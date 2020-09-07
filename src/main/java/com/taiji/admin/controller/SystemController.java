@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taiji.admin.common.ResponseInfo;
+import com.taiji.admin.constant.Constant;
 import com.taiji.admin.service.SUserService;
 import com.taiji.admin.service.SystemService;
+import com.taiji.admin.utils.LogUtil;
 
 /**
  * 
@@ -44,8 +46,8 @@ public class SystemController {
 	@Autowired
 	SUserService userService;
 	
-//	@Autowired
-//	private LogUtil logUtil;
+	@Autowired
+	private LogUtil logUtil;
 	
 //	@Autowired
 //	BeanConfig beanIns;
@@ -59,6 +61,7 @@ public class SystemController {
 	public ResponseInfo writeThreshold(double threshold) throws IOException {
 		ResponseInfo resp = new ResponseInfo();
 		systemService.writeThreshold(threshold);
+		logUtil.appendLog(request, "", "设置表空间阈值 ", "操作成功", Constant.RESULT_SUCCESS_CODE);
 		resp.setCode(200);
 		return resp;
 	}
@@ -124,6 +127,7 @@ public class SystemController {
 			request.getSession().setMaxInactiveInterval(Integer.valueOf(sessiomTime)*60);
 			systemService.writeForward(sessiomTime);
 			resp.setCode(200);
+			logUtil.appendLog(request, "", "设置系统超时重定向", "操作成功", Constant.RESULT_SUCCESS_CODE);
 		}
 		else {
 			resp.setCode(500);

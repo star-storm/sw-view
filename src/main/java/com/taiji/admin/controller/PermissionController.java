@@ -21,6 +21,7 @@ import com.taiji.admin.constant.Constant;
 import com.taiji.admin.model.SPermission;
 import com.taiji.admin.model.SUser;
 import com.taiji.admin.service.SPermissionService;
+import com.taiji.admin.utils.LogUtil;
 
 /**
  * 
@@ -43,8 +44,8 @@ public class PermissionController {
 	@Autowired
 	private SPermissionService permissionService;
 	
-//	@Autowired
-//	private LogUtil logUtil;
+	@Autowired
+	private LogUtil logUtil;
 	
 	/**
 	 * 列表
@@ -59,7 +60,7 @@ public class PermissionController {
 		resp.setCode(200);
 		resp.setCount(count);
 		resp.setData(permissions);
-//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询权限", logUtil.appendParam("", name), Constant.RESULT_SUCCESS);
+		logUtil.appendLog(request, "", "查询权限", logUtil.appendParam("", name), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -73,7 +74,7 @@ public class PermissionController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(permission);
-//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询权限详情", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询权限详情", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -87,7 +88,7 @@ public class PermissionController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(permissions);
-//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询权限详情", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询权限详情", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -102,7 +103,7 @@ public class PermissionController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(result);
-//		logUtil.appendLog(request, Constant.SYSTEM_INDEX.toString(), "查询权限", "", Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, Constant.SYSTEM_INDEX.toString(), "查询权限", "", Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -124,6 +125,7 @@ public class PermissionController {
 			resp.setMsg("数据处理错误");
 		}
 		else {
+			logUtil.appendLog(request, "", "更新权限", logUtil.appendParam("", name), Constant.RESULT_SUCCESS_CODE);
 			resp.setCode(200);
 		}
 		return resp;
@@ -139,6 +141,7 @@ public class PermissionController {
 		SUser host = (SUser) request.getSession().getAttribute(Constant.SESSION_USER_KEY);
 		LogMsgInfo info = permissionService.delPermission(id, host);
 		if (info.getResult() == 0){
+			logUtil.appendLog(request, "", "删除权限", logUtil.appendParam("", info.getName()), Constant.RESULT_SUCCESS_CODE);
 			resp.setCode(200);
 		}
 		else {
@@ -168,6 +171,7 @@ public class PermissionController {
 		SUser host = (SUser) request.getSession().getAttribute(Constant.SESSION_USER_KEY);
 		LogMsgInfo info = permissionService.delBatch(ids, host);
 		if (info.getResult() == 0){
+			logUtil.appendLog(request, "", "批量删除权限", logUtil.appendParam("", ""), Constant.RESULT_SUCCESS_CODE);
 			resp.setCode(200);
 		}
 		else {

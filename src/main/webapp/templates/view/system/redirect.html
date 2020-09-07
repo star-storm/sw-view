@@ -46,7 +46,7 @@ function setRedirectTime(){
 	var sessiomTime = document.getElementById("sessiomTime").value;
 	if(sessiomTime == ""){
 		alert("请输入阈值设置的值!!");
-	}else if(!/^[0-9]{1,8}([.][0-9]{1,5})?$/.test(sessiomTime)){
+	}else if(!/^[0-9]{1,8}([0-9]{1,5})?$/.test(sessiomTime)){
 		alert("对不起，请输入数字。");
 	}else{
 		$.ajax({

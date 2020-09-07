@@ -236,7 +236,7 @@ public class SLogExample {
         	addCriterion("u.id in (select u.id from s_user_role j "
         			+ " left join s_user u on j.uid=u.id "
         			+ " left join s_role r on j.rid=r.id "
-        			+ " where r.id=6 or r.id=10)");
+        			+ " where r.id=3 or r.id=4)");
         	return (Criteria) this;
         }
         

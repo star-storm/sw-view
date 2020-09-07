@@ -3,7 +3,6 @@
  */
 package com.taiji.admin.service.imp;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,8 +37,6 @@ public class SLogServiceImp implements SLogService {
 	 */
 	@Override
 	public long count(String modelId, String content, String userName, String roleName) {
-		if (StringUtils.isEmpty(roleName) || (!roleName.equalsIgnoreCase("audit") && !roleName.equalsIgnoreCase("admin")))
-			return 0;
 		SLogExample example = new SLogExample();
 		SLogExample.Criteria criteria = example.createCriteria();
 //		System.out.println("com.taiji.admin.service.imp.SLogServiceImp: modelId = " + modelId + ", content = " + content + ", userName = " + userName);
@@ -50,10 +47,7 @@ public class SLogServiceImp implements SLogService {
 		if (!StringUtils.isEmpty(userName))
 			criteria.andUserNameLike("%" + userName + "%");
 		criteria.andDelFlgEqualTo("0");
-//		if (roleName.equalsIgnoreCase("audit"))
-//			criteria.andRoleUser();
-//		else
-//			criteria.andRoleManeger();
+		criteria.andRoleManeger();
 		return logMapper.countByExample(example);
 	}
 
@@ -62,8 +56,6 @@ public class SLogServiceImp implements SLogService {
 	 */
 	@Override
 	public List<SLog> logPage(PageInfo pageInfo, String modelId, String content, String userName, String roleName) {
-		if (StringUtils.isEmpty(roleName) || (!roleName.equalsIgnoreCase("audit") && !roleName.equalsIgnoreCase("admin")))
-			return new ArrayList<SLog>();
 		SLogExample example = new SLogExample();
 		example.setFrom(pageInfo.getFrom());
 		example.setSize(pageInfo.getSize());
@@ -75,10 +67,7 @@ public class SLogServiceImp implements SLogService {
 		if (!StringUtils.isEmpty(userName))
 			criteria.andUserNameLike("%" + userName + "%");
 		criteria.andDelFlgEqualTo("0");
-//		if (roleName.equalsIgnoreCase("audit"))
-//			criteria.andRoleUser();
-//		else
-//			criteria.andRoleManeger();
+		criteria.andRoleManeger();
 		example.setOrderByClause(" option_date desc, id desc");
 		return logMapper.selectByExample(example);
 	}

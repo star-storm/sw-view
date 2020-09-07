@@ -41,6 +41,7 @@ $(function(){
 // 		$(li).find('a')[0].click();
 	});
 	$('.titleli').click(function(){
+		checkLogin0();
 		var $ul = $(this).next('ul');
 		$('dd').find('ul').slideUp();
 		if($ul.is(':visible')){
@@ -77,6 +78,9 @@ function checkLogin0() {
 				else if (user.loginName=="secAdmin") {
 					$("#permissionTab .titleli a")[0].click();
 				}
+			}
+			else {
+				top.location.href="/view/main";
 			}
 		}
 	});

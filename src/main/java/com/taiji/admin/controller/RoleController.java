@@ -22,6 +22,7 @@ import com.taiji.admin.constant.Constant;
 import com.taiji.admin.model.SRole;
 import com.taiji.admin.model.SUser;
 import com.taiji.admin.service.SRoleService;
+import com.taiji.admin.utils.LogUtil;
 
 /**
  * 
@@ -44,8 +45,8 @@ public class RoleController {
 	@Autowired
 	private SRoleService roleService;
 	
-//	@Autowired
-//	private LogUtil logUtil;
+	@Autowired
+	private LogUtil logUtil;
 	
 	/**
 	 * 列表
@@ -61,7 +62,7 @@ public class RoleController {
 		resp.setCode(200);
 		resp.setCount(count);
 		resp.setData(roles);
-//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询角色", logUtil.appendParam("", name), Constant.RESULT_SUCCESS);
+		logUtil.appendLog(request, "", "查询角色", logUtil.appendParam("", name), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -76,7 +77,7 @@ public class RoleController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(role);
-//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询角色详情", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询角色详情", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -91,7 +92,7 @@ public class RoleController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(role);
-//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询角色详情及相关权限", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询角色详情及相关权限", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 
@@ -102,7 +103,6 @@ public class RoleController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public ResponseInfo updateRole(String id, String name, String descrip, String pIds) throws IOException {
-		@SuppressWarnings("unused")
 		String tag = "编辑角色信息";
 		if (StringUtils.isEmpty(id))
 			tag = "新建角色信息";
@@ -113,7 +113,7 @@ public class RoleController {
 		if (result == 0){
 			resp.setCode(200);
 			resp.setMsg("操作成功");
-//			logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), tag, logUtil.appendParam(String.valueOf(id), name), Constant.RESULT_SUCCESS);
+			logUtil.appendLog(request, "", tag, logUtil.appendParam(String.valueOf(id), name), Constant.RESULT_SUCCESS_CODE);
 		}
 		else {
 			resp.setCode(500);
@@ -128,7 +128,7 @@ public class RoleController {
 				resp.setMsg("处理错误");
 				break;
 			}
-//			logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), tag, logUtil.appendParam(String.valueOf(id), name), Constant.RESULT_FAIL);
+			logUtil.appendLog(request, "", tag, logUtil.appendParam(String.valueOf(id), name), Constant.RESULT_FAIL_CODE);
 		}
 		return resp;
 	}
@@ -145,7 +145,7 @@ public class RoleController {
 		LogMsgInfo info = roleService.delRole(id, host);
 		if (info.getResult() == 0){
 			resp.setCode(200);
-//			logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "删除角色信息", logUtil.appendParam(info.getId(), info.getName()), Constant.RESULT_SUCCESS);
+			logUtil.appendLog(request, "", "删除角色信息", logUtil.appendParam(info.getId(), info.getName()), Constant.RESULT_SUCCESS_CODE);
 		}
 		else {
 			resp.setCode(500);
@@ -163,7 +163,7 @@ public class RoleController {
 				resp.setMsg("处理错误");
 				break;
 			}
-//			logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "删除角色信息", logUtil.appendParam(info.getId(), info.getName()), Constant.RESULT_FAIL);
+			logUtil.appendLog(request, "", "删除角色信息", logUtil.appendParam(info.getId(), info.getName()), Constant.RESULT_FAIL_CODE);
 		}
 		return resp;
 	}
@@ -180,7 +180,7 @@ public class RoleController {
 		LogMsgInfo info = roleService.delBatch(ids, host);
 		if (info.getResult() == 0){
 			resp.setCode(200);
-//			logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "批量删除虚拟机模板信息", logUtil.appendParam(info.getId(), info.getName()), Constant.RESULT_SUCCESS);
+			logUtil.appendLog(request, "", "批量删除虚拟机模板信息", logUtil.appendParam(info.getId(), info.getName()), Constant.RESULT_SUCCESS_CODE);
 		}
 		else {
 			resp.setCode(500);
@@ -198,7 +198,7 @@ public class RoleController {
 				resp.setMsg("处理错误");
 				break;
 			}
-//			logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "批量删除虚拟机模板信息", logUtil.appendParam(info.getId(), info.getName()), Constant.RESULT_FAIL);
+			logUtil.appendLog(request, "", "批量删除虚拟机模板信息", logUtil.appendParam(info.getId(), info.getName()), Constant.RESULT_FAIL_CODE);
 		}
 		return resp;
 	}
@@ -215,7 +215,7 @@ public class RoleController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(result);
-//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询全部角色信息", "", Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "查询全部角色信息", "", Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -232,11 +232,11 @@ public class RoleController {
 		if (!result){
 			resp.setCode(500);
 			resp.setMsg("数据处理错误");
-//			logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "更新用户角色", "", Constant.RESULT_FAIL);
+			logUtil.appendLog(request, "", "更新用户角色", "", Constant.RESULT_FAIL_CODE);
 		}
 		else {
 			resp.setCode(200);
-//			logUtil.appendLog(request, Constant.ROLE_INDEX.toString(), "更新用户角色", "", Constant.RESULT_SUCCESS);
+			logUtil.appendLog(request, "", "更新用户角色", "", Constant.RESULT_SUCCESS_CODE);
 		}
 		return resp;
 	}

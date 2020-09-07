@@ -24,6 +24,7 @@ import com.taiji.admin.model.SUser;
 import com.taiji.admin.service.SOrgService;
 import com.taiji.admin.service.SRoleService;
 import com.taiji.admin.service.SUserService;
+import com.taiji.admin.utils.LogUtil;
 import com.taiji.admin.utils.encrypt.Encrypt;
 
 /**
@@ -53,8 +54,8 @@ public class UserController {
 	@Autowired
 	private SOrgService orgService;
 	
-//	@Autowired
-//	private LogUtil logUtil;
+	@Autowired
+	private LogUtil logUtil;
 	
 	/**
 	 * 列表
@@ -70,7 +71,7 @@ public class UserController {
 		resp.setCode(200);
 		resp.setCount(count);
 		resp.setData(users);
-//		logUtil.appendLog(request, Constant.USER_INDEX.toString(), "查询用户信息", logUtil.appendParam("", name), Constant.RESULT_SUCCESS);
+		logUtil.appendLog(request, "", "查询用户信息", logUtil.appendParam("", name), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -85,7 +86,7 @@ public class UserController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(list);
-//		logUtil.appendLog(request, Constant.USER_INDEX.toString(), "查询用户信息详情及相关角色和权限", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, "", "查询用户信息详情及相关角色和权限", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -100,7 +101,7 @@ public class UserController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(user);
-//		logUtil.appendLog(request, Constant.USER_INDEX.toString(), "查询用户信息详情", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS);
+		logUtil.appendLog(request, "", "查询用户信息详情", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -115,7 +116,7 @@ public class UserController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(user);
-//		logUtil.appendLog(request, Constant.USER_INDEX.toString(), "查询用户信息详情及相关角色和权限", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, "", "查询用户信息详情及相关角色和权限", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -183,11 +184,11 @@ public class UserController {
 		if (!result){
 			resp.setCode(500);
 			resp.setMsg("数据处理错误");
-//			logUtil.appendLog(request, Constant.USER_INDEX.toString(), "删除用户信息", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_FAIL);
+			logUtil.appendLog(request, "", "删除用户信息", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_FAIL_CODE);
 		}
 		else {
 			resp.setCode(200);
-//			logUtil.appendLog(request, Constant.USER_INDEX.toString(), "删除用户信息", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS);
+			logUtil.appendLog(request, "", "删除用户信息", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS_CODE);
 		}
 		return resp;
 	}
@@ -204,7 +205,7 @@ public class UserController {
 		LogMsgInfo info = userService.delBatch(ids, host);
 		if (info.getResult() == 0){
 			resp.setCode(200);
-//			logUtil.appendLog(request, "0", "批量删除组织信息", logUtil.appendParam(String.valueOf(ids), ""), Constant.RESULT_SUCCESS_CODE);
+			logUtil.appendLog(request, "0", "批量删除组织信息", logUtil.appendParam(String.valueOf(ids), ""), Constant.RESULT_SUCCESS_CODE);
 		}
 		else {
 			resp.setCode(500);
@@ -222,7 +223,7 @@ public class UserController {
 				resp.setMsg("处理错误");
 				break;
 			}
-//			logUtil.appendLog(request, "0", "批量删除组织信息", logUtil.appendParam(String.valueOf(ids), ""), Constant.RESULT_FAIL);
+			logUtil.appendLog(request, "0", "批量删除组织信息", logUtil.appendParam(String.valueOf(ids), ""), Constant.RESULT_FAIL_CODE);
 		}
 		return resp;
 	}

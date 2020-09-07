@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import com.taiji.admin.constant.Constant;
 import com.taiji.admin.model.SOrg;
 import com.taiji.admin.model.SUser;
 import com.taiji.admin.service.SOrgService;
+import com.taiji.admin.utils.LogUtil;
 
 import net.sf.json.JSONArray;
 
@@ -44,8 +46,8 @@ public class OrgController {
 	@Autowired
 	private SOrgService orgService;
 	
-//	@Autowired
-//	private LogUtil logUtil;
+	@Autowired
+	private LogUtil logUtil;
 	
 	/**
 	 * 列表
@@ -61,7 +63,7 @@ public class OrgController {
 		resp.setCode(200);
 		resp.setCount(count);
 		resp.setData(orgs);
-//		logUtil.appendLog(request, "0", "查询组织信息", logUtil.appendParam("", name), Constant.RESULT_SUCCESS);
+		logUtil.appendLog(request, "", "查询组织信息", logUtil.appendParam("", name), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -76,7 +78,7 @@ public class OrgController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(org);
-//		logUtil.appendLog(request, "0", "查询组织详情", logUtil.appendParam(String.valueOf(id), org.getName()), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, "", "查询组织详情", logUtil.appendParam(String.valueOf(id), org.getName()), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -91,7 +93,7 @@ public class OrgController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(org);
-//		logUtil.appendLog(request, "0", "查询组织详情", logUtil.appendParam(String.valueOf(code), org.getName()), Constant.RESULT_SUCCESS);
+		logUtil.appendLog(request, "", "查询组织详情", logUtil.appendParam(String.valueOf(code), org.getName()), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 
@@ -102,17 +104,17 @@ public class OrgController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public ResponseInfo updateOrg(String json) throws IOException {
-//		String tag = "编辑组织信息";
-//		if (StringUtils.isEmpty(id))
-//			tag = "新建组织信息";
 		ResponseInfo resp = new ResponseInfo();
 		SOrg org = SOrg.jsonToSOrg(json);
+		String tag = "编辑组织信息";
+		if (StringUtils.isEmpty(org.getId()))
+			tag = "新建组织信息";
 		SUser host = (SUser) request.getSession().getAttribute(Constant.SESSION_USER_KEY);
 		int result = orgService.updateOrg(org, host);
 		if (result == 0){
 			resp.setCode(200);
 			resp.setMsg("操作成功");
-//			logUtil.appendLog(request, "0", tag, logUtil.appendParam(String.valueOf(id), name), Constant.RESULT_SUCCESS);
+//			logUtil.appendLog(request, "", tag, logUtil.appendParam(String.valueOf(id), name), Constant.RESULT_SUCCESS_CODE);
 		}
 		else {
 			resp.setCode(500);
@@ -129,7 +131,7 @@ public class OrgController {
 			default:
 				break;
 			}
-//			logUtil.appendLog(request, "0", tag, logUtil.appendParam(String.valueOf(id), name), Constant.RESULT_FAIL);
+			logUtil.appendLog(request, "", tag, logUtil.appendParam(String.valueOf(org.getId()), org.getName()), Constant.RESULT_FAIL_CODE);
 		}
 		return resp;
 	}
@@ -146,7 +148,7 @@ public class OrgController {
 		int result = orgService.delOrg(id, host);
 		if (result == 0){
 			resp.setCode(200);
-//			logUtil.appendLog(request, "0", "删除组织信息", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS);
+			logUtil.appendLog(request, "", "删除组织信息", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_SUCCESS_CODE);
 		}
 		else {
 			resp.setCode(500);
@@ -164,7 +166,7 @@ public class OrgController {
 				resp.setMsg("处理错误");
 				break;
 			}
-//			logUtil.appendLog(request, "0", "删除组织信息", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_FAIL);
+			logUtil.appendLog(request, "", "删除组织信息", logUtil.appendParam(String.valueOf(id), ""), Constant.RESULT_FAIL_CODE);
 		}
 		return resp;
 	}
@@ -181,7 +183,7 @@ public class OrgController {
 		int result = orgService.delBatch(ids, host);
 		if (result == 0){
 			resp.setCode(200);
-//			logUtil.appendLog(request, "0", "批量删除组织信息", logUtil.appendParam(String.valueOf(ids), ""), Constant.RESULT_SUCCESS_CODE);
+			logUtil.appendLog(request, "", "批量删除组织信息", logUtil.appendParam(String.valueOf(ids), ""), Constant.RESULT_SUCCESS_CODE);
 		}
 		else {
 			resp.setCode(500);
@@ -199,7 +201,7 @@ public class OrgController {
 				resp.setMsg("处理错误");
 				break;
 			}
-//			logUtil.appendLog(request, "0", "批量删除组织信息", logUtil.appendParam(String.valueOf(ids), ""), Constant.RESULT_FAIL);
+			logUtil.appendLog(request, "", "批量删除组织信息", logUtil.appendParam(String.valueOf(ids), ""), Constant.RESULT_FAIL_CODE);
 		}
 		return resp;
 	}
@@ -214,7 +216,7 @@ public class OrgController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(result);
-//		logUtil.appendLog(request, "0", "查询全部组织信息", logUtil.appendParam("", ""), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, "", "查询全部组织信息", logUtil.appendParam("", ""), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -228,7 +230,7 @@ public class OrgController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(result);
-//		logUtil.appendLog(request, "0", "查询全部组织信息", logUtil.appendParam("", ""), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, "", "查询全部组织信息", logUtil.appendParam("", ""), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -243,7 +245,7 @@ public class OrgController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(children);
-//		logUtil.appendLog(request, "0", "查询子组织信息", logUtil.appendParam("", p), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, "", "查询子组织信息", logUtil.appendParam("", p), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -258,7 +260,7 @@ public class OrgController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(parent);
-//		logUtil.appendLog(request, "0", "查询最高父类信息", logUtil.appendParam("", p), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, "", "查询最顶层父组织信息", logUtil.appendParam("", p), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -273,7 +275,7 @@ public class OrgController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(parent);
-//		logUtil.appendLog(request, "0", "查询最高父类信息", logUtil.appendParam("", p), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, "", "查询最顶层父组织信息", logUtil.appendParam("", p), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -288,7 +290,7 @@ public class OrgController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(parent);
-//		logUtil.appendLog(request, "0", "查询最高父类信息", logUtil.appendParam("", p), Constant.RESULT_SUCCESS);
+//		logUtil.appendLog(request, "", "查询最高父类信息", logUtil.appendParam("", p), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
