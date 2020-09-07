@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>全年水资源总量</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:1200px;height:370px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/lsxzg/www/js/echarts.js"></script>
+    
+    <script type="text/javascript">
+    
+    var data = [[35.5,29.8,35.1,26.8,20.3],//全年水资源总量
+			    [14.3,12,14,9.3,6.5],//地表水资源量
+			    [21.1,17.7,21.1,17.4,13.8]];//地下水资源量
+    
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+    require.config({
+        paths: {
+            echarts: '/templates/view/dcdb/page/echarts/lsxzg/www/js'
+        }
+    });
+    // Step:4 require echarts and use it in the callback.
+    // Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/map'
+        ],
+        function (ec) {
+            //--- 折柱 ---
+            var myChart = ec.init(document.getElementById('main'));
+            myChart.setOption({
+            	grid:{
+                    x:40,
+                    y:40,
+                    x2:30,
+                    y2:30,
+                    borderWidth: 1, 
+                    borderColor: 'blue'
+                },
+                title: {
+                	text: '单位：亿立方米',
+                	x:'right',
+                	padding: [0, 24, 0, 0],
+                    textStyle: {
+                        color: 'white',
+                        fontFamliy: 'Microsoft YaHei',
+                        fontSize: 18,
+	                    fontWeight: 'normal'
+                    },
+                },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:['全年水资源总量','地表水资源量','地下水资源量'],
+                    orient:"horizontal",
+                    x:'left',
+                    textStyle: {
+                        color: 'white',
+                        fontFamliy: 'Microsoft YaHei',
+                        fontSize: 18
+                    }
+                },
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : ['2018年','2017年','2016年','2015年','2014年'],
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                            	color: 'white',
+                                fontFamliy: 'Microsoft YaHei',
+                                fontSize: 18
+                            }
+                        },
+                        splitLine: {
+                        	show: false
+                        },
+                        axisTick: {
+                        	show: false
+                        },
+                        axisLine: {
+                        	show: true,
+                        	lineStyle: {
+                                type: 'solid',
+                                color:'blue',
+                                width: 1
+                            }
+                        }
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value',
+//                         boundaryGap: false,
+//                         splitArea : {show : true},
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                            	color: 'white',
+                                fontFamliy: 'Microsoft YaHei',
+                                fontSize: 18
+                            }
+                        },
+                        axisLine: {
+                        	show: false
+                        },
+						splitLine: {
+							show: true,
+							lineStyle: {
+								type: 'solid',
+								color: 'blue',
+								width: 1
+							}
+						}
+                    }
+                ],
+                series : [
+                    {
+                        name:'全年水资源总量',
+                        type:'bar',
+                        data:data[0],
+    	                barWidth: 40,
+                        itemStyle: {
+                        	normal: {
+                        		color: '#9B65FA',
+//                         		color: {
+//                         			type: 'radial',
+//                         		    x: 0.5,
+//                         		    y: 0.5,
+//                         		    r: 0.5,
+//                         		    colorStops: [{
+//                         		        offset: 0, color: 'red' // 0% 处的颜色
+//                         		    }, {
+//                         		        offset: 1, color: 'blue' // 100% 处的颜色
+//                         		    }]
+//                         		}
+                        		label: {
+									show: true, 
+									position: 'top', 
+									textStyle: { 
+		                            	color: 'white',
+		                                fontFamliy: 'Microsoft YaHei',
+		                                fontSize: 18
+									}
+								}
+                        	}
+                        }
+                    },
+                    {
+                        name:'地表水资源量',
+                        type:'bar',
+                        data:data[1],
+    	                barWidth: 40,
+//     	                barGap: '-12%',
+//     	                barCategoryGap: '12%',
+                        itemStyle: {
+                        	normal: {
+                        		color: '#3F69FF',
+//                         		color: {
+//                         			type: 'linear',
+//                         		    x: 0,
+//                         		    y: 0,
+//                         		    x2: 0,
+//                         		    y2: 1,
+//                         		    colorStops: [{
+//                         		        offset: 0, color: 'red' // 0% 处的颜色
+//                         		    }, {
+//                         		        offset: 1, color: 'blue' // 100% 处的颜色
+//                         		    }],
+//                         		    globalCoord: false
+//                         		}
+                        		label: {
+									show: true, 
+									position: 'top', 
+									textStyle: { 
+		                            	color: 'white',
+		                                fontFamliy: 'Microsoft YaHei',
+		                                fontSize: 18
+									}
+								}
+                        	}
+                        }
+                    },
+                    {
+                        name:'地下水资源量',
+                        type:'bar',
+                        data:data[2],
+    	                barWidth: 40,
+                        itemStyle: {
+                        	normal: {
+                        		color: '#72FEA1',
+//                         		color: {
+//                         			type: 'linear',
+//                         		    x: 0,
+//                         		    y: 0,
+//                         		    x2: 0,
+//                         		    y2: 1,
+//                         		    colorStops: [{
+//                         		        offset: 0, color: 'red' // 0% 处的颜色
+//                         		    }, {
+//                         		        offset: 1, color: 'blue' // 100% 处的颜色
+//                         		    }],
+//                         		    globalCoord: false
+//                         		}
+                        		label: {
+									show: true, 
+									position: 'top', 
+									textStyle: { 
+		                            	color: 'white',
+		                                fontFamliy: 'Microsoft YaHei',
+		                                fontSize: 18
+									}
+								}
+                        	}
+                        }
+                    }
+                ]
+            });
+        }
+    );
+    </script>
+</body>
+</html>

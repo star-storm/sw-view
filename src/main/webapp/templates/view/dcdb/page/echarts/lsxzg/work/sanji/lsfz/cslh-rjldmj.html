@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>城市绿化情况-人均绿地面积</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:1700px;height:380px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    
+    <script type="text/javascript">
+    
+    		var data1 = [13.95, 9.42, 45.09, 41.01, 30.25, 75.92, 61.17, 64.35, 42.96, 60.94, 43.46, 43.99, 34.22, 57.77, 34.44, 53.74];//人均绿地面积
+    		var data2 = [7.97, 4.47, 20.59, 13.95, 9.29, 22.81, 30.03, 13.84, 19.3, 25.27, 26.82, 14.51, 20.6, 29.45, 14.86, 46.84];//人均公园绿地面积
+			var topdata = [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80];//峰值data
+		    			
+			var colors = ['rgba(251,210,73,0.7)'/* , 'rgba(251,210,73,0.7)', 'rgba(124,213,253,0.7)', 'rgba(124,213,253,0.7)', 'rgba(124,213,253,0.7)', 'rgba(124,213,253,0.7)', 'rgba(124,213,253,0.7)', 'rgba(124,213,253,0.7)', 'rgba(181,236,69,0.7)', 'rgba(181,236,69,0.7)', 'rgba(136,243,227,0.7)', 'rgba(136,243,227,0.7)', 'rgba(136,243,227,0.7)', 'rgba(136,243,227,0.7)' */];
+			var aCategorys = ['东城区','西城区','朝阳区','海淀区','丰台区','石景山区','门头沟区','房山区','通州区','顺义区','昌平区','大兴区','平谷区','怀柔区','密云区','延庆区'];
+
+			var option = {
+// 			    backgroundColor: '#0f375f',
+		        title: {
+		            x:'center',
+		            text: '各区人均绿地面积及公园绿地面积情况',
+	                padding: [0, 0, 0, 0],
+		            textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 18,
+	                    fontWeight: 'bold',
+		            },
+		            subtext:'                                                                                                                                                                                                                                                                                             单位：平方米',
+		            subtextStyle: {
+	                    align: 'right',
+	                    verticalAlign: 'top',
+		            	color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 18,
+	                    fontWeight: 'normal',
+		            }
+		        },
+			    grid: {
+			        top: 100,
+			        left: 40,
+			        right: 50,
+			        bottom: 0,
+			        containLabel: true
+			    },
+			    tooltip: {
+			        trigger: 'axis',
+			        axisPointer: {
+			            type: 'shadow',
+			            label: {
+			                show: true,
+			                backgroundColor: '#333'
+			            }
+			        }
+			    },
+			    legend: {
+			        data: ['人均绿地面积', '人均公园绿地面积'],
+			        top: 45,
+			        right: '20%',
+			        textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 18,
+	                    fontWeight: 'normal'
+			        }
+			    },
+			    xAxis: {
+			        data: aCategorys,
+			        axisLabel:{
+			            textStyle:{
+		                    color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 16,
+		                    fontWeight: 'normal'
+			            }
+			        },
+			        axisLine: {
+			            show: true,
+			            lineStyle:{
+			                color: 'rgb(23,255,243,0.3)'
+			            }
+                    },
+			        splitLine: {
+			            show: false,
+			            lineStyle:{
+			                color: 'rgb(23,255,243,0.3)'
+			            }
+			        }
+			    },
+			    yAxis: {
+			        axisLine: {
+			            show: true,
+			            lineStyle:{
+			            	width : 0.5,
+			                color: 'rgb(23,255,243,0.3)'
+			            }
+                    },
+    	            axisTick: {
+    	                show: false,
+    	            },
+    	            axisLabel: {
+    	                show: true,
+			            textStyle:{
+		                    color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 16,
+		                    fontWeight: 'normal'
+			            }
+    	            },
+			        splitLine: {
+			            show: true,
+			            lineStyle:{ 
+			            	width : 0.5,
+			                color: 'rgb(23,255,243,0.3)'
+			            }
+			        }
+			    },
+			    series: [{
+			        name: '人均绿地面积',
+			        type: 'line',
+			        smooth: true,
+			        showAllSymbol: true,
+			        symbol: 'emptyCircle',
+			        symbolSize: 15,
+			        itemStyle: {
+			            normal: {
+			                color: 'yellow',
+			        		label : {
+			        			show: true,
+					            textStyle: {
+				                    color: 'white',
+				                    fontFamliy: 'Microsoft YaHei',
+				                    fontSize: 18,
+				                    fontWeight: 'normal',
+					            }
+			        		}
+			            }
+			        },
+			        data: data1
+			    }, {
+			        name: '人均公园绿地面积',
+			        type: 'bar',
+			        barWidth: 30,
+			        itemStyle: {
+			            normal: {
+			                barBorderRadius: 5,
+			                color: new echarts.graphic.LinearGradient(
+			                    0, 0, 0, 1,
+			                    [
+			                        {offset: 0, color: '#14c8d4'},
+			                        {offset: 1, color: '#43eec6'}
+			                    ]
+			                ),
+			        		label : {
+			        			show: true,
+					            textStyle: {
+				                    color: 'white',
+				                    fontFamliy: 'Microsoft YaHei',
+				                    fontSize: 18,
+				                    fontWeight: 'normal',
+					            }
+			        		}
+			            }
+			        },
+			        data: data2
+			    }, {
+			        name: '人均绿地面积',
+			        type: 'bar',
+			        barGap: '-100%',
+			        barWidth: 30,
+			        itemStyle: {
+			            normal: {
+			                color: new echarts.graphic.LinearGradient(
+			                    0, 0, 0, 1,
+			                    [
+			                        {offset: 0, color: 'rgba(20,200,212,0.5)'},
+			                        {offset: 0.2, color: 'rgba(20,200,212,0.2)'},
+			                        {offset: 1, color: 'rgba(20,200,212,0)'}
+			                    ]
+			                )
+			            }
+			        },
+			        z: -12,
+			        data: data1
+			    }, {
+			        name: '人均绿地面积',
+			        type: 'pictorialBar',
+			        symbol: 'rect',
+			        itemStyle: {
+			            normal: {
+			                color: '#0f375f'
+			            }
+			        },
+			        symbolRepeat: true,
+			        symbolSize: [12, 4],
+			        symbolMargin: 1,
+			        z: -10,
+			        data: data1
+			    }]
+			};
+            //--- 折柱 ---
+	    	var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption(option);
+            
+    </script>
+</body>
+</html>

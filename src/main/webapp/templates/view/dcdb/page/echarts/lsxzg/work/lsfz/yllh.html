@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>水资源情况</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:540px;height:240px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/lsxzg/www/js/echarts.js"></script>
+    
+    <script type="text/javascript">
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+    require.config({
+        paths: {
+            echarts: '/templates/view/dcdb/page/echarts/lsxzg/www/js'
+        }
+    });
+    // Step:4 require echarts and use it in the callback.
+    // Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/map'
+        ],
+        function (ec) {
+            //--- 折柱 ---
+            var myChart = ec.init(document.getElementById('main'));
+            myChart.setOption({
+            	grid:{
+                    x:80,
+                    y:45,
+                    x2:10,
+                    y2:30,
+                    borderWidth: 0
+                },
+   	            title: {
+   	            	text: '单位：公顷',
+   	            	x:'right',
+   	            	padding: [4,20,0,0],
+   	                textStyle: {
+   	                    color: 'white',
+   	                    fontFamliy: 'Microsoft YaHei',
+   	                    fontSize: 18,
+   	                    fontWeight: 'normal'
+   	                }
+   	            },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:['data'],
+                    show : false
+                },
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : ['林地面积','森林面积','耕地面积','园地面积'],
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                            	color: 'white',
+                                fontFamliy: 'Microsoft YaHei',
+                                fontSize: 16
+                            },
+//                             nameGap: 120,
+                            margin: 12,
+                        },
+                        splitLine: {
+                        	show: false
+                        },
+                        axisTick: {
+                        	show: false
+                        },
+                        axisLine: {
+                        	show: true,
+                        	lineStyle: {
+                                type: 'solid',
+                                color:'blue',
+                                width: 1
+                            }
+                        }
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value',
+//                         boundaryGap: false,
+//                         splitArea : {show : true},
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                            	color: 'white',
+                                fontFamliy: 'Microsoft YaHei',
+                                fontSize: 16
+                            }
+                        },
+                        axisLine: {
+                        	show: false
+                        },
+						splitLine: {
+							show: true,
+							lineStyle: {
+		    	                type: 'dashed',
+								color: '#333E66',
+								width: 1
+							}
+						},
+						max : 800000,
+			            min : 0,
+			            splitNumber : 4
+                    }
+                ],
+                series : [
+                    {
+                        name:'data',
+                        type:'bar',
+                        data:[744473.56, 777603.5, 213730.65, 132799.79],
+        	            barWidth: 44,
+                        itemStyle: {
+                        	normal: {
+                        		color: function(params) {
+                                    let colorList = [
+                                        "rgba(15,116,124,0.6)",
+                                        "rgba(142,42,86,0.6)",
+                                        "rgba(134,114,55,0.6)",
+//                                         "rgba(58,134,166,0.6)",
+                                        "rgba(9,85,157,0.6)",
+                                    ];
+                                    return colorList[params.dataIndex];
+                                },
+//                         		color: {
+//                         			type: 'radial',
+//                         		    x: 0.5,
+//                         		    y: 0.5,
+//                         		    r: 0.5,
+//                         		    colorStops: [{
+//                         		        offset: 0, color: 'red' // 0% 处的颜色
+//                         		    }, {
+//                         		        offset: 1, color: 'blue' // 100% 处的颜色
+//                         		    }]
+//                         		}
+                        		label: {
+									show: true, 
+									position: 'top', 
+									textStyle: { 
+		                            	color: 'white',
+		                                fontFamliy: 'Microsoft YaHei',
+		                                fontSize: 16
+									}
+								}
+                        	}
+                        }
+                    }
+                ]
+            });
+        }
+    );
+    </script>
+</body>
+</html>

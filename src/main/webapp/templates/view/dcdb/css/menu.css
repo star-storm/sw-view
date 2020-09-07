@@ -1,0 +1,231 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+	margin: 0;
+	padding: 0;
+	font-family:'微软雅黑';
+}
+a {
+	text-decoration: none;
+}
+fieldset, img {
+	border: 0;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+	font-style: normal;
+	font-weight: normal;
+}
+ol, ul {
+	list-style: none;
+}
+caption, th {
+	text-align: left;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
+q:before, q:after {
+	content: '';
+}
+abbr, acronym {
+	border: 0;
+}
+.clear {
+	margin: 0px auto;
+	width: 100%;
+	height: 1px;
+	font-size: 1px;
+	clear: both;
+	background: none;
+	overflow: hidden;
+}
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clearfix {
+	display: inline-block;
+}
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+a:focus{
+	outline:none;
+	-moz-outline:none;
+}
+/*menuBox*/
+.menuBox{
+	background:url(../images/menubg.png) top center no-repeat;
+	width:100%;
+	height:80px;
+	float:left;
+}
+.sidenav{
+	width:1882px;
+	height:65px;
+	margin-top:15px;
+	margin-left:18px;
+	float:left;
+}
+.sidenav li{
+	height:48px;	
+	margin-left:10px;
+	float:left;
+}
+.sidenav li a{
+	width:180px;
+	height:45px;
+	margin-top:3px;
+	display:block;
+	float:left;
+	cursor:pointer;
+	background:url(../images/menuOff.png)left top no-repeat;
+}
+.sidenav li.now a{
+	width:180px;
+	height:45px;
+	margin-top:3px;
+	display:block;
+	float:left;
+	cursor:pointer;
+	background:url(../images/menuOn.png)left top no-repeat;
+}
+.sidenav li a:hover{
+	width:180px;
+	height:45px;
+	display:block;
+	float:left;
+	cursor:pointer;
+	background:url(../images/menuOn.png)left top no-repeat;
+}
+.sidenav li a span{
+	width:180px;
+	height:45px;
+	display:block;
+}
+.sidenav li a .menuID_01{
+	background:url(../images/img_01.png)no-repeat;
+}
+.sidenav li.now a .menuID_01{
+	background:url(../images/img_01_on.png)no-repeat;
+}
+.sidenav li a .menuID_02{
+	background:url(../images/img_02.png)no-repeat;
+}
+.sidenav li.now a .menuID_02{
+	background:url(../images/img_02_on.png)no-repeat;
+}
+.sidenav li a .menuID_03{
+	background:url(../images/img_03.png)no-repeat;
+}
+.sidenav li.now a .menuID_03{
+	background:url(../images/img_03_on.png)no-repeat;
+}
+.sidenav li a .menuID_04{
+	background:url(../images/img_04.png)no-repeat;
+}
+.sidenav li.now a .menuID_04{
+	background:url(../images/img_04_on.png)no-repeat;
+}
+.sidenav li a .menuID_05{
+	background:url(../images/img_05.png)no-repeat;
+}
+.sidenav li.now a .menuID_05{
+	background:url(../images/img_05_on.png)no-repeat;
+}
+.sidenav li a .menuID_06{
+	background:url(../images/img_06.png)no-repeat;
+}
+.sidenav li.now a .menuID_06{
+	background:url(../images/img_06_on.png)no-repeat;
+}
+.sidenav li a .menuID_07{
+	background:url(../images/img_07.png)no-repeat;
+}
+.sidenav li.now a .menuID_07{
+	background:url(../images/img_07_on.png)no-repeat;
+}
+.click{
+	width:180px;
+	height:45px;
+	display:block;
+	float:left;
+	margin-left:10px;
+	background:url(../images/menuOff.png)left top no-repeat;
+}
+.click  a {
+	width:180px;
+	height:45px;
+	display:block;
+}
+.click  a:hover{
+	width:180px;
+	height:45px;
+	display:block;
+	background:url(../images/menuOn.png)left top no-repeat;
+}
+.click a .menuID_08{
+	width:180px;
+	height:45px;
+	display:block;
+	background:url(../images/img_08.png)no-repeat;
+}
+.sidenav li .menu_zt{
+	width:325px;
+	height:48px;
+	display:block;
+	float:left;
+	margin-left:17px;
+	margin-top:0;
+	text-align:center;
+	background:none
+}
+.sidenav li .menu_zt:hover{
+	width:325px;
+	height:48px;
+	display:block;
+	float:left;
+	margin-left:17px;
+	margin-top:0;
+	text-align:center;
+	background:none;
+}
+.sidenav li.now .menu_zt{
+	width:325px;
+	height:48px;
+	display:block;
+	float:left;
+	margin-left:17px;
+	margin-top:0;
+	text-align:center;
+	background:url(../images/menu_zt_over.png) center no-repeat;
+}
+.sidenav li .menu_zt span{	
+	width:325px;
+	height:48px;
+	display:block;
+	float:left;
+}
+.menu_zt_01{background:url(../images/menu_zt.png) center no-repeat;}
+.menu_zt_01:hover{background:url(../images/menu_zt_on.png)center no-repeat;}
+.sidenav li.now .menu_zt .menu_zt_01{background:url(../images/menu_zt_on.png)center no-repeat;}
+/*erji*/
+.sidenav li .erji{
+	width:180px;
+	height:14px;
+	display:none;
+	text-align:center;
+}
+.sidenav li .erji span{
+	width:180px;
+	height:14px;
+	font-size:0;
+}
+.sidenav li.now .erji{
+	display:block;
+}

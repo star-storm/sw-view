@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/static/css/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="/static/css/demo.css" type="text/css">
+<link rel="stylesheet" href="/static/css/menu.css" type="text/css" />
+<style type="text/css">
+	.ztree li button.switch {visibility:hidden; width:1px;}
+	.ztree li button.switch.roots_docu {visibility:visible; width:16px;}
+	.ztree li button.switch.center_docu {visibility:visible; width:16px;}
+	.ztree li button.switch.bottom_docu {visibility:visible; width:16px;}
+</style>
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ztree.core.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.sidenav li').click(function(){
+		$(this).siblings('li').removeClass('now');
+		$(this).addClass('now');
+	});
+	
+	$('.erji li').click(function(){
+		$(this).siblings('li').removeClass('now_li');
+		$(this).addClass('now_li');
+	});
+	
+	var main_h = $(window).height();
+	$('.content_wrap').css('height',main_h+'px');
+})
+</script>
+</head>
+
+<body>
+<!-- 	<div class="sear"> -->
+<!-- 		<input id="orgSearch" type="text" style="border:1px #bcbcbc solid"/><a href="#" id="searchId">查询</a> -->
+<!-- 	</div> -->
+	<div class="fl w_18 h780" style="border-right: 3px #e9f6ff solid;">
+		<!--tree start-->
+		<div class="content_wrap" style="background: #f8f8f8;overflow:auto">
+			<div class="zTreeDemoBackground left">
+				<ul id="treeDemo" class="ztree"></ul>
+			</div>
+		</div>
+		<!--tree end-->
+	</div>
+	<input id="treeId" type="hidden"/>
+</body>
+</html>
+
+<script type="text/javascript">
+	var zNodes = new Array();
+	var setting = {
+		view : {
+			dblClickExpand : true,
+			showLine : false
+		},
+		data : {
+			simpleData : {
+				enable : true,
+				idKey : "id",//节点id
+				pIdKey : "pid",//父节点id
+			}
+		},
+		callback : {
+			onClick : onClick
+		}
+	};
+
+	function initTree(expand) {
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		$.fn.zTree.getZTreeObj("treeDemo").expandAll(expand);
+		//设置样式
+		$("ul.ztree").css("border", "none");
+		$("ul.ztree").css("width", "290px");
+		$("ul.ztree").css("height", $(window).height()-140);
+		$("ul.ztree").css("padding-top", "7px");
+		$("div.zTreeDemoBackground").css("height", $(window).height()-107);
+	}
+	//调取后台数据
+	function treeData(pid) {
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/org/subOrgs",
+			dataType : "json",
+			data : {
+				pid : pid
+			},
+			success : function(resp) {
+				if (resp.code == 200) {
+					zNodes = resp.data;
+				} else {
+					//alert(resp.msg);
+				}
+			}
+		});
+	}
+
+	function onClick(e, treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		zTree.expandNode(treeNode);
+// 		alert(treeNode.id);
+		$("#treeId").val(treeNode.id);//当前所选分类
+// 		$(window.parent.document).contents().find("#rightFrame")[0].contentWindow.$("#treeId").val(treeNode.id);//当前所选分类
+		$(window.parent.document).contents().find("#rightFrame")[0].contentWindow.location.href="/templates/view/org/list.html";
+	}
+
+	function cancelSelectedNode() {
+		$("#treeId").val("");
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		//alert(treeNode.id);
+		zTree.cancelSelectedNode(zTree.getSelectedNodes()[0]);
+	}
+	
+	function checkLogin0() {
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/checkLogin",
+			dataType : "json",
+			data : {},
+			success : function(resp) {
+				if(resp.code == 200){
+					var name = resp.data.loginName;
+					if (name!="admin") {
+						$("#roleBtns").css("display","none");
+					}
+				} else {
+					if (window.location.href.indexOf("/view/index") == -1) {
+//						alert("用户未登录");
+// 						top.location.href = "/view/index";
+					}
+				}
+			}
+		});
+	}
+	
+	//条件查询
+	function search() {
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/org/queryOrgs",
+			dataType : "json",
+			data : {
+				'name' : $("#orgSearch").val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					zNodes = resp.data;
+					initTree(true);
+				} else {
+					if (window.location.href.indexOf("/view/index") == -1) {
+//						alert("用户未登录");
+// 						top.location.href = "/view/index";
+					}
+				}
+			}
+		});
+	}
+	
+	//默认展开第一级
+	function expendRoot() {
+		var treeId = $("#treeId").val();
+		if (treeId == "") {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			var rootNode = zTree.getNodesByFilter(function (node) { return node.level == 0 }, true); 
+			zTree.setting.callback.onClick(null,zTree.setting.treeId,rootNode);
+		}
+	}
+
+	//页面初始化
+	(function($) {
+		checkLogin0();
+
+		//树
+		treeData("0");
+		//初始化树
+		initTree(false);
+		
+		$("#searchId").click(function() {
+			search();
+		});
+		
+		//默认展开第一级
+		expendRoot();
+		
+	}(jQuery));
+	
+</script>

@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--style-->
+<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+
+</head>
+<body>
+<div class="fl w1920 h1000 bg_ej_xq">	
+	<div class="fl w h61">
+		<div class="fl ml610 w700 tc"><span id="titDiv" class="fl  w f24 white tc mt25 bold">各区督查件整体情况</div>
+		<div class="fr mr270 mt25"><a href="####" onclick="gotosixteen()"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w1833 h750 ml40 mt37">
+		<div class="fl w1000 h745 ml50 mt20">	
+			<div class="fl w h60 white bold f22 mt15">
+				<span id="title" class="fl w tc color_yellow"></span>
+			</div>
+			<ul id="modelDiv" class="fl w f22">
+				<li class="fl w h90 bgli">
+					<span class="fl w210 h90 lh90 tr white">立项日期：</span>
+					<span id="data1" class="fl w700 h90 lh90 tl white"></span>
+				</li>
+				<li class="fl w h90">
+					<span class="fl w210 h90 lh90 tr white">督办事项：</span>
+					<span id="data2" class="fl w700 h90 lh90 tl white"></span>
+				</li>
+				<li class="fl w h90 bgli">
+					<span class="fl w210 h90 lh90 tr white">承办单位：</span>
+					<span id="data3" class="fl w700 h90 lh90 tl white"></span>
+				</li>
+				<li class="fl w h90">
+					<span class="fl w210 h90 lh90 tr white">批示领导/内容：</span>
+					<span id="data4" class="fl w700 h90 lh90 tl white"></span>
+				</li>
+				<li class="fl w h90 bgli">
+					<span class="fl w210 h90 lh90 tr white">办理状态：</span>
+					<span id="data5" class="fl w700 h90 lh90 tl white">办理中</span>
+				</li>
+				<li class="fl w h90">
+					<span class="fl w210 h90 lh90 tr white">批示原件：</span>
+					<span class="fl w700 h90 lh90 tl white">
+						<!-- <a href="###" class="color_fj">督查督办通报.pdf</a> -->
+						无
+					</span>
+				</li>
+			</ul>			
+		</div>
+		<div class="fr w670 h800">
+			<span class="fl w">
+				<div id="pdf"></div>
+			</span>
+		</div>
+	</div>
+</div>
+<div class="sjly_div h38 pa tc">
+   <span class="fl w mt13 tc">数据来源方：市委办公厅</span>
+</div>
+</body>
+</html>
+
+<!-- pdf -->
+<style>
+.pdfobject-container {
+	width: 100%;
+	max-width: 660px;
+	height: 800px;
+/* 	margin: 2em 0; */
+}
+</style>
+<script src="/templates/view/dcdb/page/pdf/pdfobject.min.js"></script>
+
+<script>
+	var options = {
+		width: '100%',
+		maxWidth: '660px',
+		height: '800px',
+		pdfOpenParams: {
+// 		    pagemode: "thumbs",
+		    toolbar: 0,
+		    navpanes: 0,
+		    statesbar: 0,
+		    view: 'FitBV,left',
+		    zoom: '112,0,0'
+		}
+	};
+	PDFObject.embed("/templates/view/dcdb/page/pdf/转文第277号-晓东同志批示.pdf", "#pdf", options);
+	function viewPdf() {
+		$(".tip").fadeIn(200);
+		$(".con").fadeOut(200);
+	}
+</script>
+
+<script>
+	
+//ID
+var id=getUrlParam("id");
+//年份
+var year=getUrlParam("year");
+if (year=="" || year==null || year=="null" || year=="undefined")
+	year = "";
+//区域
+var areaName=decodeURI(getUrlParam("area"));
+$("#titDiv").html((year==""?"":(year+"年"))+areaName+"督查件整体情况");
+//分类
+var type=getUrlParam("type");
+//状态
+var status=getUrlParam("status");
+	
+//页面初始化
+(function($) {
+		
+		$("#mySelect").select({
+			width: "128px"
+		});
+
+	//督办件
+	model(id);
+
+		
+}(jQuery));
+
+//解析地址栏参数
+function getUrlParam(s) {
+	var str = window.location.search.substr(1)+"&";
+	var params = str.split("&");
+	for (var i = 0; i < params.length; i++) {
+		var key = params[i].split("=")[0];
+		var value = params[i].split("=")[1];
+		if (key == s)
+			return value;
+	}
+	return null;
+}
+
+//督查件详情
+function model(id) {
+	var url = "";
+	if (type=="zddcsxDiv" || type=="dyzssxDiv" || type=="hyjdsxDiv")
+		url = "/api/dcdb/dcj/model";
+	else if (type=="ldpsjDiv" || type=="ldzssxDiv")
+		url = "/api/dcdb/psj/model";
+	else if (type=="mtfywtDiv" || type=="smrxDiv" || type=="qtDiv")
+		url = "/api/dcdb/media/mediaModel";
+	$.ajax({
+//		async : false,
+		type : "post",
+		url : url,
+		dataType : "json",
+		data : {
+			'id' : id
+		},
+		success : function(resp) {
+			$("#title").html("");
+			$("#data1").html("");
+			$("#data2").html("");
+			$("#data3").html("");
+			$("#data4").html("");
+			$("#data5").html("");
+			if(resp.code == 200){
+				if (resp.data!=null) {
+// 					$("#title").append(resp.data.estabprojdate);
+// 					$("#data1").html(resp.data[0]);
+// 					$("#data2").html(resp.data[1]);
+// 					$("#data3").html(resp.data[3]);
+// 					$("#data4").html(resp.data[2]);
+// 					$("#data5").html(resp.data[4]);
+// 					$("#modelDiv").append("<li class='fl w h90 bgli'>"
+// 							+ " 	<span class='fl w210 h90 lh90 tr white'>立项日期：</span>"
+// 							+ " 	<span class='fl w700 h90 lh90 tl white'>"+resp.data[0][0]+"</span>"
+// 							+ " </li>"
+// 							+ " <li class='fl w h90'>"
+// 							+ " 	<span class='fl w210 h90 lh90 tr white'>督办事项：</span>"
+// 							+ " 	<span class='fl w700 h90 lh90 tl white'>"+resp.data[0][1]+"</span>"
+// 							+ " </li>"
+// 							+ " <li class='fl w h90 bgli'>"
+// 							+ " 	<span class='fl w210 h90 lh90 tr white'>承办单位：</span>"
+// 							+ " 	<span class='fl w700 h90 lh90 tl white'>"+resp.data[0][3]+"</span>"
+// 							+ " </li>"
+// 							+ " <li class='fl w h90'>"
+// 							+ " 	<span class='fl w210 h90 lh90 tr white'>领导批示/内容：</span>"
+// 							+ " 	<span class='fl w700 h90 lh90 tl white'>"+resp.data[0][2]+"</span>"
+// 							+ " </li>"
+// 							+ " <li class='fl w h90'>"
+// 							+ " 	<span class='fl w210 h90 lh90 tr white'>办理状态：</span>"
+// 							+ " 	<span class='fl w700 h90 lh90 tl white'>"+resp.data[0][4]+"</span>"
+// 							+ " </li>");
+
+					$("#title").html("");
+					$("#title").append(emptytoNull(resp.data.title));
+					$("#modelDiv").html("");
+					if (type=="zddcsxDiv") {
+						$("#modelDiv").append("<li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>立项日期：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.estabprojdate)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>督办事项：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.title)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>承办单位：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.speciapartyname)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>领导批示/内容：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.instrleadername)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>办理状态：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.handlestatus)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>批示原件：</span>"
+	 							+ " 	<span class='fl w700 h90 lh90 tl white'><a href='###' class='color_fj' onclick='viewPdf()'>转文第277号-晓东同志批示.pdf</a></span>"
+// 								+ " 	<span class='fl w700 h90 lh90 tl white'>无</span>"
+								+ " </li>");
+					}
+					else if (type=="dyzssxDiv" || type=="hyjdsxDiv") {
+						$("#modelDiv").append("<li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>立项日期：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.estabprojdate)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>督办事项：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.title)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>承办单位：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.speciapartyname)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>办理状态：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.handlestatus)+"</span>"
+								+ " </li>");
+					}
+					else if (type=="ldpsjDiv" || type=="ldzssxDiv") {
+						$("#modelDiv").append("<li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>立项日期：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.estabprojdate)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>限结日期：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.limitdate)+"</span>"
+								+ " </li>"
+	 							+ " <li class='fl w h90 bgli'>"
+	 							+ " 	<span class='fl w210 h90 lh90 tr white'>督办事项：</span>"
+	 							+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.title)+"</span>"
+	 							+ " </li>"
+								+ " <li class='fl w h90'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>承办单位：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.speciapartyname)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>领导批示/内容：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.instrleadername)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>办理状态：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.handlestatus)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>批示原件：</span>"
+	 							+ " 	<span class='fl w700 h90 lh90 tl white'><a href='###' class='color_fj' onclick='viewPdf()'>转文第277号-晓东同志批示.pdf</a></span>"
+// 								+ " 	<span class='fl w700 h90 lh90 tl white'>无</span>"
+								+ " </li>");
+					}
+					else if (type=="mtfywtDiv" || type=="smrxDiv" || type=="qtDiv") {
+						$("#modelDiv").append("<li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>刊登媒体：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.mediapartyname)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>下发日期：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.publishdate)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>承办单位：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.partyname)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>办理状态：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>"+emptytoNull(resp.data.handlestatus)+"</span>"
+								+ " </li>"
+								+ " <li class='fl w h90 bgli'>"
+								+ " 	<span class='fl w210 h90 lh90 tr white'>摘要：</span>"
+								+ " 	<span class='fl w700 h90 lh90 tl white'>无</span>"
+								+ " </li>");
+					}
+				}
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//督查件列表
+function gotosixteen() {
+	window.location.href="/templates/view/dcdb/page/area/sixteen.html?year="+year+"&area="+areaName+"&type="+type+"&status="+status;
+}
+
+
+</script>

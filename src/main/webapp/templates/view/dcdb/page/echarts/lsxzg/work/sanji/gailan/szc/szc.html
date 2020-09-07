@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>疏整促</title>
+</head>
+<body>
+
+    <div id="overView1_meddle_cont_maps_bjMap" style="width:660px;height:600px; color:#fff;font-size:16px;margin-left:20px"></div>
+	
+	
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+	<script>
+	
+	//16区
+	var areaArray = new Array();
+	var sixArray = new Array();
+	var totArray = new Array();
+	var index = 0;
+	var danwei = "";
+	//页面初始化
+	(function($) {
+		
+		//年份
+		index=getUrlParam("index");
+		if (index=="" || index==null || index=="null" || index=="undefined")
+			index = 0;
+		if (index == 0)
+			danwei = "单位：个";
+		else if (index == 1)
+			danwei = "单位：万人";
+		else if (index == 2)
+			danwei = "单位：万平方米";
+		else if (index == 3)
+			danwei = "单位：公顷";
+
+		//16区
+// 		areaCount1();
+		
+		areaArray = [
+				[
+					{'name':'东城区','value':737},
+					{'name':'西城区','value':813},
+					{'name':'朝阳区','value':1711},
+					{'name':'丰台区','value':419},
+					{'name':'石景山区','value':114},
+					{'name':'海淀区','value':1000},
+					{'name':'门头沟区','value':304},
+					{'name':'房山区','value':1203},
+					{'name':'通州区','value':12977},
+					{'name':'顺义区','value':1845},
+					{'name':'昌平区','value':1067},
+					{'name':'大兴区','value':248},
+					{'name':'怀柔区','value':159},
+					{'name':'平谷区','value':1355},
+					{'name':'密云区','value':675},
+					{'name':'延庆区','value':520}
+				],
+				[
+					{'name':'东城区','value':71.2},//-16.09%
+					{'name':'西城区','value':103.4},//-15.77%
+					{'name':'朝阳区','value':436.1},//-14.58%
+					{'name':'丰台区','value':236.8},//-12.5%
+					{'name':'石景山区','value':60.6},//-10.01%
+					{'name':'海淀区','value':291.8},//-23.97%
+					{'name':'门头沟区','value':40.3},//6.00%
+					{'name':'房山区','value':124.9},//-9.04%
+					{'name':'通州区','value':197.0},//-5.94%
+					{'name':'顺义区','value':138.7},//-10.45%
+					{'name':'昌平区','value':221.7},//-16.89%
+					{'name':'大兴区','value':178.6},//-12.26%
+					{'name':'怀柔区','value':38.9},//-7.30%
+					{'name':'平谷区','value':42.8},//8.26%
+					{'name':'密云区','value':48.4},//2.89%
+					{'name':'延庆区','value':31.4}//-2.75%
+				],
+				[
+					{'name':'东城区','value':2.32},
+					{'name':'西城区','value':1.4},
+					{'name':'朝阳区','value':75.92},
+					{'name':'丰台区','value':13.6},
+					{'name':'石景山区','value':1.98},
+					{'name':'海淀区','value':98.46},
+					{'name':'门头沟区','value':3.11},
+					{'name':'房山区','value':29.68},
+					{'name':'通州区','value':167.63},
+					{'name':'顺义区','value':53.8},
+					{'name':'昌平区','value':105.41},
+					{'name':'大兴区','value':10.14},
+					{'name':'怀柔区','value':10.02},
+					{'name':'平谷区','value':13.19},
+					{'name':'密云区','value':7.47},
+					{'name':'延庆区','value':9.79}
+				],
+				[
+					{'name':'东城区','value':2.18},
+					{'name':'西城区','value':1},
+					{'name':'朝阳区','value':254.28},
+					{'name':'丰台区','value':83.32},
+					{'name':'石景山区','value':25.75},
+					{'name':'海淀区','value':69.41},
+					{'name':'门头沟区','value':34.75},
+					{'name':'房山区','value':118.94},
+					{'name':'通州区','value':583.58},
+					{'name':'顺义区','value':272.37},
+					{'name':'昌平区','value':1094.91},
+					{'name':'大兴区','value':143.42},
+					{'name':'怀柔区','value':135.15},
+					{'name':'平谷区','value':41.03},
+					{'name':'密云区','value':93.62},
+					{'name':'延庆区','value':25.7}
+				]		
+			];
+		totArray = [25147, 579366, 603.93, 2977.97];
+
+		sixArray = [[7370, 813, 1711, 1000, 419, 114],
+					[6460, 5415, 91532, 86649, 84097, 120],
+					[2.32, 1.4, 75.92, 98.46, 13.6, 1.98],
+					[2.18, 0.55, 254.28, 69.41, 83.32, 25.75]
+			];
+
+// 		alert(index);
+		$("#dcNum"+(parseInt(index)+1),window.parent.document).html(sixArray[index][0]);
+		$("#xcNum"+(parseInt(index)+1),window.parent.document).html(sixArray[index][1]);
+		$("#cyNum"+(parseInt(index)+1),window.parent.document).html(sixArray[index][2]);
+		$("#hdNum"+(parseInt(index)+1),window.parent.document).html(sixArray[index][3]);
+		$("#ftNum"+(parseInt(index)+1),window.parent.document).html(sixArray[index][4]);
+// 		alert(sixArray[index][5]);
+		$("#sjsNum"+(parseInt(index)+1),window.parent.document).html(sixArray[index][5]);
+		
+		
+	}(jQuery));
+	
+	//区域统计：16区
+	function areaCount1() {
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/dcdb/dcj/areaCount",
+			dataType : "json",
+			data : {
+				'year' : $("#mySelect",window.parent.document).find("option:selected").val(),
+				'area' : '0'
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+//	 				alert(resp.data);
+					for (var i=0; i<resp.data.length; i++) {
+						var name = resp.data[i].split("|")[0];
+						var num = resp.data[i].split("|")[1];
+						$("#otherName"+(i+1)).html((i+1)+". "+name);
+						$("#otherNum"+(i+1)).html(num);
+						areaArray.push({'name':name,'value':num});
+						
+						if (name=="东城区") {
+							$("#dongchengNum",window.parent.document).html(num);
+						}
+						else if (name=="西城区") {
+							$("#xichengNum",window.parent.document).html(num);
+						}
+						else if (name=="海淀区") {
+							$("#haidianNum",window.parent.document).html(num);
+						}
+						else if (name=="朝阳区") {
+							$("#chaoyangNum",window.parent.document).html(num);
+						}
+						else if (name=="丰台区") {
+							$("#fengtaiNum",window.parent.document).html(num);
+						}
+						else if (name=="石景山区") {
+							$("#shijingshanNum",window.parent.document).html(num);
+						}
+					}
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	</script>
+    
+    <!-- ECharts单文件引入 -->
+    <script src="/templates/view/dcdb/page/echarts/map/require/require.js"></script>
+
+ 	<script>
+		require.config({
+			urlArgs : 'v=' + (new Date()).getTime(),
+			paths : {
+				jquery : '/templates/view/dcdb/page/echarts/map/jquery/jquery-1.7.2.min',
+				json : '/templates/view/dcdb/page/echarts/map/json/BJMapGeoJson',
+				echarts : '/templates/view/dcdb/page/echarts/map/echarts/echarts.min',
+				ProvinceMapUtilColor : '/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gailan/szc/ProvinceMapUtilColor'
+			},
+			shim : {
+
+			}
+		});
+		
+		require([ 'jquery', 'ProvinceMapUtilColor' ], function($, ProvinceMapUtilColor) {
+			ProvinceMapUtilColor.showProvince({
+				idName : "overView1_meddle_cont_maps_bjMap",
+				IdNames : "overView1_meddle_cont_maps_bjMap",
+				data : areaArray[index],
+				Company : "无",
+				clickCallBack : function(param) {
+// 					alert(param.name);
+// 					alert(index);
+// 					alert(window.parent.parent.document.getElementById("dcdb").innerHTML);
+					if (index==0) {
+						$("#szc",window.parent.parent.document).click();
+						window.parent.location.href = "http://222.65.100.220";
+					}
+					else if (index==1) {
+						$("#szc",window.parent.parent.document).click();
+						window.parent.location.href = "http://222.65.100.220/renkou";
+					}
+				},
+				MapparamDefaultTrue : true,
+				optionData : {
+					series : [ {
+						zoom : 1.25,
+						markLine : {	
+							symbol : [ 'none', 'arrow' ],
+							lineStyle : {
+								type : 'solid',
+								width : 1.5,
+								color : '#58c7ee'//rgba(88,199,238,.5)
+							},
+							data : [ [ {
+								x : '46.5%',
+								y : '71.5%'
+							}, {
+								x : '16%',
+								y : '100%'
+							} ]// 东城区
+// 							[ {
+// 								x : '48.5%',
+// 								y : '70.5%'
+// 							}, {
+// 								x : '85%',
+// 								y : '78%'
+// 							} ],// 西城区
+							]
+						}
+					} ]
+				}
+			})
+		});
+	</script>
+    
+</body>

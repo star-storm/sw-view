@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!..提示消息 js   ..>
+<link rel="stylesheet" type="text/css" href="/templates/view/system/news.css"/>
+<script type="text/javascript" src="/templates/view/system/news.js"></script>
+<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+
+<style>
+/*表头*/
+.thListNormal{
+	height:25px;
+	/*filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#FFFFFF', endColorStr='#CBCEE0', gradientType='0');*/
+	background-image:url(./images/16B/bg_trlist.png);
+	text-align:center;
+	vertical-align:middle;
+	color:#000000;
+	border-left:#55add2 solid 1px;
+	border-right:#55add2 solid 1px;
+	border-top:#55add2 solid 1px;
+	border-bottom:#55add2 solid 1px;
+	background-color:#FFFFFF;
+}
+
+/*主体表格定义*/
+/*表格外框*/
+.tabout{
+	border-left:1px #55add2 solid;
+	border-right:1px #55add2 solid;
+	border-top:4px #a7cee4 solid;
+	border-bottom:1px #55add2 solid; 
+	background:#f0fcfe;
+	border-collapse:collapse;
+	width:98%;
+}
+</style>
+
+<style>
+	*{margin:0; padding:0;}
+	.box{width:677px; height:330px; margin:auto; font-family:"微软雅黑";}
+	.title{width:100%;height:30px;margin-top:50px;}
+	.xxcon{background:url(/templates/view/system/images/conbg.png) top center no-repeat; width:677px; height:288px;}
+	.name{font-size:24px;color:#1381b3; font-weight:bold;text-align:center; height:100px; line-height:100px;}
+	.list{width:500px; margin-left:100px;}
+	.red{color:red;}
+</style>
+<script type="text/javascript">
+
+	(function($) {
+
+		warn();//数据现状
+		
+	}(jQuery));
+
+	//数据现状
+	function warn() {
+		$.ajax({
+// 			async : false,
+			type : 'post',
+			url : '/api/sys/warn',
+			dataType : 'json',
+			data : {
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					var recCount = resp.data[0].recCount;
+					var dataSize = resp.data[0].dataSize;
+					var indexSize = resp.data[0].indexSize;
+					$("#recCount").html(recCount+" 条");
+					$("#dataSize").html((dataSize+indexSize)+" MB");
+					readThreshold();//阈值
+				}
+			}
+		});
+	}
+
+	//阈值
+	function readThreshold() {
+		$.ajax({
+// 			async : false,
+			type : 'post',
+			url : '/api/sys/readThreshold',
+			dataType : 'json',
+			data : {
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$("#threshold").html(resp.data+" MB");
+					displayImg();
+				}
+			}
+		});
+	}
+	
+	function displayImg() {
+		var dataSize = $("#dataSize").html();
+		var threshold = $("#threshold").html();
+// 		alert("dataSize="+dataSize+",threshold="+threshold);
+		if (dataSize>=threshold) {
+			display();
+			$("#imgDiv").append('<img id="alertImg" width="33" height="45" src="./images/jingdeng.gif"/>');
+		}
+	}
+	
+</script>
+	
+</head>
+<body>
+<input type="hidden" value="" id="tsid"/>
+<div class="float_layer" id="miaov_float_layer">
+    <h2>
+        <strong>提示消息</strong>
+        <a id="btn_min" href="javascript:;" class="min"></a>
+        <a id="btn_close" href="javascript:;" class="close"></a>
+    </h2>
+    <div class="content">
+	<div class="wrap">数据库空间容量不够。</div>
+  </div>
+</div>
+
+<div class="box">
+	<div class="title"></div>
+    <div class="xxcon">
+    	<div class="name">数据库表空间信息</div>
+        <div class="list">
+        	<table width="100%" border="0" style="background:none;">
+              <tr>
+                <td width="33%" height="50" align="right" valign="middle">数据量：</td>
+                <td width="51%" height="50" align="left" valign="middle"><span id="recCount"></span></td>
+                <td id="imgDiv" width="16%" height="50" valign="middle"></td>
+              </tr>
+              <tr>
+                <td height="50" align="right" valign="middle">数据占用空间：</td>
+                <td height="50" align="left" valign="middle"><span id="dataSize"></span></td>
+                <td height="50" valign="middle">&nbsp;</td>
+              </tr>
+              <tr>
+                <td height="50" align="right" valign="middle">阈值：</td>
+                <td height="50" align="left" valign="middle"><span id="threshold"></span></td>
+                <td height="50" valign="middle">&nbsp;</td>
+              </tr>
+            </table>
+      </div>
+    </div>
+</div>
+
+</body>
+</html>

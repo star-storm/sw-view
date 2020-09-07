@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--base style!-->
+<link href="/static/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/web.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/select.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/js.js"></script>
+
+
+</head>
+<body>
+
+<!--弹出框-->
+<div id="bg1"></div>
+<!--新增-->
+<div id="show1" class="fl w930 min-h pb50 bg_white">
+	<div class="fl w h45 lh45 tit_zx ti20">
+		<span class="white f16 bold">资源新增</span>
+	</div>
+	<div class="fl w ">
+		<iframe src="/static/test/subwindow/page_1-xz.html" id="iframepage" frameborder="0" width="100%" scrolling="auto"></iframe>	
+	</div>	
+	<div class="fl w200 h30 ml370 mt20" >
+		<button type="reset" value="Reset" class="fl btn bg_green">确定</button>
+		<button type="submit" onclick="hidediv('1');" value="Submit" class="fr btn bg_red">取消</button>
+	</div>
+</div>
+<!--新增 end-->
+<script type="text/javascript" language="javascript"> 
+
+function iFrameHeight() {   
+    var ifr = document.getElementById("iframepage");
+    var doc = ifr.contentWindow.document;
+    
+    var scrollWidth = doc.documentElement.scrollWidth; //弹出窗口的宽度;
+	var scrollHeight = doc.documentElement.scrollHeight; //弹出窗口的高度;
+// 	alert("scrollWidth: " + scrollWidth);
+// 	alert("scrollHeight: " + scrollHeight);
+	$("#iframepage").height(scrollHeight);
+	var divWidth = document.getElementById("show1").offsetWidth;
+	var divHeight = document.getElementById("show1").offsetHeight;
+    var clientWidth = document.documentElement.clientWidth; //屏幕的宽度;
+	var clientHeight = document.documentElement.clientHeight; //屏幕的高度;
+// 	alert("clientWidth: " + clientWidth);
+// 	alert("clientHeight: " + clientHeight);
+	var left = (clientWidth-divWidth)/2; //获得窗口的水平位置;
+// 	var top = (clientHeight-divHeight)/2; //获得窗口的垂直位置;
+	var top = 0; //获得窗口的垂直位置;
+// 	if (clientHeight - 200 < divHeight) {
+// 		divHeight = clientHeight - 200;
+// 		$("#iframepage").height(divHeight);
+// 		alert(divHeight);
+// 		top = 100;
+// 	}
+	if (600 < divHeight) {
+		divHeight = 600;
+		$("#iframepage").height(600);
+	}
+	top = (clientHeight-document.getElementById("show1").offsetHeight)/2; //获得窗口的垂直位置;
+// 	alert("divWidth: " + divWidth);
+// 	alert("divHeight: " + divHeight);
+// 	alert("left: " + left);
+// 	alert("top: " + top);
+	$("#show1")
+	    .width(divWidth)
+		.height(divHeight)
+	    .css('position','absolute')
+	    .css("top",top)
+	    .css("left",left);
+}   
+</script>
+
+<div id="divDel"  class="fl w400 h200  bg_white">
+	<div class="fl w h45 lh45 tit_zx ti20">
+		<span class="white f16 bold">批量删除</span>
+	</div>
+	<div class="fl w h80 lh80 tc f16">
+		确定要删除吗？
+	</div>	
+	<div class="fl w200 h30 ml100" >
+		<button type="reset" value="Reset" class="fl btn bg_green">确定</button>
+		<button type="submit" onclick="hidediv_del();" value="Submit" class="fr btn bg_red">取消</button>
+	</div>
+</div>
+
+
+<!--弹出框 end-->
+
+	<!--top start-->
+	<div class="w bc h95">
+		<iframe src="/static/iframe/top.html" allowtransparency="true" style="background-color=transparent"  frameborder="0" width="100%" height="95" scrolling="no"></iframe>
+	</div>
+	<!--top end-->
+	<div class="w1200 bc">
+		<!--menu start-->
+		<div class="fl w209 h834 menuDiv mt20">
+			<iframe src="/static/iframe/menu.html" allowtransparency="true" style="background-color=transparent"  frameborder="0" width="209" height="834" scrolling="no"></iframe>
+		</div>
+		<!--menu end-->
+		<!--right start-->
+		<div class="fr w989 h834 con mt20">
+			<div class="fl w976 mt5 ml6 titBg titColor bold f18 h40 lh36 ti20">标密样本文件管理</div>
+			<div class="fl w930 ml30 mt10 h80">
+				<form action="" method="get">
+					<div class="fl w840">
+						<ul class="fl w ">
+							<li  class="fl w420 mt10 ">
+								<span class="fl w70 tl mt5">资源名称：</span>
+								<span class="fl w350"><input type="text" name="inputtext" class="InputText w330"/></span>
+							</li>
+							<li  class="fl w420 mt10 ">
+								<span class="fl w70 tl mt5">资源分类：</span>
+								<span class="fl w350 ">
+
+									<div id="cate" class="cate w330">
+									   <div class="w cate_wrp">
+											<div class="cate_inp w299 cate_tri">请选择资源分类</div>
+											<a href="###" class="cate_tri"></a>
+									  </div>
+									   <div class="cate_drop" style="display:none">
+											  <ul>
+												<li>资源分类1</li>
+												<li>资源分类2</li>
+												<li>资源分类3</li>
+												<li>资源分类4</li>
+											  </ul>
+									   </div>
+									</div>
+								
+								</span>
+							</li>
+							<li  class="fl w420 mt10 ">
+								<span class="fl w70 tl mt5">复杂程度：</span>
+								<span class="fl w320 ">
+								
+									<div id="cate1" class="cate w330">
+									   <div class="w cate_wrp">
+											<div class="cate_inp w299 cate_tri">请选择复杂程度</div>
+											<a href="###" class="cate_tri"></a>
+									  </div>
+									   <div class="cate_drop" style="display:none">
+											  <ul>
+												<li>简单</li>
+												<li>一般</li>
+												<li>困难</li>
+											  </ul>
+									   </div>
+									</div>
+								
+								</span>
+							</li>
+						</ul>
+
+
+					</div>
+					<div class="fr w80">
+						<button type="reset" value="Reset" class="btn bg_green mt8">重置</button>
+						<button type="submit" value="Submit" class="btn bg_bule mt12">搜索</button>
+					</div>
+				</form>
+			</div>
+			<div class="fl w930 ml30 mt15 ">
+				<form action="" method="get">
+					<div class="fl w bgBtn f18 h35 lh35">
+						<a href="###" onclick="showdiv('1');iFrameHeight();" class="fl f16 Black bold ti30 btn_xz">新增</a>
+						<a href="###" onclick="showdiv_del()" class="fl f16 Black bold ti30 btn_plsc ml10">批量删除</a>
+					</div>
+					<div class="fl w mt10">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tablelist">
+						  <tr class="tableTit">
+							<td class="tc w30">选择</td>
+							<td class="tc w30">序号</td>
+							<td class="tc ">资源名称</td>
+							<td class="tc w150">资源分类</td>
+							<td class="tc w60">复杂程度</td>
+							<td class="tc w180">操作</td>
+						  </tr>
+						  <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">223132</td>
+							<td class="tc">1</td>
+							<td class="tc">一般</td>
+							<td class="tc">
+								<a href="page_2-ck.html" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">修改</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr>
+						  <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">223132</td>
+							<td class="tc">1</td>
+							<td class="tc">一般</td>
+							<td class="tc">
+								<a href="#" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">修改</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr>
+						  <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">223132</td>
+							<td class="tc">1</td>
+							<td class="tc">一般</td>
+							<td class="tc">
+								<a href="#" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">修改</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr>
+						  <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">223132</td>
+							<td class="tc">1</td>
+							<td class="tc">一般</td>
+							<td class="tc">
+								<a href="#" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">修改</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr>
+						  <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">223132</td>
+							<td class="tc">1</td>
+							<td class="tc">一般</td>
+							<td class="tc">
+								<a href="#" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">修改</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr>
+						  <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">223132</td>
+							<td class="tc">1</td>
+							<td class="tc">一般</td>
+							<td class="tc">
+								<a href="#" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">修改</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr>
+						  <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">223132</td>
+							<td class="tc">1</td>
+							<td class="tc">一般</td>
+							<td class="tc">
+								<a href="#" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">修改</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr>
+						  <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">223132</td>
+							<td class="tc">1</td>
+							<td class="tc">一般</td>
+							<td class="tc">
+								<a href="#" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">修改</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr>
+						  <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">223132</td>
+							<td class="tc">1</td>
+							<td class="tc">一般</td>
+							<td class="tc">
+								<a href="#" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">修改</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr>
+						  <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">10</td>
+							<td class="tc">223132</td>
+							<td class="tc">1</td>
+							<td class="tc">一般</td>
+							<td class="tc">
+								<a href="#" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">修改</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr>
+						</table>
+					</div>
+					<div class="fl w500 mt25 pageDiv tc ml210" >
+						<a href="#" class="pageoff ml10">首页</a>
+						<a href="#" class="pageoff ml10">上一页</a>
+						<a href="#" class="pageon ml10">1</a>
+						<a href="#" class="pageoff ml10">2</a>
+						<a href="#" class="pageoff ml10">3</a>
+						<a href="#" class="pageoff ml10">4</a>
+						<a href="#" class="pageoff ml10">5</a>
+						<a class="nostyle ml10">...</a>
+						<a href="#" class="pageoff ml10">20</a>
+						<a href="#" class="pageoff ml10">下一页</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+    <script type="text/javascript">
+
+    // 下拉列表js
+    (function($) {
+      var $cate = $('#cate'),
+        $tri = $('.cate_tri', $cate),
+        $drop = $('div.cate_drop', $cate),
+        $inp = $('div.cate_inp', $cate);
+
+        $tri.on('click', function(event) {
+            var $el = $(this);
+            if( $el.data('active') !== 'on' ) {
+              $drop[0].style.display = 'block';
+              $el.data('active', 'on');
+            } else {
+              $drop[0].style.display = 'none';
+              $el.data('active', 'off')
+            }
+        });
+
+        $drop.on('mouseover', 'li', function(event) {
+          $inp[0].innerHTML = this.innerHTML; 
+        }).on('click', 'li', function(event) {
+          // do something
+          $drop[0].style.display = 'none';
+          $tri.data('active', 'off');
+        });
+    }(jQuery));
+
+	 (function($) {
+      var $cate = $('#cate1'),
+        $tri = $('.cate_tri', $cate),
+        $drop = $('div.cate_drop', $cate),
+        $inp = $('div.cate_inp', $cate);
+
+        $tri.on('click', function(event) {
+            var $el = $(this);
+            if( $el.data('active') !== 'on' ) {
+              $drop[0].style.display = 'block';
+              $el.data('active', 'on');
+            } else {
+              $drop[0].style.display = 'none';
+              $el.data('active', 'off')
+            }
+        });
+
+        $drop.on('mouseover', 'li', function(event) {
+          $inp[0].innerHTML = this.innerHTML; 
+        }).on('click', 'li', function(event) {
+          // do something
+          $drop[0].style.display = 'none';
+          $tri.data('active', 'off');
+        });
+    }(jQuery));
+	 
+    </script>	
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+	   $(function(){
+	      $(".scrollDiv").niceScroll({
+			cursorcolor:"#446ba9",
+			touchbehavior: true,
+			cursoropacitymax: 1,
+			cursorborder: "0",
+			cursorwidth: "10px",
+			autohidemode: true});
+		});
+  		function callback0(id) {
+//   			alert(id);return;
+  			var tmpId = id.replace("Tab","");
+  			var k=0;
+  			for (var i=0; i<area.length; i++) {
+				if (area[i]==tmpId) {
+					k = i;
+					$("#titleSpan").html(areaArray[i]+"常住人口分布情况");
+				}
+			}
+  			document.getElementById(tmpId+"Frame").src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/xtfz/czrk.html?param="+area[k];
+  		}
+  		function getUrlParam(s) {
+  			var str = window.location.search.substr(1)+"&";
+  			var params = str.split("&");
+  			for (var i = 0; i < params.length; i++) {
+  				var key = params[i].split("=")[0];
+  				var value = params[i].split("=")[1];
+  				if (key == s)
+  					return value;
+  			}
+  			return null;
+  		}
+    </script>
+</head>
+<body>
+<div class="fl w h1000 cx_morebg">	
+	<div class="fl w h61 titbg">
+		<div class="fl ml610 w700 tl">
+			<span id="titleSpan" class="fl w f24 white tc mt10 bold">全市常住人口分布情况</span>
+		</div>
+		<div class="fr mr270 mt10"><a href="lsxzg_2xt.html"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w">
+		<div class="fl w410 h800 ml45 mt25 scrollDiv" id="scrollDiv" style="height:800px;overflow:auto;">
+			<div class="fl w390 ml10">
+				<span id="qsTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_On"><font class="fl w f24 tc mt10">全&nbsp;&nbsp;&nbsp;&nbsp;市</font></span>
+				<span id="dcTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">东城区</font></span>
+				<span id="xcTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">西城区</font></span>
+				<span id="cyTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">朝阳区</font></span>
+				<span id="hdTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">海淀区</font></span>
+				<span id="ftTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">丰台区</font></span>
+				<span id="sjsTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">石景山区</font></span>
+				<span id="syTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">顺义区</font></span>
+				<span id="tzTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">通州区</font></span>
+				<span id="dxTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">大兴区</font></span>
+				<span id="mtgTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">门头沟区</font></span>
+				<span id="myTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">密云区</font></span>
+				<span id="hrTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">怀柔区</font></span>
+				<span id="yqTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">延庆区</font></span>
+				<span id="pgTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">平谷区</font></span>
+				<span id="cpTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">昌平区</font></span>
+				<span id="fsTab" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">房山区</font></span>
+			</div>		
+		</div>
+		<div id="dataDiv">
+		</div>
+	</div>
+</div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+//常住人口基本情况
+	//常住人口
+	var czrkData =      [2153.6,  79.4,    113.7,    347.3,   323.7,    202.5,      57,        122.8,   167.5,    171.2,    25.4,      50.3,       42.2,    28.9,    46.2,    216.6,    125.5];
+	//常住外来人口
+	var czwlrkData =    [745.6,   15.4,    21,      149.1,    123.7,      64.1,       13.7,      48.0,    64.6,   77.1,     -1,        7.9,        10.2,    4.5,     4.7,     105.1,    30.8];
+	//常住人口密度
+	var czrkmdData =    [1312,    18977,   22400,   7632,     7515,     6628,       6648,      -1,      -1,      1822,     -1,        -1,         197,     -1,      487,     -1,       631];
+	//常住人口出生率
+	var czrkcslData =   [8.12,    -1,       7.35,     -1,      -1,     6.73,      7.38,      8.43,    8.96,     -1,     9.9,       8.44,       7.89,    8.22,    11.95,   12.43,    -1];
+	//常住人口死亡率
+	var czrkswlData =   [5.49,    -1,       6.12,     -1,      -1,     5.41,      6.26,      7.26,    5.35,     -1,     3.5,       5.38,       5.78,    5.84,    5.71,    3.02,     -1];
+	//常住人口自然增长率
+	var czrkzrzzlData = [2.63,    -1,       5.2,      -1,      -1,     1.32,      1.12,      -1,      -1,       -1,     6.4,       -1,         2.11,    2.38,    6.24,    9.41,     -1];
+//常住人口性别分布情况
+	//女人数
+	var nvNum =         [1059.6,  41.3,    58.8,     -1,       -1,    100.7,      28.6,      59.3,    81.4,     -1,     -1,        24.7,       20.5,    -1,      22.8,    -1,       61.8];
+	//女百分比
+	var nvPercent =     [49.2,    52,      51.7,     -1,       -1,    49.7,       50.2,      48.3,    48.4,     -1,    -1,        49.1,       48.6,    -1,      49.4,    -1,       49.2];
+	//男人数
+	var nanNum =        [1094.0,  38.1,    54.9,     -1,       -1,    101.8,      28.4,      63.5,    86.4,     -1,     -1,        25.6,       21.7,    -1,      23.4,    -1,       63.7];
+	//男百分比
+	var nanPercent =    [50.8,    48,      48.3,     -1,       -1,    50.3,       49.8,      51.7,    51.6,     -1,    -1,        50.9,       51.4,    -1,      50.6,    -1,       50.8];
+//常住人口性别分布情况	
+	//城镇数 
+	var czNum =         [1865.0,  79.4,    113.7,    -1,       -1,    202.1,      -1,        71.0,    118.0,    -1,    -1,        30.5,       30.1,    -1,      27.1,    -1,       94.4];
+	//城镇百分比
+	var czPercent =     [86.6,    100,     100,      -1,       -1,     99.8,       -1,        57.8,    70.4,     -1,    -1,        60.6,       71.3,    -1,      58.7,    -1,       75.2];
+	//乡村数
+	var xcNum =         [288.6,   0.0,     0.0,      -1,       -1,      0.4,        -1,        51.8,    49.5,     -1,     -1,        19.8,       12.1,    -1,      19.1,    -1,       31.1];
+	//乡村百分比
+	var xcPercent =     [13.4,    0.0,     0.0,      -1,       -1,      0.2,        -1,        42.2,    29.6,     -1,    -1,        39.4,       28.7,    -1,      41.3,    -1,       24.8];
+//城区数据
+	var area =          ['qs',    'dc',    'xc',     'cy',    'hd',     'ft',    'sjs',      'sy',      'tz',     'dx',     'mtg',     'my',       'hr',    'yq',    'pg',    'cp',     'fs'];
+	var areaArray =     ['全市',  '东城区','西城区', '朝阳区','海淀区', '丰台区','石景山区', '顺义区',  '通州区', '大兴区', '门头沟区','密云区',   '怀柔区','延庆区','平谷区','昌平区', '房山区'];
+	
+	//参数
+	var tab = getUrlParam("param");
+	if (tab == null || tab=="undefied" || tab=="null")
+		tab="";
+	$(function () {
+		$("#mySelect").select({
+			width:"128px"
+		});
+		
+		$("#dataDiv").html("");
+		for (var i=0; i<17; i++) {
+			$("#dataDiv").append("<div class='fl w1360 h860 ml55 mt25 rk_rightbg' id='conent"+i+"' style='display:"+(i==0?"block":"none")+"'>"
+				+ "	<div class='fl w827 h415 mt20'>"
+				+ "		<div class='fl w'>"
+				+ "			<span class='fl bold f24 ml20 white'>常住人口基本情况  </span>"
+				+ "			<span class='fl f16 white mt5'>（2019年）</span>"
+				+ "		</div>"
+				+ "		<div class='fl w mt20'>"
+				+ "			<div class='fl mt15 ml20 w252 h135 rk_btn'>"
+				+ "				<span class='fl w  ml20 f18 lh46 white'>常住人口 </span>"
+				+ "				<span class='fl w  mt28 tc'>"
+				+ "					<span class='f40 color_yellow lh42 mt20'>"+(czrkData[i]==-1?"-":czrkData[i])+"</span>"
+				+ "					<span class='mt20 f18 white'>"+(czrkData[i]==-1?'':'万人')+"</span>"
+				+ "				</span>"
+				+ "			</div>"
+				+ "			<div class='fl mt15 ml20 w252 h135 rk_btn'>"
+				+ "				<span class='fl w  ml20 f18 lh46 white'>常住外来人口 </span>"
+				+ "				<span class='fl w  mt28 tc'>"
+				+ "					<span class='f40 color_yellow lh42 mt20'>"+(czwlrkData[i]==-1?"-":czwlrkData[i])+"</span>"
+				+ "					<span class='mt20 f18 white'>"+(czwlrkData[i]==-1?'':'万人')+"</span>"
+				+ "				</span>"
+				+ "			</div>					"
+				+ "			<div class='fl mt15 ml20 w252 h135 rk_btn'>"
+				+ "				<span class='fl w  ml20 f18 lh46 white'>常住人口密度 </span>"
+				+ "				<span class='fl w  mt28 tc'>"
+				+ "					<span class='f40 color_yellow lh42 mt20'>"+(czrkmdData[i]==-1?"-":czrkmdData[i])+"</span>"
+				+ "					<span class='mt20 f18 white'>"+(czrkmdData[i]==-1?"":'人/平方公里')+"</span>"
+				+ "				</span>"
+				+ "			</div>"
+				+ "			<div class='fl mt15 ml20 w252 h135 rk_btn'>"
+				+ "				<span class='fl w  ml20 f18 lh46 white'>常住人口出生率 </span>"
+				+ "				<span class='fl w  mt28 tc'>"
+				+ "					<span class='f40 color_yellow lh42 mt20'>"+(czrkcslData[i]==-1?"-":czrkcslData[i])+"</span>"
+				+ "					<span class='mt20 f18 white'>"+(czrkcslData[i]==-1?"":"‰")+"</span>"
+				+ "				</span>"
+				+ "			</div>"
+				+ "			<div class='fl mt15 ml20 w252 h135 rk_btn'>"
+				+ "				<span class='fl w  ml20 f18 lh46 white'>常住人口死亡率 </span>"
+				+ "				<span class='fl w  mt28 tc'>"
+				+ "					<span class='f40 color_yellow lh42 mt20'>"+(czrkswlData[i]==-1?"-":czrkswlData[i])+"</span>"
+				+ "					<span class='mt20 f18 white'>"+(czrkswlData[i]==-1?"":"‰")+"</span>"
+				+ "				</span>"
+				+ "			</div>"
+				+ "			<div class='fl mt15 ml20 w252 h135 rk_btn'>"
+				+ "				<span class='fl w  ml20 f18 lh46 white'>常住人口自然增长率 </span>"
+				+ "				<span class='fl w  mt28 tc'>"
+				+ "					<span class='f40 color_yellow lh42 mt20'>"+(czrkzrzzlData[i]==-1?"-":czrkzrzzlData[i])+"</span>"
+				+ "					<span class='mt20 f18 white'>"+(czrkzrzzlData[i]==-1?"":"‰")+"</span>"
+				+ "				</span>"
+				+ "			</div>"
+				+ "		</div>"
+				+ "	</div>"
+				+ "	<div class='fl w447 ml50 mt20'>"
+				+ "		<div class='fl w'>"
+				+ "			<span class='fl bold f24 ml20 white'>常住人口性别分布情况</span>"
+				+ "			<span class='fl f16 white mt5'>（2019年）</span>"
+				+ "		</div>"
+				+ "		<div class='fl w h190'>"
+				+ "			<div class='fl w176 h126 ml40 '>"
+				+ "				<div class='fl w h70 mt20'>"
+				+ "					<span class='fl w70'><img src='/templates/view/dcdb/images/rk_ico_1.png'></span>"
+				+ "					<span class='fl w90 f18  white mt10'>女（万人）</span>"
+				+ "					<span class='fl w90 f18 bold white mt10'>"+(nvNum[i]==-1?"-":nvNum[i])+"</span>"
+				+ "				</div>"
+				+ "				<div class='fl w h31 lh31 tc mt15 bor'>"
+				+ "					<span class='f24 bold white'>"+(nvPercent[i]==-1?"-":(nvPercent[i]+"%"))+"</span>"
+				+ "				</div>"
+				+ "			</div>"
+				+ "			<div class='fr w176 h126 mr10 '>"
+				+ "				<div class='fl w h70 mt20'>"
+				+ "					<span class='fl w70'><img src='/templates/view/dcdb/images/rk_ico_2.png'></span>"
+				+ "					<span class='fl w90 f18  white mt10'>男（万人）</span>"
+				+ "					<span class='fl w90 f18 bold white mt10'>"+(nanNum[i]==-1?"-":nanNum[i])+"</span>"
+				+ "				</div>"
+				+ "				<div class='fl w h31 lh31 tc mt15 bor'>"
+				+ "					<span class='f24 bold white'>"+(nanPercent[i]==-1?"-":(nanPercent[i]+"%"))+"</span>"
+				+ "				</div>"
+				+ "			</div>"
+				+ "		</div>"
+				+ "		<div class='fl w'>"
+				+ "			<span class='fl bold f24 ml20 white'>常住人口城乡分布情况</span>"
+				+ "			<span class='fl f16 white mt5'>（2019年）</span>"
+				+ "		</div>"
+				+ "		<div class='fl w'>"
+				+ "			<div class='fl w190 h126 ml30 '>"
+				+ "				<div class='fl w h70 mt20'>"
+				+ "					<span class='fl w70'><img src='/templates/view/dcdb/images/rk_ico_3.png'></span>"
+				+ "					<span class='fl w120 f18  white mt10'>城镇（万人）</span>"
+				+ "					<span class='fl w90 f18 bold white mt10'>"+(czNum[i]==-1?"-":czNum[i])+"</span>"
+				+ "				</div>"
+				+ "				<div class='fl w h31 lh31 tc mt15 bor'>"
+				+ "					<span class='f24 bold white'>"+(czPercent[i]==-1?"-":(czPercent[i]+"%"))+"</span>"
+				+ "				</div>"
+				+ "			</div>"
+				+ "			<div class='fr w190 h126 mr10 '>"
+				+ "				<div class='fl w h70 mt20'>"
+				+ "					<span class='fl w70'><img src='/templates/view/dcdb/images/rk_ico_4.png'></span>"
+				+ "					<span class='fl w120 f18  white mt10'>乡村（万人）</span>"
+				+ "					<span class='fl w90 f18 bold white mt10'>"+(xcNum[i]==-1?"-":xcNum[i])+"</span>"
+				+ "				</div>"
+				+ "				<div class='fl w h31 lh31 tc mt15 bor'>"
+				+ "					<span class='f24 bold white'>"+(xcPercent[i]==-1?"-":(xcPercent[i]+"%"))+"</span>"
+				+ "				</div>"
+				+ "			</div>"
+				+ "		</div>"
+				+ "	</div>"
+				+ "	<div class='fl w ml10 mt20'>"
+				+ "		<div class='fl w'>"
+				+ "			<span class='fl bold f24 ml20 white'>常住人口分布情况</span>"
+				+ "			<span class='fl f16 white mt5'>（2014年 - 2019年）</span>"
+				+ "		</div>"
+				+ "		<div class='fl w mt20 h330'>"
+				+ "			<iframe id='"+area[i]+"Frame' src='' frameborder='0' width='100%' height='100%' scrolling='no' style='overflow-x:hidden'></iframe>"
+				+ "		</div>"
+				+ "	</div>"
+				+ "</div>");
+		}
+	    
+		if (tab!=""){
+            $("#"+tab).click();
+            var index =   $("#"+tab).index();
+            var scroll = 69*index;
+            if(scroll>650){
+                $("#scrollDiv").scrollTop(scroll);
+			}
+
+		}else
+			$("#qsTab").click();
+	});
+
+/*$("#id").scrollTop();*/
+</script>
+</html>

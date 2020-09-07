@@ -1,0 +1,99 @@
+﻿body{
+	margin:0;
+	padding:0;
+	background:#090e23;
+}
+a{text-decoration:none;}
+a:hover{text-decoration:none;}
+img{border:none;vertical-align:bottom;}
+/*menu*/
+.menuBox{
+	background:url(../images/menubg.png) top center no-repeat;
+	width:100%;
+	height:80px;
+	float:left;
+}
+.menu{	
+	width:1870px;
+	height:48px;
+	margin-top:15px;
+	margin-left:25px;
+}
+
+.menuOff{
+	width:180px;
+	height:45px;
+	display:block;
+	float:left;
+	margin-left:10px;
+	margin-top:3px;
+	text-align:center;
+	background:url(../images/menuOff.png)left top no-repeat;
+}
+.menuOn{
+	width:180px;
+	height:45px;
+	display:block;
+	float:left;
+	margin-left:10px;
+	margin-top:3px;
+	text-align:center;
+	background:url(../images/menuOn.png)left top no-repeat;
+}
+.menuOff:hover{
+	width:180px;
+	height:45px;
+	display:block;
+	float:left;
+	margin-left:10px;
+	margin-top:3px;
+	text-align:center;
+	background:url(../images/menuOn.png)left top no-repeat;
+}
+.menu_zt{
+	width:325px;
+	height:48px;
+	display:block;
+	float:left;
+	margin-left:10px;
+	text-align:center;
+}
+.menu span{	
+	width:180px;
+	height:45px;
+	display:block;
+	float:left;
+}
+.menu_zt span{	
+	width:325px;
+	height:48px;
+	display:block;
+	float:left;
+}
+.menuID_01{background:url(../images/img_01.png)no-repeat;}
+.menuID_02{background:url(../images/img_02.png)no-repeat;}
+.menuID_03{background:url(../images/img_03.png)no-repeat;}
+.menuID_04{background:url(../images/img_04.png)no-repeat;}
+.menuID_05{background:url(../images/img_05.png)no-repeat;}
+.menuID_06{background:url(../images/img_06.png)no-repeat;}
+.menuID_07{background:url(../images/img_07.png)no-repeat;}
+.menuID_08{background:url(../images/img_08.png)no-repeat;}
+.menuID_01_On{background:url(../images/img_01_on.png)no-repeat;}
+.menuID_02_On{background:url(../images/img_02_on.png)no-repeat;}
+.menuID_03_On{background:url(../images/img_03_on.png)no-repeat;}
+.menuID_04_On{background:url(../images/img_04_on.png)no-repeat;}
+.menuID_05_On{background:url(../images/img_05_on.png)no-repeat;}
+.menuID_06_On{background:url(../images/img_06_on.png)no-repeat;}
+.menuID_07_On{background:url(../images/img_07_on.png)no-repeat;}
+.menuID_08_On{background:url(../images/img_08_on.png)no-repeat;}
+.menuID_01:hover{background:url(../images/img_01_on.png)no-repeat;}
+.menuID_02:hover{background:url(../images/img_02_on.png)no-repeat;}
+.menuID_03:hover{background:url(../images/img_03_on.png)no-repeat;}
+.menuID_04:hover{background:url(../images/img_04_on.png)no-repeat;}
+.menuID_05:hover{background:url(../images/img_05_on.png)no-repeat;}
+.menuID_06:hover{background:url(../images/img_06_on.png)no-repeat;}
+.menuID_07:hover{background:url(../images/img_07_on.png)no-repeat;}
+.menuID_08:hover{background:url(../images/img_08_on.png)no-repeat;}
+.menu_zt_01{background:url(../images/menu_zt.png) center no-repeat;}
+.menu_zt_01:hover{background:url(../images/menu_zt_on.png)center no-repeat;}
+.menu_zt_01_on{background:url(../images/menu_zt_on.png)center no-repeat;}

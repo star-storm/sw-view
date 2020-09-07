@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/static/css/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="/static/css/demo.css" type="text/css">
+<link rel="stylesheet" href="/static/css/menu.css" type="text/css" />
+<style type="text/css">
+	.ztree li button.switch {visibility:hidden; width:1px;}
+	.ztree li button.switch.roots_docu {visibility:visible; width:16px;}
+	.ztree li button.switch.center_docu {visibility:visible; width:16px;}
+	.ztree li button.switch.bottom_docu {visibility:visible; width:16px;}
+</style>
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.sidenav li').click(function(){
+		$(this).siblings('li').removeClass('now');
+		$(this).addClass('now');
+	});
+	
+	$('.erji li').click(function(){
+		$(this).siblings('li').removeClass('now_li');
+		$(this).addClass('now_li');
+	});
+	
+	var main_h = $(window).height();
+	$('.content_wrap').css('height',main_h+'px');
+})
+</script>
+</head>
+
+<body>
+<!-- 	<div class="sear"> -->
+<!-- 		<input id="orgSearch" type="text" style="border:1px #bcbcbc solid"/><a href="#" id="searchId">查询</a> -->
+<!-- 	</div> -->
+	<div class="fl w_18 h780" style="border-right: 3px #e9f6ff solid;">
+		<!--tree start-->
+		<div class="content_wrap" style="background: #f8f8f8;overflow:auto">
+			<div class="zTreeDemoBackground left">
+				<ul id="treeDemo" class="ztree"></ul>
+			</div>
+		</div>
+		<!--tree end-->
+	</div>
+	<input id="treeId" type="hidden"/>
+</body>
+</html>

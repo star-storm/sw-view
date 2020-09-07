@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+         
+         var dateTmp = timestampToYesterday(new Date());
+         $("#comment1").html("（截止到"+dateTmp+"）");
+         $("#comment3").html("（截止到"+dateTmp+"）");
+      });
+      function callback0(id) {
+//     	  alert(id);
+    	  var tmpFrameId = id.replace("tab","szc");
+    	  var tmpId = parseInt(id.replace("tab",""));
+    	  document.getElementById(tmpFrameId).src = "/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gailan/szc/szc.html?index="+(tmpId-1);
+      }
+	  
+      //昨天日期
+      function timestampToYesterday(t) {
+      	if (t == null)return "";
+      	var date =  new Date(t);
+      	var y = "";
+      	if (BrowserType().indexOf("IE") == -1 || BrowserType() == "IE10" || BrowserType() == "IE11" || BrowserType() == "IEEdge")
+      		y = 1900+date.getYear();
+      	else
+      		y = date.getYear();
+      	var m = "0"+(date.getMonth()+1);
+      	var d = "0"+(date.getDate()-1);
+      	return y+"年"+m.substring(m.length-2,m.length)+"月"+d.substring(d.length-2,d.length) + "日 ";
+      }
+      
+      //信息刊物
+      function gotoxxkw() {
+    	  $("#xxkw",window.parent.document).click();
+    	  window.parent.document.getElementById("Frame").src="http://222.65.176.36:8088/ldbg/ldjc_tj_shipin/index.jsp";
+      }
+      //督查督办
+      function gotodcdb() {
+    	  $("#dcdb",window.parent.document).click();
+    	  window.parent.document.getElementById("Frame").src="/templates/view/dcdb/page/dcdb.html";
+      }
+      //疏整促
+      function gotoszc() {
+    	  $("#szc",window.parent.document).click();
+    	  window.parent.document.getElementById("Frame").src="http://222.65.100.220";
+      }
+      //拆违监控
+      function gotocwjk() {
+    	  $("#cwjk",window.parent.document).click();
+    	  window.parent.document.getElementById("Frame").src="http://222.65.100.206:8003";
+      }
+      //扶贫
+      function gotofp() {
+    	  $("#fp",window.parent.document).click();
+    	  window.parent.document.getElementById("Frame").src="/templates/view/dcdb/page/fpgz/fpgz.html";
+      }
+      //落实新总归
+      function gotolsxzg() {
+    	  $("#lsxzg",window.parent.document).click();
+    	  window.parent.document.getElementById("Frame").src="/templates/view/dcdb/page/lsxzg/lsxzg.html";
+      }
+      //城市运行
+      function gotocsyx() {
+    	  $(".click",window.parent.document).click();
+      }
+    </script>
+</head>
+<body>
+<div class="fl w h1000 bg_zl">	
+	<div class="fl w">
+		<!--left-->
+		<div class="fl w500 h930 ml32 mt10">
+			<div class="fl w h50 mt5">			
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">督查督办</span>
+				<span id="comment1" class="fl f18 mt5 ml10 color_yellow">（本年度，截止到昨日）</span>
+				<a href="###" onclick="gotodcdb()" class="fr"><img src="/templates/view/dcdb/images/btn_more.png"></a>
+			</div>
+			<div class="fl w h202">
+				<div class="fl w418 h73 zl_dcdb ml35 mt10">
+					<span class="fl f18 h50 lh50 w150 tl mt15 ml30 white">督查件总数</span>
+					<span class="fl f36 h50 lh50 w150 tr mt15 ml20 color_green">2626</span>
+					<span class="fl f18 h50 lh50 mt20 tc ml20 white">件</span>
+				</div>
+				<div class="fl w418 h73 zl_dcdb ml35 mt5">
+					<div class="fl w185 h37 ml25 mt18 bor_r">
+						<span class="fl w70 h37 lh37 f18 tl white">办理中</span>
+						<span class="fl w70 h37 lh37 f24 tr color_blz">564</span>
+						<span class="fl w20 h37 f16 tc white mt8 ml10">件</span>
+					</div>
+					<div class="fl w175 h37 ml15 mt18">
+						<span class="fl w70 h37 lh37 f18 tl white">已办结</span>
+						<span class="fl w70 h37 lh37 f24 tr color_yjb">2062</span>
+						<span class="fl w20 h37 f16 tc white mt8 ml10">件</span>
+					</div>
+				</div>
+			</div>
+			<div class="fl w mt15">
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">拆违监控</span>
+				<span id="comment2" class="fl f18 mt5 ml10 color_yellow">（截至到2019年12月）</span>
+				<a href="###" onclick="gotocwjk()" class="fr"><img src="/templates/view/dcdb/images/btn_more.png"></a>
+			</div>
+			<div class="fl w h310">
+				<div class="fl w215 h138 div_cwjk ml22 mt10">
+					<div class="fl w h32 lh32 tc cwjk_tit f18">用地腾退</div>
+					<div class="fl w105 h100 mt5">
+						<span class="fl w h50 f16 white tc"><font class="fl w mt10">实施量<br/>（平方公里）</font></span>
+						<span class="fl w h40 tc color_yellow f24 mt10">57.06</span>
+					</div>
+					<div class="fl w105 h100 mt5">
+						<span class="fl w h50 f16 white tc"><font class="fl w mt20">实施进度</font></span>
+						<span class="fl w h40 tc color_yellow f24 mt10">143%</span>
+					</div>
+				</div>
+				<div class="fl w215 h138 div_cwjk ml22 mt10">
+					<div class="fl w h32 lh32 tc cwjk_tit f18">违建拆除</div>
+					<div class="fl w105 h100 mt5">
+						<span class="fl w h50 f16 white tc"><font class="fl w mt10">实施量<br/>（平方公里）</font></span>
+						<span class="fl w h40 tc color_red f24 mt10">4377</span>
+					</div>
+					<div class="fl w105 h100 mt5">
+						<span class="fl w h50 f16 white tc"><font class="fl w mt20">实施进度</font></span>
+						<span class="fl w h40 tc color_red f24 mt10">109%</span>
+					</div>
+				</div>
+				<div class="fl w215 h138 div_cwjk ml22 mt10">
+					<div class="fl w h32 lh32 tc cwjk_tit f18">人口疏解</div>
+					<div class="fl w105 h100 mt5">
+						<span class="fl w h60 f16 white tc"><font class="fl w ">拆违疏解<br/>居住人口变化<br/>（万人）</font></span>
+						<span class="fl w h30 tc color_green f24 mt10">-31.18</span>
+					</div>
+					<div class="fl w105 h100 mt5">
+						<span class="fl w h60 f16 white tc"><font class="fl w">拆违疏解<br/>就业人口变化<br/>（万人）</font></span>
+						<span class="fl w h30 tc color_green f24 mt10">-10.03</span>
+					</div>
+				</div>
+				<div class="fl w215 h138 div_cwjk ml22 mt10">
+					<div class="fl w h32 lh32 tc cwjk_tit f18">产业提质</div>
+					<div class="fl w h100 mt5">
+						<span class="fl w h60 f16 white tc"><font class="fl w">拆违疏解<br/>企业数量变化<br/>（家）</font></span>
+						<span class="fl w h30 tc color_blue f24  mt10">-15695</span>
+					</div>
+				</div>
+			</div>
+			<div class="fl w mt35">
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">扶贫工作</span>
+				<a href="###" onclick="gotofp()" class="fr"><img src="/templates/view/dcdb/images/btn_more.png"></a>
+			</div>
+			<div class="fl w h210 tc">
+				<iframe id="fpgz" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gailan/fpgz.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+		</div>
+		<!--center-->
+		<div class="fl w730 h930 ml65 mt10 white">
+			<div class="fl w tc">
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">疏整促</span>
+				<span id="comment3" class="fl f18 mt5 ml10 color_yellow">（本年度，截至2020年7月7日）</span>
+				<a href="###" onclick="gotoszc()" class="fr"><img src="/templates/view/dcdb/images/btn_more.png"></a>
+			</div>
+			<div class="fl w h59 pr">
+				<div class="fl w h59 pa tit_szc">
+					<span onclick="showCardMore(this,'listUl_zlcon','more_zlbg','subCardMore')" id="zlcon1" class="subCardMoreOn">专项治理</span> 
+					<span onclick="showCardMore(this,'listUl_zlcon','more_zlbg','subCardMore')" id="zlcon2" class="subCardMoreOff">人口监测</span>
+				</div>				
+				<div class="fl w h59 tit_zl1" id="more_zlbg0" ></div>
+				<div class="fl w h59 tit_zl2" id="more_zlbg1" style="display:none;"></div>
+			</div>
+			<div class="fl w h789">
+				<div class="fl w h789 pr" id="listUl_zlcon1" style="display:none;">
+					<div class="fl w h40">
+						<span class="fl ml20 f18 white mt10">全市长期居住用户规模变化</span>
+					</div>
+					<div id="icodiv" style="margin-top:-30px; margin-right:-16px">
+						<span class="fl w h20 lh20 white tc f16 mt10">2020年04月居住用户规模</span>
+						<span class="fl w h20 lh20 color_yellow tc mt10"><font class="bold f24">2262.4 </font>万人</span>
+						<span class="fl w h20 lh20 white tc f16 mt20">相比于2020年01月居住用户增长</span>
+						<span class="fl w h20 lh20 color_red tc mt10">
+							<span class="fl w100 tc ml60"><font class="bold f24">9.21</font>%</span>
+							<span class="fl w17 mt4"><img src="/templates/view/dcdb/images/n_xzg_btn02.png"></span>
+						</span>
+					</div>
+					<div class="fl w h630 mt10 tc">
+						<iframe id="szc1" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gailan/szc/szc.html?index=1" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w640 h124 mapsj ml40">
+						<div class="fl w h36"><span class="fl lh35 ml48 f18 white">中心城区</span></div>
+						<div class="fl mt5 h42 ">
+							<span class="fl w98 mt3 ml24 f18 color_blz tc">东城区</span>
+							<span class="fl w98 mt3 f18 color_blz tc">西城区</span>
+							<span class="fl w98 mt3 f18 color_blz tc">朝阳区</span>
+							<span class="fl w98 mt3 f18 color_blz tc">海淀区 </span>
+							<span class="fl w98 mt3 f18 color_blz tc">丰台区</span>
+							<span class="fl w108 mt3 f18 color_blz tc">石景山区</span>
+						</div>
+						<div class="fl mt5 h42">
+							<span class="fl w98 mt3 ml24 f18 color_yellow tc">
+								<span class="fl ml5">16.09%</span>
+								<span class="fl ml5 mt5"><img src="/templates/view/dcdb/images/n_xzg_btn04.png"></span>
+							</span>
+							<span class="fl w98 mt3 f18 color_yellow tc">
+								<span class="fl ml5">15.77%</span>
+								<span class="fl ml5 mt5"><img src="/templates/view/dcdb/images/n_xzg_btn04.png"></span>
+							</span>
+							<span class="fl w98 mt3 f18 color_yellow tc">
+								<span class="fl ml5">14.58%</span>
+								<span class="fl ml5 mt5"><img src="/templates/view/dcdb/images/n_xzg_btn04.png"></span>
+							</span>
+							<span class="fl w98 mt3 f18 color_yellow tc">
+								<span class="fl ml5">23.97%</span>
+								<span class="fl ml5 mt5"><img src="/templates/view/dcdb/images/n_xzg_btn04.png"></span>
+							</span>
+							<span class="fl w98 mt3 f18 color_yellow tc">
+								<span class="fl ml5">12.05%</span>
+								<span class="fl ml5 mt5"><img src="/templates/view/dcdb/images/n_xzg_btn04.png"></span>
+							</span>
+							<span class="fl w108 mt3 f18 color_yellow tc">
+								<span class="fl ml5">23.97%</span>
+								<span class="fl ml5 mt5"><img src="/templates/view/dcdb/images/n_xzg_btn04.png"></span>
+							</span>
+						</div>
+					</div>
+				</div>				
+				<div class="fl w h789 pr" id="listUl_zlcon0">
+					<div class="fl w h40">
+						<span class="fl ml20 f18 white mt10">全市专项任务涉及点位划分情况</span>
+					</div>
+					<div id="icodiv_1">
+						<span class="fl w h30 lh30 white tc f18 mt10">任务点位数</span>
+						<span class="fl w  white tc "><font class="bold f30 color_yellow">25147</font>个</span>
+					</div>
+					<div class="fl w h630 mt10 tc">
+						<iframe id="szc2" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gailan/szc/szc.html?index=0" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w640 h124 mapsj ml40">
+						<div class="fl w h36"><span class="fl lh35 ml48 f18 white">中心城区</span></div>
+						<div class="fl mt5 h42 ">
+							<span class="fl w98 mt3 ml24 f18 color_blz tc">东城区</span>
+							<span class="fl w98 mt3 f18 color_blz tc">西城区</span>
+							<span class="fl w98 mt3 f18 color_blz tc">朝阳区</span>
+							<span class="fl w98 mt3 f18 color_blz tc">海淀区 </span>
+							<span class="fl w98 mt3 f18 color_blz tc">丰台区</span>
+							<span class="fl w108 mt3 f18 color_blz tc">石景山区</span>
+						</div>
+						<div class="fl mt5 h42">
+							<span class="fl w98 mt3 ml24 f18 color_yellow tc">737</span>
+							<span class="fl w98 mt3 f18 color_yellow tc">813</span>
+							<span class="fl w98 mt3 f18 color_yellow tc">1711</span>
+							<span class="fl w98 mt3 f18 color_yellow tc">1000</span>
+							<span class="fl w98 mt3 f18 color_yellow tc">419</span>
+							<span class="fl w108 mt3 f18 color_yellow tc">114</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--right-->
+		<div class="fr w500 h930 mt20 mr32">
+			<div class="fl w h50">	
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">落实新总规</span>
+				<span id="comment3" class="fl f18 mt5 ml10 color_yellow">（2019年）</span>
+				<a href="###" onclick="gotolsxzg()" class="fr"><img src="/templates/view/dcdb/images/btn_more.png"></a>
+			</div>
+			<div class="fl w h390">
+				<div class="fl w241 h101 tc mt10 zl_xgz_libg f16" >
+					<div class="fl w230 tl lh40 ml10 mt8">万人发明专利拥有量</div>
+					<div class="fl w230 tl lh40 ml10">
+						<span class="f30 color_yellow ">132</span>
+						<span class="white ml15">件</span>
+					</div>
+				</div>
+				<div class="fr w241 h101 tc mt10 zl_xgz_libg f16" >
+					<div class="fl w230 tl lh40 ml10 mt8">入境旅游人数</div>
+					<div class="fl w230 tl lh40 ml10">
+						<span class="f30 color_yellow ">376.9</span>
+						<span class="white ml15">万人次</span>
+					</div>
+				</div>
+				<div class="fl w241 h101 tc mt20 zl_xgz_libg f16" >
+					<div class="fl w230 tl lh40 ml10 mt8">全市居民人均可支配收入</div>
+					<div class="fl w230 tl lh40 ml10">
+						<span class="f30 color_orange ">67756</span>
+						<span class="white ml15">元</span>
+					</div>
+				</div>
+				<div class="fr w241 h101 tc mt20 zl_xgz_libg f16" >
+					<div class="fl w230 tl lh40 ml10 mt8">全市居民人均消费支出</div>
+					<div class="fl w230 tl lh40 ml10">
+						<span class="f30 color_orange ">43038</span>
+						<span class="white ml15">元</span>
+					</div>
+				</div>
+				<div class="fl w241 h101 tc mt20 zl_xgz_libg f16" >
+					<div class="fl w230 tl lh40 ml10 mt8">公园绿地500米服务半径覆盖率</div>
+					<div class="fl w230 tl lh40 ml10">
+						<span class="f30 color_green ">87</span>
+						<span class="white ml15">%</span>
+					</div>
+				</div>
+				<div class="fr w241 h101 tc mt20 zl_xgz_libg f16" >
+					<div class="fl w230 tl lh40 ml10 mt8">中心城区市民绿色出行比例</div>
+					<div class="fl w230 tl lh40 ml10">
+						<span class="f30 color_green ">74.1</span>
+						<span class="white ml15">%</span>
+					</div>
+				</div>
+			</div>
+			<div class="fl w mt45 h30">				
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">城市运行</span>
+				<a href="###" onclick="gotocsyx()" class="fr"><img src="/templates/view/dcdb/images/btn_more.png"></a>
+			</div>
+			<div class="fl w h315 tc mt10">
+				<div class="fl w xzg_kf_tit lh35 mt20"><span class="fl f18 white ml10">路网交通指数（更新频率：25分钟）</span></div>
+				<div class="fl w430 h40 lh40 bor mt20 bg_blue ml35">
+					<span class="fl white f16 ml25">交通指数：</span>
+					<span class="fl white f24 color_green ml10">3.0</span>
+					<span class="fl white f24 color_green ml20">基本畅通</span>
+				</div>
+				<div class="fl w h80 mt20"><img src="/templates/view/dcdb/images/zl_img_jtzs.png"/></div>
+				<div class="fl w  xzg_kf_tit lh35 mt20"><span class="fl f18 white ml10">全市天气（更新频率：30分钟）</span></div>
+				<div class="fl w430 h90 lh45 bor mt20 bg_blue ml35">					
+					<span class="fl white f24 color_blue ml10">晴</span>
+					<span class="fl white f24 color_blue ml20">28℃</span>
+					<span class="fl white f16 ml25">风向：</span>
+					<span class="fl white f24 color_blue ml5">西南风</span>
+					<span class="fl white f16 ml25">风速：</span>
+					<span class="fl white f24 color_blue ml5">2.3m/s</span>
+					<span class="fl white f16 ml5">空气质量：</span>
+					<span class="fl white f24 color_blue ml5">优</span>
+					<span class="fl white f16 ml15">首要污染物：</span>
+					<span class="fl white f24 color_blue ml5">PM10</span>
+					<span class="fl white f16 ml5">（可吸入颗粒物）</span>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+<div class="sjly_div h38 pa tc">
+   <span class="fl w mt13 tc">数据来源方：市委办公厅、市发展改革委、市规划自然资源委、市扶贫支援办、市统计局、市交通委、市生态环境局、市知识产权局、市园林绿化局、市气象局</span>
+</div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width:"128px"
+		});
+	});
+</script>
+</html>

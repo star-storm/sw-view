@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--base style!-->
+<link href="/static/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/web.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/js.js"></script>
+<link rel="stylesheet" href="/static/css/jqtransformplugin/jqtransform.css" type="text/css" media="all" />	
+<script type="text/javascript" src="/static/css/jqtransformplugin/jquery.js" ></script>
+<script type="text/javascript" src="/static/css/jqtransformplugin/jquery.jqtransform.js" ></script>
+<script language="javascript">
+	$(function(){
+		$('span').jqTransform({imgPath:'jqtransformplugin/img/'});
+	});
+</script>
+<script>
+function addImage(){
+	document.getElementById_x("image").click();
+}
+
+function goBack() {
+	window.location.href = "/templates/view/org/list.html";
+}
+</script>
+</head>
+<body>
+	<div class="bc w1000">
+		<form action="" method="get">
+			<div class="fl w1000 min-h bor_t mt70 pb70">
+				<ul class="fl  w800 ml150 ">
+					<li class="fl w mt20">
+						<span class="fl w80 mt5 tr">名称：</span>
+						<input id="name" class="fl ml15 mt5 h30 w300"></input>
+					</li>
+					<li class="fl w mt20">
+						<span class="fl w80 mt5 tr">编码：</span>
+						<input id="code" class="fl ml15 mt5 gray8 h30 w300"></input>
+					</li>				
+					<li class="fl w mt20">
+						<span class="fl w80 mt5 tr">排序：</span>
+						<input id="sort" class="fl ml15 mt5 gray8 h30 w300"></input>
+					</li>
+					<li class="fl w mt20">
+						<span class="fl w80 tr mt5">备注：</span>
+						<input id="remark" class="fl ml15 mt5 gray8 h30 w300"></input>
+					</li>
+					<li class="fl w mt20">
+						<button id="addBtn" type="button" class="fl w80 tc mt25 ml90 h30 w120">提交</button>
+						<button id="backBtn" type="button" onclick="goBack();" class="fl w80 tc mt25 ml60 h30 w120">返回</button>
+					</li>
+				</ul>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+ 
+ 	var pid = getUrlParam("id");
+
+ //页面初始化
+ (function($) {
+	 
+	 //alert($(window.parent.document).contents().find("#leftFrame")[0].contentWindow.$("#treeId").val());
+	 
+	//添加组织
+	$("#addBtn").click(function() {
+		add();
+	});
+	
+ }(jQuery));
+
+/**
+ * 添加组织
+ */
+function add() {
+	 if ((pid == null) || (pid == "")) {
+		 var treeId = $(window.parent.document).contents().find("#leftFrame")[0].contentWindow.$("#treeId").val();
+		 if ((treeId=="") || (treeId==undefined)) {
+			 alert("请选择父组织");
+			 return;
+		 }
+		 pid = treeId;
+	 }
+	 var org = new Object();
+	 org.pid = pid;
+	 org.name = $("#name").val();
+	 org.code = $("#code").val();
+	 org.sort = $("#sort").val();
+	 org.remark = $("#remark").val();
+	 $.ajax({
+		async : false,
+		type : "post",
+		url : "/api/org/update",
+		dataType : "json",
+		data : {
+			'json' : JSON.stringify(org)
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				alert("操作成功");
+// 				$(window.parent.document).contents().find("#leftFrame")[0].contentWindow.location.reload();
+// 				$(window.parent.document).contents().find("#leftFrame")[0].contentWindow.$("#treeId").click();
+				$("#backBtn").trigger("click");
+			} else {
+				//alert(resp.msg);
+			}
+		}
+	});
+}
+
+//校验字段
+function checkInfo(pid, name, code, sort) {
+	if (pid == '') {
+		alert("父组织为空");
+		return false;
+	}
+	else if (name == '') {
+		alert("请输入组织名称");
+		return false;
+	}
+	else if(name.length > 120) {
+		alert("组织名称字数过多，请重新输入");
+		return false;
+	}
+	else if (code == '') {
+		alert("请输入编码");
+		return false;
+	}
+	else if (sort == '') {
+		alert("请输入排序号");
+		return false;
+	}
+	return true;
+}
+</script>

@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+
+
+<style>
+
+/*
+PDFObject appends the classname "pdfobject-container" to the target element.
+This enables you to style the element differently depending on whether the embed was successful.
+*/
+.pdfobject-container {
+	width: 100%;
+	max-width: 660px;
+	height: 758px;
+/* 	margin: 2em 0; */
+}
+
+/* PDFObject automatically assigns the class name "pdfobject" to the <embed> element */
+.pdfobject { border: solid 1px #666; }
+
+</style>
+
+</head>
+
+<body>
+
+<div id="pdf2"></div>
+
+<script src="./pdfobject.min.js"></script>
+<script>
+
+PDFObject.embed("./转文第277号-晓东同志批示.pdf", "#pdf2");
+</script>
+
+</body>
+</html>

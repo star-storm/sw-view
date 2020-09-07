@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>国际、国内旅游情况-旅游外汇输入额</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:460px;height:370px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+	    var myChart = echarts.init(document.getElementById('main'));
+	    var pointStyle = {
+	    	     color: '#F7B500',
+	    	     borderWidth: 1,
+	    	 };
+	    var labelStyle = {
+	    	     show: true,
+	    	     position: 'top',
+	    	     lineHeight: 4,
+	    	     //borderRadius: 5,
+	    	     //backgroundColor: 'rgba(255,255,255,.9)',
+	    	     //borderColor: 'red',
+	    	     //borderWidth: '1',
+	    	     padding: [5, 15, 4],
+	    	     color: '#fff',
+	    	     fontSize: 14,
+	    	     fontWeight: 'normal',
+	    	 };
+	    var total = [46.1, 46.1, 50.7, 51.3, 55.2];
+	    var seriesData = [];
+	    var total = total.sort(function(a, b) {
+	    	     return a - b
+	    	 });
+	    	 total.forEach((item, index) => {
+	    	     let ob = {
+	    	         value: item,
+	    	         itemStyle: pointStyle,
+	    	         label: labelStyle,
+	    	     }
+	    	     if (index === total.length - 1) {
+	    	         ob.itemStyle = {
+	    	             color: '#F7B500',
+	    	             borderWidth: 1,
+	    	         }
+	    	         ob.label = {
+	    	             show: true,
+	    	             position: 'top',
+	    	             lineHeight: 4,
+	    	             //borderRadius: 5,
+	    	             //backgroundColor: 'rgba(255,255,255,.9)',
+	    	             //borderColor: 'red',
+	    	             //borderWidth: '1',
+	    	             padding: [5, 15, 4],
+	    	             color: '#fff',
+	    	             fontSize: 14,
+	    	             fontWeight: 'normal',
+	    	         }
+	    	     }
+	    	     seriesData.push(ob)
+	    	 });
+
+	    	 var option = {
+            	title: {
+  	            	text: '单位：亿美元',
+  	            	x:'right',
+  	            	padding: [-5,14,0,0],
+  	                textStyle: {
+  	                    color: 'white',
+  	                    fontFamliy: 'Microsoft YaHei',
+  	                    fontSize: 16,
+  	                    fontWeight: 'normal'
+  	                }
+  	            },
+  	    	     grid: {
+  	 	        	 show: true,
+  	    	         top: '10%',
+  	    	         left: '10%',
+  	    	         right: '6%',
+  	    	         bottom: '8%',
+  	 	             borderWidth: 1,
+  		             borderColor : '#0C2F74',
+  	    	     },
+	    	     xAxis: [{
+	    	         type: 'category',
+	    	         axisTick: {
+	    	             show: false,
+	    	         },
+	    		     axisLabel: {
+	   	                show: true,
+	   	                textStyle: {
+	   	                	color: 'white',
+	   	                    fontFamliy: 'Microsoft YaHei',
+	   	                    fontSize: 14
+	   	                }
+	   	             },
+	    	         axisLine: {
+	    	             show: false,
+	    	         },
+	    	         splitLine: {
+	    	             show: false,
+	    	             lineStyle: {
+	    	                 type: 'dashed',
+	    	             },
+	    	         },
+	    	         data: ['2014年', '2015年', '2016年', '2017年', '2018年'],
+	    	     }, ],
+
+	    	     yAxis: [{
+	    	         type: 'value',
+	    	         min: 42,
+	    	         max: 58,
+	    	         splitNumber: 7,
+	    	         axisLine: {
+	    	             show: false,
+	    	         },
+	    	         axisTick: {
+	    	             show: false,
+	    	         },
+	    		       splitLine: {
+	    		           show: true,
+	    		           lineStyle: {
+	    		               type: 'solid',
+	    		               color: '#305078',
+	    		               width: 1
+	    		           }
+	    		       },
+		            axisLabel: {
+		                textStyle: {
+		                	color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 16
+		                },
+		            }
+	    	     }, ],
+	    	     series: [{
+	    	         type: 'line',
+	    	         showAllSymbol: true,
+	    	         symbol: 'circle',
+	    	         symbolSize: 10,
+	    	         lineStyle: {
+	    	             normal: {
+	    	                 color: 'rgba(242,186,47,0.7)',
+	    	                 width: 1,
+	    	             },
+	    	         },
+	    	         tooltip: {
+	    	             show: false,
+	    	         },
+	    	         areaStyle: {
+	    	             normal: {
+	    	                 color: new echarts.graphic.LinearGradient(
+	    	                     0,
+	    	                     0,
+	    	                     0,
+	    	                     1,
+	    	                     [{
+	    	                             offset: 0,
+	    	                             color: 'rgba(251,218,0, 1)',
+	    	                         },
+	    	                         {
+	    	                             offset: 1,
+	    	                             color: 'rgba(251,218,0,0)',
+	    	                         },
+	    	                     ],
+	    	                     false
+	    	                 ),
+	    	             },
+	    	         },
+	    	         data: seriesData
+	    	     }]
+	    	 };
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+body{
+	overflow-x:hidden;
+	background:url("../images/left_bg.jpg") no-repeat center #072783;
+	font-size:16px;
+	color:#ffffff;
+	font-family:'Î¢ÈíÑÅºÚ';}
+a,a:hover,a:active,a:visited{color:#ffffff;}
+.leftbg{
+	width:1440px;
+	height:124px;
+	letter-spacing:4px;
+	/*background:url("../images/left_bg.jpg") no-repeat;*/}
+.rightbg{
+	width:715px;
+	height:124px;
+	background:url("../images/right_bg.jpg") no-repeat;}
+.name{font-size:24px;color:#ffffff;}

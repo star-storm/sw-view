@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+	<style>
+		.scrollDiv{
+			overflow-y: scroll;
+			overflow-x: hidden;
+		}
+	</style>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+	<script>
+            var mtg = ['潭柘寺镇南辛房村','潭柘寺镇桑峪村','雁翅镇河南台村','雁翅镇芹峪村','雁翅镇下马岭村',
+                '雁翅镇太子墓村','雁翅镇付家台村','雁翅镇青白口村','雁翅镇山神庙村','雁翅镇大村',
+                '雁翅镇房良村','雁翅镇苇子水村','雁翅镇田庄村','雁翅镇高台村','雁翅镇淤白村',
+                '斋堂镇马栏村','斋堂镇白虎头村','斋堂镇牛战村','斋堂镇东胡林村','斋堂镇桑峪村',
+                '斋堂镇杨家村','斋堂镇吕家村','斋堂镇张家村','斋堂镇沿河口村','斋堂镇高铺村',
+                '清水镇齐家庄村','清水镇梁家铺村','清水镇黄塔村','清水镇张家庄村',
+                '清水镇李家庄村','清水镇达摩庄村','清水镇龙王村','清水镇黄安坨村',
+                '清水镇燕家台村','清水镇田寺村','清水镇天河水村','清水镇下清水村',
+                '清水镇椴木沟村','清水镇双塘涧村','清水镇杜家庄村','清水镇塔河村',
+                '清水镇梁家庄村','清水镇上清水村','清水镇上达摩村','清水镇黄安村'];//门头沟
+            var fs = ['周口店镇龙宝峪村','石楼镇二站村','大石窝镇王家磨村','大石窝镇惠南庄村','张坊镇下寺村',
+                '张坊镇瓦沟村','十渡镇马安村','十渡镇卧龙村','十渡镇东太平村','十渡镇西太平村',
+                '霞云岭乡王家台村','霞云岭乡石板台村','霞云岭乡四合村','霞云岭乡三流水村',
+                '霞云岭乡大草岭村','霞云岭乡上石堡村','南窖乡花港村','南窖乡水峪村','南窖乡南窖村',
+                '佛子庄乡东班各庄村','佛子庄乡黑龙关村','佛子庄乡佛子庄村','佛子庄乡红煤厂村',
+                '佛子庄乡长操村','佛子庄乡山川村','佛子庄乡贾峪口村','佛子庄乡石板房村',
+                '大安山乡西苑村','大安山乡水峪村','大安山乡寺尚村','史家营乡元阳水村',
+                '蒲洼乡鱼斗泉村','蒲洼乡芦子水村','蒲洼乡富合村','蒲洼乡森水村'];//房山
+            var dx = ['青云店镇六村','长子营镇小黑垡村'];//大兴
+            var tz = ['西集镇车屯村','西集镇吕家湾村','西集镇耿楼村'];//通州
+            var sy = ['南彩镇小营村','杨镇荆坨村','杨镇下营村'];//顺义
+            var cp = ['十三陵镇永陵村','十三陵镇庆陵村','十三陵镇大岭沟村','十三陵镇景陵村','十三陵镇老君堂村',
+                '十三陵镇石头园村','十三陵镇锥石口村','十三陵镇泰陵村','十三陵镇长陵村','十三陵镇上口村',
+                '十三陵镇燕子口村','南口镇长水峪村','南口镇后洼村','南口镇前洼村','南口镇居庸关村',
+                '流村镇北庄村','流村镇古将村','流村镇瓦窑村','流村镇北照台村','流村镇马刨泉村',
+                '流村镇老峪沟村','流村镇黄土洼村','流村镇禾子涧村','延寿镇下庄村','延寿镇北庄村'];//昌平
+            var hr = ['雁栖镇交界河村','雁栖镇八道河村','雁栖镇西栅子村','雁栖镇头道梁村','雁栖镇大地村',
+                '雁栖镇北湾村','汤河口镇二号沟门村','汤河口镇大栅子村','汤河口镇大蒲池沟村','汤河口镇连石沟村',
+                '渤海镇铁矿峪村','渤海镇四渡河村','九渡河镇局里村','九渡河镇东宫村','九渡河镇黄花城村',
+                '琉璃庙镇龙泉峪村','琉璃庙镇碾子湾村','琉璃庙镇鱼水洞村','琉璃庙镇河北村','琉璃庙镇八亩地村',
+                '琉璃庙镇梁根村','宝山镇西黄梁村','宝山镇西帽山村','宝山镇下栅子村','宝山镇道德坑村',
+                '长哨营满族乡三岔口村','长哨营满族乡北湾村','长哨营满族乡东辛店村','长哨营满族乡北干沟村',
+                '长哨营满族乡大沟村','喇叭沟门满族乡对角沟门村','喇叭沟门满族乡上台子村'];//怀柔
+            var my = ['大城子镇北沟村','大城子镇墙子路村','大城子镇南沟村','大城子镇下栅子村','大城子镇苍术会村',
+                '大城子镇张庄子村','大城子镇聂家峪村','大城子镇方耳峪村','大城子镇后甸村','大城子镇大龙门村',
+                '大城子镇碰河寺村','大城子镇张泉村','大城子镇梯子峪村','新城子镇大角峪村','新城子镇小口村',
+                '新城子镇太古石村','新城子镇吉家营村','新城子镇苏家峪','新城子镇塔沟村','新城子镇大树洼村',
+                '不老屯镇车道岭村','不老屯镇董各庄村','不老屯镇北香峪村','不老屯镇燕落村','不老屯镇白土沟村',
+                '西田各庄镇青甸村','西田各庄镇新王庄村','石城镇黄峪口村','冯家峪镇西白莲峪村','溪翁庄镇尖岩村','太师屯镇后八家庄村'];//密云
+            var yq = ['刘斌堡镇上虎叫村','刘斌堡镇小观头村','刘斌堡镇小吉祥村','刘斌堡镇大观头村','刘斌堡镇山东沟村',
+                '刘斌堡镇刘斌堡村','刘斌堡镇马道梁村','刘斌堡镇营盘村','刘斌堡镇山南沟村','刘斌堡镇周四沟村',
+                '刘斌堡镇红果寺村','刘斌堡镇下虎叫村','张山营镇吴庄村','张山营镇胡家营村','张山营镇田宋营村',
+                '张山营镇佛峪口村','张山营镇后黑龙庙村','张山营镇辛家堡村','张山营镇苏庄村','张山营镇黄柏寺村',
+                '张山营镇小河屯村','张山营镇下板泉村','四海镇前山村','四海镇王顺沟村','四海镇菜食河村',
+                '四海镇永安堡村','四海镇郭家湾村','珍珠泉镇下花楼村','珍珠泉镇称沟湾村','珍珠泉镇庙梁村',
+                '珍珠泉镇上水沟村','珍珠泉镇南天门村','珍珠泉镇小铺村','珍珠泉镇小川村','珍珠泉镇水泉子村',
+                '永宁镇头司村','永宁镇西山沟村','永宁镇罗家台村','永宁镇营城村','永宁镇西关村',
+                '永宁镇西灰岭村','永宁镇利民街村','香营镇聂庄村','香营镇下垙村','香营镇上垙村',
+                '香营镇屈家窑村','香营镇东白庙村','香营镇黑峪口村','香营镇新庄堡村','大庄科镇里长沟村',
+                '大庄科镇黄土梁村','大庄科镇董家沟村','大庄科镇东太平庄村','大庄科镇汉家川河北村',
+                '旧县镇烧窑峪村','旧县镇白河堡村','旧县镇北张庄村','千家店镇花盆村'];//延庆
+        $(function(){
+
+            //代码
+            var area=getUrlParam("area");
+            if (area=="" || area==null || area=="null" || area=="undefined")
+                area = "";
+//     	alert(area);
+            //名称
+            var name=decodeURI(getUrlParam("name"));
+            if (name=="" || name==null || name=="null" || name=="undefined")
+                name = "";
+        	
+            $(".scrollDiv").niceScroll({
+                cursorcolor:"#446ba9",
+                touchbehavior: true,
+                cursoropacitymax: 1,
+                cursorborder: "0",
+                cursorwidth: "10px",
+                autohidemode: true});
+
+            appendData(area,name,'0');
+        });
+
+
+        function appendData(area,name,is) {
+//     	alert(name);
+            var datas = new Array();
+            if (area=="mtg" || !area)
+                datas = mtg;
+            else if (area=="fs")
+                datas = fs;
+            else if (area=="dx")
+                datas = dx;
+            else if (area=="tz")
+                datas = tz;
+            else if (area=="sy")
+                datas = sy;
+            else if (area=="cp")
+                datas = cp;
+            else if (area=="hr")
+                datas = hr;
+            else if (area=="my")
+                datas = my;
+            else if (area=="yq")
+                datas = yq;
+            else {
+                datas = [];
+            }
+            if (is=="0")
+				$("#dsr2").attr("src","/templates/view/dcdb/page/echarts/fpgz/dsr/dsr2.html?area="+area+"&name="+name);
+            $("#tbData").html("");
+            var s = "";
+            if(!name){
+                name = "门头沟区"
+			}
+            var count = datas.length+"个";
+            if (datas.length==0)
+            	count = "暂无数据";
+            $("#tbData").append("<tr class='lh42 white tc table_tit'>"
+                + "	<td class='bold' colspan='8'>"+name+"（"+count+"）</td>"
+                + "</tr>");
+            if (datas.length>0) {
+                var num = (datas.length%4==0)?(datas.length/4):(Math.floor(datas.length/4)+1);
+// 			alert(num);
+                var index = 0;
+
+                for (var i=0; i<num; i++) {
+                    s += "<tr class='lh42 white tc "+((i%2==0)?"":"table_color")+"'>";
+                    for (var j=0; j<4; j++) {
+                        if (index<datas.length) {
+                            s += "<td class='tc w40'>"+(index+1)+"</td><td class='tl w200'><span class='ml5'>"+datas[index]+"</span></td>";
+                            index++;
+                        }
+                        else {
+                            s += "<td class='tc w40'></td><td class='tl w200'><span class='ml5'></span></td>";
+                        }
+                    }
+                    s += "</tr>";
+                }
+
+
+            }
+            $("#tbData").append(s);
+        }
+
+        function gotodsr() {
+//     	window.location.href="/templates/view/dcdb/page/fpgz/fpgz_1bf.html";
+        }
+	</script>
+</head>
+<body>
+<div class="fl w h1000 bg_ej_xq_map">
+	<div class="fl w h61 titbg">
+		<div class="fl ml610 w700 tl">
+			<span class="fl w f24 white tc mt10 bold">低收入村分布情况</span>
+		</div>
+		<div class="fr mr270 mt10"><a href="fpgz_1bf.html"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w880 ml60 mt40">
+		<table id="tbData" class="w f16 xzg_kf_table ml40" border="0" cellspacing="0" cellpadding="0">
+			<!-- <tr class="lh42 white tc table_tit">
+				<td class="bold" colspan="4">门头沟区（45个）</td>
+			</tr>
+			<tr class="lh42 white tc">	
+				<td class="tc">1.潭柘寺镇南辛房村</td>
+				<td class="tl">2.潭柘寺镇桑峪村</td>
+				<td class="tl">3.雁翅镇河南台村</td>
+				<td class="tl">4.雁翅镇芹峪村</td>
+			</tr>
+			<tr class="lh42 white tc table_color">	
+				<td class="tc">1.潭柘寺镇南辛房村</td>
+				<td class="tl">2.潭柘寺镇桑峪村</td>
+				<td class="tl">3.雁翅镇河南台村</td>
+				<td class="tl">4.雁翅镇芹峪村</td>
+			</tr>
+			<tr class="lh42 white tc">	
+				<td class="tc">1.潭柘寺镇南辛房村</td>
+				<td class="tl">2.潭柘寺镇桑峪村</td>
+				<td class="tl">3.雁翅镇河南台村</td>
+				<td class="tl">4.雁翅镇芹峪村</td>
+			</tr> -->
+		</table>
+	</div>
+	<div class="fl w780  ml100 mt70">
+		<div class="fl w h740  pr">
+			<div class="fl w h600 mt20 white ">
+				<iframe id="dsr2" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+
+			<div class="fl w520 fp_dsr_table_1 ml10 pa">
+				<div class="fl w520 h124">
+					<div class="fl w h36"><span class="fl mt3 ml20 f18 white">中心城区</span></div>
+					<div class="fl mt5 h42 ">
+						<span class="fl w90 mt3 f18 color_blz tc">东城区</span>
+						<span class="fl w80 mt3 f18 color_blz tc">西城区</span>
+						<span class="fl w85 mt3 f18 color_blz tc">朝阳区</span>
+						<span class="fl w80 mt3 f18 color_blz tc">海淀区 </span>
+						<span class="fl w80 mt3 f18 color_blz tc">丰台区</span>
+						<span class="fl w100 mt3 f18 color_blz tc">石景山区</span>
+					</div>
+					<div class="fl mt5 h42">
+						<span class="fl w90 mt3 f18 color_yellow tc">0</span>
+						<span class="fl w80 mt3 f18 color_yellow tc">0</span>
+						<span class="fl w85 mt3 f18 color_yellow tc">0</span>
+						<span class="fl w80 mt3 f18 color_yellow tc">0</span>
+						<span class="fl w80 mt3 f18 color_yellow tc">0</span>
+						<span class="fl w100 mt3 f18 color_yellow tc">0</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sjly_div pa h38 tc"><span class="fl w mt13 tc">数据来源方：市农业农村局、市统计局</span></div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#mySelect").select({
+            width:"128px"
+        });
+    });
+</script>
+</html>

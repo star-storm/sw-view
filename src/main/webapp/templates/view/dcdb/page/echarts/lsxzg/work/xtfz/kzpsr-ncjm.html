@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>全是居民家庭人均可支配收入-农村居民</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:540px;height:280px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+	    var myChart = echarts.init(document.getElementById('main'));
+	    var pointStyle = {
+	    	     borderColor: '#ea6f21',
+	    	     color: '#A5830A',
+	    	     borderWidth: 1,
+	    	 };
+	    var labelStyle = {
+	    	     show: true,
+	    	     position: 'top',
+	    	     lineHeight: 4,
+	    	     //borderRadius: 5,
+	    	     //backgroundColor: 'rgba(255,255,255,.9)',
+	    	     //borderColor: 'red',
+	    	     //borderWidth: '1',
+	    	     padding: [5, 15, 4],
+	    	     color: '#A5830A',
+	    	     fontSize: 14,
+	    	     fontWeight: 'normal',
+	    	 };
+	    var total = [20569, 22309, 24240, 26490];
+	    var seriesData = [];
+	    var total = total.sort(function(a, b) {
+	    	     return a - b
+	    	 });
+	    	 total.forEach((item, index) => {
+	    	     let ob = {
+	    	         value: item,
+	    	         itemStyle: pointStyle,
+	    	         label: labelStyle,
+	    	     }
+	    	     if (index === total.length - 1) {
+	    	         ob.itemStyle = {
+	    	             borderColor: '#ea6f21',
+	    	             color: '#A5830A',
+	    	             borderWidth: 1,
+	    	         }
+	    	         ob.label = {
+	    	             show: true,
+	    	             position: 'top',
+	    	             lineHeight: 4,
+	    	             //borderRadius: 5,
+	    	             //backgroundColor: 'rgba(255,255,255,.9)',
+	    	             //borderColor: 'red',
+	    	             //borderWidth: '1',
+	    	             padding: [5, 15, 4],
+	    	             color: '#A5830A',
+	    	             fontSize: 14,
+	    	             fontWeight: 'normal',
+	    	         }
+	    	     }
+	    	     seriesData.push(ob)
+	    	 });
+
+	    	 var option = {
+   	            title: {
+      	            	text: '单位：元',
+      	            	x:'right',
+      	            	padding: [-8,42,0,0],
+      	                textStyle: {
+      	                    color: 'white',
+      	                    fontFamliy: 'Microsoft YaHei',
+      	                    fontSize: 18,
+      	                    fontWeight: 'normal'
+      	                }
+      	            },
+   	    	     grid: {
+   	    	         top: '9%',
+   	    	         left: '12%',
+   	    	         right: '8%',
+   	    	         bottom: '24%',
+   	    	     },
+	    	     xAxis: [{
+	    	         type: 'category',
+	    	         axisTick: {
+	    	             show: false,
+	    	         },
+	    	         axisLine: {
+	    	             show: true,
+	    	             lineStyle: {
+	                         type: 'solid',
+	                         color: '#ccc',
+	                         width: 1
+	    	             }
+	    	         },
+	    	         splitLine: {
+	    	             show: false,
+	    	             lineStyle: {
+	    	                 type: 'dashed',
+	    	             },
+	    	         },
+	    	         splitArea: {
+	    	             show: true,
+	    	             areaStyle: {
+	    	                 color: ['rgba(12,40,85,0.4)', 'rgba(13,24,70,0.7)']
+	    	             }
+	    	         },
+                     axisLabel: {
+                         show: true,
+                         textStyle: {
+                         	color: 'white',
+                             fontFamliy: 'Microsoft YaHei',
+                             fontSize: 18
+                         }
+                     },
+	    	         data: ['2015年', '2016年', '2017年', '2018年'],
+	    	     }, ],
+
+	    	     yAxis: [{
+	    	         type: 'value',
+	    	         min: 0,
+	    	         max: 80000,
+	    	         splitNumber: 4,
+	    	         axisLine: {
+	    	             show: false,
+	    	         },
+	    	         axisTick: {
+	    	             show: false,
+	    	         },
+	    	         splitLine: {
+	    	             show: true,
+	    	             lineStyle: {
+	    	                 type: 'dashed',
+	    	             },
+	    	         },
+		            axisLabel: {
+		                textStyle: {
+		                	color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 16
+		                },
+		            }
+	    	     }, ],
+	    	     series: [{
+	    	         type: 'line',
+	    	         showAllSymbol: true,
+	    	         symbol: 'circle',
+	    	         symbolSize: 10,
+	    	         lineStyle: {
+	    	             normal: {
+	    	                 color: 'rgba(242,186,47,0.7)',
+	    	                 width: 1,
+	    	             },
+	    	         },
+	    	         tooltip: {
+	    	             show: false,
+	    	         },
+	    	         areaStyle: {
+	    	             normal: {
+	    	                 color: new echarts.graphic.LinearGradient(
+	    	                     0,
+	    	                     0,
+	    	                     0,
+	    	                     1,
+	    	                     [{
+	    	                             offset: 0,
+	    	                             color: 'rgba(249,237,28, 1)',
+	    	                         },
+	    	                         {
+	    	                             offset: 1,
+	    	                             color: 'rgba(249,237,28,0)',
+	    	                         },
+	    	                     ],
+	    	                     false
+	    	                 ),
+	    	             },
+	    	         },
+	    	         data: seriesData,
+	    	         markLine: {
+	    	             symbol: ['none', 'none'], //去掉箭头
+	    	             itemStyle: {
+	    	                 normal: {
+	    	                     lineStyle: {
+	    	                         type: 'solid',
+	    	                         color: '#ccc',
+	    	                         width: 2
+	    	                     }
+	    	                 },
+	    	             },
+	    	             data: [{
+	    	                 name: '',
+	    	                 yAxis: 80000,
+	    	                 label: {
+	    	                     normal: {
+	    	                         formatter: '',
+	    	                     },
+	    	                 },
+	    	             }, ],
+	    	         },
+	    	     }, ],
+	    	 };
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

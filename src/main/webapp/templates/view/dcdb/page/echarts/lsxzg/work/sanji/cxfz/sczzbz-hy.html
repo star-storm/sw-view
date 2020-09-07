@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>地区生产总值比重（按行业分）</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:450px;height:350px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    
+    <script type="text/javascript">
+	
+		var data = new Array(),
+			index = 0;
+	    $(function(){
+	    	index=getUrlParam("index");
+	    	initData(index);
+	    	initEcharts();
+	    });
+	    
+	    function initData(index) {
+        	if(!index) {
+        		data = [0.3,12.0,4.3,8.1,2.9,1.5,18.5,7.4,45.0];
+        	}
+        	else {
+				var nlmy = parent.nlmy[index]==-1?0:parent.nlmy[index];
+				if(!nlmy)nlmy=0;
+				var gy = parent.gy[index]==-1?0:parent.gy[index];
+				if(!gy)gy=0;
+				var jzy = parent.jzy[index]==-1?0:parent.jzy[index];
+				if(!jzy)jzy=0;
+				var pfls = parent.pfls[index]==-1?0:parent.pfls[index];
+				if(!pfls)pfls=0;
+				var jtyz = parent.jtyz[index]==-1?0:parent.jtyz[index];
+				if(!jtyz)jtyz=0;
+				var zscy = parent.zscy[index]==-1?0:parent.zscy[index];
+				if(!zscy)zscy=0;
+				var jry = parent.jry[index]==-1?0:parent.jry[index];
+				if(!jry)jry=0;
+				var fdcy = parent.fdcy[index]==-1?0:parent.fdcy[index];
+				if(!fdcy)fdcy=0;
+				var qtcy = parent.qtcy[index]==-1?0:parent.qtcy[index];
+				if(!qtcy)qtcy=0;
+				data = [nlmy, gy, jzy, pfls, jtyz, zscy, jry, fdcy, qtcy];
+        	}
+	    }
+	
+		function initEcharts() {
+		    var myChart = echarts.init(document.getElementById('main'));
+		    myChart.setOption({
+		        grid: {
+		            x:167,
+		            y:0,
+		            x2:100,
+		            y2:12,
+		        },
+	            title: {
+	            	show:false,
+	            	text: '单位：亿美元',
+	            	x:'right',
+	            	padding: [-4,24,0,0],
+	                textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 14,
+	                    fontWeight: 'normal'
+	                },
+	            },
+		        tooltip: {
+		            trigger: 'axis',
+		        },
+		        xAxis: {
+		            type: 'value',
+			        splitLine: {
+			           show: false,
+			        },
+		       		axisLabel: {
+		                show: false,
+		                textStyle: {
+		                	color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 14
+		                }
+		            },
+		            axisTick: {
+		            	show: false
+		            },
+		            axisLine: {
+		                show: false
+		            },
+		        },
+		        yAxis: [{
+		            type: 'category',
+		            inverse: true,
+		            axisLabel: {
+		                textStyle: {
+		                	color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 14
+		                },
+		            },
+		            splitLine: {
+		                show: false
+		            },
+		            axisTick: {
+		                show: false
+		            },
+		            axisLine: {
+		                show: false
+		            },
+		            data: ['农、林、牧、渔业','工业','建筑业','批发和零售业','交通运输、仓储和邮政业','住宿和餐饮业','金融业','房地产业','其他服务业']
+		        }, {
+		            inverse: true,
+		            axisLabel: {
+		                textStyle: {
+		                	color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 14,
+		                },
+		                    formatter: '{value}%'
+		            },
+		            axisLine: {
+		                show: false
+		            },
+		            splitLine: {
+		                show: false
+		            },
+		            axisTick: {
+		                show: false
+		            },
+		            data: data
+		        }],
+		        series: [{
+		            type: 'bar',
+		            yAxisIndex: 0,
+		            zlevel: 3,
+		            data: data,
+		            barWidth: 12,
+		            itemStyle: {
+		                normal: {
+		                    barBorderRadius: 12,
+		                    color: 'yellow'
+		                }
+		            },
+		            label: {
+		                normal: {
+		                    show: false,
+		                    position: 'inside',
+		                    formatter: '{c}%'
+		                }
+		            },
+		        }, {
+		            type: 'bar',
+		            yAxisIndex: 1,
+		            zlevel: 1,
+		            data: [100, 100, 100, 100, 100, 100, 100, 100, 100],
+		            barWidth: 12,
+		            itemStyle: {
+		                normal: {
+		                    color: '#305078',
+		                    borderColor: '#00c1de',
+		                    borderWidth: 0,
+		                    barBorderRadius: 12,
+		                }
+		            }
+		        }]
+		    });
+		}
+    </script>
+</body>
+</html>

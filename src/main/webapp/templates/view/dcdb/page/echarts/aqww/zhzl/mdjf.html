@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>特殊人群</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:500px;height:220px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+		var xData = ['艾滋病人','吸毒人员','社区矫正人员','重性精神病人','刑释解教人员','强制隔离戒毒','志愿者'];
+		var yData = [10, 15, 19, 22, 19, 22, 19];
+	    var option = {
+// 	    	      backgroundColor:'#040042',
+	    	      tooltip: {
+	    	          formatter: "{a} <br/>{c} {b}"
+	    	      },
+	    	      series: [{
+	    	              name: '第一部分',
+	    	              type: 'gauge',
+	    	              color: ['#f00'],
+	    	              min: 0,
+	    	              max: 8,
+	    	              splitNumber: 8,
+	    	              radius: '70%',
+	    	              center: ["15%", "55%"],
+	    	              axisLine: { // 坐标轴线
+	    	                  lineStyle: { // 属性lineStyle控制线条样式
+	    	                      width: 10,
+	    	                      color: [
+	    	                          [0.4, '#203add'],
+	    	                          [1, '#0d1758']
+	    	                      ]
+	    	                  },
+	    	                  backgroundColor: "none"
+	    	              },
+	    	              tooltip: {
+	    	                  formatter: function() {
+	    	                      if (dataArry.one) {
+	    	                          return "第一部分:" + dataArry.one;
+	    	                      }
+	    	                  }
+	    	              },
+	    	              axisTick: { // 坐标轴小标记
+	    	                  length: 4, // 属性length控制线长
+	    	                  lineStyle: { // 属性lineStyle控制线条样式
+	    	                      color: 'auto'
+	    	                  }
+	    	              },
+	    	              splitLine: { // 分隔线
+	    	                  length: 5, // 属性length控制线长
+	    	                  lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+	    	                      color: 'rgba(255,255,255,0.7)',
+	    	                  }
+	    	              },
+	    	              axisLabel: {
+	    	                  borderRadius: 1,
+	    	                  color: 'rgba(255,255,255,0.7)',
+	    	                  padding: 1,
+	    	              },
+	    	              title: {
+	    	                  // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+	    	                  // fontWeight: 'bolder',
+	    	                  fontSize: 13,
+	    	                  fontColor: "#FFF",
+	    	                  color: "#FFF",
+	    	                  paddingTop: 10,
+	    	                  offsetCenter: [0, '90%']
+	    	                  // fontStyle: 'italic'
+	    	              },
+	    	              itemStyle: {
+	    	                  color: '#1092ff',
+	    	              },
+	    	              detail: {
+	    	                  shadowOffsetX: 0,
+	    	                  shadowOffsetY: 0,
+	    	                  // borderWidth: 1,
+	    	                  textBorderColor: '#000',
+	    	                  textBorderWidth: 1,
+	    	                  textShadowBlur: 1,
+	    	                  textShadowColor: '#fff',
+	    	                  textShadowOffsetX: 0,
+	    	                  textShadowOffsetY: 0,
+	    	                  paddingTop: 10,
+	    	                  fontFamily: 'digital',
+	    	                  fontSize: 20,
+	    	                  width: 30,
+	    	                  color: '#fff',
+	    	                  rich: {},
+	    	                  offsetCenter: [0, '65%'],
+	    	                  formatter: function(value) {
+	    	                      console.info(value)
+	    	                      return (value * 10 + "%");
+	    	                  }
+	    	              },
+	    	              data: [{
+	    	                  value: 5,
+	    	                  name: '第一部分'
+	    	              }]
+	    	          },
+	    	          {
+	    	              name: '第二部分',
+	    	              type: 'gauge',
+	    	              color: ['#f00'],
+	    	              min: 0,
+	    	              max: 8,
+	    	              splitNumber: 8,
+	    	              radius: '70%',
+	    	              center: ["50%", "55%"],
+	    	              axisLine: { // 坐标轴线
+	    	                  lineStyle: { // 属性lineStyle控制线条样式
+	    	                      width: 10,
+	    	                      color: [
+	    	                          [0.4, '#203add'],
+	    	                          [1, '#0d1758']
+	    	                      ]
+	    	                  },
+	    	                  backgroundColor: "none"
+	    	              },
+	    	              axisTick: { // 坐标轴小标记
+	    	                  length: 12, // 属性length控制线长
+	    	                  lineStyle: { // 属性lineStyle控制线条样式
+	    	                      color: 'auto'
+	    	                  }
+	    	              },
+	    	              tooltip: {
+	    	                  formatter: function() {
+	    	                      if (dataArry.two) {
+	    	                          return "第二部分:" + dataArry.two;
+	    	                      }
+	    	                  }
+	    	              },
+	    	              splitLine: { // 分隔线
+	    	                  length: 5, // 属性length控制线长
+	    	                  lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+	    	                      color: 'rgba(255,255,255,0.7)',
+	    	                  }
+	    	              },
+	    	              axisLabel: {
+	    	                  borderRadius: 1,
+	    	                  color: 'rgba(255,255,255,0.7)',
+	    	                  padding: 1,
+	    	              },
+	    	              title: {
+	    	                  fontSize: 13,
+	    	                  fontColor: "#FFF",
+	    	                  color: "#FFF",
+	    	                  paddingTop: 10,
+	    	                  offsetCenter: [0, '90%']
+	    	              },
+	    	              itemStyle: {
+	    	                  color: '#1092ff'
+	    	              },
+	    	              detail: {
+	    	                  shadowOffsetX: 0,
+	    	                  shadowOffsetY: 0,
+	    	                  textBorderColor: '#000',
+	    	                  textBorderWidth: 1,
+	    	                  textShadowBlur: 1,
+	    	                  textShadowColor: '#fff',
+	    	                  textShadowOffsetX: 0,
+	    	                  textShadowOffsetY: 0,
+	    	                  paddingTop: 10,
+	    	                  fontFamily: 'digital',
+	    	                  fontSize: 20,
+	    	                  width: 30,
+	    	                  color: '#fff',
+	    	                  rich: {},
+	    	                  offsetCenter: [0, '65%'],
+	    	                  formatter: function(value) {
+	    	                      return (value * 10 + "%");
+	    	                  }
+	    	              },
+	    	              data: [{
+	    	                  value: 3,
+	    	                  name: '第二部分'
+	    	              }]
+	    	          }
+	    	      ]
+	    	  };
+	    var myChart = echarts.init(document.getElementById('main'));
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

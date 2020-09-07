@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+
+    <div id="main" style="width:500px;height:360px; color:white;font-size:16px;"></div>
+    
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>  
+	<script type="text/javascript" src="/static/js/js.js"></script>  
+    
+    
+    <!-- ECharts单文件引入 -->
+    <script src="./echarts.min.js"></script>
+    
+    <script type="text/javascript">
+	  
+      var datas = new Array();
+	  //年份
+	  var year=getUrlParam("year");
+	  //批示件载体总数
+	  var psjCount=getUrlParam("count");
+	  if (psjCount=="" || psjCount=="null" || psjCount==null)
+		  psjCount = 0;
+	  var psjCountText = "共"+psjCount+"件";
+    
+	  //页面初始化
+	  (function($) {
+	
+	  	//批示件数
+	  	count();
+	  	
+	  }(jQuery));
+	
+	  //批示件数
+	  function count() {
+	  	$.ajax({
+	 		async : false,
+	  		type : "post",
+	  		url : "/api/dcdb/psj/count",
+	  		dataType : "json",
+	  		data : {
+	  			'year' : year
+	  		},
+	  		success : function(resp) {
+	  			if(resp.code == 200){
+// 					var datas0 =  [
+//        	                {value: 335, name: '直接访问0'},
+//        	                {value: 310, name: '邮件营销1'},
+//        	                {value: 274, name: '联盟广告2'},
+//        	                {value: 235, name: '视频广告3'},
+//        	                {value: 400, name: '搜索引擎4'}
+//        	            ];
+// 					resp.data = datas0;
+	  				for (var i=0; i<resp.data.length; i++) {
+	  					var name = resp.data[i].split("|")[0];
+	  					var num = resp.data[i].split("|")[1];
+	  					var tmp = new Object();
+	  					tmp.name = name;
+	  					tmp.value = parseInt(num);
+	  					datas.push(tmp);
+	  				}
+	  			} else {
+	  				alert(resp.msg);
+	  			}
+	  		}
+	  	});
+	  	return false;
+	  }
+    
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = echarts.init(document.getElementById('main')); 
+        option = {
+//         	    backgroundColor: '#2c343c',
+
+        	    title: {
+        	        text: psjCountText,
+        	        left: 'left',
+        	        top: -12,
+        	        left: 42,
+        	        textStyle: {
+        	            color: '#86ffd6',
+        	        	fontSize : 18,
+        	        	fontWeight: 'bold',
+						fontFamily: '微软雅黑',
+        	        }
+        	    },
+
+        	    tooltip: {
+        	        trigger: 'item',
+        	        formatter: '{a} <br/>{b} : {c} ({d}%)'
+        	    },
+
+//         	    visualMap: {
+//         	        show: false,
+//         	        min: 40,
+//         	        max: 3000,
+//         	        inRange: {
+//         	            colorLightness: [0, 1]
+//         	        }
+//         	    },
+        	    series: [
+        	        {
+        	            name: '',
+        	            type: 'pie',
+        	            radius: '50%',
+        	            center: ['45%', '55%'],
+        	            data: datas.sort(function (a, b) { return a.value - b.value; }),
+//         	            roseType: 'radius',
+        	            label: {
+        	                color: '#fff',
+                            textStyle : {
+    	                    	fontWeight : 300,
+    	                    	fontSize : 16,
+    							fontFamily: '微软雅黑'
+    	                    },
+    						formatter:'{b}\n{c}',
+    						padding:[0, -60]
+        	            },
+        	            labelLine: {
+        	                lineStyle: {
+        	                	width: 1.6,
+        	                    color: '#fff'
+        	                },
+        	                smooth: 0.2,
+        	                length: 20,
+        	                length2: 80
+        	            },
+        	            itemStyle: {
+        	                color: function(params) {
+        	                    //自定义颜色
+        	                    var colorList = [
+        	                    	'#4B9BFE','#F57170','#1AEDBA','#9278FD','#F2F560'
+        	                    ];
+        	                    return colorList[params.dataIndex]
+        	                },
+        	                shadowBlur: 200,
+        	                shadowColor: 'rgba(0, 0, 0, 0.5)'
+        	            },
+
+        	            animationType: 'scale',
+        	            animationEasing: 'elasticOut',
+        	            animationDelay: function (idx) {
+        	                return Math.random() * 200;
+        	            }
+        	        }
+        	    ]
+        	};
+        // 为echarts对象加载数据 
+        myChart.setOption(option);  myChart.on("click", function(params) {
+              parent.location.href = "../psj/psj.html?year="+year
+          });
+    </script>
+    
+</body>

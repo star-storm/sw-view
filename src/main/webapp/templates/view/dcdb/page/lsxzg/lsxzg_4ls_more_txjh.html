@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+	     window.parent.erjiHide(1);
+      });
+      function callback0(){}
+    </script>
+</head>
+<body>
+<div class="fl w h1000 bg_ej_xq_wfj">
+	<div class="fl w h61 titbg">
+		<div class="fl ml610 w700 tl">
+			<span class="fl w f24 white tc mt10 bold">提效降耗情况</span>
+		</div>
+		<div class="fr mr270 mt10"><a href="javascript:history.go(-1)"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w1837 h878 ml30 mt25">
+		<div class="fl ml45 w1747">
+			<div class="fl w mt30 subTit subtit_line">
+				<span onclick="showCard(this,'con','subCard',callback0)" class="subCardOn" >工业万元增加值能耗</span>
+				<span onclick="showCard(this,'con','subCard',callback0)" class="subCardOff">万元地区生产总值水耗</span>
+			</div>
+			<div id="con0" class="fl w h800 mt20 white">
+				<iframe id="gynh" src="/templates/view/dcdb/page/echarts/lsxzg/work/lsfz/gynh.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+			<div id="con1" class="fl w h800 mt20 white" style="display:none;">
+				<iframe id="gysh" src="/templates/view/dcdb/page/echarts/lsxzg/work/lsfz/gysh.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+		</div>		
+	</div>		
+</div>
+<div class="sjly_div pa h38 tc"><span class="fl w mt13 tc">数据来源方：市统计局</span></div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width: "128px"
+		});
+	});
+</script>
+</html>

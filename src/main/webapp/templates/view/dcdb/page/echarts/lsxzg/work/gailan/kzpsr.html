@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>居民人均可支配收入</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:540px;height:360px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+	    var myChart = echarts.init(document.getElementById('main'));
+	    myChart.setOption({
+	        grid: [{
+	            top: 40,
+	            bottom: 50,
+	            left: '63%',
+	            width: '35%'
+	        }, {
+	            top: 40,
+	            bottom: 50,
+	            left: '9%',
+	            width: '35%'
+	        }],
+            title: {
+            	text: '单位：元',
+            	x:'right',
+            	padding: [0,0,0,0],
+                textStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 18,
+                    fontWeight: 'normal'
+                },
+            },
+	    	tooltip : {
+	            trigger: 'axis',
+	            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+	                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+	            }
+	        },
+            legend: {
+                data:['农村居民','城镇居民'],
+                orient:"horizontal",
+                x:'left',
+            	padding: [0,0,0,20],
+                textStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 18
+                }
+            },
+	        xAxis : [
+	          {
+	                name : '',
+	                type : 'value',
+	                show: false
+	            },
+	            {
+	                gridIndex: 1,
+	                name : '',
+	                type : 'value',
+	                show: false,
+	                inverse: true
+	            }
+	        ],
+	        yAxis : [
+	            {
+	                type : 'category',
+	                axisTick : {
+	                	show: false
+	                },	
+	                axisLine:{
+		                show: false
+	                },
+		            axisLabel: {
+		                textStyle: {
+		                	color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 18
+		                },
+		            },
+// 	                data :  ['2014年','2015年','2016年','2017年','2018年']
+		            data :  ['','','','','']
+	            },
+	             {
+	                gridIndex: 1,
+	                type : 'category',
+	                position:'right',
+	                axisTick : {
+	                	show: false
+	                },
+	                axisLine:{
+		                show: false
+	                },
+		            axisLabel: {
+		                textStyle: {
+		                	color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 18
+		                },
+		            },
+	                data :  [' -2014年-',' -2015年-',' -2016年-',' -2017年-',' -2018年-']
+	            }
+	        ],
+	        series : [
+	            {
+	                name:'农村居民',
+	                type:'bar',
+		            barWidth: 30,
+	                label: {
+	                    normal: {
+	                        show: true,
+	                        position: 'inside',
+			                textStyle: {
+			                	color: 'white',
+			                    fontFamliy: 'Microsoft YaHei',
+			                    fontSize: 18
+			                }
+	                    }
+	                },
+		            itemStyle: {
+		                normal: {
+		                    color: '#EF6311',
+		                    borderWidth: 0,
+		                    barBorderRadius: 7,
+		                }
+		            },
+	                data:[20226, 20569, 22310, 24240, 26490]
+	            },
+	            {
+	                name:'城镇居民',
+	                type:'bar',
+		            barWidth: 30,
+	                xAxisIndex: 1,
+	                yAxisIndex: 1,
+	                symbolSize: 8,
+	                //stack: '总量',
+	                label: {
+	                    normal: {
+	                        show: true,
+	                        position: 'inside',
+			                textStyle: {
+			                	color: 'white',
+			                    fontFamliy: 'Microsoft YaHei',
+			                    fontSize: 18
+			                }
+	                    }
+	                },
+		            itemStyle: {
+		                normal: {
+		                    color: '#8ED726',
+		                    borderWidth: 0,
+		                    barBorderRadius: 7,
+		                }
+		            },
+	                data:[43910, 52859, 57275, 62406, 67990]
+	            }
+	        ]
+	    });
+    </script>
+</body>
+</html>

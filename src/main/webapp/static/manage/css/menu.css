@@ -1,0 +1,31 @@
+﻿*{font-size:15px;border:0;margin:0;padding:0;}
+body{font-family:'微软雅黑'; margin:0 auto;min-width:1200px; background:#f9f9f9;}
+ul{display:block;margin:0;padding:0;list-style:none;}
+li{display:block;margin:0;padding:0;list-style: none;}
+img{border:0;}
+dl,dt,dd,span{margin:0;padding:0;display:block;}
+a,a:focus{text-decoration:none;color:#000;outline:none;blr:expression(this.onFocus=this.blur());}
+a:hover{text-decoration:none;}
+table{border-collapse:collapse;border-spacing:0;}
+cite{font-style:normal;}
+h2{font-weight:normal;}
+
+/*left.html*/
+.leftmenu{width:270px;padding-bottom: 9999px;margin-bottom: -9999px; overflow:hidden;border-right:solid 1px #cecfd0;}
+.leftmenu dd{background:url(../images/leftmenubg.png) no-repeat left top; border-bottom:1px #0a437f solid; line-height:47px;font-weight:bold;font-size:18px;}
+.leftmenu dd span{float:left;margin:15px 8px 0 12px;}
+.leftmenu dd .menuson{display:none;}
+.leftmenu dd:first-child .menuson{display:block;}
+.menuson {line-height:50px; font-weight:normal;}
+.menuson li{cursor:pointer; border-bottom:1px #cecfd0 solid;}
+.menuson li.active{position:relative; background:url(../images/menusonbg.png) no-repeat right center;; line-height:40px; color:#000000;font-weight:bold;}
+.menuson li cite{display:block; float:left; margin-left:22px; background:none; width:16px; height:16px; margin-top:7px;}
+.menuson li.active cite{background:none;}
+.menuson li.active i{display:block; background:none; width:6px; height:11px; position:absolute; right:0;z-index:10000; top:9px; right:-1px;}
+.menuson li a{ display:block; *display:inline; *padding-top:5px;}
+.menuson li a:hover{color:#000000;font-weight:600;}
+.menuson li.active a{color:#000000;}
+.title{cursor:pointer; color:#ffffff;font-size:18px;}
+.titleli a{cursor:pointer; color:#ffffff;font-size:18px;}
+.TitOn{background:url(../images/bg_menu_fd_on.png) no-repeat right center;}
+.TitOff{background:url(../images/bg_menu_fd_off.png) no-repeat right center;}

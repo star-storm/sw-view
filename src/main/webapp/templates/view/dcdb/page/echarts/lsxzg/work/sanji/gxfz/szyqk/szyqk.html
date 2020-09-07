@@ -1,0 +1,478 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>水资源情况</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:1200px;height:380px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    
+    <script type="text/javascript">
+		//全年水资源总量
+    	var datas1 = [24.6, 35.5, 29.8, 35.1, 26.8, 20.3, 24.8, 39.5];
+		//大中型水库蓄水总量
+    	var datas2 = [33.3, 34.3, 27.9, 24.3, 16.16, 13.9, 18];
+  		//平原区地下水深
+	    var datas3 = [22.6, 23.03, 24.97, 25.2, 25.76, 25.66, 24.46];
+	  	//人均水资源
+	    var datas4 = [0, 164, 137.1, 161.4, 123.8, 94.9, 118.6];
+		//全年用水总量
+	    var datas5 = [
+		    	[41.5, 39.3, 39.5, 38.8, 38.2, 37.5, 36.4],//全年用水总量
+		    	[3.7, 4.2, 5.1, 6.1, 6.5, 8.2, 9.1],//农业用水
+		    	[2.8, 3.3, 3.5, 3.8, 3.8, 5.1, 5.1],//工业用水
+		    	[15.6, 18.4, 18.3, 17.8, 17.5, 17, 16.3],//生活用水
+		    	[14.5, 13.4, 12.6, 11.1, 10.4, 7.2, 5.9]//生态环境用水
+	    ];
+	  	//用水升降率
+	    var datas6 = [
+	    	[-12.2, -17.6, -16.2, -6.4, -21.08, -10.1, -2.4],//农业用水
+	    	[-7.6, -8.8, -8.1, -2.6, -24.37, -0.6, 4.7],//工业用水
+	    	[4.2, 2, 2.4, -0.3, 2.9, 4.5, 1.5],//生活用水
+	    	[16.8, 2.5, 9.7, 9.7, 43.86, 22.4, 4.4]//生态环境用水
+	    ];
+	  	
+		var index = 0;
+		var data1 = new Array();
+		var data2 = new Array();
+	    
+		//页面初始化
+		(function($) {
+			index=getUrlParam("index");
+			if (!index)
+				index = 0;
+			data1 = [datas5[1][index],datas5[2][index],datas5[3][index],datas5[4][index]];
+			data2 = [datas6[0][index],datas6[1][index],datas6[2][index],datas6[3][index]];
+			
+			initEcharts(data1,data2);
+		}(jQuery));
+    
+	    function initEcharts(data1, data2) {
+		    var myChart = echarts.init(document.getElementById('main'));
+// 		    var option = {
+// // 		    	    backgroundColor: '#fff',
+// 		    	    grid: {
+// 		    	        top: '15%',
+// 		    	        right: '10%',
+// 		    	        left: '10%',
+// 		    	        bottom: '20%'
+// 		    	    },
+// 		    	    xAxis: [{
+// 		    	        type: 'category',
+// 		    	        color: '#59588D',
+// 		    	        data: ['农业用水','工业用水','生活用水','生态环境用水'],
+// 		    	        axisLabel: {
+// 		    	            margin: 20,
+// 		    	            textStyle: {
+// 		                       	color: 'white',
+// 		                        fontFamliy: 'Microsoft YaHei',
+// 		                        fontSize: 16
+// 		    	            },
+// 		    	        },
+// 		    	        axisLine: {
+// 		    	            lineStyle: {
+// 		    	                color: 'rgba(107,107,107,0.37)',
+// 		    	            }
+// 		    	        },
+// 		    	        axisTick: {
+// 		    	            show: false
+// 		    	        },
+// 		    	    }],
+// 		    	    yAxis: [{
+// 		    	        axisLabel: {
+// 		    	            formatter: '{value}%',
+// 		    	            textStyle: {
+// 		                       	color: 'white',
+// 		                        fontFamliy: 'Microsoft YaHei',
+// 		                        fontSize: 16
+// 		    	            },
+// 		    	        },
+// 		    	        axisLine: {
+// 		    	            lineStyle: {
+// 		    	                color: 'rgba(107,107,107,0.37)',
+// 		    	            }
+// 		    	        },
+// 		    	        axisTick: {
+// 		    	            show: false
+// 		    	        },
+// 		    	        splitLine: {
+// 		    	            lineStyle: {
+// 		    	                color: 'rgba(131,101,101,0.2)',
+// 		    	                type: 'dashed',
+// 		    	            }
+// 		    	        }
+// 		    	    }],
+// 		    	    series: [{
+// 		    	        type: 'bar',
+// 		    	        data: data1,
+// 		    	        barWidth: '40px',
+// 		    	        itemStyle: {
+// 		    	            normal: {
+// 		    	                color: function(params){//展示正值的柱子，负数设为透明
+// 		    	                    let colorArr = params.value > 0?['#FF9A22', '#FFD56E']:['rgba(0,0,0,0)', 'rgba(0,0,0,0)']
+// 		    	                    return new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+// 		    	                        offset: 0,
+// 		    	                        color: colorArr[0] // 0% 处的颜色
+// 		    	                    }, {
+// 		    	                        offset: 1,
+// 		    	                        color:  colorArr[1]// 100% 处的颜色
+// 		    	                    }], false)
+// 		    	                },
+// 		    	                barBorderRadius: [30,30,0,0]
+// 		    	            },
+// 		    	        },
+// 		    	        label: {
+// 		    	            normal: {
+// 		    	                show: true,
+// 		    	                fontSize: 18,
+// 		    	                fontWeight: 'normal',
+// 		    	                color: 'white',
+// 		    	                position: 'top',
+// 		    	            }
+// 		    	        }
+// 		    	    },{
+// 		    	        type: 'bar',
+// 		    	        data: data1,
+// 		    	        barWidth: '40px',
+// 		    	        barGap: '-100%',
+// 		    	        itemStyle: {
+// 		    	            normal: {
+// 		    	                color: function(params){//展示负值的柱子，正数设为透明
+// 		    	                    let colorArr = params.value > 0?['rgba(0,0,0,0)', 'rgba(0,0,0,0)']:['#FFD56E', '#FF9A22']
+// 		    	                    return new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+// 		    	                        offset: 0,
+// 		    	                        color: colorArr[0] // 0% 处的颜色
+// 		    	                    }, {
+// 		    	                        offset: 1,
+// 		    	                        color:  colorArr[1]// 100% 处的颜色
+// 		    	                    }], false)
+// 		    	                },
+// 		    	                barBorderRadius: [0,0,30,30]
+// 		    	            },
+// 		    	        }
+// 		    	    },{
+// 		    	        data: data2,
+// 		    	        type: 'line',
+// 		    	        smooth: true,
+// 		    	        name: '折线图',
+// 		    	        symbol: 'none',
+// 		    	        lineStyle: {
+// 		    	            color: '#3275FB',
+// 		    	            width: 4,
+// 		    	            shadowColor: 'rgba(0, 0, 0, 0.3)',//设置折线阴影
+// 		    	            shadowBlur: 15,
+// 		    	            shadowOffsetY: 20,
+// 		    	        },
+// 		    	        "itemStyle": {
+// 		    	            "normal": {
+// 		    	                "color": 'red',
+// 		    			        lineStyle: {
+// 		    			            width:2// 0.1的线条是非常细的了
+// 		    			        },
+// 		                   	label : {
+// 		      	    	             show: true,
+// 		      	    	             lineHeight: 4,
+// 		      	    	             //borderRadius: 5,
+// 		      	    	             //backgroundColor: 'rgba(255,255,255,.9)',
+// 		      	    	             //borderColor: 'red',
+// 		      	    	             //borderWidth: '1',
+// 		      	    	             padding: [5, 15, 4],
+// 		      	    	             color: 'yellow',
+// 		      	                     fontFamliy: 'Microsoft YaHei',
+// 		      	                     fontSize: 16,
+// 		      	    	             fontWeight: 'normal',
+// 		      	    	         }
+// 		    	            }
+// 		    	        }
+// 		    	    }
+// 		    	]
+// 		    	};
+
+				// 设置echart的默认颜色列表
+	    let colorList = [
+	        ["#FF9A22", "#FF9A22"],
+	        ["#12fcc9"]
+	    ];
+	    let lengthColor = [colorList[0][0], colorList[1][0]]
+	    // y轴单位
+	    let yAxisOpt = [{
+	            "name": ""
+	        },
+	        {
+	            "name": "单位：亿立方米"
+	        }
+	    ]
+	    // series数据
+	    let seriesData = [{
+	            "name": "",
+	            "type": "bar",
+	            "data": data1
+	        },
+	        {
+	            "name": "",
+	            "type": "line",
+	            "data": data2
+	        }
+	    ]
+
+	    let yAxis = [];
+	    let series = [];
+	    let legend = [];
+	    let yLeftMax = Math.ceil(Math.max.apply(null, seriesData[0].data)); //左轴最大值
+	    let yRightMax2 = Math.ceil(Math.max.apply(null, seriesData[1].data)); //左轴最大值
+	    //配置Y轴的选项
+	    yAxisOpt.forEach((opt, index) => {
+	        let defaultyAxisOpt = {
+	            "type": "value", //设置y轴为值
+	            "name": "", //顶部名称 
+	            "min": index == 0 ? -20 : -50,
+	            max: index == 0 ? 20 : 50,
+	            "interval": null,
+	            "align": "right",
+	            "nameTextStyle": {
+	                "color": "white",
+                   fontFamliy: 'Microsoft YaHei',
+                   fontSize: 18,
+	                padding: [0, 0, 0, 0]
+	            },
+	            //坐标轴上的刻度
+	            "axisTick": {
+	                "show": false
+	            },
+	            //坐标轴线
+	            "axisLine": {
+	            	show: true,
+   		           lineStyle: {
+   		               type: 'solid',
+   		               color: '#305078',
+   		               width: 1
+   		           }
+	            },
+	            //坐标轴上的标签
+	            "axisLabel": {
+	                "show": true,
+	                color: 'white',
+                   fontFamliy: 'Microsoft YaHei',
+                   fontSize: 16,
+   	            formatter: function(param) {
+   	            	if (index != 0)
+   	            		return param+'%';
+   	            	else
+   	            		return param;
+   	            }
+	            },
+		       splitLine: {
+		           show: index == 0 ?true:false,
+		           lineStyle: {
+		               type: 'solid',
+		               color: '#305078',
+		               width: 1
+		           }
+		       },
+	            "color": "#999999"
+	        }
+	        yAxis.push({
+	            ...defaultyAxisOpt,
+	            ...opt,
+	        })
+	    })
+	    yAxis[1].nameTextStyle.padding = [0, 0, 0, 0]
+
+	    // 默认折线图配置
+	    let defaultLineSeriesOpt = {
+	        "name": "",
+	        "type": "line",
+	        "yAxisIndex": 0,
+	        "data": [], //[5, 10, 15, 20],
+	         showAllSymbol: true,
+	         symbol: 'circle',
+	         symbolSize: 10,
+	        "itemStyle": {
+	            "normal": {
+	                "color": 'white',//colorList[1],
+			        lineStyle: {
+			            width:2// 0.1的线条是非常细的了
+			        },
+               	label : {
+  	    	             show: true,
+  	    	             position: 'top',
+  	    	             lineHeight: 4,
+  	    	             //borderRadius: 5,
+  	    	             //backgroundColor: 'rgba(255,255,255,.9)',
+  	    	             //borderColor: 'red',
+  	    	             //borderWidth: '1',
+  	    	             padding: [0, 0, -40, 0],
+  	    	             color: 'white',
+  	                     fontFamliy: 'Microsoft YaHei',
+  	                     fontSize: 16,
+  	    	             fontWeight: 'normal',
+  	    	         }
+	            }
+	        }
+	    }
+	    let lengedInfoList = []
+	    // 默认柱状图配置
+	    let defaultBarSeriesOpt = {
+	        "name": "",
+	        "type": "bar",
+	        "data": [], //[500, 1000, 15000, 2000],
+	        "barWidth": 40,
+	        "itemStyle": {
+	            "normal": {
+	                "barBorderRadius": [20, 20, 0, 0],
+	                "color": function() {
+	                    let itemColor = colorList[0] ? colorList[0] : '';
+	                    if (itemColor.length > 1) {
+	                        return new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+	                            offset: 0,
+	                            color: itemColor[0]
+	                        }, {
+	                            offset: 1,
+	                            color: itemColor[1]
+	                        }])
+	                    } else {
+	                        return itemColor[0];
+	                    }
+	                },
+           		label: {
+						show: true, 
+						position: 'top',
+						padding: [0,0,4,0],
+						textStyle: { 
+                       	color: '#FF9A22',
+                           fontFamliy: 'Microsoft YaHei',
+                           fontSize: 16
+						}
+					}
+	            }
+	        }
+	    }
+	    seriesData.forEach((charts, index) => {
+	        let opt;
+	        let unit = yAxisOpt[index]['name'];
+	        legend.push(charts.name)
+	        lengedInfoList.push({
+	            name: charts.name,
+	            unit
+	        })
+	        if (charts.type == "line") {
+	            opt = {
+	                ...defaultLineSeriesOpt,
+	                ...charts,
+	                unit,
+	                yAxisIndex:1
+	            }
+	        } else {
+	            opt = {
+	                ...defaultBarSeriesOpt,
+	                ...charts,
+	                unit,
+	                yAxisIndex:0
+	            }
+	        }
+	        series.push(opt)
+	    });
+
+
+	    option = {
+	        color: lengthColor,
+	        "tooltip": {
+	            "trigger": "axis",
+	            //"formatter":tooltipFormatter,
+	            formatter: function(tipLabel) {
+	                let axisValue = ''
+	                let contentHtml = ''
+
+	                tipLabel.forEach(label => {
+	                    //label.value = label.value +'万元'
+	                    let seriy = lengedInfoList.find(sery => {
+	                        return sery.name == label.seriesName
+	                    })
+	                    let unit = ''
+	                    if (seriy) {
+	                        unit = seriy.unit ? `${seriy.unit}` : ''
+	                    }
+	                    axisValue = label.axisValue
+	                    contentHtml += (label.seriesName + ' : ' + label.value + unit + '<br>')
+	                })
+	                return `<span>${axisValue}<br>${contentHtml}</span>`;
+	            },
+	            "textStyle": {
+	                "fontSize": 12,
+	                "color": "#fff"
+	            },
+	        },
+	        "legend": {
+	            "show": true,
+	            align: "left",
+	            "bottom": "95%",
+	            "left": "8%",
+	            "itemWidth": 12,
+	            "itemHeight": 6,
+	            "textStyle": {
+	                "color": "white",
+                   fontFamliy: 'Microsoft YaHei',
+                   fontSize: 18,
+	            },
+	            "data": legend,
+//	            "formatter": function(name) {
+//	                let seriy = series.find(sery => {
+//	                    return sery.name == name;
+//	                });
+//	                let unit = '';
+//	                if (seriy) {
+//	                    unit = seriy.unit.length > 2 ? `${seriy.unit}` : '';
+//	                }
+//	                return name + unit;
+//	            }
+	        },
+	        "grid": {
+	        	show: true,
+	            "top": 50,
+	            "left": "14%",
+	            "right": "14%",
+	            "bottom": 20,
+	            "containLabel": true,
+	             borderWidth: 1,
+	             borderColor : '#0C2F74'
+	        },
+	        //x轴选项配置
+	        "xAxis": [{
+	            "type": "category", //设置X轴分类
+	            //
+	            "axisTick": {
+	                "show": false
+	            },
+
+	            axisLine: {
+	                show: true,
+	                lineStyle: {
+	                    color: '#305078',
+	                    width: 4 //这里是为了突出显示加上的
+	                }
+	            },
+	            "axisLabel": {
+	                "color": "white",
+                   fontFamliy: 'Microsoft YaHei',
+                   fontSize: 16,
+	            },
+	            "data": ['农业用水','工业用水','生活用水','生态环境用水']
+	        }],
+	        yAxis,
+	        series,
+
+	    };
+			    myChart.setOption(option);
+	    }
+    </script>
+</body>
+</html>

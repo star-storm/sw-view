@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>城市运行管理平台</title>
+<!--base style!-->
+<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/templates/view/dcdb/css/menu.css" type="text/css"  rel="stylesheet" />
+<link href="/templates/view/dcdb/css/main_style.css" type="text/css"  rel="stylesheet" />
+<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.sidenav li').click(function(){
+		$(this).siblings('li').removeClass('now');
+		$(this).addClass('now');
+		$(".erji").hide();
+        $(this).find(".erji").show();
+	});	
+	$('.erji span').click(function(){
+		$(this).siblings('span').removeClass('now_span');
+		$(this).addClass('now_span');
+	});	
+	var main_h = $(window).height();
+	$('.sidenav').css('height',main_h+'px');
+})
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".click").click(function(){
+  $(".tip").fadeIn(200);
+  });
+  
+  $(".tiptop a").click(function(){
+  $(".tip").fadeOut(200); 
+});
+//   $("#erjiTab1").css("display","none");
+});
+
+function erjiHide(o) {
+    if(o == "1"){
+        $(".now").find(".erji").hide();
+	} else {
+        $(".now").find(".erji").show();
+	}
+
+}
+function aqww() {
+	return false;
+}
+</script>
+</head>
+<body style="overflow:none;">
+	<div class="tip" style="display:none;">
+		<div class="tiptop"><a></a></div>
+		<div class="titcon">
+			<iframe width="100%" height="100%" src="http://222.65.219.66:7001/deviceSmall" frameborder="no" scrolling="No" noresize="noresize" ></iframe>
+		</div>
+	</div>
+	<!--导航菜单-->
+	<div class="fl w h80">
+		<div class="menuBox">
+			<ul class="sidenav">
+				<li id="xxkw">
+					<a href="http://222.65.176.36:8088/ldbg/ldjc_tj_shipin/index.jsp" target="Frame">
+						<span class="menuID_01"></span>
+					</a>
+				</li>
+				<li id="dcdb">
+					<a href="./dcdb.html" target="Frame">
+						<span class="menuID_02"></span>
+					</a>
+				</li> 
+				<li id="szc">
+					<a href="http://222.65.100.220" target="Frame">
+						<span class="menuID_03"></span>
+					</a>
+				</li>
+				<li id="cwjk">
+					<a href="http://222.65.100.206:8003" target="Frame">
+						<span class="menuID_04"></span>
+					</a>
+					<div class="erji">
+						<span class="now_span"><img src="/templates/view/dcdb/images/ico_up.png"></span>
+					</div>
+				</li>
+				<li class="now">
+					<a href="./zl.html" class="menu_zt" target="Frame">
+						<span class="menu_zt_01"></span>
+					</a>
+				</li>
+				<li>
+					<a href="./aqww/aqww_1zhzl.html" target="Frame">
+						<span class="menuID_05"></span>
+					</a>
+					<div class="erji">
+						<span class="now_span"><img src="/templates/view/dcdb/images/ico_up.png"></span>
+					</div>
+				</li>
+				<li id="fp">
+					<a href="./fpgz/fpgz.html" target="Frame">
+						<span class="menuID_06"></span>
+					</a> 
+					<div class="erji">
+						<span class="now_span"><img src="/templates/view/dcdb/images/ico_up.png"></span>
+					</div>
+				</li>
+				<li id="lsxzg">
+					<a href="./lsxzg/lsxzg.html" target="Frame">
+						<span class="menuID_07"></span>
+					</a>
+					<div class="erji">
+						<span class="now_span"><img src="/templates/view/dcdb/images/ico_up.png"></span>
+					</div>
+				</li>
+				<div class="click">
+					<a href="###">
+						<span class="menuID_08"></span>
+					</a>
+				</div>
+			</ul>
+		</div>		
+	</div>
+	<!--内容页面-->
+	<div class="fl w h1000 con">
+		<iframe width="100%" height="100%" src="./zl.html" frameborder="no" name="Frame" scrolling="No" noresize="noresize" id="Frame" title="Frame" style="z-index:1;"></iframe>
+	</div>
+	
+</body>
+</html>

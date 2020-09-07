@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理系统</title>
+<!--base style!-->
+<link href="/templates/view/dcdb/css/menu.css" type="text/css"  rel="stylesheet" />
+<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.sidenav li').click(function(){
+		$(this).siblings('li').removeClass('now');
+		$(this).addClass('now');
+	});	
+	$('.erji span').click(function(){
+		$(this).siblings('span').removeClass('now_span');
+		$(this).addClass('now_span');
+	});	
+	var main_h = $(window).height();
+	$('.sidenav').css('height',main_h+'px');
+})
+</script>
+
+</head>
+<body>
+	<!--导航菜单-->
+		<div class="menuBox">
+			<ul class="sidenav">
+				<li>
+					<a href="../page/###.html" target="Frame">
+						<span class="menuID_01"></span>
+					</a>
+				</li>
+				<li class="now">
+					<a href="../page/dcdb.html" target="Frame">
+						<span class="menuID_02"></span>
+					</a>
+				</li> 
+				<li>
+					<a href="http://222.65.100.220" target="Frame">
+						<span class="menuID_03"></span>
+					</a>
+				</li>
+				<li>
+					<a href="222.65.100.206:8003" target="Frame">
+						<span class="menuID_04"></span>
+					</a>
+				</li>
+				<div class="menu_zt"><a href="###" class="menu_zt"><span class="menu_zt_01"></span></a></div>
+				<li>
+					<a href="../page/###.html" target="Frame">
+						<span class="menuID_05"></span>
+					</a>
+				</li>
+				<li>
+					<a href="../page/###.html" target="Frame">
+						<span class="menuID_06"></span>
+					</a>
+				</li>
+				<li>
+					<a href="../page/lsxzg.html" target="Frame">
+						<span class="menuID_07"></span>
+					</a>
+					<div class="erji">
+						<span class="now_span"><img src="../images/ico_up.png"></span>
+					</div>
+				</li>
+				<li>
+					<a href="222.65.219.66:7001/deviceSmall">
+						<span class="menuID_08"></span>
+					</a>
+				</li>
+			</ul>
+		</div>	
+</body>
+</html>

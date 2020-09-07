@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<style>
+		.scrollDiv{
+			overflow-y: scroll;
+			overflow-x: hidden;
+		}
+	</style>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+	<script>
+        $(function(){
+            $(".scrollDiv").niceScroll({
+                cursorcolor:"#446ba9",
+                touchbehavior: true,
+                cursoropacitymax: 1,
+                cursorborder: "0",
+                cursorwidth: "10px",
+                autohidemode: true});
+        });
+	</script>
+</head>
+<body>
+<div class="fl w h1000 fpyz_mapbg">
+	<div class="fl w h61 titbg">
+		<div class="fl ml610 w700 tl">
+			<span class="fl w f24 white tc mt10 bold">北京市扶贫协作与对口支援图解</span>
+		</div>
+		<div class="fr mr270 mt10"><a href="javascript:history.go(-1)"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w1837 h878 ml51 mt5 ">
+		<div class="fl w  tc">
+			<div class="fl w510 h686 mt30 ml65">
+				<span class="fl w440 ml30 lh40 f16 white tl ti30 mt40">党的十八大以来，北京市深入学习贯彻习近平总书记关于扶贫工作重要论述和中央决策部署，树立首要意识，坚持首善标准，发挥首都优势，发扬首创精神，争创首位效益，形成具有北京特色的扶贫协作模式。北京市委市政府高度重视，各级各部门、社会各界全力支持推进，持续强化顶层设计高位推动，持续密切开展调研对接，持续完善精准扶贫脱贫政策，持续加大资金投入力度，持续选派优秀干部人才倾情奉献，持续深化产业就业帮扶，持续提升教育医疗“组团式”支援成效，持续促进民族团结交流交往交融，助力受援地区脱贫攻坚，书写扶贫协作的首善答卷，为全面建成小康社会作出了首都贡献。</span>
+　　			<span class="fl w440 ml30 lh40 f16 white tl ti30 mt40">北京市扶贫支援范围包括对口支援、对口帮扶、对口协作、对口合作和区域合作五类地区，涵盖全国20多个省市区，其中有扶贫任务的8省区90个县旗。</span>
+			
+			</div>
+			<div class="fl w1170 h686 mt50 ml5 white">
+				<iframe class="h640 w1170" src="/templates/view/dcdb/page/echarts/fpgz/sanji/dkzy/dkzy.html" frameborder="0" scrolling="no" style="overflow-x:hidden"></iframe>
+				<span style="background-color: #F15A25;" class="ml170 fl w25 h19 mt2"></span><span class="fl white ml5">北京对口支援地区</span>
+				<span style="background-color: #F8931F;" class="ml15 fl w25 h19 mt2"></span><span class="fl white ml5">北京扶贫协作地区</span>
+				<span style="background-color: #05A9A0;" class="ml15 fl w25 h19 mt2"></span><span class="fl white ml5">北京对口协作地区</span>
+				<span style="background-color: #2AAAE1;" class="ml15 fl w25 h19 mt2"></span><span class="fl white ml5">北京支援合作地区</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sjly_div pa h38 tc"><span class="fl w mt13 tc">数据来源方：市扶贫支援办</span></div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#mySelect").select({
+            width: "128px"
+        });
+    });
+</script>
+</html>

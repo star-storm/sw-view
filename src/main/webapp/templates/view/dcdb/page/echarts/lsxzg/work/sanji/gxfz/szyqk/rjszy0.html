@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>全市人均水资源趋势图</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:520px;height:340px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+	    var myChart = echarts.init(document.getElementById('main'));
+	    var pointStyle = {
+	    	     color: '#F7B500',
+	    	     borderWidth: 1,
+	    	 };
+	    var labelStyle = {
+	    	     show: true,
+	    	     position: 'top',
+	    	     lineHeight: 4,
+	    	     //borderRadius: 5,
+	    	     //backgroundColor: 'rgba(255,255,255,.9)',
+	    	     //borderColor: 'red',
+	    	     //borderWidth: '1',
+	    	     padding: [5, 15, 4],
+	    	     color: '#fff',
+	    	     fontSize: 14,
+	    	     fontWeight: 'normal',
+	    	 };
+	    	 var seriesData = [94.9, 123.8, 161.4, 137.1, 164.0];
+	    	 var option = {
+   	            title: {
+  	            	text: '单位：立方米/人',
+  	            	x:'right',
+  	            	padding: [-7,32,0,7],
+  	                textStyle: {
+  	                    color: 'white',
+  	                    fontFamliy: 'Microsoft YaHei',
+  	                    fontSize: 18,
+  	                    fontWeight: 'normal'
+  	                }
+  	            },
+	    	     grid: {
+	 	        	 show: true,
+	    	         top: '12%',
+	    	         left: '7%',
+	    	         right: '6%',
+	    	         bottom: '16%',
+	 	             borderWidth: 1,
+		             borderColor : '#0C2F74',
+	    	     },
+	 	        legend: {
+					orient: 'horizontal',
+					y: 'right',
+					width: 300,
+					data: ["人均水资源"],
+	                textStyle: {
+	                	color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 12,
+	                }
+				},
+	    	     xAxis: [{
+	    	         type: 'category',
+	    	         axisTick: {
+	    	             show: false,
+	    	         },
+	    		     axisLabel: {
+	   	                show: true,
+	   	                textStyle: {
+	   	                	color: 'white',
+	   	                    fontFamliy: 'Microsoft YaHei',
+	   	                    fontSize: 16
+	   	                }
+	   	             },
+	    	         axisLine: {
+	    	             show: false,
+	    	         },
+	    	         splitLine: {
+	    	             show: false,
+	    	             lineStyle: {
+	    	                 type: 'dashed',
+	    	             },
+	    	         },
+	    	         splitArea: {
+	    	             show: true,
+	    	             areaStyle: {
+	    	                 color: ['rgba(12,40,85,0.4)', 'rgba(13,24,70,0.7)']
+	    	             }
+	    	         },
+	    	         data: ['2014年', '2015年', '2016年', '2017年', '2018年'],
+	    	     }, ],
+
+	    	     yAxis: [{
+	    	         type: 'value',
+	    	         min: 0,
+	    	         max: 250,
+	    	         splitNumber: 5,
+	    	         axisLine: {
+	    	             show: false,
+	    	         },
+	    	         axisTick: {
+	    	             show: false,
+	    	         },
+	    		       splitLine: {
+	    		           show: true,
+	    		           lineStyle: {
+	    		               type: 'solid',
+	    		               color: '#305078',
+	    		               width: 1
+	    		           }
+	    		       },
+		            axisLabel: {
+		                textStyle: {
+		                	color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 16
+		                },
+		            }
+	    	     }, ],
+	    	     series: [{
+	    	         type: 'line',
+	    	         showAllSymbol: true,
+	    	         symbol: 'circle',
+	    	         symbolSize: 10,
+	    	         lineStyle: {
+	    	             normal: {
+	    	                 color: 'rgba(242,186,47,0.7)',
+	    	                 width: 1,
+	    	             },
+	    	         },
+	 	            itemStyle: {
+		                normal: {
+	 	    	             color: '#F7B500',
+	 	    	             borderWidth: 1,
+		                	label : {
+		    	    	             show: true,
+		    	    	             position: 'top',
+		    	    	             lineHeight: 4,
+		    	    	             //borderRadius: 5,
+		    	    	             //backgroundColor: 'rgba(255,255,255,.9)',
+		    	    	             //borderColor: 'red',
+		    	    	             //borderWidth: '1',
+		    	    	             padding: [5, 15, 4],
+		    	    	             color: '#fff',
+		    	    	             fontSize: 14,
+		    	    	             fontWeight: 'normal',
+		    	    	         }
+		                }
+		            },
+	    	         tooltip: {
+	    	             show: false,
+	    	         },
+	    	         areaStyle: {
+	    	             normal: {
+	    	                 color: new echarts.graphic.LinearGradient(
+	    	                     0,
+	    	                     0,
+	    	                     0,
+	    	                     1,
+	    	                     [{
+	    	                             offset: 0,
+	    	                             color: 'rgba(251,218,0, 1)',
+	    	                         },
+	    	                         {
+	    	                             offset: 1,
+	    	                             color: 'rgba(251,218,0,0)',
+	    	                         },
+	    	                     ],
+	    	                     false
+	    	                 ),
+	    	             },
+	    	         },
+	    	         data: seriesData
+	    	     }]
+	    	 };
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

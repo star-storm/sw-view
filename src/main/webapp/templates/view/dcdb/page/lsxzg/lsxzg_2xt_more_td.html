@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true}
+	   );
+	     window.parent.erjiHide(1);
+         
+         $("#index").val("index1");
+         
+         $("tr").click(function() {
+//         	 alert(this.id);
+        	 if (this.id=="titTr")return;
+        	 $(".gx_jy_table_on").removeClass("gx_jy_table_on");
+        	 $(this).addClass("gx_jy_table_on");
+			 $("#index").val(this.id);
+			 if (this.id!=null && this.id.indexOf("index")>-1) {
+     	    	document.getElementById("gdmj").src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/xtfz/gdmj.html?index="+this.id.replace("index","");
+     	     }
+         });
+         
+         $("tr").mouseover(function() {
+        	 if (this.id=="titTr")return;
+        	 $(this).addClass("gx_jy_table_on");
+         });
+         $("tr").mouseout(function() {
+        	 if (this.id!=$("#index").val())
+        	 	$(this).removeClass("gx_jy_table_on");
+         });
+      });
+      
+      function gotoxtfz() {
+    	  window.location.href="/templates/view/dcdb/page/lsxzg/lsxzg_2xt.html";
+      }
+    </script>
+</head>
+<body>
+<div class="fl w h1000 bg_ej_xq_wfj">
+	<div class="fl w h61 titbg">
+		<div class="fl ml610 w700 tl">
+			<span class="fl w f24 white tc mt10 bold">主要土地利用状况</span>
+		</div>
+		<div class="fr mr270 mt10"><a href="lsxzg_2xt.html" onclick="gotoxtfz()"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w">		
+		<div class="fl w1526 h860 ml180 mt25">
+			<div class="fl w tc mt30 f22 bold white tc h40">耕地面积趋势图 （2011年-2018年）</div>
+			<div class="fl w h296 tc">
+				<iframe id="gdmj" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/xtfz/gdmj.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+			<div class="fl w1500 mt30">
+					<table class="f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr id="titTr" class="h50 c_num02">
+							<th class="xzg_kf_tableTit">用地类别</th>
+							<th class="xzg_kf_tableTit">2011年</th>
+							<th class="xzg_kf_tableTit">2012年</th>
+							<th class="xzg_kf_tableTit">2013年</th>
+							<th class="xzg_kf_tableTit">2014年</th>
+							<th class="xzg_kf_tableTit">2015年</th>
+							<th class="xzg_kf_tableTit">2016年</th>
+							<th class="xzg_kf_tableTit">2017年</th>
+							<th class="xzg_kf_tableTit">2018年</th>
+						</tr>
+						<tr id="index1" class="h50 tc gx_jy_table_on">
+							<td>耕地面积</td>
+							<td>221956.16</td>
+							<td>220856.16</td>
+							<td>221157.28</td>
+							<td>219948.76</td>
+							<td>219326.49</td>
+							<td>216345.43</td>
+							<td>210730.65</td>
+							<td>212840.60</td>
+						</tr>
+						<tr id="index2" class="h50 white tc">
+							<td>园地面积</td>
+							<td>138072.99</td>
+							<td>137117.72</td>
+							<td>135573.37</td>
+							<td>135103.71</td>
+							<td>134857.89</td>
+							<td>133453.18</td>
+							<td>132799.79</td>
+							<td>132531.10</td>
+						</tr>
+						<tr id="index3" class="h50 white tc">
+							<td>林地面积</td>
+							<td>740730.87</td>
+							<td>739633.48</td>
+							<td>738036.45</td>
+							<td>737542.89</td>
+							<td>737078.88</td>
+							<td>739705.54</td>
+							<td>744473.56</td>
+							<td>746634.08</td>
+						</tr>
+						<tr id="index4" class="h50 white tc">
+							<td>草地面积</td>
+							<td>85651.69</td>
+							<td>85491.29</td>
+							<td>85348.82</td>
+							<td>85139.49</td>
+							<td>85066.77</td>
+							<td>84721.53</td>
+							<td>84479.43</td>
+							<td>84323.67</td>
+						</tr>
+						<tr id="index5" class="h50 white tc">
+							<td>城镇村及工矿用地面积</td>
+							<td>295116.72</td>
+							<td>297758.79</td>
+							<td>300847.83</td>
+							<td>302939.17</td>
+							<td>304393.05</td>
+							<td>306615.41</td>
+							<td>306825.68</td>
+							<td>303247.34</td>
+						</tr>
+						<tr id="index6" class="h50 white tc">
+							<td>交通运输用地面积</td>
+							<td>45452.68</td>
+							<td>46327.98</td>
+							<td>46626.41</td>
+							<td>47006.28</td>
+							<td>47062.78</td>
+							<td>47480.86</td>
+							<td>47704.86</td>
+							<td>48526.72</td>
+						</tr>
+						<tr id="index7" class="h50 white tc">
+							<td>水域及水利设施用地面积</td>
+							<td>79380.05</td>
+							<td>79088.32</td>
+							<td>78739.52</td>
+							<td>78378.65</td>
+							<td>78304.28</td>
+							<td>77968.73</td>
+							<td>76373.77</td>
+							<td>76291.41</td>
+						</tr>
+					</table>
+					<input id="index" hidden="hidden"></input>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width:"128px"
+		});
+	});
+</script>
+</html>

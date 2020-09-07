@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>全市常住人口分布情况</title>
+</head>
+<body>
+
+    <div id="overView1_meddle_cont_maps_bjMap" style="width:600px;height:640px; color:#fff;font-size:16px;margin-left:20px"></div>
+	
+	
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+	<script>
+	
+	//16区
+	var areaArray = new Array();
+	
+	//页面初始化
+	(function($) {
+		
+		//年份
+		var year=getUrlParam("year");
+
+		//16区
+// 		areaCount1();
+		
+	}(jQuery));
+	
+	//区域统计：16区
+	function areaCount1() {
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/dcdb/dcj/areaCount",
+			dataType : "json",
+			data : {
+				'year' : $("#mySelect",window.parent.document).find("option:selected").val(),
+				'area' : '0'
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+//	 				alert(resp.data);
+					for (var i=0; i<resp.data.length; i++) {
+						var name = resp.data[i].split("|")[0];
+						var num = resp.data[i].split("|")[1];
+						$("#otherName"+(i+1)).html((i+1)+". "+name);
+						$("#otherNum"+(i+1)).html(num);
+						areaArray.push({'name':name,'value':num});
+						
+						if (name=="东城区") {
+							$("#dongchengNum",window.parent.document).html(num);
+						}
+						else if (name=="西城区") {
+							$("#xichengNum",window.parent.document).html(num);
+						}
+						else if (name=="海淀区") {
+							$("#haidianNum",window.parent.document).html(num);
+						}
+						else if (name=="朝阳区") {
+							$("#chaoyangNum",window.parent.document).html(num);
+						}
+						else if (name=="丰台区") {
+							$("#fengtaiNum",window.parent.document).html(num);
+						}
+						else if (name=="石景山区") {
+							$("#shijingshanNum",window.parent.document).html(num);
+						}
+					}
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	</script>
+    
+    <!-- ECharts单文件引入 -->
+    <script src="/templates/view/dcdb/page/echarts/map/require/require.js"></script>
+
+ 	<script>
+		require.config({
+			urlArgs : 'v=' + (new Date()).getTime(),
+			paths : {
+				jquery : '/templates/view/dcdb/page/echarts/map/jquery/jquery-1.7.2.min',
+				json : '/templates/view/dcdb/page/echarts/map/json/BJMapGeoJson',
+				echarts : '/templates/view/dcdb/page/echarts/map/echarts/echarts.min',
+				ProvinceMapUtilColor : '/templates/view/dcdb/page/echarts/lsxzg/work/xtfz/ProvinceMapUtilColor'
+			},
+			shim : {
+
+			}
+		});
+
+		areaArray = [{'name':'东城区','value':73},
+			{'name':'西城区','value':107.08},
+			{'name':'朝阳区','value':441.02},
+			{'name':'丰台区','value':241.91},
+			{'name':'石景山区','value':61.27},
+			{'name':'海淀区','value':300.75},
+			{'name':'门头沟区','value':40.9},
+			{'name':'房山区','value':126.94},
+			{'name':'通州区','value':198.45},
+			{'name':'顺义区','value':141.33},
+			{'name':'昌平区','value':225.50},
+			{'name':'大兴区','value':185.19},
+			{'name':'怀柔区','value':39.87},
+			{'name':'平谷区','value':42.31},
+			{'name':'密云区','value':48.82},
+			{'name':'延庆区','value':32.25}];
+		
+		require([ 'jquery', 'ProvinceMapUtilColor' ], function($, ProvinceMapUtilColor) {
+			ProvinceMapUtilColor.showProvince({
+				idName : "overView1_meddle_cont_maps_bjMap",
+				IdNames : "overView1_meddle_cont_maps_bjMap",
+				data : areaArray,
+				Company : "无",
+				clickCallBack : function(param) {
+// 					alert(param.name);
+					var tab="";
+					if (param.name=="东城区")
+						tab="dcTab";
+					else if (param.name=="西城区")
+						tab="xcTab";
+					else if (param.name=="朝阳区")
+						tab="cyTab";
+					else if (param.name=="丰台区")
+						tab="ftTab";
+					else if (param.name=="石景山区")
+						tab="sjsTab";
+					else if (param.name=="海淀区")
+						tab="hdTab";
+					else if (param.name=="门头沟区")
+						tab="mtgTab";
+					else if (param.name=="房山区")
+						tab="fsTab";
+					else if (param.name=="通州区")
+						tab="tzTab";
+					else if (param.name=="顺义区")
+						tab="syTab";
+					else if (param.name=="昌平区")
+						tab="cpTab";
+					else if (param.name=="大兴区")
+						tab="dxTab";
+					else if (param.name=="怀柔区")
+						tab="hrTab";
+					else if (param.name=="平谷区")
+						tab="pgTab";
+					else if (param.name=="密云区")
+						tab="myTab";
+					else if (param.name=="延庆区")
+						tab="yqTab";
+					window.parent.location.href = "/templates/view/dcdb/page/lsxzg/lsxzg_2xt_more_rk.html?param="+tab;
+				},
+				MapparamDefaultTrue : true,
+				optionData : {
+					series : [ {
+						zoom : 1.25,
+						markLine : {	
+							symbol : [ 'none', 'arrow' ],
+							lineStyle : {
+								type : 'solid',
+								width : 1.5,
+								color : '#58c7ee'//rgba(88,199,238,.5)
+							},
+							data : [ [ {
+								x : '46.5%',
+								y : '71.5%'
+							}, {
+								x : '16%',
+								y : '100%'
+							} ]// 东城区
+// 							[ {
+// 								x : '48.5%',
+// 								y : '70.5%'
+// 							}, {
+// 								x : '85%',
+// 								y : '78%'
+// 							} ],// 西城区
+							]
+						}
+					} ]
+				}
+			})
+		});
+	</script>
+    
+</body>

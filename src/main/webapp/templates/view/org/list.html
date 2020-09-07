@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--base style!-->
+<link href="/static/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/web.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/js.js"></script>
+
+</head>
+<body>
+	<div class="fl w  fixdiv">
+		<span class="fl f18 ti20 bold  h20 lh20 titBg mt15 ml20">组织列表</span>
+	</div>
+	<div class="fl w mt50">
+		<form action="" method="get">
+			<div class="fl w h120 bor_t pb20">
+				<ul class="fl  w  mb35">
+					<li class="fl w_32 mt20">
+						<span class="fl w80 mt5 tr">名称</span>
+						<span class="fl ml15"><input id="name" type="text" name="inputtext" class="InputText w240"/></span>
+					</li>
+					<li class="fl w_32 mt20 ml15">
+						<span class="fl w80 mt5 tr">编码</span>
+						<span class="fl ml15"><input id="code" type="text" name="inputtext" class="InputText w240"/></span>
+					</li>
+				</ul>
+				<div class="bc w200 h30 mt30">				
+					<button id="search" type="button" value="" class="btn bg_bule fl">查询</button>
+					<button id="reset" type="button" value="" class="btn fr">重置</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="fl w mt40">
+		<div class="fl w bgBtn f18 h35 lh35">
+			<a id="addHref" href="###" onclick="add();" class="fl f16 Black bold ti30 btn_xz">新增</a>
+			<a id="delBatchHref" href="#" onclick="delBatch();" class="fl f16 Black bold ti30 btn_plsc ml10">批量删除</a>
+		</div>
+		<table id="orgTb" width="100%" border="0" cellspacing="0" cellpadding="0" class="tablelist bor_t">
+			<tr class="tableTit">
+				<td class="tc w50">序号</td>
+				<td class="tc ">名称</td>
+				<td class="tc ">编码</td>
+				<td class="tc w180">操作</td>
+			</tr>
+		</table>	
+	</div>
+	<div class="fl w mt20">
+		<div class="bc w500 mt25 pageDiv tc" >
+			<a href="#" onclick="firstPage()" class="pageoff ml10">首页</a>
+			<a href="#" onclick="prevPage()" class="pageoff ml10">上一页</a>
+			<label class="fl ml20 pt4 pr4">第</label>
+			<input id="pageIndex" type="text" class="InputText fl mt4" style="width: 36px; height: 20px; line-height: 20px">
+			<label class="fl pt4 pl4">页</label>
+			<label id="pageNum" class="fl pt4 pl4">(共0页)</label>
+			<a href="#" onclick="gotoPage()" class="pageoff ml10">跳转</a>
+			<a href="#" onclick="nextPage()" class="pageoff ml10">下一页</a>
+			<a href="#" onclick="lastPage()" class="pageoff ml10">尾页</a>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+ //页面初始化
+ (function($) {
+	 if ($(window.parent.document).contents().find("#leftFrame")[0].contentWindow.$ !=undefined) {
+		 $(window.parent.document).contents().find("#leftFrame")[0].contentWindow.$("#treeId").val();
+	 }
+	 
+	//组织列表
+	list();
+	
+	$("#search").click(function() {
+		pageIndex = 1;
+		list();
+	});
+		
+	//重置
+	$("#reset").click(function() {
+		$("#name").val("");
+		$("#code").val("");
+		cancelSelectedNode();
+	});
+	
+	//根据权限显示
+	if (!perCheck("org", "")) {
+		$("#addHref").css("display", "none");
+	}
+	if (!perCheck("org", "")) {
+		$("#delBatchHref").css("display", "none");
+	}
+	
+ }(jQuery));
+
+	//分页
+	var pageIndex = 1;
+	var pageNum = 0;
+	var pageSize = 10;
+	
+	//记录查询条件
+	var nameTmp = "";
+	var codeTmp = "";
+	
+	//组织列表
+	function list() {
+		 if ($(window.parent.document).contents().find("#leftFrame")[0].contentWindow.$ ==undefined)return;
+		 var treeId = $(window.parent.document).contents().find("#leftFrame")[0].contentWindow.$("#treeId").val();
+		 if ((treeId=="") || (treeId==undefined))return;
+		 $.ajax({
+			type : "post",
+			url : "/api/org/list",
+			dataType : "json",
+			data : {
+				'nowPage' : pageIndex,
+				'id' : treeId,
+				'name' : $("#name").val(),
+				'code' : $("#code").val(),
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$("#orgTb").html("");
+					if(resp.data.length != 0) {
+						$("#orgTb").append(formList(resp.data));
+						//$("#orgTb").listview("refresh");//在使用'ul'标签时才使用，作用:刷新列表
+						$("#orgTb").trigger("create");
+						pageNum = (resp.count % pageSize == 0) ? (resp.count / pageSize) : (Math.floor(resp.count / pageSize) + 1);
+					}
+					else {
+						pageNum = 0;
+					}
+					$("#pageIndex").val(pageIndex);
+					$("#pageNum").text("(共" + pageNum + "页)");
+
+					nameTmp = $("#name").val();
+					codeTmp = $("#code").val();
+					$("#dataId").val("");
+				} else {
+					//alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//组织数据
+	var selectTab = false;
+	function formList(list) {
+		//判断权限
+		var ap = true;//perCheck("up", "org");
+		var ep = true;//perCheck("e", "org");
+		var dp = true;//perCheck("d", "org");
+		//组织数据
+		var html = "<tr class='tableTit'>"
+			+ "	<td class='tc w50'><span id='checkItem' onclick='selectAll()' style='cursor:pointer'>全选</span></td>"
+			+ "	<td class='tc w50'>序号</td>"
+			+ "	<td class='tc '>名称</td>"
+			+ "	<td class='tc '>编码</td>"
+			+ "	<td class='tc '>排序</td>"
+			+ "	<td class='tc w180'>操作</td>"
+			+ "</tr>";
+		for (var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var parent = (item.parent == null)?"":item.parent.name;
+			var trCss = (i % 2 != 0) ? "class='trbgColor'" : "";
+			html += "<tr "  + trCss + ">" 
+				+ "	<td class='tc w30'><input name='dataList' onclick='selectSingle()' type='checkbox' value='" + item.id + "' class='CheckBox' /></td>"
+				+ "	<td class='tc w30'>" + (i + 1) + "</td>"
+				+ "	<td class='tc ' title='" + (item.name == null?"":item.name) + "'>" + textEllipsis((item.name == null?"":item.name), 12) + "</td>"
+				+ "	<td class='tc ' title='" + (item.code == null?"":item.code) + "'>" + textEllipsis((item.code == null?"":item.code), 12) + "</td>"
+				+ "	<td class='tc ' title='" + (item.sort == null?"":item.sort) + "'>" + textEllipsis((item.sort == null?"":item.sort), 12) + "</td>"
+				+ "	<td class='tc w180'>"
+				+ (ap ? "<a href='/templates/view/org/add.html?id=" + item.id + "' class='btn_cz'>新增</a>" : "")
+				+ "		 <a href='/templates/view/org/detail.html?id=" + item.id + "' class='ml12 btn_cz'>查看</a>"
+				+ (ep ? "<a href='/templates/view/org/edit.html?id=" + item.id + "' class='ml12 btn_cz'>编辑</a>" : "")
+				+ (dp ? "		<a href='#' onclick='delRole(" + item.id + ");' class='ml12 btn_cz'>删除</a>" : "")
+				+ "	</td>"
+				+ "</tr>";
+		}
+		return html;
+	}
+
+	//查询条件是否有更新
+	function checkSearchItem() {
+		return (nameTmp == $("#name").val())
+			&& (codeTmp == $("#code").val()) 
+	}
+	
+	//新建组织
+	function add() {
+		 if ($(window.parent.document).contents().find("#leftFrame")[0].contentWindow.$ ==undefined)return;
+		 var treeId = $(window.parent.document).contents().find("#leftFrame")[0].contentWindow.$("#treeId").val();
+		 if ((treeId=="") || (treeId==undefined)) {
+			 alert("请选择所属组织！");
+			 return;
+		 }
+		 window.location.href = "/templates/view/org/add.html";
+	}
+	
+	//删除组织
+	function delRole(id) {
+		/* if (!perCheck("d", "org")) {
+			alert("您没有权限！");
+			return;
+		} */
+		if (!confirm("该组织及其请选择子类会请选择删除，确定删除？"))
+			return;
+		$.ajax({
+			type : "post",
+			url : "/api/org/delete",
+			dataType : "json",
+			data : {
+				"id" : id
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("操作成功！");
+					pageIndex = 1;
+					list();
+				} else {
+					//alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//批量删除组织
+	function delBatch() {
+		/* if (!perCheck("d", "org")) {
+			alert("您没有权限！");
+			return;
+		} */
+		var ids = "";
+		$("input:checkbox[name=dataList]:checked'").each(function(i){  
+        	ids += $(this).val() + ",";  
+        });
+		if (ids == "") {
+			alert("请选择要删除的数据");
+			return;
+		}
+//		alert(ids);return;
+		if (!confirm("所选组织及其请选择子类会请选择删除，确定删除？"))
+			return;
+		$.ajax({
+			type : "post",
+			url : "/api/org/delBatch",
+			dataType : "json",
+			data : {
+				"ids" : ids
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("操作成功！");
+					pageIndex = 1;
+					list();
+// 					initTree();
+				} else {
+					//alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+</script>

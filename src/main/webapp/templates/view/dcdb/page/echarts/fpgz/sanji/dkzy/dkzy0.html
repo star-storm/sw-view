@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>扶贫援助合作-北京市各区结对情况一览表</title>
+</head>
+<body>
+
+    <div id="main" style="width:1380px;height:860px; color:#fff;font-size:16px;margin-left:20px"></div>
+	
+	
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    <script src="/templates/view/dcdb/page/echarts/map/echarts/echarts.min.js"></script>
+    <script src="/templates/view/dcdb/page/echarts/fpgz/sanji/dkzy/china.js"></script>
+	<script>
+    
+	
+    var myChart = echarts.init(document.getElementById('main'));
+	
+    var geoCoordMap = {
+//     	    江西: [115.892151,28.676493],
+//     	    河南: [113.665412,34.757975],
+//     	    四川: [104.065735,30.659462],
+//     	    重庆: [106.504962,29.533155],
+//     	    西藏: [91.132212,29.660361],
+//     	    贵州: [106.713478,26.578343],
+//     	    辽宁: [123.429096,41.796767],
+//     	    新疆: [87.617733,43.792818],
+//     	    山东: [117.000923,36.675807],
+//     	    上海: [121.472644,31.231706],
+//     	    澳門: [113.54909,22.198951],
+    	    山西: [112.549248,37.857014],
+//     	    浙江: [120.153576,30.287459],
+//     	    海南: [110.33119,20.031971],
+//     	    福建: [119.306239,26.075302],
+//     	    青海: [101.778916,36.623178],
+//     	    宁夏: [106.278179,38.46637],
+//     	    湖北: [114.298572,30.584355],
+//     	    甘肃: [103.823557,36.058039],
+//     	    安徽: [117.283042,31.86119],
+//     	    台湾: [121.509062,25.044332],
+//     	    陕西: [108.948024,34.263161],
+//     	    广西: [108.320004,22.82402],
+//     	    天津: [117.190182,39.125596],
+//     	    云南: [102.712251,25.040609],
+//     	    黑龙江: [126.642464,45.756967],
+//     	    广东: [113.280637,23.125178],
+//     	    湖南: [112.982279,28.19409],
+//     	    河北: [114.502461,38.045474],
+//     	    内蒙古: [111.670801,40.818311],
+//     	    吉林: [125.3245,43.886841],
+//     	    江苏: [118.767413,32.041544],
+//     	    北京: [116.405285,39.904989],
+//     	    香港: [114.173355,22.320048]
+    	};
+    	 
+    	var data={
+//     	    江西: Math.round(Math.random()*1000),
+//     	    河南: Math.round(Math.random()*1000),
+//     	    四川: Math.round(Math.random()*1000),
+//     	    重庆: Math.round(Math.random()*1000),
+//     	    西藏: Math.round(Math.random()*1000),
+//     	    贵州: Math.round(Math.random()*1000),
+//     	    辽宁: Math.round(Math.random()*1000),
+//     	    新疆: Math.round(Math.random()*1000),
+//     	    山东: Math.round(Math.random()*1000),
+    	    山西: Math.round(Math.random()*1000),
+//     	    海南: Math.round(Math.random()*1000),
+//     	    福建: Math.round(Math.random()*1000),
+//     	    青海: Math.round(Math.random()*1000),
+//     	    宁夏: Math.round(Math.random()*1000),
+//     	    湖北: Math.round(Math.random()*1000),
+//     	    甘肃: Math.round(Math.random()*1000),
+//     	    安徽: Math.round(Math.random()*1000),
+//     	    陕西: Math.round(Math.random()*1000),
+//     	    广西: Math.round(Math.random()*1000),
+//     	    云南: Math.round(Math.random()*1000),
+//     	    黑龙江: Math.round(Math.random()*1000),
+//     	    湖南: Math.round(Math.random()*1000),
+//     	    河北: Math.round(Math.random()*1000),
+//     	    内蒙古: Math.round(Math.random()*1000),
+//     	    吉林: Math.round(Math.random()*1000),
+    	    //江苏北京香港上海澳門浙江台湾天津广东 没数据
+    	}
+    	 
+    	// 保存引导线末端的坐标
+    	var linesEndCoords={
+    	    山西:[geoCoordMap['山西'][0],geoCoordMap['山西'][1]+8],
+//     	    陕西:[geoCoordMap['陕西'][0],geoCoordMap['陕西'][1]+16],
+//     	    宁夏:[geoCoordMap['宁夏'][0],geoCoordMap['宁夏'][1]+6],
+//     	    甘肃:[geoCoordMap['甘肃'][0],geoCoordMap['甘肃'][1]+16],
+//     	    河北:[geoCoordMap['河北'][0]+12,geoCoordMap['河北'][1]],
+//     	    山东:[geoCoordMap['山东'][0]+20,geoCoordMap['山东'][1]],
+//     	    河南:[geoCoordMap['河南'][0]+14,geoCoordMap['河南'][1]],
+//     	    安徽:[geoCoordMap['安徽'][0]+20,geoCoordMap['安徽'][1]],
+//     	    湖北:[geoCoordMap['湖北'][0]+14,geoCoordMap['湖北'][1]],
+//     	    江西:[geoCoordMap['江西'][0]+22,geoCoordMap['江西'][1]],
+//     	    福建:[geoCoordMap['福建'][0]+9,geoCoordMap['福建'][1]],
+//     	    海南:[geoCoordMap['海南'][0]+9,geoCoordMap['海南'][1]],
+//     	    重庆:[geoCoordMap['重庆'][0]-27,geoCoordMap['重庆'][1]],
+//     	    云南:[geoCoordMap['云南'][0]-10,geoCoordMap['云南'][1]],
+//     	    广西:[geoCoordMap['广西'][0]-30,geoCoordMap['广西'][1]],
+//     	    贵州:[geoCoordMap['贵州'][0],geoCoordMap['贵州'][1]-10],
+//     	    湖南:[geoCoordMap['湖南'][0],geoCoordMap['湖南'][1]-11],
+    	}
+    	 
+    	// lines引导线数据和坐标
+    	function dataLines(province,data){
+    	    var res=[];
+    	    province.forEach(name=>{
+    	        res.push({
+    	            name:name,
+    	            value:data[name],
+    	            coords:[
+    	                geoCoordMap[name],
+    	                linesEndCoords[name]
+    	            ],
+    	        })
+    	    })
+    	    return res;
+    	}
+    	 
+    	// 散点图数据，其中value属性值为地理坐标和value拼接
+    	function dataScatter(province,data){
+    	    var res=[];
+    	    province.forEach(name=>{
+    	    	alert(name+","+geoCoordMap[name][0]+","+geoCoordMap[name][1]+","+data[name]);
+    	        res.push({
+    	            name:name,
+    	            value:[geoCoordMap[name][0],geoCoordMap[name][1],data[name]]
+    	        })
+    	    })
+    	    return res;
+    	}
+    	 
+    	var option = {
+    	    legend:{},
+    	    geo:{
+    	        type:'map',
+    	        map:'china',
+                zoom: 1, //当前视角的缩放比例
+                roam: true, //是否开启平游或缩放
+    	        label: {
+    	            show:false,
+    	        },
+    	        emphasis:{
+    	            label:{
+    	              show:false,
+    	            },
+    	        },
+    	        regions: [{ // 隐藏南海诸岛
+    	          name: '南海诸岛',
+    	          itemStyle: {
+    	            opacity:0,
+    	          }
+    	        }],
+    	    },
+    	    series: [{ // 含引导线的省份，用lines实现
+    	        type: 'lines',
+    	        symbol:'circle',
+    	        symbolSize:[6,4],
+    	        label:{
+    	            show:true,
+    	            formatter:'{b}{c}份'
+    	        },
+    	        lineStyle:{
+    	            type:'dotted',
+    	            shadowBlur:3,
+    	        },
+    	        data:dataLines(['山西'],data),
+    	    },
+    	    { // 没有引导线的省份，用scatter实现
+    	        type: 'scatter',
+    	        coordinateSystem:'geo',
+    	        symbolSize:6,
+    	        label:{
+    	          show:true,
+    	          position:'bottom',
+    	          formatter:'{b}{@[2]}份',
+    	        },
+    	        itemStyle:{
+    	            color:'#00f',
+    	        },
+    	        data:dataScatter(['山西'],data),
+    	    }]
+    	};
+
+	myChart.setOption(option);
+	
+	</script>
+    
+</body>

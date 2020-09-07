@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>特殊人群</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:500px;height:220px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+		var xData = ['艾滋病人','吸毒人员','社区矫正人员','重性精神病人','刑释解教人员','强制隔离戒毒','志愿者'];
+		var yData = [10, 15, 19, 22, 19, 22, 19];
+	    var option = {
+	    	       title: {
+	    	           text: '',
+	    	           textStyle: {
+	    	               fontSize: 25,
+	    	               fontWeight: 'normal',
+	    	               color: '#fff',
+	    	           },
+	    	           x: 'center'
+	    	       },
+// 	    	       backgroundColor: "#05224d",
+	    	       tooltip: {},
+	    	       grid: {
+	    	    	   show: true,
+	    	           top: '1%',
+	    	           left: '3%',
+	    	           right: '4%',
+	    	           bottom: '8%',
+	    	           containLabel: true,
+	                   borderWidth: 1,
+	    	           borderColor: '#0a3256'
+	    	       },
+	    	       legend: {
+	    	           itemGap: 50,
+	    	           data: ['人员出入总数'],
+	    	           textStyle: {
+	    	               color: '#f9f9f9',
+	    	               borderColor: '#fff'
+	    	           },
+	    	       },
+	    	       xAxis: [{
+	    	           type: 'category',
+	    	           boundaryGap: true,
+	    	           axisLine: { //坐标轴轴线相关设置。数学上的x轴
+	    	               show: true,
+	    	               lineStyle: {
+	    	                   color: '#0a3256'
+	    	               },
+	    	           },
+	    	           axisLabel: { //坐标轴刻度标签的相关设置
+	    	               textStyle: {
+	    	                   color: '#d1e6eb',
+	   	                    color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 16,
+	    	                   margin: 16,
+	    	               },
+	                       rotate: 45
+	    	           },
+	    	           splitLine: {
+	    	               show: true,
+	    	               lineStyle: {
+	    	                   color: '#0a3256'
+	    	               }
+	    	           },
+	    	           axisTick: {
+	    	               show: false,
+	    	           },
+	    	           data: xData,
+	    	       }],
+	    	       yAxis: [{
+	    	           type: 'value',
+	    	           min: 0,
+	    	           max: 30,
+// 	    	           splitNumber: 7,
+	    	           splitLine: {
+	    	               show: false,
+	    	               lineStyle: {
+	    	                   color: '#0a3256'
+	    	               }
+	    	           },
+	    	           axisLine: {
+	    	               show: false,
+	    	           },
+	    	           axisLabel: {
+	    	               show: false,
+	    	               margin: 20,
+	    	               textStyle: {
+	    	                   color: '#d1e6eb',
+
+	    	               },
+	    	           },
+	    	           axisTick: {
+	    	               show: false,
+	    	           },
+	    	       }],
+	    	       series: [{
+	    	           name: '注册总量',
+	    	           type: 'line',
+	    	           smooth: true, //是否平滑曲线显示
+	    	           // 			symbol:'circle',  // 默认是空心圆（中间是白色的），改成实心圆
+	    	           showAllSymbol: true,
+	    	           symbol: 'emptyCircle',
+	    	           symbolSize: 6,
+	    	           lineStyle: {
+	    	               normal: {
+	    	                   color: "#28ffb3", // 线条颜色
+	    	               },
+	    	               borderColor: '#f0f'
+	    	           },
+	    	           label: {
+	    	               show: true,
+	    	               position: 'top',
+	    	               textStyle: {
+	    	                   color: '#fff',
+	    	               }
+	    	           },
+	    	           itemStyle: {
+	    	               normal: {
+	    	                   color: "#28ffb3",
+
+	    	               }
+	    	           },
+	    	           tooltip: {
+	    	               show: false
+	    	           },
+	    	           areaStyle: { //区域填充样式
+	    	               normal: {
+	    	                   //线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+	    	                   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+	    	                           offset: 0,
+	    	                           color: 'rgba(0,154,120,1)'
+	    	                       },
+	    	                       {
+	    	                           offset: 1,
+	    	                           color: 'rgba(0,0,0, 0)'
+	    	                       }
+	    	                   ], false),
+	    	                   shadowColor: 'rgba(53,142,215, 0.9)', //阴影颜色
+	    	                   shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
+	    	               }
+	    	           },
+	    	           data: yData
+	    	        }
+	    	       ]
+	    	   };
+	    var myChart = echarts.init(document.getElementById('main'));
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

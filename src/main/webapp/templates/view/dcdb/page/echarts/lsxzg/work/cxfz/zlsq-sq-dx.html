@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>专利申请及授权-申请-按对象统计</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:400px;height:300px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+	    var myChart = echarts.init(document.getElementById('main'));
+	    myChart.setOption({
+            title: {
+            	text: '单位：件',
+            	x:'right',
+            	padding: [0,6,0,0],
+                textStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 16,
+                    fontWeight: 'normal'
+                }
+            },
+	        tooltip: {
+	            trigger: 'item',
+	            formatter: "{b} : {c} ({d}%)"
+	        },
+	        legend: {
+				orient: 'horizontal',
+				y: 'bottom',
+				width: 300,
+				data: ["工矿企业","机关团体","大专院校","个人","科研单位"],
+                textStyle: {
+                	color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 14,
+                }
+			},
+	        visualMap: {
+	            show: false,
+	            min: 500,
+	            max: 600,
+	            inRange: {
+	                //colorLightness: [0, 1]
+	            }
+	        },
+	        series: [{
+	            name: '',
+	            type: 'pie',
+	            radius: '50%',
+	            center: ['40%', '40%'],
+	            color: ['#CA7E75', '#C6D291', '#D9B270', "#026CE0", "#3BCFC0"], 
+	            data: [{
+	                    value: 150385,
+	                    name: '工矿企业'
+	                },
+	                {
+	                    value: 4185,
+	                    name: '机关团体'
+	                },
+	                {
+	                    value: 20008,
+	                    name: '大专院校'
+	                },
+	                {
+	                    value: 18107,
+	                    name: '个人'
+	                },
+	                {
+	                    value: 18527,
+	                    name: '科研单位'
+	                }
+	            ].sort(function(a, b) {
+	                return a.value - b.value
+	            }),
+	            roseType: 'radius',
+	            label: {
+	                normal: {
+	                    formatter: '{c}',
+                        fontSize: 16,
+                        fontFamliy: 'Microsoft YaHei',
+                        color: '#839DD2',
+// 	                    rich: {
+// 	                        c: {
+// 	                            color: '#839DD2',
+// 	                            fontSize: 20,
+// 	                            fontWeight:'bold',
+//                                 fontFamliy: 'Microsoft YaHei',
+// 	                            lineHeight: 5
+// 	                        },
+// 	                        b: {
+// 	                            color: '#839DD2',
+// 	                            fontSize: 15,
+// 	                            fontWeight:'bold',
+//                                 fontFamliy: 'Microsoft YaHei',
+// 	                            height: 40
+// 	                        },
+// 	                    },
+	                }
+	            },
+	            labelLine: {
+	                normal: {
+	                    lineStyle: {
+	                        color: '#839DD2',
+	                    },
+	                    smooth: 0.2,
+	                    length: 2,
+	                    length2: 6,
+	                }
+	            },
+	            itemStyle: {
+	                normal: {
+// 	                    shadowColor: 'rgba(0, 0, 0, 0.8)',
+// 	                    shadowBlur: 50,
+	                }
+	            }
+	        }]
+	    });
+    </script>
+</body>
+</html>

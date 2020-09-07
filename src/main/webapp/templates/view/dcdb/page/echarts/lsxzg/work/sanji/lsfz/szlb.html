@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>五大水系水质类别长度百分比统计图</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:770px;height:370px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+		var myChart = echarts.init(document.getElementById('main'));
+	    var data = {
+	            area: ['潮白河系', '永定河系', '蓟运河系', '大清河系', '北运河系'],
+	            legend: ['I-II类', 'III类', 'IV类', 'V类', '劣V类'],
+	            data: [
+	            	[67, 22, 20, 20, 18],
+	            	[14, 27, 22, 16, 14],
+	            	[6, 33, 20, 21, 31],
+	            	[13, 10, 16, 26, 21],
+	            	[0, 8, 22, 17, 16]
+	            ]
+	    };
+	    var colors = ['#4C98FB', '#73DEBD', '#FBD657', '#8B5549', '#911531']
+	    var option = {
+	        title: {
+	            x:'right',
+	            text: '',
+// 	            left: 19,
+	            top: 15,
+	            textStyle: {
+	                color: "white",
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 16,
+	                padding: [0, 0, 0, 0]
+	            }
+	        },
+	        color: colors,
+	        legend: {
+	            top: 10,
+	            left: 200,
+	            itemWidth: 10,
+	            itemHeight: 10,
+	            // padding: [5, 10],
+	            textStyle: {
+	                fontSize: 16,
+	                color: '#96A4F4',
+	                padding: [3, 0, 0, 0]
+	            },
+	            data: data.legend
+	        },
+	        grid: {
+	            left: '3%',
+	            right: '4%',
+	            bottom: '7%',
+	            containLabel: true
+	        },
+	        xAxis: {
+	            type: 'category',
+	            axisLabel: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 16,
+                    fontWeight: 'normal'
+	            },
+	            axisLine: {
+	                show: false,
+	                lineStyle: {
+	                    color: '#96A4F4'
+	                },
+	                width: 5
+	            },
+	            axisTick: {
+	                show: false,
+	            },
+	            data: data.area
+	        },
+	        yAxis: {
+	            type: 'value',
+	            axisLabel: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 16,
+                    fontWeight: 'normal'
+	            },
+	            axisLine: {
+	                show: false,
+	                lineStyle: {
+	                    color: '#96A4F4'
+	                },
+	                width: 5
+	            },
+	            axisTick: {
+	                show: false,
+	            },
+	            splitLine: {
+	                lineStyle: {
+	                    color: 'rgba(150, 164, 244, 0.3)'
+	                }
+	            },
+	        },
+	        series: [
+	
+	        ]
+	    };
+	    for (var i = 0; i < data.legend.length; i++) {
+	        option.series.push({
+	            name: data.legend[i],
+	            type: 'bar',
+	            stack: '总量',
+	            barWidth: '40%',
+	            label: {
+	                show: false,
+	                position: 'insideRight'
+	            },
+	            data: data.data[i]
+	        })
+	    }
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

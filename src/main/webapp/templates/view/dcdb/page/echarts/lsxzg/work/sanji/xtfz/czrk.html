@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>全市常住人口分布情况</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:1300px;height:320px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+
+		function getUrlParam(s) {
+			var str = window.location.search.substr(1)+"&";
+			var params = str.split("&");
+			for (var i = 0; i < params.length; i++) {
+				var key = params[i].split("=")[0];
+				var value = params[i].split("=")[1];
+				if (key == s)
+					return value;
+			}
+			return null;
+		}
+		
+		var area = ['qs','dc','xc','cy','ft','sjs','hd','sy','tz','dx','mtg','my','hr','yq','pg','cp','fs'];
+		var seriesData = new Array();
+		var minData = new Array();
+		var maxData = new Array();
+	    var seriesData0 = [
+					    	[2170.5, 2172.9, 2170.7, 2154.2, 2153.6],//qs
+					    	[90.5, 87.8, 85.1,82.2,79.4],//dc
+					    	[129.8, 125.9, 122.0, 117.9, 113.7],//xc
+					    	[395.5, 385.6, 373.9, 360.5, 347.3],//cy
+					    	[232.4, 225.5, 218.6, 210.5, 202.5],//ft
+					    	[65.2, 63.4, 61.2, 59.0, 57.0],//sjs
+					    	[369.4, 359.3, 348.0, 335.8, 323.7],//hd
+					    	[102.0, 107.5,112.8, 116.9, 122.8],//sy
+					    	[137.8, 142.8, 150.8, 157.8, 167.6],//tz
+					    	[156.2, 169.4, 176.1, 179.6, 188.8],//dx
+                            [30.8, 31.1,32.2, 33.1, 34.4],//mtg
+					    	[47.9, 48.3, 49.0, 49.5, 50.3],//my
+					    	[38.4, 39.3, 40.5, 41.4, 42.2],//hr
+					    	[31.4, 32.7, 34.0, 34.8, 35.7],//yq
+					    	[42.3, 43.7, 44.8, 45.6, 46.2],//pg
+					    	[196.3, 201.0, 206.3, 210.8, 216.6],//cp
+					    	[104.6, 109.6, 115.4, 118.8, 125.5]//fs
+    					 ];
+	    var minData0 = [2070,70,140,340,200,55,320,100,90,20,20,45,37,30,41,140,100];
+	    var maxData0 = [2220,96,100,400,240,70,380,130,180,220,40,55,44,40,47,220,150];
+		//参数
+		var param = getUrlParam("param");
+		if (param == null || param=="undefied" || param=="null") {
+			param="qs";
+		}
+		else {
+			for (var i=0; i<area.length; i++) {
+				if (area[i]==param) {
+					seriesData = seriesData0[i];
+					minData = minData0[i];
+					maxData = maxData0[i];
+				}
+			}
+		}
+    
+    
+	    var myChart = echarts.init(document.getElementById('main'));
+	    var pointStyle = {
+	    	     color: '#F7B500',
+	    	     borderWidth: 1,
+	    	 };
+	    var labelStyle = {
+	    	     show: true,
+	    	     position: 'top',
+	    	     lineHeight: 4,
+	    	     //borderRadius: 5,
+	    	     //backgroundColor: 'rgba(255,255,255,.9)',
+	    	     //borderColor: 'red',
+	    	     //borderWidth: '1',
+	    	     padding: [5, 15, 4],
+	    	     color: '#fff',
+	    	     fontSize: 14,
+	    	     fontWeight: 'normal',
+	    	 };
+// 	    var total = [2151.6, 2170.5, 2172.9, 2170.7, 2154.2];
+// 	    var total = total.sort(function(a, b) {
+// 	    	     return a - b
+// 	    	 });
+// 	    	 total.forEach((item, index) => {
+// 	    	     let ob = {
+// 	    	         value: item,
+// 	    	         itemStyle: pointStyle,
+// 	    	         label: labelStyle,
+// 	    	     }
+// 	    	     if (index === total.length - 1) {
+// 	    	         ob.itemStyle = {
+// 	    	             color: '#F7B500',
+// 	    	             borderWidth: 1,
+// 	    	         }
+// 	    	         ob.label = {
+// 	    	             show: true,
+// 	    	             position: 'top',
+// 	    	             lineHeight: 4,
+// 	    	             //borderRadius: 5,
+// 	    	             //backgroundColor: 'rgba(255,255,255,.9)',
+// 	    	             //borderColor: 'red',
+// 	    	             //borderWidth: '1',
+// 	    	             padding: [5, 15, 4],
+// 	    	             color: '#fff',
+// 	    	             fontSize: 14,
+// 	    	             fontWeight: 'normal',
+// 	    	         }
+// 	    	     }
+// 	    	     seriesData.push(ob)
+// 	    	 });
+
+	    	 var option = {
+   	            title: {
+  	            	text: '单位：万人',
+  	            	x:'right',
+  	            	padding: [-7,75,0,7],
+  	                textStyle: {
+  	                    color: 'white',
+  	                    fontFamliy: 'Microsoft YaHei',
+  	                    fontSize: 16,
+  	                    fontWeight: 'normal'
+  	                }
+  	            },
+	    	     grid: {
+	 	        	 show: true,
+	    	         top: '12%',
+	    	         left: '7%',
+	    	         right: '6%',
+	    	         bottom: '16%',
+	 	             borderWidth: 1,
+		             borderColor : '#0C2F74',
+	    	     },
+	    	     xAxis: [{
+	    	         type: 'category',
+	    	         axisTick: {
+	    	             show: false,
+	    	         },
+	    		     axisLabel: {
+	   	                show: true,
+	   	                textStyle: {
+	   	                	color: 'white',
+	   	                    fontFamliy: 'Microsoft YaHei',
+	   	                    fontSize: 16
+	   	                }
+	   	             },
+	    	         axisLine: {
+	    	             show: false,
+	    	         },
+	    	         splitLine: {
+	    	             show: false,
+	    	             lineStyle: {
+	    	                 type: 'dashed',
+	    	             },
+	    	         },
+	    	         splitArea: {
+	    	             show: true,
+	    	             areaStyle: {
+	    	                 color: ['rgba(12,40,85,0.4)', 'rgba(13,24,70,0.7)']
+	    	             }
+	    	         },
+	    	         data: [ '2015年', '2016年', '2017年', '2018年', '2019年'],
+	    	     }, ],
+
+	    	     yAxis: [{
+	    	         type: 'value',
+	    	         min: minData,
+	    	         max: maxData,
+	    	         splitNumber: 5,
+	    	         axisLine: {
+	    	             show: false,
+	    	         },
+	    	         axisTick: {
+	    	             show: false,
+	    	         },
+	    		       splitLine: {
+	    		           show: true,
+	    		           lineStyle: {
+	    		               type: 'solid',
+	    		               color: '#305078',
+	    		               width: 1
+	    		           }
+	    		       },
+		            axisLabel: {
+		                textStyle: {
+		                	color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 16
+		                },
+		            }
+	    	     }, ],
+	    	     series: [{
+	    	         type: 'line',
+	    	         showAllSymbol: true,
+	    	         symbol: 'circle',
+	    	         symbolSize: 10,
+	    	         lineStyle: {
+	    	             normal: {
+	    	                 color: 'rgba(242,186,47,0.7)',
+	    	                 width: 1,
+	    	             },
+	    	         },
+	 	            itemStyle: {
+		                normal: {
+	 	    	             color: '#F7B500',
+	 	    	             borderWidth: 1,
+		                	label : {
+		    	    	             show: true,
+		    	    	             position: 'top',
+		    	    	             lineHeight: 4,
+		    	    	             //borderRadius: 5,
+		    	    	             //backgroundColor: 'rgba(255,255,255,.9)',
+		    	    	             //borderColor: 'red',
+		    	    	             //borderWidth: '1',
+		    	    	             padding: [5, 15, 4],
+		    	    	             color: '#fff',
+		    	    	             fontSize: 14,
+		    	    	             fontWeight: 'normal',
+		    	    	         }
+		                }
+		            },
+	    	         tooltip: {
+	    	             show: false,
+	    	         },
+	    	         areaStyle: {
+	    	             normal: {
+	    	                 color: new echarts.graphic.LinearGradient(
+	    	                     0,
+	    	                     0,
+	    	                     0,
+	    	                     1,
+	    	                     [{
+	    	                             offset: 0,
+	    	                             color: 'rgba(251,218,0, 1)',
+	    	                         },
+	    	                         {
+	    	                             offset: 1,
+	    	                             color: 'rgba(251,218,0,0)',
+	    	                         },
+	    	                     ],
+	    	                     false
+	    	                 ),
+	    	             },
+	    	         },
+	    	         data: seriesData
+	    	     }]
+	    	 };
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link rel="icon" type="image/x-icon" href="/static/manage/images/favicon.ico">
+<!--base style!-->
+<link href="/static/manage/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/web.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/manage/css/select.css"/>
+<script type="text/javascript" src="/static/manage/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/manage/js/js.js"></script>
+</head>
+<body style="padding-left:20px; padding-right:20px;">
+
+	<!--弹出框-->
+	<div id="bg1"></div>
+	<div id="show1"  class="fl w930 pb50 bg_white">
+		<div class="fl w h45 lh45 tit_zx ti20">
+				<span class="white f16 bold">角色详情</span>
+			<a href="###" onclick="hide(1);" class="fr mt10 mr15"><img src="/static/manage/images/close20.png"/></a>
+		</div>
+		<div class="fl w ">
+			<iframe id="iframe1" src="/templates/view/role/detail.html" frameborder="0" width="100%" height="470" scrolling="auto"></iframe>	
+		</div>	
+		<div class="fl w200 h30 ml424 mt20" >
+			<button type="submit" onclick="hide(1);" class="fl btn bg_green">返回</button>
+		</div>
+		
+	</div>
+	<!--弹出框 end-->
+	<!--弹出框-->
+	<div id="bg2"></div>
+	<div id="show2"  class="fl w930 pb50 bg_white">
+		<div class="fl w h45 lh45 tit_zx ti20">
+				<span class="white f16 bold">编辑角色</span>
+		</div>
+		<div class="fl w ">
+			<iframe id="iframe2" src="/templates/view/role/edit.html" frameborder="0" width="100%" height="470" scrolling="auto"></iframe>	
+		</div>	
+		<div class="fl w200 h30 ml370 mt20" >
+			<button onclick="update()" class="fl btn bg_green">确定</button>
+			<button type="submit" onclick="hide(2);" value="Submit" class="fr btn bg_red">取消</button>
+		</div>
+		
+	</div>
+	<!--弹出框 end-->
+	<!--弹出框-->
+	<div id="bg3"></div>
+	<div id="show3"  class="fl w930 pb50 bg_white">
+		<div class="fl w h45 lh45 tit_zx ti20">
+				<span class="white f16 bold">新建角色</span>
+		</div>
+		<div class="fl w ">
+			<iframe id="iframe3" src="/templates/view/role/add.html" frameborder="0" width="100%" height="470" scrolling="auto"></iframe>	
+		</div>	
+		<div class="fl w200 h30 ml370 mt20" >
+			<button onclick="add()" class="fl btn bg_green">确定</button>
+			<button type="submit" onclick="hide(3);" value="Submit" class="fr btn bg_red">取消</button>
+		</div>
+		
+	</div>
+	<!--弹出框 end-->
+
+	<div class="w bc">
+		<!--right start-->
+		<div class="fr w ">
+			<div class="fl w titBg titColor bold f18 h48 lh46 ">
+				<span class="fl h48 titBgon">系统管理 &nbsp;/&nbsp;角色管理</span>
+			</div>
+			<div class="fl w  mt10 ">
+					<div class="fl w_82 ">
+						<ul class="fl ">
+						<li class="fl w350 mt10 "><span class="fl w80 tl mt5">角色名称：</span>
+							<span class="fl w250"><input type="text" id="name"
+								class="InputText w250" /></span></li>
+						<li class="fr w350 mt10 ">
+							<span class="fl w50 tl mt5">说明：</span>
+							<span class="fl w280 "> <input type="text" id="descrip" class="InputText w280" />
+						</span></li>
+					</ul>
+				</div>
+					<div class="fr w180">
+						<button id="search" class="btn bg_green mt8">查 询</button>
+						<button id="reset" class="btn bg_bule mt12 ml12">重 置</button>
+					</div>
+					<input id="rId" type="hidden"/>
+			</div>
+			<div class="fl w  mt15 ">
+					<div class="fl w bgBtn f18 h35 lh35">
+						<a id="addHref" href="###" onclick="show(3);" class="fl f16 Black bold ti30 btn_xz">新增</a>
+						<a id="delBatchHref" href="#" onclick="delBatch();" class="fl f16 Black bold ti30 btn_plsc ml10">批量删除</a>
+					</div>
+					<div class="fl w mt10">
+						<table id="roleTb" width="100%" border="0" cellspacing="0" cellpadding="0" class="tablelist">
+						  <tr class="tableTit">
+							<td class="tc w30">选择</td>
+							<td class="tc w30">序号</td>
+							<td class="tc w80">角色名称</td>
+							<td class="tc w150">说明</td>
+							<td class="tc w180">操作</td>
+						  </tr>
+						  <!-- <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">王晓红</td>
+							<td class="tc">系统管理员</td>
+							<td class="tc">信息化管理办公室科员</td>
+							<td class="tc">管理员</td>
+							<td class="tc">
+								<a href="page_2-ck.html" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">编辑</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr> -->
+						</table>
+					</div>
+					<div class="fl w h20 bc"></div>
+					<div class="w550 mt25 pageDiv bc" >
+						<a href="#" onclick="firstPage()" class="pageoff ml10">首页</a>
+						<a href="#" onclick="prevPage()" class="pageoff ml10">上一页</a>
+						<label class="fl ml20 pt4 pr4">第</label>
+						<input id="pageIndex" type="text" class="InputText fl mt4" style="width: 36px; height: 20px; line-height: 20px">
+						<label class="fl pt4 pl4">页</label>
+						<label id="pageNum" class="fl pt4 pl4">(共0页)</label>
+						<a href="#" onclick="gotoPage()" class="pageoff ml4">跳转</a>
+						<a href="#" onclick="nextPage()" class="pageoff ml10">下一页</a>
+						<a href="#" onclick="lastPage()" class="pageoff ml10">末页</a>
+					</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+ //页面初始化
+ (function($) {
+	//验证登录，根据权限显示菜单
+	checkLogin();
+	
+	//角色列表
+	list();
+		
+	$("#search").click(function() {
+		pageIndex = 1;
+		list();
+	});
+		
+	//重置
+	$("#reset").click(function() {
+		$("#name").val("");
+		$("#descrip").val("");
+	});
+	
+	//根据权限显示
+	if (!perCheck("role", "")) {
+		$("#addHref").css("display", "none");
+		$("#delBatchHref").css("display", "none");
+	}
+	
+ }(jQuery));
+
+
+	//分页
+	var pageIndex = 1;
+	var pageNum = 0;
+	var pageSize = 10;
+	
+	//记录查询条件
+	var nameTmp = "";
+	var descripTmp = "";
+	
+	//用户列表
+	function list() {
+		 $.ajax({
+			type : "post",
+			url : "/api/role/list",
+			dataType : "json",
+			data : {
+				'nowPage' : pageIndex,
+				'name' : $("#name").val(),
+				'descrip' : $("#descrip").val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$("#roleTb").html("");
+					if(resp.data.length != 0) {
+						$("#roleTb").append(formRoles(resp.data));
+						//$("#roleTb").listview("refresh");//在使用'ul'标签时才使用，作用:刷新列表
+						$("#roleTb").trigger("create");
+						
+						pageNum = (resp.count % pageSize == 0) ? (resp.count / pageSize) : (Math.floor(resp.count / pageSize) + 1);
+					}
+					else {
+						pageNum = 0;
+					}
+					$("#pageIndex").val(pageIndex);
+					$("#pageNum").text("(共" + pageNum + "页)");
+					nameTmp = $("#name").val();
+					descripTmp = $("#descrip").val();
+					
+					$("#rId").val("");
+				} else {
+					//alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//角色数据
+	var selectTab = false;
+	function formRoles(list) {
+		//判断权限
+		var ep = perCheck("role", "");
+		var dp = perCheck("role", "");
+		//组织数据
+		var html = "<tr class='tableTit'>"
+			+ "	<td class='tc w50'><span id='checkItem' onclick='selectAll()' style='cursor:pointer'>全选</span></td>"
+			+ "	<td class='tc w50'>序号</td>"
+			+ "	<td class='tc w80'>角色名称</td>"
+			+ "	<td class='tc w150'>说明</td>"
+			+ "	<td class='tc w180'>操作</td>"
+			+ "</tr>";
+		for (var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var trCss = (i % 2 != 0) ? "class='trbgColor'" : "";
+			html += "<tr "  + trCss + ">" 
+				+ "	<td class='tc w30'><input name='dataList' onclick='selectSingle()' type='checkbox' value='" + item.id + "' class='CheckBox' /></td>"
+				+ "	<td class='tc w30'>" + (i + 1) + "</td>"
+				+ "	<td class='tc w80' title='" + (item.name == null?"":item.name) + "'>" + textEllipsis((item.name == null?"":item.name), 9) + "</td>"
+				+ "	<td class='tc w150' title='" + (item.descrip == null?"":item.descrip) + "'>" + textEllipsis((item.descrip == null?"":item.descrip), 16) + "</td>"
+				+ "	<td class='tc w180'>"
+				+ "		<a href='#' onclick='show(1, " + item.id + ");' class='mr15 unl btn_ck Black'>查看</a>"
+				+ (ep ? "		<a href='#' onclick='show(2, " + item.id + ");' class='mr15 unl btn_xg Black'>编辑</a>" : "")
+				+ (dp ? "		<a href='#' onclick='delRole(" + item.id + ");' class='btn_del unl Black'>删除</a>" : "")
+				+ "	</td>"
+				+ "</tr>";
+		}
+		return html;
+	}
+	
+	//查询条件是否有更新
+	function checkSearchItem() {
+		return (nameTmp == $("#name").val()) &&
+			(descripTmp == $("#descrip").val()) 
+	}
+	
+	//删除角色
+	function delRole(id) {
+		if (!perCheck("role", "")) {
+			alert("您没有权限！");
+			return;
+		}
+		if (!confirm("确定删除？"))
+			return;
+		$.ajax({
+			type : "post",
+			url : "/api/role/delete",
+			dataType : "json",
+			data : {
+				"id" : id
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("角色删除成功！");
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//批量删除角色
+	function delBatch() {
+		if (!perCheck("role", "")) {
+			alert("您没有权限！");
+			return;
+		}
+		var ids = "";
+		$("input:checkbox[name=dataList]:checked'").each(function(i){  
+        	ids += $(this).val() + ",";  
+        });
+		if (ids == "") {
+			alert("请选择要删除的角色");
+			return;
+		}
+//		alert(ids);return;
+		if (!confirm("确定删除？"))
+			return;
+		$.ajax({
+			type : "post",
+			url : "/api/role/delBatch",
+			dataType : "json",
+			data : {
+				"ids" : ids
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("角色删除成功！");
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	
+	
+	//---------------------------------------------------------------------------
+	// 弹出框
+	//---------------------------------------------------------------------------
+	/**
+	 * 弹出框
+	 */
+	function show(i, id) {
+	    $("#rId").val(id);
+		permissions(id, i);
+
+		showdiv(i);
+	    if (i == 1)//查询
+			detail();
+	    else if (i == 2) {//编辑
+			if (!perCheck("role", "")) {
+				alert("您没有权限！");
+				return;
+			}
+			edit();
+	    }
+	    else if (i == 3) {//新建
+			if (!perCheck("role", "")) {
+				alert("您没有权限！");
+				return;
+			}
+	    }
+		showDivAlign0("iframe" + i, "show" + i);
+	}
+
+	var tmpPers = "";
+	
+	/**
+	 * 请选择权限数据
+	 */
+	function permissions(id, n) {
+		 perInfo(id);
+		 $.ajax({
+			async : false,
+			type : "post",
+			url : "/api/permission/members",
+			dataType : "json",
+			data : {},
+			success : function(resp) {
+				if(resp.code == 200){
+					if (resp.data != null) {
+						$("#iframe" + n).contents().find("#listUl1").html("");
+						$("#iframe" + n).contents().find("#listUl1").append(formPermissions(resp.data, n));
+					}
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	//权限数据
+	function formPermissions(items, n) {
+		var s = "";
+		for (var i=0; i<items.length; i++) {
+			var item = items[i];
+			s += "<ul id='u32' class=' fl w mt6 mb6'>"
+				+ " <span class='fl w30 tr mr10 mt5'><input type='checkbox' name='checkbox"+n+"' id='p_"+item.id+"' value='"+item.id+"'" + checkPermission(item.name, n) + "/></span>"
+				+ "	<span class='fl w300 gray5'>" + item.descrip + "</span>"
+				+ "</ul>";
+		}
+		return s;
+	}
+	
+	//重载数据
+	function checkPermission(p, n) {
+		var s = "";
+		if ((tmpPers.indexOf(p) != -1) && (n==2))
+			s = "checked='checked'";
+		return s;
+	}
+	//权限数据
+	function perInfo(id) {
+		tmpPers = "";
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/permission/selectByRole",
+			dataType : "json",
+			data : {
+				'id' : id
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					tmpPers = resp.data;
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//只读
+	function readOnly(n) {
+		if (n == 1)
+			return "disabled=\"disabled\"";
+		else
+			return "";
+	}
+	
+	/**
+	 * 获取选中权限
+	 */
+	function getPers(n) {
+		var pIds = "";
+		$(document).contents().find("#iframe" + n)[0].contentWindow.$("input:checkbox[name='checkbox"+n+"']:checked").each(function() {
+			pIds += $(this).val() + ",";
+		});
+		return pIds;
+	}
+
+	//---------------------------------------------------------------------------
+	// 子页面--角色详情页
+	//---------------------------------------------------------------------------
+	/**
+	 * 角色详情页
+	 */
+	function detail() {
+		 $.ajax({
+			async : false,
+			type : "post",
+			url : "/api/role/detail",
+			dataType : "json",
+			data : {
+				'id' : $('#rId').val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$(document).contents().find("#iframe1")[0].contentWindow.$("#name").text(resp.data.name==null?"":resp.data.name);
+					$(document).contents().find("#iframe1")[0].contentWindow.$("#descrip").text(resp.data.descrip==null?"":resp.data.descrip);
+					for (var i = 0; i < resp.data.permissons.length; i++) {
+						$(document).contents().find("#iframe1")[0].contentWindow.$("#p_" + resp.data.permissons[i].id).attr("checked", "checked");
+					}					
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	
+	//---------------------------------------------------------------------------
+	// 子页面--角色新建页
+	//---------------------------------------------------------------------------
+	/**
+	 * 新建角色
+	 */
+	function add() {
+		var name = $(document).contents().find("#iframe3")[0].contentWindow.$("#name").val();
+		var descrip = $(document).contents().find("#iframe3")[0].contentWindow.$("#descrip").val();
+		if (!checkInfo(name, descrip))
+			return;
+		$.ajax({
+			type : "post",
+			url : "/api/role/update",
+			dataType : "json",
+			data : {
+				'name' : name,
+				'descrip' : descrip,
+				'pIds' : getPers(3)
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("操作成功");
+					//隐藏弹出框
+					hide(3);
+					//刷新页面
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//校验字段
+	function checkInfo(name, descrip) {
+		if (name == '') {
+			alert("请输入角色名称");
+			return false;
+		}
+		else if(name.length > 120) {
+			alert("角色名称字数过多，请重新输入");
+			return false;
+		}
+		else if (descrip == '') {
+			alert("请输入角色说明");
+			return false;
+		}
+		else if(descrip.length > 200) {
+			alert("角色说明字数过多，请重新输入");
+			return false;
+		}
+		return true;
+	}
+	
+
+	//---------------------------------------------------------------------------
+	// 子页面--角色编辑页
+	//---------------------------------------------------------------------------
+	/**
+	 * 编辑角色-初始化数据
+	 */
+	function edit() {
+		//查询用户角色
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/role/detail",
+			dataType : "json",
+			data : {
+				'id' : $('#rId').val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#name").val(resp.data.name);
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#descrip").val(resp.data.descrip);
+					for (var i = 0; i < resp.data.permissons.length; i++) {
+						$(document).contents().find("#iframe2")[0].contentWindow.$("#p_" + resp.data.permissons[i].id).attr("checked", "checked");
+					}
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	/**
+	 * 编辑角色
+	 */
+	function update() {
+		var name = $(document).contents().find("#iframe2")[0].contentWindow.$("#name").val();
+		var descrip = $(document).contents().find("#iframe2")[0].contentWindow.$("#descrip").val();
+		if (!checkInfo(name, descrip))
+			return;
+		//编辑角色
+		$.ajax({
+			type : "post",
+			url : "/api/role/update",
+			dataType : "json",
+			data : {
+				'id' : $('#rId').val(),
+				'name' : name,
+				'descrip' : descrip,
+				'pIds' : getPers(2)
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("操作成功");
+					//隐藏弹出框
+					hide(2);
+					//刷新页面
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+</script>

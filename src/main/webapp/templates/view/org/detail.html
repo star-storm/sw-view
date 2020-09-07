@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--base style!-->
+<link href="/static/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/web.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/js.js"></script>
+<link rel="stylesheet" href="/static/css/jqtransformplugin/jqtransform.css" type="text/css" media="all" />	
+<script type="text/javascript" src="/static/css/jqtransformplugin/jquery.js" ></script>
+<script type="text/javascript" src="/static/css/jqtransformplugin/jquery.jqtransform.js" ></script>
+<script language="javascript">
+	$(function(){
+		$('span').jqTransform({imgPath:'jqtransformplugin/img/'});
+	});
+</script>
+<script>
+function addImage(){
+document.getElementById_x("image").click();
+}
+</script>
+</head>
+<body>
+	<div class="fl w fixdiv">	
+		<span class="fl f18 ti20 bold  h20 lh20 titBg mt15 ml20">组织详情</span>
+		<a href="javascript:history.go(-1)" class="fr btn tc mt10 mr20">返回</a>	
+	</div>
+	<div class="bc w1000">
+		<form action="" method="get">
+			<div class="fl w1000 min-h bor_t mt70 pb70">
+				<span  id="name" class="fl w f24  h60 lh60 tc bor_b"></span>
+				<ul class="fl  w800 ml150 ">
+					<li class="fl w mt20">
+						<span class="fl w80 tr mt5">编码：</span>
+						<span id="code" class="fl w150 ml15 mt5"></span>
+					</li>
+					<li class="fl w mt20">
+						<span class="fl w80 mt5 tr">排序：</span>
+						<span id="sort" class="fl ml15 mt5 gray8"></span>
+					</li>
+					<li class="fl w mt20">
+						<span class="fl w80 tr mt5">备注：</span>
+						<span id="remark" class="fl w680 ml15 mt5 gray8 lh24"></span>
+					</li>
+				</ul>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+ //页面初始化
+ (function($) {
+	 
+	//组织详情
+	detail();
+	
+ }(jQuery));
+
+/**
+ * 组织详情
+ */
+function detail() {
+	 var id = getUrlParam("id");
+	 if ((id=="") || (id==undefined))return;
+	 $.ajax({
+		async : false,
+		type : "post",
+		url : "/api/org/model",
+		dataType : "json",
+		data : {
+			'id' : id
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				$("#name").text(resp.data.name==null?"":resp.data.name);
+				$("#sort").text(resp.data.sort==null?"":resp.data.sort);
+				$("#code").text(resp.data.code==null?"":resp.data.code);
+				$("#remark").text(resp.data.remark==null?"":resp.data.remark);
+			} else {
+				//alert(resp.msg);
+			}
+		}
+	});
+}
+</script>

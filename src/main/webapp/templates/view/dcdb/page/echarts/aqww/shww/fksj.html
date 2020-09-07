@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>反馈上级单位接收情况</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:540px;height:520px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    
+    <script type="text/javascript">
+   		var index = 0;
+        $(function(){
+        	index=getUrlParam("index");
+        	if (!index)
+        		index = 1;
+        	initEcharts(--index);
+        });
+    	var datas0=['东城区','西城区','朝阳区','海淀区','丰台区','石景山区','门头沟区','房山区','通州区','顺义区','昌平区','大兴区','平谷区','怀柔区','密云区','延庆区'];
+    	var datas1=[
+    		[234, 229, 214, 210, 201, 197, 186, 178, 163, 160, 229, 214, 210, 201, 197, 186],
+    		[204, 212, 206, 202, 181, 167, 166, 144, 143, 170, 220, 207, 170, 203, 183, 166],
+    		[220, 200, 232, 200, 176, 177, 146, 150, 132, 152, 202, 223, 160, 222, 172, 167]
+    	];
+    	function initEcharts(index) {
+	    	var myChart = echarts.init(document.getElementById('main'));
+	    	myChart.setOption({
+// 	    	  backgroundColor: '#000',
+	    	  title: {
+	    	    show: false
+	    	  },
+	    	  tooltip: {
+	    	    trigger: 'item'
+	    	  },
+	    	  grid: {
+	    	    borderWidth: 0,
+	    	    top: '0%',
+	    	    left: '16%',
+	    	    right: '8%',
+	    	    bottom: '8%'
+	    	  },
+	    	  color: '#fff',
+	    	  yAxis: [{
+	    	    type: 'category',
+	    	    inverse: true,
+	    	    axisLine: {
+	    	      show: false
+	    	    },
+	    	    splitLine: {
+	    	      show: false
+	    	    },
+	    	    axisTick: {
+	    	      show: false
+	    	    },
+	    	    axisLabel: {
+	    	      	show: true,
+	                textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 14,
+	                    fontWeight: 'normal'
+	                },
+	                interval:0
+	    	    },
+	    	    data: datas0
+	    	  }],
+	    	  xAxis: {
+	    	    type: 'value',
+	    	    axisTick: {
+	    	      show: false
+	    	    },
+	    	    axisLine: {
+	    	      show: false
+	    	    },
+	    	    splitLine: {
+	    	      show: false
+	    	    },
+	    	    axisLabel: {
+	    	      	show: false,
+	                textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 14,
+	                    fontWeight: 'normal'
+	                }
+	    	    }
+	    	  },
+	    	  series: [
+	    	    {
+	    	      name: '',
+	    	      type: 'bar',
+	    	      barWidth: 9,
+	    	      itemStyle: {
+	    	        normal: {
+	    	          show: true,
+	    	          color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+	    	            offset: 0,
+	    	            color: 'rgba(216,188,1,1)'
+	    	          }, {
+	    	            offset: 1,
+	    	            color: 'rgba(250,231,102,1)'
+	    	          }], false),
+	    	          barBorderRadius: 10
+	    	        },
+	    	        emphasis: {
+	    	          shadowBlur: 15,
+	    	          shadowColor: 'rgba(0, 0, 0, 0.1)'
+	    	        }
+	    	      },
+	    	      data: datas1[index],
+	    	      animationDuration: 1500,
+	    	      label: {
+	    	        normal: {
+	    	          show: true,
+	    	          position: 'right',
+	    	          textStyle: {
+		                color: 'white',
+	    	            fontSize: 14,
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontWeight: 'normal'
+	    	          }
+	    	        }
+	    	      }
+	    	    }
+	    	  ],
+	    	  animationEasing: 'cubicOut'
+	    	});
+	    }
+    </script>
+</body>
+</html>

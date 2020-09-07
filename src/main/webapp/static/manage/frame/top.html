@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--base style!-->
+<link href="../css/base.css" type="text/css" rel="stylesheet" />
+<link href="../css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="../css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="../css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="../css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="../css/top.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/js.js"></script>
+</head>
+<body>
+	<div class="w bc h128 top">
+		<div class="fl w h128">
+			<div class="fl"><span class="fl ml30 f36 mt25 bold white">大数据平台专题发布系统</span></div>
+			<div class="fr">
+				<!-- <span class="fl white lh26 ti40 mt20"><img src="../images/pic_photo.png" /></span> -->
+				<span id="userName" class="fl white bold lh90 ti40  mr25 ico_uer"></span>
+				<!-- <span class="fl white topline lh90 mr35">&nbsp;</span>
+				<a id="back1" href="#" onclick="gotoPortal0()" class="fl white bold lh26 ico_fh ti40 mt30 mr35">返回主页</a> -->
+				<span class="fl white topline lh90 mr35">&nbsp;</span>
+				<a id="back2" href="#" onclick="logout()" class="fl white bold lh26 ico_fh ti40 mt30 mr35">退出系统</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+var user;
+//页面初始化
+$(document).ready(function(){ 
+// 	alert("载入页头");
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/checkLogin",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if(resp.code == 200){
+				user = resp.data;
+				if (user.roles != null && user.roles.length > 0) {
+					var rid = user.roles[0].id;
+					if (rid == 6) {
+						$("#back1").css("display","none");
+						$("#back2").css("display","block");
+					}
+				}
+				$("#userName").html(resp.data.name);
+				getDate();
+			}
+			else {
+				top.location.href = "/view/index";
+			}
+		}
+	});
+});
+
+function getDate() {
+	var date =  new Date();
+	var y = "";
+	if (BrowserType().indexOf("IE") == -1 || BrowserType() == "IE10" || BrowserType() == "IE11" || BrowserType() == "IEEdge")
+		y = 1900+date.getYear();
+	else
+		y = date.getYear();
+	var m = "0"+(date.getMonth()+1);
+	var d = "0"+date.getDate();
+	var w = date.getDay();
+	var dateStr = y+"年"+m.substring(m.length-2,m.length)+"月"+d.substring(d.length-2,d.length) + "日 ";
+	$("#dateStr").html(dateStr);
+	var weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+	var weekStr = weekday[w];
+	$("#weekStr").html(weekStr);
+}
+function BrowserType() { 
+	  var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串 
+	//  alert(userAgent);
+	  var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器 
+	  var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器 
+	  var isEdge = userAgent.indexOf("Windows NT") > -1 && userAgent.indexOf("Trident/7.0") > -1 && !isIE; //判断是否IE的Edge浏览器 
+	  var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器 
+	  var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器 
+	  var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器 
+	 
+	  if (isIE) { 
+	     var reIE = new RegExp("MSIE (\\d+\\.\\d+);"); 
+	     reIE.test(userAgent); 
+	     var fIEVersion = parseFloat(RegExp["$1"]); 
+	     if(fIEVersion == 7) 
+	     { return "IE7";} 
+	     else if(fIEVersion == 8) 
+	     { return "IE8";} 
+	     else if(fIEVersion == 9) 
+	     { return "IE9";} 
+	     else if(fIEVersion == 10) 
+	     { return "IE10";} 
+	     else if(fIEVersion == 11) 
+	     { return "IE11";} 
+	     else
+	     { return "IE"}//IE版本过低 
+	   }//isIE end 
+	     
+	   if (isFF) { return "FF";} 
+	   if (isOpera) { return "Opera";} 
+	   if (isSafari) { return "Safari";} 
+	   if (isChrome) { return "Chrome";} 
+	   if (isEdge) { return "IEEdge";} 
+	   return "";
+	 }
+	 
+//返回门户
+function gotoPortal0() {
+	top.location.href = "/view/main";
+}
+
+//退出系统
+function logout() {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/logout",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if(resp.code == 200){
+				top.location.href = "/";
+			} else {
+				if (window.location.href.indexOf("/index") == -1) {
+//					alert("用户未登录");
+					top.location.href = "/index";
+				}
+			}
+		}
+	});
+}
+	 
+</script>

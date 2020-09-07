@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+首页-tmp
+<a href="./view/user/list">用户</a>
+<form enctype="multipart/form-data" method="post" action="/file/upload/jxkj">
+   	图片<input type="file" name="file"/>
+   	<input type="submit" value="上传"/>
+	<!-- <span class="fl w100 tr mr10 mt5">资源文件：</span>
+	<span class="fl w440 "><input type="text" name="inputtext" class="InputText w440"/></span>
+	<span class="fr w80"><button type="submit" value="submit" class="fl btn bg_bule" disabled="disabled">确认上传</button></span>
+	<span class="fr w80"><input type="file" value="file" class="fl btn bg_bule" >选择文件</button></span> -->
+	
+	
+	<iframe id="upIframe" name="upIframe" style="display: none">
+	</iframe>
+	<form target="upIframe" enctype="multipart/form-data" method="post" action="/file/upload/jxkj">
+		<input type="file" id="file" name="file" style="display: none"/>
+		<button id="submitBtn" type="submit" style="display: none"></button>
+	</form>
+</form>
+</body>
+</html>
+
+<script>
+$('#upIframe').on('load', function() {
+	/**var responseText = $('#upIframe')[0].contentDocument.body.textContent;
+	alert(responseText);
+	JSON.parse(responseText);
+	var responseData = JSON.parse(responseText) || {};
+	if (responseData.isSuccess == true || responseData.code == 200) {
+		$("#fileId").val(responseData.data);
+        alert("上传成功!");
+	} else {
+		alert("上传失败！");
+	} */
+});
+</script>

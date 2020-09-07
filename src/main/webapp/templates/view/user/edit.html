@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link rel="icon" type="image/x-icon" href="/static/manage/images/favicon.ico">
+<!--base style!-->
+<link href="/static/manage/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/web.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/manage/js/jquery-1.7.2.min.js"></script>
+<link href="/static/manage/css/select.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/manage/js/js.js"></script>
+<link rel="stylesheet" href="/static/css/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="/static/css/demo.css" type="text/css">
+<link rel="stylesheet" href="/static/css/menu.css" type="text/css" />
+<style type="text/css">
+	.ztree li button.switch {visibility:hidden; width:1px;}
+	.ztree li button.switch.roots_docu {visibility:visible; width:16px;}
+	.ztree li button.switch.center_docu {visibility:visible; width:16px;}
+	.ztree li button.switch.bottom_docu {visibility:visible; width:16px;}
+</style>
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.sidenav li').click(function(){
+		$(this).siblings('li').removeClass('now');
+		$(this).addClass('now');
+	});
+	
+	$('.erji li').click(function(){
+		$(this).siblings('li').removeClass('now_li');
+		$(this).addClass('now_li');
+	});
+	
+	$('.content_wrap').css('width','440px');
+	$('.content_wrap').css('height','240px');
+	$('.content_wrap').css('margin-left','15px');
+})
+</script>
+</head>
+<body class="bg_white">
+	<div class="fl w900 bg_white">
+		
+		<div class="fl w720 ml100 mt20">
+			<ul class="fl w ">
+				<li  class="fl w mt10 mb10">
+					<span class="fl w100 tr mr10">姓名：</span>
+					<input id="name" class="fl ml15 mt5 h30 w300"></input>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w100 tr mr10">用户名：</span>
+					<input id="userId" class="fl ml15 mt5 h30 w300"></input>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w100 tr mr10">单位：</span>
+					<span id="depart" class="fl w500 blue">
+						<div class="content_wrap" style="background: #f8f8f8;overflow:auto">
+							<div class="zTreeDemoBackground left">
+								<ul id="treeDemo" class="ztree"></ul>
+							</div>
+						</div>	
+					</span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w100 tr mr10">角色：</span>
+					<span id="role" class="fl w500 blue">
+					</span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w100 tr mr10">密级：</span>
+					<select id="userSecret" class="fl ml25 mt5 h30 w300">
+						<option value="0">无</option>
+						<option value="1">一般</option>
+						<option value="2">重要</option>
+						<!-- <option value="3">核心</option> -->
+					</select>
+				</li>
+		    </ul>
+		</div>
+		<input id="orgId" type="hidden" value=""/>
+		<input id="orgName" type="hidden" value=""/>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	var zNodes = new Array();
+	var setting = {
+		view : {
+			dblClickExpand : true,
+			showLine : false
+		},
+		data : {
+			simpleData : {
+				enable : true,
+				idKey : "id",//节点id
+				pIdKey : "pid",//父节点id
+			}
+		},
+		callback : {
+			onClick : onClick
+		}
+	};
+
+	function initTree(expand) {
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		$.fn.zTree.getZTreeObj("treeDemo").expandAll(expand);
+		//设置样式
+		$("ul.ztree").css("border", "none");
+		$("ul.ztree").css("width", "290px");
+		$("ul.ztree").css("height", $(window).height()-140);
+		$("ul.ztree").css("padding-top", "7px");
+		$("div.zTreeDemoBackground").css("height", $(window).height()-107);
+	}
+	//调取后台数据
+	function treeData(pid) {
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/org/subOrgs",
+			dataType : "json",
+			data : {
+				pid : pid
+			},
+			success : function(resp) {
+				if (resp.code == 200) {
+					zNodes = resp.data;
+				} else {
+					//alert(resp.msg);
+				}
+			}
+		});
+	}
+
+	function onClick(e, treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		zTree.expandNode(treeNode);
+// 		alert(treeNode.id);
+		$("#orgId").val(treeNode.id);//当前所选分类
+		$("#orgName").val(treeNode.name);//当前所选分类
+	}
+
+	function cancelSelectedNode() {
+		$("#orgId").val("");
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		//alert(treeNode.id);
+		zTree.cancelSelectedNode(zTree.getSelectedNodes()[0]);
+	}
+	
+	//条件查询
+	function search() {
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/org/queryOrgs",
+			dataType : "json",
+			data : {
+				'name' : $("#orgSearch").val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					zNodes = resp.data;
+					initTree(true);
+				} else {
+					if (window.location.href.indexOf("/view/index") == -1) {
+//						alert("用户未登录");
+// 						top.location.href = "/view/index";
+					}
+				}
+			}
+		});
+	}
+	
+	//默认展开第一级
+	function expendRoot() {
+		var treeId = $("#orgId").val();
+		if (treeId == "") {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			var rootNode = zTree.getNodesByFilter(function (node) { return node.level == 0 }, true); 
+// 			zTree.setting.callback.onClick(null,zTree.setting.treeId,rootNode);
+// 			zTree.expandNode(rootNode);
+			zTree.expandAll(true);
+		}
+	}
+	
+	//设置节点选中
+	function clickNode(nodeId) {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		var node = zTree.getNodeByParam("id",nodeId);
+		if (node != null)
+			$("#"+node.tId+"_a").click();
+	}
+
+	//页面初始化
+	(function($) {
+		//树
+		treeData("0");
+		//初始化树
+		initTree(false);
+		
+		$("#searchId").click(function() {
+			search();
+		});
+		
+		//默认展开第一级
+		expendRoot();
+		
+		//角色信息
+		allRoleInfo();
+		
+	}(jQuery));
+	
+	//全部角色信息
+	function allRoleInfo() {
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/role/members",
+			dataType : "json",
+			data : {},
+			success : function(resp) {
+				if(resp.code == 200){
+					if(resp.data.length != 0) {
+						$("#role").html("");
+						$("#role").append(formRoles(resp.data));
+					}
+				} else {
+				}
+			}
+		});
+	}
+	//组织数据
+	function formRoles(list) {
+		var html = "";
+		for (var i = 0; i < list.length; i++) {
+			var item = list[i];
+			html += "<li  class='fl w200 mt10 mb10'>"
+				+ "  <span class='fl w50 tr mr10 mt5'>"
+				+ "    <input type='radio' name='role' value='" + item.id + "'/>"
+				+ "  </span>"
+				+ "  <span class='fl w140 gray5 pt2'>" + item.name + "</span>"
+				+ "</li>";
+		}
+		return html;
+	}
+	
+	//设置角色选中
+	function selectRole(resp) {
+		if (resp.data.roles != null) {
+			for (var i = 0; i < resp.data.roles.length; i++) {
+				//resp.data.roles[i].name;
+				$("input[@type=radio][name=role][value=" + resp.data.roles[i].id + "]").attr("checked",true); 
+			}
+		}
+	}
+	
+</script>

@@ -1,0 +1,300 @@
+form.jqansformdone label{
+	margin-top:4px;
+	margin-right: 8px;
+	display: block;
+	float:left;
+}
+form.jqansformdone div.rowElem{
+	clear:both;
+	padding:4px 0px;
+}
+/* -------------
+ * Buttons
+ * ------------- */
+button.jqTransformButton {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	background-color: ansparent;
+	cursor: pointer;
+	overflow: visible;
+	font-family: Arial;
+}
+*:first-child+html button.jqTransformButton[type]{width: 1;} /* IE7 */
+
+button.jqTransformButton {
+	background: ansparent url(img/btn_right.gif) no-repeat right top;
+	display: block;
+	float: left;
+	padding: 0px 4px 0px 0px; /* sliding doors padding */
+	margin: 0px;
+	height: 33px;
+}
+button.jqTransformButton  {
+	background: ansparent url(img/btn_left.gif) no-repeat top left;
+	color: #333;
+	padding: 8px 4px 0px 8px;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 13px;
+	display: block;
+	text-decoration: none;
+	height: 33px;
+}
+
+/*hover*/
+button.jqTransformButton_hover { background-position: left -33px ; }
+button.jqTransformButton_hover { background-position: right -33px ; }
+
+/*clicked*/
+button.jqTransformButton_click { background-position: left -66px ; }
+button.jqTransformButton_click { background-position: right -66px ; }
+
+/* IE 6 */
+* html button.jqTransformButton { height:33px; }
+* button.jqTransformButton { height: 25px; }
+/* IE 7 */
+*+ html button.jqTransformButton { height:33px; }
+*+ button.jqTransformButton { height: 25px; }
+
+/* -------------
+ * Inputs
+ * ------------- */
+.jqTransformInputWrapper {
+	background:#ffffff;
+	border:1px #ccc solid;
+	height: 31px;
+	line-height: 30px;
+	padding: 0px;
+	float:left;
+}
+
+.jqTransformInputInner {
+	background:none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.jqTransformInputInner div {
+	height: 31px;
+	margin:0;
+	
+}
+
+.jqTransformInputInner div input {
+	font-family:Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	height: 31px;
+	line-height:31px;
+	color:#404040;	
+	border: none;
+	margin: 0px;
+	background:ansparent;
+	text-indent:10px;
+}
+
+/*  IE6 */
+* html .jqTransformInputInner div input {
+	margin: 0 0 0 -8px;
+	height:24px;
+}
+/* Ie7 */
+*+ html .jqTransformInputInner div input {
+	margin-left:-10px;
+	height:24px;
+}
+/*hover*/
+.jqTransformInputWrapper_hover{ background-position: left -31px ;}
+.jqTransformInputWrapper_hover div.jqTransformInputInner{ background-position: right -31px ;}
+
+/*focus*/
+.jqTransformInputWrapper_focus{ background-position: left -62px ;}
+.jqTransformInputWrapper_focus div.jqTransformInputInner{ background-position: right -62px ;}
+
+.jqTransformSafari .jqTransformInputInner div {
+	position: relative;
+	overflow: hidden;
+	margin:0px 8px;
+}
+.jqTransformSafari .jqTransformInputInner div input {
+	background-color: none;
+	position: absolute;
+	top: -10px;
+	left: -2px;
+	height: 42px; 
+	padding-left: 4px;
+}
+/* -------------
+ * Textarea
+ * ------------- */
+div.jqTransformTextarea {
+	width:5px;
+	height:5px;
+	margin:0;
+	padding:0;
+}
+
+div.jqTransformTextarea textarea{
+	font-size: 16px;
+	line-height: 20px;
+	margin: 0;
+	padding:10px;
+	border: 0;
+	background: none;
+	border:1px #ccc solid;
+}
+
+div.jqTransformTextarea #jqTransformTextarea-tl{background:none;}
+div.jqTransformTextarea #jqTransformTextarea-tm{background:none;}
+div.jqTransformTextarea #jqTransformTextarea-{background:none;}
+
+div.jqTransformTextarea #jqTransformTextarea-ml{background:none;}
+div.jqTransformTextarea #jqTransformTextarea-mm{background:none;}
+div.jqTransformTextarea #jqTransformTextarea-mr{background:none;}
+
+div.jqTransformTextarea #jqTransformTextarea-bl{background:none;}
+div.jqTransformTextarea #jqTransformTextarea-bm{background: url(img/textarea/textarea_bm.gif) repeat-x top left;}
+div.jqTransformTextarea #jqTransformTextarea-br{background: url(img/textarea/textarea_br.gif) no-repeat top left;}
+
+/*hover*/
+div.jqTransformTextarea-hover #jqTransformTextarea-tl{background-position:0px -5px;}
+div.jqTransformTextarea-hover #jqTransformTextarea-tm{background-position:0px -5px;}
+div.jqTransformTextarea-hover #jqTransformTextarea-{background-position:0px -5px;}
+div.jqTransformTextarea-hover #jqTransformTextarea-ml{background-position:-5px 0px;}
+div.jqTransformTextarea-hover #jqTransformTextarea-mm{background-image: url(img/textarea/textarea-mm-hover.gif);}
+div.jqTransformTextarea-hover #jqTransformTextarea-mr{background-position:-5px 0px;}
+div.jqTransformTextarea-hover #jqTransformTextarea-bl{background-position:0px -5px;}
+div.jqTransformTextarea-hover #jqTransformTextarea-bm{background-position:0px -5px;}
+div.jqTransformTextarea-hover #jqTransformTextarea-br{background-position:0px -5px;}
+
+/*focus*/
+div.jqTransformTextarea-focus #jqTransformTextarea-tl{background-position:0px -10px;}
+div.jqTransformTextarea-focus #jqTransformTextarea-tm{background-position:0px -10px;}
+div.jqTransformTextarea-focus #jqTransformTextarea-{background-position:0px -10px;}
+div.jqTransformTextarea-focus #jqTransformTextarea-ml{background-position:-10px 0px;}
+div.jqTransformTextarea-focus #jqTransformTextarea-mm{background-image: url(img/textarea/textarea-mm-focus.gif);}
+div.jqTransformTextarea-focus #jqTransformTextarea-mr{background-position: -10px 0px;}
+div.jqTransformTextarea-focus #jqTransformTextarea-bl{background-position:0px -10px;}
+div.jqTransformTextarea-focus #jqTransformTextarea-bm{background-position:0px -10px;}
+div.jqTransformTextarea-focus #jqTransformTextarea-br{background-position:0px -10px;}
+
+
+div.jqTransformTextarea .jqTransformSafariTextarea div {
+	position: relative;
+	overflow: hidden;
+	border: 0px solid red;
+}
+div.jqTransformTextarea .jqTransformSafariTextarea textarea{
+	background: none;
+	position: absolute;
+	top:-10px;
+	left:-10px;
+	padding: 10px 10px 10px 10px;
+	resize: none;
+}
+
+
+/* -------------
+ * Radios
+ * ------------- */
+.jqTransformRadioWrapper {float: left;display:block;margin:0px 4px;	margin-top:5px;}
+.jqTransformRadio {
+	background: ansparent url(img/radio.png) no-repeat center top;
+	vertical-align: middle;
+	height: 19px;
+	width: 18px;
+	display:block;/*display: -moz-inline-block;*/
+}
+
+
+/* -------------
+ * Checkboxes
+ * ------------- */
+div.jqTransformCheckboxWrapper{
+	display:block;float:left;
+	margin-top:5px;
+}
+a.jqTransformCheckbox {
+	background: ansparent url(img/checkbox.png) no-repeat center top;
+	vertical-align: middle;
+	height: 18px;
+	width: 18px;
+	display:block;/*display: -moz-inline-block;*/
+}
+
+/* -------------
+ * Checked - Used for both Radio and Checkbox
+ * ------------- */
+a.jqTransformChecked { background-position: center bottom;}
+
+
+/* -------------
+ * Selects
+ * ------------- */
+.jqTransformSelectWrapper {
+	width:100%;
+	position:relative;
+	height: 31px;
+	background:#ffffff;
+	border:1px #ccc solid;
+	float:left;
+}
+
+.jqTransformSelectWrapper div span {
+	float: none;
+	position: absolute;
+	white-space: nowrap;
+	height: 31px;
+	line-height:30px;
+	overflow: hidden;
+	cursor:pointer;
+	text-indent:10px;
+}
+
+.jqTransformSelectWrapper  a.jqTransformSelectOpen {
+	display: block;
+	position: absolute;
+	right: 0px;
+	width: 31px;
+	height: 31px;
+	background: url(img/uew_icon.png) no-repeat center center;
+}
+
+.jqTransformSelectWrapper ul {
+	position: absolute;
+	top: 30px;
+	left: 0px;
+	list-style: none;
+	background-color: #FFF;
+	border: solid 1px #CCC;
+	display: none;
+	margin: 0px;
+	padding: 0px;
+	height: 150px;
+	overflow: auto;
+	overflow-y: auto;
+	z-index:1000;
+}
+
+.jqTransformSelectWrapper ul a {
+	display: block;
+	padding: 5px;
+	text-decoration: none;
+	color:#333;
+	background-color: #FFF;
+}
+
+.jqTransformSelectWrapper ul a.selected {
+	background: #EDEDED;
+	color: #333;
+}
+
+.jqTransformSelectWrapper ul a:hover, .jqTransformSelectWrapper ul a.selected:hover {
+	background:#2d7ad7;
+	color: #fff;
+}
+
+/* -------------
+ * Hidden - used to hide the original form elements
+ * ------------- */
+.jqTransformHidden {display: none;}

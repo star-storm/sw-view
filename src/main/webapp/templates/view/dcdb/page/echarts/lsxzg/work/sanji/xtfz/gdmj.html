@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>耕地面积趋势图</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:1490px;height:300px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    
+    <script type="text/javascript">
+    	
+	    var myChart = echarts.init(document.getElementById('main'));
+	    
+	    // 数据
+	    var xAxisData = ['2011年','2012年','2013年','2014年','2015年','2016年','2017年', '2018年'];
+	    var minDatas = [207000, 130000, 736000, 84000, 290000, 45000, 75000];
+	    var maxDatas = [[225000, 225000, 225000, 225000, 225000, 225000, 225000, 225000],
+	    	[140000, 140000, 140000, 140000, 140000, 140000, 140000, 140000],
+	    	[750000, 750000, 750000, 750000, 750000, 750000, 750000, 750000],
+	    	[86000, 86000, 86000, 86000, 86000, 86000, 86000, 86000],
+	    	[309000, 309000, 309000, 309000, 309000, 309000, 309000, 309000],
+	    	[49000, 49000, 49000, 49000, 49000, 49000, 49000, 49000],
+	    	[79800, 79800, 79800, 79800, 79800, 79800, 79800, 79800]];
+	    var datas = [[221956.16, 220856.16, 221157.28, 219948.76, 219326.49, 216345.43, 210730.65, 212840.60],//耕地面积
+	    	[138072.99, 137117.72, 135573.37, 135103.71, 134857.89, 133453.18, 132799.79, 132531.10],//园地面积
+	    	[740730.87, 739633.48, 738036.45, 737542.89, 737078.88, 739705.54, 744473.56, 746634.08],//林地面积
+	    	[85651.69, 85491.29, 85348.82, 85139.49, 85066.77, 84721.53, 84479.43, 84323.67],//草地面积
+	    	[295116.72, 297758.79, 300847.83, 302939.17, 304393.05, 306615.41, 306825.68, 303247.34],//城镇村及工矿用地面积
+	    	[45452.68, 46327.98, 46626.41, 47006.28, 47062.78, 47480.86, 47704.86, 48526.72],//交通运输用地面积
+	    	[79380.05, 79088.32, 78739.52, 78378.65, 78304.28, 77968.73, 76373.77, 76291.41]];//水域及水利设施用地面积
+
+		var index=getUrlParam("index");
+	    if (index=="" || index==null || index=="null" || index=="undefined")
+	    	index = 0;
+	    else
+	    	index = parseInt(index)-1;
+// 	    alert(index);
+	    var yAxisData = datas[index];
+	    var minData = minDatas[index];
+	    var maxData = maxDatas[index];
+	    
+	 // 颜色设置
+	    var color = {
+	        linearYtoG: {
+	            type: 'linear',
+	            x: 0,
+	            y: 0,
+	            x2: 1,
+	            y2: 1,
+	            colorStops: [{
+	                offset: 0,
+	                color: '#f5b44d'
+	            }, {
+	                offset: 1,
+	                color: '#28f8de'
+	            }]
+	        },
+	        linearGtoB: {
+	            type: 'linear',
+	            x: 0,
+	            y: 0,
+	            x2: 1,
+	            y2: 0,
+	            colorStops: [{
+	                offset: 0,
+	                color: '#43dfa2'
+	            }, {
+	                offset: 1,
+	                color: '#28f8de'
+	            }]
+	        },
+	        linearBtoG: {
+	            type: 'linear',
+	            x: 0,
+	            y: 0,
+	            x2: 1,
+	            y2: 0,
+	            colorStops: [{
+	                offset: 0,
+	                color: 'red'
+	            }, {
+	                offset: 1,
+	                color: 'red'
+	            }]
+	        },
+	        areaBtoG: {
+	            type: 'linear',
+	            x: 0,
+	            y: 0,
+	            x2: 0,
+	            y2: 1,
+	            colorStops: [{
+	                offset: 0,
+	                color: 'rgba(241,209,28,.9)'
+	            }, {
+	                offset: 1,
+	                color: 'rgba(241,209,28,0.1)'
+	            }]
+	        }
+	    };
+
+	    var option = {
+	        title: {
+	        	show: false,
+	            text: '耕地面积趋势图（2010年-2017年）',
+	            textStyle: {
+	                color: '#fff',
+	                fontSize: 32,
+	                fontWeight: 'normal'
+	            },
+	            top: 50,
+	            x: 'center'
+// 	            left: 80
+	        },
+	        tooltip: {
+	            trigger: 'item'
+	        },
+	        grid: {
+	        	show: true,
+	            left: 90,
+	            right: 20,
+	            bottom: 60,
+	            top: '20%',
+	            borderWidth: 1,
+	            borderColor : 'rgba(255,255,255,.1)',
+	        },
+	        xAxis: {
+	            type: 'category',
+	            position: 'bottom',
+	            axisLine: true,
+	            axisLabel: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 18,
+                    fontWeight: 'normal'
+	            },
+	            data: xAxisData,
+	        },
+	        yAxis: {
+	            name: '单位：公顷',
+	            nameLocation: 'end',
+	            nameGap: 24,
+	            nameTextStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 18,
+                    fontWeight: 'normal'
+	            },
+	            min: minData,
+	            max: maxData[0],
+	            splitNumber: 6,
+	            axisLine: {
+	                lineStyle: {
+	                    opacity: 0
+	                }
+	            },
+	            splitLine: {
+	                show: true,
+	                lineStyle: {
+	                    color: '#fff',
+	                    opacity: .1
+	                }
+	            },
+	            axisLabel: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 14,
+                    fontWeight: 'normal'
+	            }
+	        },
+	        series: [{
+	            name: '',
+	            type: 'line',
+// 	            smooth: true,
+	            symbol: 'emptyCircle',
+	            symbolSize: 8,
+	            itemStyle: {
+	                normal: {
+	    	            borderColor: 'orange',
+	                    color: 'blue'
+	                }
+	            },
+	            lineStyle: {
+	                normal: {
+	                    color: color.linearBtoG,
+	                    width: 3
+	                }
+	            },
+	            areaStyle: {
+	                normal: {
+	                    color: color.areaBtoG,
+	                }
+	            },
+	            label: {
+	                show: true,
+	                textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 18,
+	                    fontWeight: 'normal'
+		            },
+	            },
+	            data: yAxisData,
+	            lineSmooth: true,
+// 	            markLine: {
+// 	                silent: true,
+// 	                data: [{
+// 	                    type: 'average',
+// 	                    name: '平均值'
+// 	                }],
+// 	                precision: 0,
+// 	                label: {
+// 	                    normal: {
+// 	                        formatter: '平均值: \n {c}'
+// 	                    }
+// 	                },
+// 	                lineStyle: {
+// 	                    normal: {
+// 	                        color: 'rgba(248,211,81,.7)'
+// 	                    }
+// 	                }
+// 	            },
+	            tooltip: {
+	                position: 'top',
+	                formatter: '{b}： {c}',
+	                backgroundColor: 'rgba(28,152,232,.2)',
+	                padding: 12
+	            }
+	        },  {
+	            name: '占位背景',
+	            type: 'bar',
+	            itemStyle: {
+	                normal: {
+	                    show: true,
+	                    color: '#000',
+	                    opacity: .1
+	                }
+	            },
+	            silent: true,
+	            barWidth: '50%',
+	            barGap: 0,
+	            data: maxData,
+	            animation: false
+	        }],
+// 	        backgroundColor: '#383546',
+	    };
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

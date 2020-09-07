@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link rel="icon" type="image/x-icon" href="/static/manage/images/favicon.ico">
+<!--base style!-->
+<link href="/static/manage/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/web.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/manage/js/jquery-1.7.2.min.js"></script>
+<link href="/static/manage/css/select.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/manage/js/js.js"></script>
+</head>
+<body class="bg_white">
+	<div class="fl w930 bg_white">
+		<div class="fl w720 ml100 mt40" id="listUl0">
+			<ul class="fl w">
+				<li  class="fl w mt10 mb10">
+					<span class="fl w100 tr mr10 mt5"><font class="red bold mr5">*</font>名称：</span>
+					<span class="fl w500 "><input type="text" id="name" class="InputText w600"/></span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w100 tr mr10 mt5">编码：</span>
+					<span class="fl w500 "><input type="text" id="code" class="InputText w600"/></span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w100 tr mr10 mt5"><font class="red bold mr5">*</font>地址：</span>
+					<span class="fl w500 "><input type="text" id="url" class="InputText w600"/></span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w100 tr mr10 mt5">所属人：</span>
+					<span class="fl w500 "><input type="text" id="owner" class="InputText w600"/></span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w100 tr mr10"><font class="red bold mr5">*</font>权限：</span>
+					<span id="perDiv" class="fl w500 blue">
+					</span>
+				</li>
+		    </ul>
+		</div>
+	</div>
+</body>
+</html>
+
+<script>
+//页面初始化
+(function($) {
+	
+	//权限信息
+	permissions();
+	
+}(jQuery));
+
+/**
+ * 请选择权限数据
+ */
+function permissions() {
+	 $.ajax({
+		async : false,
+		type : "post",
+		url : "/api/permission/members",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if(resp.code == 200){
+				if (resp.data != null) {
+					$("#perDiv").html("");
+					$("#perDiv").append(formPermissions(resp.data));
+				}
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+//权限数据
+function formPermissions(items) {
+	var s = "";
+	for (var i=0; i<items.length; i++) {
+		var item = items[i];
+		if (item.name=="org" || item.name=="user" || item.name=="role" || item.name=="permission")
+			continue;
+		s += "<ul id='u32' class=' fl w mt6 mb6'>"
+			+ " <span class='fl w30 tr mr10 mt5'><input type='radio' name='per' id='p_"+item.id+"' value='"+item.id+"'/></span>"
+			+ "	<span class='fl w300 gray5'>" + item.descrip + "</span>"
+			+ "</ul>";
+	}
+	return s;
+}
+</script>

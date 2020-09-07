@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>医疗与养老情况</title>
+</head>
+<body>
+
+    <div id="overView1_meddle_cont_maps_bjMap" style="width:660px;height:590px; color:#fff;font-size:16px;margin-left:30px"></div>
+	
+	
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+	<script>
+	
+	//16区
+	var areaArray = new Array();
+	var sixArray = new Array();
+	var totArray = new Array();
+	var index = 0;
+	//页面初始化
+	(function($) {
+		
+		//年份
+		index=getUrlParam("index");
+		if (index=="" || index==null || index=="null" || index=="undefined")
+			index = 0;
+		
+		areaArray = [
+				[
+					{'name':'东城区','value':2910.4},
+					{'name':'西城区','value':5007.3},
+					{'name':'朝阳区','value':0},
+					{'name':'海淀区','value':0},
+					{'name':'丰台区','value':1829.6},
+					{'name':'石景山区','value':806.4},
+					{'name':'门头沟区','value':0},
+					{'name':'房山区','value':0},
+					{'name':'通州区','value':0},
+					{'name':'顺义区','value':0},
+					{'name':'昌平区','value':0},
+					{'name':'大兴区','value':0},
+					{'name':'怀柔区','value':0},
+					{'name':'平谷区','value':0},
+					{'name':'密云区','value':0},
+					{'name':'延庆区','value':0}
+				]		
+			];
+		
+	}(jQuery));
+	
+	</script>
+    
+    <!-- ECharts单文件引入 -->
+    <script src="/templates/view/dcdb/page/echarts/map/require/require.js"></script>
+
+ 	<script>
+		require.config({
+			urlArgs : 'v=' + (new Date()).getTime(),
+			paths : {
+				jquery : '/templates/view/dcdb/page/echarts/map/jquery/jquery-1.7.2.min',
+				json : '/templates/view/dcdb/page/echarts/map/json/BJMapGeoJson',
+				echarts : '/templates/view/dcdb/page/echarts/map/echarts/echarts.min',
+				ProvinceMapUtilColor : '/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gxfz/ylyl/ProvinceMapUtilColor'
+			},
+			shim : {
+
+			}
+		});
+		
+		require([ 'jquery', 'ProvinceMapUtilColor' ], function($, ProvinceMapUtilColor) {
+			ProvinceMapUtilColor.showProvince({
+				idName : "overView1_meddle_cont_maps_bjMap",
+				IdNames : "overView1_meddle_cont_maps_bjMap",
+				data : areaArray[index],
+				Company : "无",
+				clickCallBack : function(param) {
+// 					alert(param.name);
+// 					alert(index);
+// 					alert(window.parent.parent.document.getElementById("dcdb").innerHTML);
+
+					//东城区, 西城区, 朝阳区, 海淀区, 丰台区, 石景山区, 门头沟区, 房山区, 通州区, 顺义区, 昌平区, 大兴区, 平谷区, 怀柔区, 密云区, 延庆区
+					var index = 0;
+					if (param.name=="东城区")
+						index=1;
+					else if (param.name=="西城区")
+						index=2;
+					else if (param.name=="朝阳区")
+						index=3;
+					else if (param.name=="海淀区")
+						index=4;
+					else if (param.name=="丰台区")
+						index=5;
+					else if (param.name=="石景山区")
+						index=6;
+					else if (param.name=="门头沟区")
+						index=7;
+					else if (param.name=="房山区")
+						index=8;
+					else if (param.name=="通州区")
+						index=9;
+					else if (param.name=="顺义区")
+						index=10;
+					else if (param.name=="昌平区")
+						index=11;
+					else if (param.name=="大兴区")
+						index=12;
+					else if (param.name=="平谷区")
+						index=13;
+					else if (param.name=="怀柔区")
+						index=14;
+					else if (param.name=="密云区")
+						index=15;
+					else if (param.name=="延庆区")
+						index=16;
+					if(index!=0)
+						parent.appendData(index);
+				},
+				MapparamDefaultTrue : true,
+				optionData : {
+					series : [ {
+						zoom : 1.25,
+						markLine : {	
+							symbol : [ 'none', 'arrow' ],
+							lineStyle : {
+								type : 'solid',
+								width : 1.5,
+								color : '#58c7ee'//rgba(88,199,238,.5)
+							},
+							data : [ [ {
+								x : '46.5%',
+								y : '71.5%'
+							}, {
+								x : '26%',
+								y : '100%'
+							} ]// 东城区
+// 							[ {
+// 								x : '48.5%',
+// 								y : '70.5%'
+// 							}, {
+// 								x : '85%',
+// 								y : '78%'
+// 							} ],// 西城区
+							]
+						}
+					} ]
+				}
+			})
+		});
+	</script>
+    
+</body>

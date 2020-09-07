@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>大数据专题管理系统</title>	
+<link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+<!--base style!-->
+<link href="/static/css/login.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/js.js"></script>
+</head>
+<script language="javascript">
+	$(function(){
+    $('.loginbox').css({'position':'absolute','left':($(window).width()-900)/2});
+	$(window).resize(function(){  
+    $('.loginbox').css({'position':'absolute','left':($(window).width()-900)/2});
+    })  
+});  
+</script> 
+<body style="background-color: #BDB76B; 
+	background-repeat: no-repeat; background-position: center top; overflow: hidden;">
+	<div class="loginbody">
+		<span class="systemlogo"></span>
+		<div class="loginbox">
+			<ul>
+				<li><input id="loginName" type="text" class="loginuser" value="" placeholder="用户名"
+					onclick="JavaScript:this.value=''" /></li>
+				<li><input id="password" type="password" class="loginpwd" value="" placeholder="密码"
+					onclick="JavaScript:this.value=''" /></li>
+				<li><input id="loginBtn" type="button" class="loginbtn" value="登录" /></li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+<script>
+	//页面初始化
+	$(document).ready(function(e){  
+		//单点登录
+		redirectLogin();
+		
+		//用户名密码登录
+		$("#loginBtn").click(function() {
+			$.ajax({
+				type : "post",
+				url : "/nameLogin",
+				dataType : "json",
+				data : {
+					loginName : $("#loginName").val(),
+					password : $("#password").val()
+				},
+				success : function(resp) {
+					if(resp.code == 200){
+// 						alert("登录成功");
+						loginForward(resp);
+					} else {
+						alert(resp.msg);
+					}
+				}
+			}); 
+
+// 			$.ajax({
+// 				type : "post",
+// 				url : "/userLogin",
+// 				dataType : "json",
+// 				data : {
+// 					'userCode' : 1
+// 				},
+// 				success : function(resp) {
+// 					if(resp.code == 200){
+// 						parent.location.href = "/view/main";
+// 					} else {
+// 						alert(resp.msg);
+// 					}
+// 				}
+// 			});
+		});
+		
+		//回车事件
+		$(document).keypress(function(e) {  
+			if(e.which == 13) {  
+				$("#loginBtn").click();
+			}
+		}); 
+	});
+	
+	//检测登录
+	function checkLogin0(n) {
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/checkLogin",
+			dataType : "json",
+			data : {},
+			success : function(resp) {
+				if(resp.code == 200){
+//						alert("登录成功");
+					loginForward(resp);
+				} else {
+// 					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//单点跳转登录
+	function redirectLogin() {
+		var str=location.href; //取得整个地址栏
+		if (str.indexOf("AUTH_TICKET") != -1) {
+			var num=str.indexOf("?") 
+			str=str.substr(num+1); //取得所有参数   stringvar.substr(start [, length ]
+			var arr=str.split("&");
+			var authTicket;
+			var type;
+			for (var i = 0; i < arr.length; i++) {
+				var name = arr[i].split("=")[0];
+				if (name == "AUTH_TICKET") {
+					authTicket = arr[i].split("=")[1];
+				}
+				if (name == "type") {
+					type = arr[i].split("=")[1];
+				}
+			}
+			$.ajax({
+				async : false,
+				type : "post",
+				url : "/singleLogin",
+				dataType : "json",
+				data : {
+					authTicket : authTicket,
+					type : type
+				},
+				success : function(resp) {
+					if(resp.code == 200){
+						loginForward(resp);
+					} else {
+						checkLogin0("");
+// 						alert(resp.msg == null ? "登录失败" : resp.msg);
+					}
+				}
+			});
+		}
+		else
+			checkLogin0("");
+	}
+	
+	function loginForward(resp) {
+		var pers = "";
+		if (resp.data.roles != null) {
+			for (var i = 0; i < resp.data.roles.length; i++) {
+				if (resp.data.roles[i].permissons != null) {
+					for (var j = 0; j < resp.data.roles[i].permissons.length; j++) {
+						pers = resp.data.roles[i].permissons[j].name + "," + pers;
+					}
+				}
+			}
+		}
+		if (resp.msg == "update") {
+			alert("你的密码已到期，请修改密码");
+			window.location.href = "/static/manage/frame/changePwd.html";
+		}
+		else if (resp.msg == "orign") {
+			alert("你的密码是初始密码，请修改");
+			window.location.href = "/static/manage/frame/changePwd.html";
+		}
+		else {
+			if (resp.data.loginName.indexOf('Admin')>-1)
+				window.location.href = "/static/manage/frame/main.html";
+			else {
+				if ((pers.indexOf("app") != -1) && (resp.data.userSecret == 2))
+					window.location.href = "/templates/view/dcdb/page/main.html";
+				else
+					window.location.href = "/templates/view/noPermission.html";
+			}
+		}
+	}
+
+</script>

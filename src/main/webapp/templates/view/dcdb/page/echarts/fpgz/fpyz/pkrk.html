@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>贫困人口情况</title>
+</head>
+
+<body>
+<!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+<!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+<div id="main" style="width:540px;height:180px;"></div>
+
+<!--Step:2 Import echarts.js-->
+<!--Step:2 引入echarts.js-->
+<script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+
+<script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        myChart.setOption({
+            grid: {
+                show: true,
+                x:20,
+                y:0,
+                x2:20,
+                y2:0,
+                borderWidth: 1,
+                borderColor : '#305078',
+                containLabel: true
+            },
+            title: {
+                x:'right',
+                padding: [-4,24,0,0],
+                textStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 18,
+                    fontWeight: 'normal'
+                },
+            },
+            tooltip: {
+                trigger: 'axis',
+            },
+            xAxis: [{
+                type : 'value',
+                min: 0,
+                max: 150,
+                splitNumber: 5,
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: 'white',
+                        fontFamliy: 'Microsoft YaHei',
+                        fontSize: 14
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        type: 'solid',
+                        color:'rgba(255,255,255,.1)',
+                        width: 0.1
+                    }
+                }
+            }
+            ], yAxis: [{
+                type : 'category',
+                data : ['2017年','2018年','2019年','2020年'],
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: 'white',
+                        fontFamliy: 'Microsoft YaHei',
+                        fontSize: 14
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        type: 'solid',
+                        color:'rgba(255,255,255,.1)',
+                        width: 0.1
+                    }
+                }
+            }],
+            series: [{
+                type: 'bar',
+
+                data: [134, 72.44, 58, 0],
+                barWidth: 24,
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 0,
+                        color: '#F7FE2E'
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'right',
+                        textStyle: {
+                            color: 'white',
+                            fontFamliy: 'Microsoft YaHei',
+                            fontSize: 16
+                        }
+                    }
+                },
+            }]
+        });
+</script>
+</body>
+</html>

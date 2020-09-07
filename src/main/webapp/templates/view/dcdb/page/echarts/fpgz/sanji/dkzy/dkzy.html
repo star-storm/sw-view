@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>扶贫援助合作-北京市各区结对情况一览表</title>
+</head>
+<body>
+
+	<div id="main" style="width: 1170px; height: 680px; color: #fff; font-size: 16px;"></div>
+
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+	<script src="/templates/view/dcdb/page/echarts/map/echarts/echarts.min.js"></script>
+	<script src="/templates/view/dcdb/page/echarts/fpgz/sanji/dkzy/china.js"></script>
+	
+	<script>
+	
+		var myChart = echarts.init(document.getElementById('main'));
+
+		var convertLineData = function(data) {
+			var res = [];
+			for (var i = 0; i < data.length; i++) {
+				var dataItem = data[i];
+				var coordS = dataItem.lineS; //线起点
+				var coordM = dataItem.lineM; //线中间点
+				var coordE = dataItem.lineE; //线尾点
+				if (coordS && coordM && coordE) {
+					res.push({
+						coords : [ coordS, coordM, coordE ]
+					});
+				}
+			}
+			return res;
+		};
+		
+		var convertSData = function(data) {
+			var res = [];
+			for (var i = 0; i < data.length; i++) {
+				var dataItem = data[i];
+				res.push({
+					name : dataItem.areaName,
+					value : dataItem.lineS.concat(dataItem.value)
+				});
+			}
+			return res;
+		};
+		
+		var convertEData = function(data) {
+			var res = [];
+			for (var i = 0; i < data.length; i++) {
+				var dataItem = data[i];
+				res.push({
+					name : dataItem.areaName,
+					value : dataItem.lineE.concat(dataItem.value)
+				});
+			}
+			return res;
+		};
+		
+		var convertSData = function(data) {
+			var res = [];
+			for (var i = 0; i < data.length; i++) {
+				var dataItem = data[i];
+				res.push({
+					name : dataItem.areaName,
+					value : dataItem.lineS.concat(dataItem.value)
+				});
+			}
+			return res;
+		};
+		
+		var json = {
+			data : [ {
+				areaName : '乌鲁木齐',
+				value : '新疆乌鲁木齐',
+				lineS : [ 87.68, 43.77 ],
+				lineM : [ 80.68, 47.77 ],
+				lineE : [ 68.62, 47.77 ]
+			}, {
+				areaName : '和田',
+				value : '新疆和田',
+				lineS : [ 79.94, 37.12 ],
+				lineM : [ 76.94, 42.12 ],
+				lineE : [ 65.7, 42.12 ]
+			}, {
+				areaName : '新疆建设兵团',
+				value : '新疆建设兵团14师',
+				lineS : [ 78.94, 37.32 ],
+				lineM : [ 74.94, 39.32 ],
+				lineE : [ 71.5, 39.32 ]
+			}, {
+				areaName : '玉树',
+				value : '青海玉树',
+				lineS : [ 96.97, 33.03 ],
+				lineM : [ 88.97, 36.03 ],
+				lineE : [ 65.67, 36.03 ]
+			}, {
+				areaName : '拉萨',
+				value : '西藏拉萨市',
+				lineS : [ 91.11, 29.97 ],
+				lineM : [ 80.11, 32.97 ],
+				lineE : [ 65.71, 32.97 ]
+			}, {
+				areaName : '昌都',
+				value : '西藏昌都',
+				lineS : [ 97.44, 30.73 ],
+				lineM : [ 90.44, 27.73 ],
+				lineE : [ 65.72, 27.73 ]
+			} ]
+		};
+		var json0 = {
+				data : [ {
+					areaName : '呼和浩特',
+					value : '内蒙古31个贫困县',
+					lineS : [ 111.65, 40.82 ],
+					lineM : [ 127.65, 47.82 ],
+					lineE : [ 136.65, 47.82 ]
+				}, {
+					areaName : '沈阳',
+					value : '辽宁沈阳',
+					lineS : [ 123.38, 41.8 ],
+					lineM : [ 130.38, 43.8 ],
+					lineE : [ 142.38, 43.8 ]
+				}, {
+					areaName : '张家口',
+					value : '河北张承保23个贫困县',
+					lineS : [ 114.87, 40.82 ],
+					lineM : [ 127.87, 39.82 ],
+					lineE : [ 133.87, 39.82 ]
+				}, {
+					areaName : '郑州',
+					value : '河南6个市县',
+					lineS : [ 113.65, 34.76 ],
+					lineM : [ 126.65, 37.20 ],
+					lineE : [ 140.30, 37.20 ]
+				}, {
+					areaName : '十堰',
+					value : '湖北十堰、神农架10个县区',
+					lineS : [ 110.79, 32.65 ],
+					lineM : [ 124.79, 34.65 ],
+					lineE : [ 131.20, 34.65 ]
+				}, {
+					areaName : '巴东',
+					value : '湖北巴东县',
+					lineS : [ 111.3, 30.7 ],
+					lineM : [ 120.3, 27.7 ],
+					lineE : [ 141.3, 27.7 ]
+				} ]
+			};
+		var data = json.data;
+		var data0 = json0.data;
+		var series = [];
+		series.push({
+			name : '',
+			type : 'lines',
+			zlevel : 2,
+			symbol : 'arrow',
+			silent : true, //不响应鼠标点击或事件
+			effect : {
+				show : false
+			//关闭特效
+			},
+			tooltip : {
+				show : false
+			},
+			polyline : true, //支持多点连线
+			lineStyle : {
+				normal : {
+					color : 'red',
+					width : 1.5,
+					opacity : 0.9,
+					curveness : 0
+				}
+			},
+			data : convertLineData(data)
+		}, {
+			name : '',
+			type : 'scatter',
+			coordinateSystem : 'geo',
+			zlevel : 2,
+			hoverAnimation : false, //hover时不高亮点
+			cursor : 'default', //鼠标设置为箭头
+			itemStyle : {
+				normal : {
+					color : 'orange'
+				}
+			},
+			tooltip : {
+				show : false
+			},
+			label : {
+				normal : {
+					show : false,
+					position : 'right',
+					fontSize : 20,
+					fontWeight : 'bold',
+					color : '#f5a623',
+					formatter : function(param) {
+						return param.value[2];
+					}
+				}
+			},
+			data : convertSData(data)
+		}, {
+			name : '',
+			type : 'scatter',
+			coordinateSystem : 'geo',
+            symbolSize: 1,
+			zlevel : 2,
+			hoverAnimation : false, //hover时不高亮点
+			cursor : 'default', //鼠标设置为箭头
+			itemStyle : {
+				normal : {
+					color : 'orange'
+				}
+			},
+			tooltip : {
+				show : false
+			},
+			label : {
+				normal : {
+					show : true,
+					position : 'left',
+					fontSize : 20,
+
+					color : '#FFF',
+					formatter : function(param) {
+						return param.value[2];
+					}
+				}
+			},
+			data : convertEData(data)
+		},{
+			name : '',
+			type : 'lines',
+			zlevel : 2,
+			symbol : 'arrow',
+			silent : true, //不响应鼠标点击或事件
+			effect : {
+				show : false
+			//关闭特效
+			},
+			tooltip : {
+				show : false
+			},
+			polyline : true, //支持多点连线
+			lineStyle : {
+				normal : {
+					color : 'red',
+					width : 1,
+					opacity : 1,
+					curveness : 0
+				}
+			},
+			data : convertLineData(data0)
+		}, {
+			name : '',
+			type : 'scatter',
+			coordinateSystem : 'geo',
+			zlevel : 2,
+			hoverAnimation : false, //hover时不高亮点
+			cursor : 'default', //鼠标设置为箭头
+			itemStyle : {
+				normal : {
+					color : 'orange'
+				}
+			},
+			tooltip : {
+				show : false
+			},
+			label : {
+				normal : {
+					show : false,
+					position : 'right',
+					fontSize : 20,
+					fontWeight : 'bold',
+					color : '#f5a623',
+					formatter : function(param) {
+						return param.value[2];
+					}
+				}
+			},
+			data : convertSData(data0)
+		}, {
+			name : '',
+			type : 'scatter',
+			coordinateSystem : 'geo',
+            symbolSize: 1,
+			zlevel : 2,
+			hoverAnimation : false, //hover时不高亮点
+			cursor : 'default', //鼠标设置为箭头
+			itemStyle : {
+				normal : {
+					color : 'orange'
+				}
+			},
+			tooltip : {
+				show : false
+			},
+			label : {
+				normal : {
+					show : true,
+					position : 'right',
+					fontSize : 20,
+
+					color : '#FFF',
+					formatter : function(param) {
+						return param.value[2];
+					}
+				}
+			},
+			data : convertEData(data0)
+		});
+
+		var option = {
+	        	grid:{
+	                x:0,
+	                y:0,
+	                x2:0,
+	                y2:0
+	            },
+			geo : {
+				type : 'map',
+				map : 'china',
+				zoom : 1, //当前视角的缩放比例
+				roam : true, //是否开启平游或缩放
+				label: {
+		            normal: {
+		                show: !0,
+		                fontSize: 16,
+		                color: "rgba(0,0,0,0.7)"
+		            }
+		        },
+		        itemStyle: {
+		            normal: {
+		                //shadowBlur: 50,
+		                //shadowColor: 'rgba(0, 0, 0, 0.2)',
+		                borderColor: "rgba(0, 0, 0, 0.2)"
+		            },
+		            emphasis: {
+		                areaColor: "#f2d5ad",
+		                shadowOffsetX: 0,
+		                shadowOffsetY: 0,
+		                borderWidth: 0
+		            }
+		        },
+		        regions: [{
+		            name: '新疆',
+		            itemStyle: {
+		                normal: {
+		                    areaColor: '#F15A25',
+		                    color: 'blue'
+		                }
+		            }
+		        },{
+		            name: '西藏',
+		            itemStyle: {
+		                normal: {
+		                    areaColor: '#F15A25',
+		                    color: 'blue'
+		                }
+		            }
+		        },{
+		            name: '青海',
+		            itemStyle: {
+		                normal: {
+		                    areaColor: '#F15A25',
+		                    color: 'blue'
+		                }
+		            }
+		        },{
+		            name: '内蒙古',
+		            itemStyle: {
+		                normal: {
+		                    areaColor: '#F8931F',
+		                    color: 'blue'
+		                }
+		            }
+		        },{
+		            name: '河北',
+		            itemStyle: {
+		                normal: {
+		                    areaColor: '#F8931F',
+		                    color: 'blue'
+		                }
+		            }
+		        },{
+		            name: '辽宁',
+		            itemStyle: {
+		                normal: {
+		                    areaColor: '#05A9A0',
+		                    color: 'blue'
+		                }
+		            }
+		        },{
+		            name: '河南',
+		            itemStyle: {
+		                normal: {
+		                    areaColor: '#2AAAE1',
+		                    color: 'blue'
+		                }
+		            }
+		        },{
+		            name: '湖北',
+		            itemStyle: {
+		                normal: {
+		                    areaColor: '#2AAAE1',
+		                    color: 'blue'
+		                }
+		            }
+		        }]
+			},
+			series : series
+		};
+
+		myChart.setOption(option);
+	</script>
+
+</body>

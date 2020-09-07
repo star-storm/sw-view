@@ -1,0 +1,902 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+     	var datas = [
+     		//2018,2017,2016,2015,2014
+     		//基本情况
+     			//市科协
+     		[1,1,1,1,1],//机构数
+			[54,54,392,48,392],//机关从业人员
+			//市级学会
+			[185,182,182,178,170],//机构数
+			[1010,1069,999,951,808],//机关从业人员
+			//合计
+			[186,183,183,179,171],//机构数
+			[1064,1123,1391,999,1200],//机关从业人员
+			
+			//科技期刊
+			//市科协
+			[1,4,7,1,1],//主办科技期刊数
+			[60.00,62.65,19.45,2.4,2.25],//科技期刊总印数
+			[0,46,69,17,23],//科技期刊发表论文数
+			//市级学会
+			[31,31,32,32,30],//主办科技期刊数
+			[74.27,90.50,110.71,103.79,107.97],//科技期刊总印数
+			[6262,5952,22209,2883,5461],//科技期刊发表论文数
+			//合计
+			[31,35,39,33,31],//主办科技期刊数
+			[134.27,153.15,130.16,106.19,110.22],//科技期刊总印数
+			[6262,5998,22278,2900,5484],//科技期刊发表论文数
+			
+			//科普活动
+			//市科协
+			[301,345,584,1745,1700],//举办科普宣讲活动
+			[540,840,0,1309,1918],//播放科技广播、影视节目
+			[55,166,520,642,218],//举办实用技术培训
+			//市级学会
+			[1193,1386,3767,4785,4124],//举办科普宣讲活动
+			[1984,1270,3249,4302,6035],//播放科技广播、影视节目
+			[214,227,270,421,463],//举办实用技术培训
+			//合计
+			[1494,1731,4351,6530,5824],//举办科普宣讲活动
+			[2524,2110,3249,5611,7953],//播放科技广播、影视节目
+			[269,393,790,1063,681],//举办实用技术培训
+			
+			//学术交流活动
+			//国内学术会议
+			//市科协
+			[2,2,1,1,2],//举办次数
+			[880,900,120,120,200],//参加人数
+			[7,9,6,18,20],//交流论文
+			//市级学会
+			[832,845,1175,1191,1088],//举办次数
+			[191411,183549,632266,405869,323774],//参加人数
+			[19878,18724,17389,19177,19742],//交流论文
+			//合计
+			[834,847,1176,1192,1090],//举办次数
+			[192291,184449,632386,405989,323974],//参加人数
+			[19885,18733,17395,19195,19762],//交流论文
+			//境内国际学术会议
+			//市科协
+			[3,0,0,0,0],//举办次数
+			[770,0,0,0,0],//参加人数
+			[35,0,0,0,0],//交流论文
+			//市级学会
+			[32,32,71,76,87],//举办次数
+			[9713,10033,17907,14509,10317],//参加人数
+			[1591,1086,2142,2217,2295],//交流论文
+			//合计
+			[35,32,71,76,87],//举办次数
+			[10483,10033,17907,14509,10317],//参加人数
+			[1626,1086,2142,2217,2295],//交流论文
+			//港澳台地区学术会议
+			//市科协
+			[1,0,0,0,0],//举办次数
+			[300,0,0,0,0],//参加人数
+			[50,0,0,0,0],//交流论文
+			//市级学会
+			[3,7,4,11,10],//举办次数
+			[425,712,682,995,1131],//参加人数
+			[4,132,72,253,336],//交流论文
+			//合计
+			[4,7,4,11,10],//举办次数
+			[725,712,682,995,1131],//参加人数
+			[54,132,72,253,336],//交流论文
+			
+			//科技开放与交流
+			//市科协
+			[0,0,0,0,0],//加入国际民间科技组织
+			[45,53,183,135,84],//参加国外科技活动人数
+			[57,26,23,61,11],//参加港澳台地区科技活动人数
+			[178,570,315,373,316],//接待外国专家学者
+			[25,142,80,41,130],//接待港澳台地区专家学者
+			//市级学会
+			[13,10,18,9,11],//加入国际民间科技组织
+			[239,338,380,386,409],//参加国外科技活动人数
+			[246,349,144,277,172],//参加港澳台地区科技活动人数
+			[487,602,677,597,318],//接待外国专家学者
+			[231,325,327,229,205],//接待港澳台地区专家学者
+			//合计
+			[13,10,18,9,11],//加入国际民间科技组织
+			[374,391,563,521,493],//参加国外科技活动人数
+			[303,375,167,338,183],//参加港澳台地区科技活动人数
+			[665,1172,992,970,634],//接待外国专家学者
+			[256,467,407,270,335],//接待港澳台地区专家学者
+			
+			//科技服务
+			//市科协
+			[14,16,14,70,57],//提供决策咨询报告
+			[9,11,21,38,23],//举办决策咨询活动
+			//市级学会
+			[50,63,97,136,135],//提供决策咨询报告
+			[46,63,158,178,183],//举办决策咨询活动
+			//合计
+			[64,79,111,206,192],//提供决策咨询报告
+			[55,74,179,216,206],//举办决策咨询活动
+			
+			//科技传播
+			//市科协
+			[0,0,0,1,1],//举办科技报纸种类
+			[11,4,23,27,14],//制作科普挂图种数
+			[4,5,0,0,26],//制作科技广播、影视节目套数
+			[2,4,4,38,58],//制作科技光盘种数
+			[1,1,1,10,4001],//制作科普动漫作品套数
+			[4,5,5,10,10],//主板科技网站
+			//市级学会
+			[1,1,0,0,0],//举办科技报纸种类
+			[46,66,152,209,189],//制作科普挂图种数
+			[21,23,16,31,30],//制作科技广播、影视节目套数
+			[32,16,24,56,55],//制作科技光盘种数
+			[3,3,15,17,4],//制作科普动漫作品套数
+			[59,54,50,50,49],//主板科技网站
+			//合计
+			[1,1,0,1,1],//举办科技报纸种类
+			[57,70,175,236,203],//制作科普挂图种数
+			[25,28,16,31,56],//制作科技广播、影视节目套数
+			[34,20,28,94,113],//制作科技光盘种数
+			[4,4,16,27,4005],//制作科普动漫作品套数
+			[63,59,55,60,59]//主板科技网站			
+     	];
+      
+      	$(function(){
+	         $(".scrollDiv").niceScroll({
+			 cursorcolor:"#446ba9",
+			 touchbehavior: true,
+			 cursoropacitymax: 1,
+			 cursorborder: "0",
+			 cursorwidth: "10px",
+			 autohidemode: true});
+	 		
+			 $("#contentDiv").html("");
+	         for (var i=0; i<5; i++) {
+		 		 appendContent(i);
+	         }
+		     window.parent.erjiHide(1);
+      	});
+      	
+		function callback0(id) {
+			
+		}
+		
+		function appendContent(i) {
+			$("#contentDiv").append("<div  id='conent"+i+"' style='display:"+(i==0?"block":"none")+"'> "
+					+ " <div  class='fl w mt20'> "
+					+ " 	<span class='fl mr10'><img src='/templates/view/dcdb/images/5fz_more_ico1.png'></span> "
+					+ " 	<span class='fl f20 mt5 ml5 white bold'>基本情况</span> "
+					+ " </div> "
+					+ " <div class='fl w mb20'> "
+					+ " 	<table class='mt20 f18 w xzg_kf_table' border='0' cellspacing='0' cellpadding='0'> "
+					+ " 		<tr class='h50 c_num02'> "
+					+ " 			<th class='xzg_kf_tableTit w310'>统计类目</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市科协</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市级学会</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>合计</th> "
+					+ " 			<th class='xzg_kf_tableTit w100'>单位</th> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>机构数</td> "
+					+ " 			<td>"+datas[0][i]+"</td> "
+					+ " 			<td>"+datas[2][i]+"</td> "
+					+ " 			<td>"+datas[4][i]+"</td> "
+					+ " 			<td>个</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>机关从业人员</td> "
+					+ " 			<td>"+datas[1][i]+"</td> "
+					+ " 			<td>"+datas[3][i]+"</td> "
+					+ " 			<td>"+datas[5][i]+"</td> "
+					+ " 			<td>人</td> "
+					+ " 		</tr> "
+					+ " 	</table> "
+					+ " </div> "
+					+ " <div class='fl w mt20'> "
+					+ " 	<span class='fl mr10'><img src='/templates/view/dcdb/images/5fz_more_ico2.png'></span> "
+					+ " 	<span class='fl f20 mt5 ml5 white bold'>科技期刊</span> "
+					+ " </div> "
+					+ " <div class='fl w mb20'> "
+					+ " 	<table class='mt20 f18 w xzg_kf_table' border='0' cellspacing='0' cellpadding='0'> "
+					+ " 		<tr class='h50 c_num02'> "
+					+ " 			<th class='xzg_kf_tableTit w310'>统计类目</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市科协</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市级学会</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>合计</th> "
+					+ " 			<th class='xzg_kf_tableTit w100'>单位</th> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>主办科技期刊种数</td> "
+					+ " 			<td>"+datas[6][i]+"</td> "
+					+ " 			<td>"+datas[9][i]+"</td> "
+					+ " 			<td>"+datas[12][i]+"</td> "
+					+ " 			<td>种</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>科技期刊总印数</td> "
+					+ " 			<td>"+datas[7][i]+"</td> "
+					+ " 			<td>"+datas[10][i]+"</td> "
+					+ " 			<td>"+datas[13][i]+"</td> "
+					+ " 			<td>万册</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>科技期刊发表论文数</td> "
+					+ " 			<td>"+datas[8][i]+"</td> "
+					+ " 			<td>"+datas[11][i]+"</td> "
+					+ " 			<td>"+datas[14][i]+"</td> "
+					+ " 			<td>篇</td> "
+					+ " 		</tr> "
+					+ " 	</table> "
+					+ " </div> "
+					+ " <div class='fl w mt20'> "
+					+ " 	<span class='fl mr10'><img src='/templates/view/dcdb/images/5fz_more_ico3.png'></span> "
+					+ " 	<span class='fl f20 mt3 ml5 white bold'>科普活动</span> "
+					+ " </div> "
+					+ " <div class='fl w mb20'> "
+					+ " 	<table class='mt20 f18 w xzg_kf_table' border='0' cellspacing='0' cellpadding='0'> "
+					+ " 		<tr class='h50 c_num02'> "
+					+ " 			<th class='xzg_kf_tableTit w310'>统计类目</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市科协</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市级学会</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>合计</th> "
+					+ " 			<th class='xzg_kf_tableTit w100'>单位</th> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>举办科普宣讲活动</td> "
+					+ " 			<td>"+datas[15][i]+"</td> "
+					+ " 			<td>"+datas[18][i]+"</td> "
+					+ " 			<td>"+datas[21][i]+"</td> "
+					+ " 			<td>次</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>播放科技广播、影视节目</td> "
+					+ " 			<td>"+datas[16][i]+"</td> "
+					+ " 			<td>"+datas[19][i]+"</td> "
+					+ " 			<td>"+datas[22][i]+"</td> "
+					+ " 			<td>分钟</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>举办实用技术培训</td> "
+					+ " 			<td>"+datas[17][i]+"</td> "
+					+ " 			<td>"+datas[20][i]+"</td> "
+					+ " 			<td>"+datas[23][i]+"</td> "
+					+ " 			<td>次</td> "
+					+ " 		</tr> "
+					+ " 	</table> "
+					+ " </div> "
+					+ " <div class='fl w mt20'> "
+					+ " 	<span class='fl mr10'><img src='/templates/view/dcdb/images/5fz_more_ico4.png'></span> "
+					+ " 	<span class='fl f20 mt3 ml5 white bold'>学术交流活动</span> "
+					+ " </div> "
+					+ " <div class='fl w mb20'> "
+					+ " 	<table class='mt20 f18 w xzg_kf_table' border='0' cellspacing='0' cellpadding='0'> "
+					+ " 		<tr class='h50 c_num02'> "
+					+ " 		  <th rowspan='4' class='w100 tc'><span class='white'>国内学术</br>会议</span></th> "
+					+ " 			<th class='xzg_kf_tableTit w210'>统计类目</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市科协</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市级学会</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>合计</th> "
+					+ " 			<th class='xzg_kf_tableTit w100'>单位</th> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 		  <td>举办次数</td> "
+					+ " 			<td>"+datas[24][i]+"</td> "
+					+ " 			<td>"+datas[27][i]+"</td> "
+					+ " 			<td>"+datas[30][i]+"</td> "
+					+ " 			<td>次</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 		  <td>参加人数</td> "
+					+ " 			<td>"+datas[25][i]+"</td> "
+					+ " 			<td>"+datas[28][i]+"</td> "
+					+ " 			<td>"+datas[31][i]+"</td> "
+					+ " 			<td>人次</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 		  <td>交流论文</td> "
+					+ " 			<td>"+datas[26][i]+"</td> "
+					+ " 			<td>"+datas[29][i]+"</td> "
+					+ " 			<td>"+datas[32][i]+"</td> "
+					+ " 			<td>篇</td> "
+					+ " 		</tr> "
+					+ " 	</table> "
+					+ " 	<table class='mt20 f18 w xzg_kf_table' border='0' cellspacing='0' cellpadding='0'> "
+					+ " 		<tr class='h50 c_num02'> "
+					+ " 		  <th rowspan='4' class='w100 tc'><span class='white'>境内国际</br>学术会议</span></th> "
+					+ " 			<th class='xzg_kf_tableTit w210'>统计类目</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市科协</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市级学会</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>合计</th> "
+					+ " 			<th class='xzg_kf_tableTit w100'>单位</th> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 		  <td>举办次数</td> "
+					+ " 			<td>"+datas[33][i]+"</td> "
+					+ " 			<td>"+datas[36][i]+"</td> "
+					+ " 			<td>"+datas[39][i]+"</td> "
+					+ " 			<td>次</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 		  <td>参加人数</td> "
+					+ " 			<td>"+datas[34][i]+"</td> "
+					+ " 			<td>"+datas[37][i]+"</td> "
+					+ " 			<td>"+datas[40][i]+"</td> "
+					+ " 			<td>人次</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 		  <td>交流论文</td> "
+					+ " 			<td>"+datas[35][i]+"</td> "
+					+ " 			<td>"+datas[38][i]+"</td> "
+					+ " 			<td>"+datas[41][i]+"</td> "
+					+ " 			<td>篇</td> "
+					+ " 		</tr> "
+					+ " 	</table> "
+					+ " 	<table class='mt20 f18 w xzg_kf_table' border='0' cellspacing='0' cellpadding='0'> "
+					+ " 		<tr class='h50 c_num02'> "
+					+ " 		  <th rowspan='4' class='w100 tc'><span class='white'>港澳台地区</br>学术会议</span></th> "
+					+ " 			<th class='xzg_kf_tableTit w210'>统计类目</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市科协</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市级学会</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>合计</th> "
+					+ " 			<th class='xzg_kf_tableTit w100'>单位</th> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 		  <td>举办次数</td> "
+					+ " 			<td>"+datas[42][i]+"</td> "
+					+ " 			<td>"+datas[45][i]+"</td> "
+					+ " 			<td>"+datas[48][i]+"</td> "
+					+ " 			<td>次</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 		  <td>参加人数</td> "
+					+ " 			<td>"+datas[43][i]+"</td> "
+					+ " 			<td>"+datas[46][i]+"</td> "
+					+ " 			<td>"+datas[49][i]+"</td> "
+					+ " 			<td>人次</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 		  <td>交流论文</td> "
+					+ " 			<td>"+datas[44][i]+"</td> "
+					+ " 			<td>"+datas[47][i]+"</td> "
+					+ " 			<td>"+datas[50][i]+"</td> "
+					+ " 			<td>篇</td> "
+					+ " 		</tr> "
+					+ " 	</table> "
+					+ " </div> "
+					+ " <div class='fl w mt20'> "
+					+ " 	<span class='fl mr10'><img src='/templates/view/dcdb/images/5fz_more_ico5.png'></span> "
+					+ " 	<span class='fl f20 mt3 ml5 white bold'>科技开放与交流</span> "
+					+ " </div> "
+					+ " <div class='fl w mb20'> "
+					+ " 	<table class='mt20 f18 w xzg_kf_table' border='0' cellspacing='0' cellpadding='0'> "
+					+ " 		<tr class='h50 c_num02'> "
+					+ " 			<th class='xzg_kf_tableTit w310'>统计类目</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市科协</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市级学会</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>合计</th> "
+					+ " 			<th class='xzg_kf_tableTit w100'>单位</th> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>加入国际民间科技组织</td> "
+					+ " 			<td>"+datas[51][i]+"</td> "
+					+ " 			<td>"+datas[56][i]+"</td> "
+					+ " 			<td>"+datas[61][i]+"</td> "
+					+ " 			<td>个</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>参加国外科技活动人数</td> "
+					+ " 			<td>"+datas[52][i]+"</td> "
+					+ " 			<td>"+datas[57][i]+"</td> "
+					+ " 			<td>"+datas[62][i]+"</td> "
+					+ " 			<td>人次</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>参加港澳台地区科技活动人数</td> "
+					+ " 			<td>"+datas[53][i]+"</td> "
+					+ " 			<td>"+datas[58][i]+"</td> "
+					+ " 			<td>"+datas[63][i]+"</td> "
+					+ " 			<td>人次</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td> 接待国外专家学者</td> "
+					+ " 			<td>"+datas[54][i]+"</td> "
+					+ " 			<td>"+datas[59][i]+"</td> "
+					+ " 			<td>"+datas[64][i]+"</td> "
+					+ " 			<td>人次</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>接待港澳台地区专家学者</td> "
+					+ " 			<td>"+datas[55][i]+"</td> "
+					+ " 			<td>"+datas[60][i]+"</td> "
+					+ " 			<td>"+datas[65][i]+"</td> "
+					+ " 			<td>人次</td> "
+					+ " 		</tr> "
+					+ " 	</table> "
+					+ " </div> "
+					+ " <div class='fl w mt20'> "
+					+ " 	<span class='fl mr10'><img src='/templates/view/dcdb/images/5fz_more_ico6.png'></span> "
+					+ " 	<span class='fl f20 mt3 ml5 white bold'>科技服务</span> "
+					+ " </div> "
+					+ " <div class='fl w mb20'> "
+					+ " 	<table class='mt20 f18 w xzg_kf_table' border='0' cellspacing='0' cellpadding='0'> "
+					+ " 		<tr class='h50 c_num02'> "
+					+ " 			<th class='xzg_kf_tableTit w310'>统计类目</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市科协</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市级学会</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>合计</th> "
+					+ " 			<th class='xzg_kf_tableTit w100'>单位</th> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>提供决策咨询报告</td> "
+					+ " 			<td>"+datas[66][i]+"</td> "
+					+ " 			<td>"+datas[68][i]+"</td> "
+					+ " 			<td>"+datas[70][i]+"</td> "
+					+ " 			<td>篇</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>举办决策咨询活动</td> "
+					+ " 			<td>"+datas[67][i]+"</td> "
+					+ " 			<td>"+datas[69][i]+"</td> "
+					+ " 			<td>"+datas[71][i]+"</td> "
+					+ " 			<td>次</td> "
+					+ " 		</tr> "
+					+ " 	</table> "
+					+ " </div> "
+					+ " <div class='fl w mt20'> "
+					+ " 	<span class='fl mr10'><img src='/templates/view/dcdb/images/5fz_more_ico7.png'></span> "
+					+ " 	<span class='fl f20 mt3 ml5 white bold'>科技传播</span> "
+					+ " </div> "
+					+ " <div class='fl w mb20'> "
+					+ " 	<table class='mt20 f18 w xzg_kf_table' border='0' cellspacing='0' cellpadding='0'> "
+					+ " 		<tr class='h50 c_num02'> "
+					+ " 			<th class='xzg_kf_tableTit w310'>统计类目</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市科协</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>市级学会</th> "
+					+ " 			<th class='xzg_kf_tableTit w250'>合计</th> "
+					+ " 			<th class='xzg_kf_tableTit w100'>单位</th> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>主办科技报纸种数</td> "
+					+ " 			<td>"+datas[72][i]+"</td> "
+					+ " 			<td>"+datas[78][i]+"</td> "
+					+ " 			<td>"+datas[84][i]+"</td> "
+					+ " 			<td>种</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>制作科普挂图种数</td> "
+					+ " 			<td>"+datas[73][i]+"</td> "
+					+ " 			<td>"+datas[79][i]+"</td> "
+					+ " 			<td>"+datas[85][i]+"</td> "
+					+ " 			<td>种</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>制作科技广播、影视节目套数</td> "
+					+ " 			<td>"+datas[74][i]+"</td> "
+					+ " 			<td>"+datas[80][i]+"</td> "
+					+ " 			<td>"+datas[86][i]+"</td> "
+					+ " 			<td>套</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td> 制作科技光盘种数</td> "
+					+ " 			<td>"+datas[75][i]+"</td> "
+					+ " 			<td>"+datas[81][i]+"</td> "
+					+ " 			<td>"+datas[87][i]+"</td> "
+					+ " 			<td>种</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>制作科普动漫作品套数</td> "
+					+ " 			<td>"+datas[76][i]+"</td> "
+					+ " 			<td>"+datas[82][i]+"</td> "
+					+ " 			<td>"+datas[88][i]+"</td> "
+					+ " 			<td>套</td> "
+					+ " 		</tr> "
+					+ " 		<tr class='h50 white tc'> "
+					+ " 			<td>主办科技网站</td> "
+					+ " 			<td>"+datas[77][i]+"</td> "
+					+ " 			<td>"+datas[83][i]+"</td> "
+					+ " 			<td>"+datas[89][i]+"</td> "
+					+ " 			<td>个</td> "
+					+ " 		</tr> "
+					+ " 	</table> "
+					+ " </div>");
+		}
+    </script>
+</head>
+<body>
+<div class="fl w h1000 cx_morebg">	
+	<div class="fl w h61 titbg">
+		<div class="fl ml610 w700 tl">
+			<span class="fl w f24 white tc mt10 bold">科学技术协会及所属学会工作情况</span>
+		</div>
+		<div class="fr mr270 mt10"><a href="javascript:history.go(-1)"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w">
+		<div class="fl w410 h800 ml45 mt25 scrollDiv" style="height:800px;overflow:auto;">
+			<div class="fl w390 ml10">
+				<span onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_On"><font class="fl w f24 tc mt10">2018年</font></span>
+				<span onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2017年</font></span>
+				<span onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2016年</font></span>
+				<span onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2015年</font></span>
+				<span onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2014年</font></span>
+			</div>		
+		</div>
+		<div class="fl w1360 h860 ml55 mt25">
+			<div class="fl w f24 tc bold white mt20 h60">科学技术协会及所属学会工作情况总览</div>
+			<div class="fl w scrollDiv"  style="height:740px;overflow:auto;">
+				<div id="contentDiv" class="fl w1160 ml100">
+					<div id="conent0"></div>
+					<div id="conent1"></div>
+					<div id="conent2"></div>
+					<div id="conent3"></div>
+					<div id="conent4"></div>
+					<!-- <div class="fl w mt20">					
+						<span class="fl mr10"><img src="/templates/view/dcdb/images/5fz_more_ico1.png"></span>
+						<span class="fl f20 mt5 ml5 white bold">基本情况</span>
+					</div>
+					<div class="fl w mb20">
+						<table class="mt20 f18 w xzg_kf_table" border="0" cellspacing="0" cellpadding="0">
+							<tr class="h50 c_num02">
+								<th class="xzg_kf_tableTit w310">统计类目</th>
+								<th class="xzg_kf_tableTit w250">市科协</th>
+								<th class="xzg_kf_tableTit w250">市级学会</th>
+								<th class="xzg_kf_tableTit w250">合计</th>
+								<th class="xzg_kf_tableTit w100">单位</th>
+							</tr>
+							<tr class="h50 white tc">
+								<td>机构数</td>
+								<td>1</td>
+								<td>185</td>
+								<td>186</td>
+								<td>个</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>机关从业人员</td>
+								<td>54</td>
+								<td>1010</td>
+								<td>1064</td>
+								<td>人</td>
+							</tr>
+						</table>
+					</div>
+					<div class="fl w mt20">
+						<span class="fl mr10"><img src="/templates/view/dcdb/images/5fz_more_ico2.png"></span>
+						<span class="fl f20 mt5 ml5 white bold">科技期刊</span>
+					</div>
+					<div class="fl w mb20">
+						<table class="mt20 f18 w xzg_kf_table" border="0" cellspacing="0" cellpadding="0">
+							<tr class="h50 c_num02">
+								<th class="xzg_kf_tableTit w310">统计类目</th>
+								<th class="xzg_kf_tableTit w250">市科协</th>
+								<th class="xzg_kf_tableTit w250">市级学会</th>
+								<th class="xzg_kf_tableTit w250">合计</th>
+								<th class="xzg_kf_tableTit w100">单位</th>
+							</tr>
+							<tr class="h50 white tc">
+								<td>主办科技期刊种数</td>
+								<td>1</td>
+								<td>31</td>
+								<td>32</td>
+								<td>种</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>科技期刊总印数</td>
+								<td>600000</td>
+								<td>742698</td>
+								<td>1342698</td>
+								<td>万册</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>科技期刊发表论文数</td>
+								<td>0</td>
+								<td>6262</td>
+								<td>6262</td>
+								<td>篇</td>
+							</tr>
+						</table>
+					</div>
+					<div class="fl w mt20">
+						<span class="fl mr10"><img src="/templates/view/dcdb/images/5fz_more_ico3.png"></span>
+						<span class="fl f20 mt3 ml5 white bold">科普活动</span>
+					</div>
+					<div class="fl w mb20">
+						<table class="mt20 f18 w xzg_kf_table" border="0" cellspacing="0" cellpadding="0">
+							<tr class="h50 c_num02">
+								<th class="xzg_kf_tableTit w310">统计类目</th>
+								<th class="xzg_kf_tableTit w250">市科协</th>
+								<th class="xzg_kf_tableTit w250">市级学会</th>
+								<th class="xzg_kf_tableTit w250">合计</th>
+								<th class="xzg_kf_tableTit w100">单位</th>
+							</tr>
+							<tr class="h50 white tc">
+								<td>举办科普宣讲活动</td>
+								<td>301</td>
+								<td>1193</td>
+								<td>1494</td>
+								<td>次</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>播放科技广播、影视节目</td>
+								<td>540</td>
+								<td>1984</td>
+								<td>2524</td>
+								<td>分钟</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>举办实用技术培训</td>
+								<td>55</td>
+								<td>214</td>
+								<td>269</td>
+								<td>次</td>
+							</tr>
+						</table>
+					</div>
+					<div class="fl w mt20">
+						<span class="fl mr10"><img src="/templates/view/dcdb/images/5fz_more_ico4.png"></span>
+						<span class="fl f20 mt3 ml5 white bold">学术交流活动</span>
+					</div>
+					<div class="fl w mb20">
+						<table class="mt20 f18 w xzg_kf_table" border="0" cellspacing="0" cellpadding="0">
+							<tr class="h50 c_num02">
+							  <th rowspan="4" class="w100 tc"><span class="white">国内学术</br>会议</span></th>
+								<th class="xzg_kf_tableTit w210">统计类目</th>
+								<th class="xzg_kf_tableTit w250">市科协</th>
+								<th class="xzg_kf_tableTit w250">市级学会</th>
+								<th class="xzg_kf_tableTit w250">合计</th>
+								<th class="xzg_kf_tableTit w100">单位</th>
+							</tr>
+							<tr class="h50 white tc">
+							  <td>举办次数</td>
+								<td>2</td>
+								<td>832</td>
+								<td>834</td>
+								<td>次</td>
+							</tr>
+							<tr class="h50 white tc">
+							  <td>参加人数</td>
+								<td>880</td>
+								<td>191411</td>
+								<td>192291</td>
+								<td>人次</td>
+							</tr>
+							<tr class="h50 white tc">
+							  <td>交流论文</td>
+								<td>7</td>
+								<td>19878</td>
+								<td>19885</td>
+								<td>篇</td>
+							</tr>
+						</table>
+						<table class="mt20 f18 w xzg_kf_table" border="0" cellspacing="0" cellpadding="0">
+							<tr class="h50 c_num02">
+							  <th rowspan="4" class="w100 tc"><span class="white">境内国际</br>学术会议</span></th>
+								<th class="xzg_kf_tableTit w210">统计类目</th>
+								<th class="xzg_kf_tableTit w250">市科协</th>
+								<th class="xzg_kf_tableTit w250">市级学会</th>
+								<th class="xzg_kf_tableTit w250">合计</th>
+								<th class="xzg_kf_tableTit w100">单位</th>
+							</tr>
+							<tr class="h50 white tc">
+							  <td>举办次数</td>
+								<td>3</td>
+								<td>32</td>
+								<td>35</td>
+								<td>次</td>
+							</tr>
+							<tr class="h50 white tc">
+							  <td>参加人数</td>
+								<td>770</td>
+								<td>9713</td>
+								<td>10483</td>
+								<td>人次</td>
+							</tr>
+							<tr class="h50 white tc">
+							  <td>交流论文</td>
+								<td>35</td>
+								<td>1591</td>
+								<td>1626</td>
+								<td>篇</td>
+							</tr>
+						</table>
+						<table class="mt20 f18 w xzg_kf_table" border="0" cellspacing="0" cellpadding="0">
+							<tr class="h50 c_num02">
+							  <th rowspan="4" class="w100 tc"><span class="white">港澳台地区</br>学术会议</span></th>
+								<th class="xzg_kf_tableTit w210">统计类目</th>
+								<th class="xzg_kf_tableTit w250">市科协</th>
+								<th class="xzg_kf_tableTit w250">市级学会</th>
+								<th class="xzg_kf_tableTit w250">合计</th>
+								<th class="xzg_kf_tableTit w100">单位</th>
+							</tr>
+							<tr class="h50 white tc">
+							  <td>举办次数</td>
+								<td>1</td>
+								<td>3</td>
+								<td>4</td>
+								<td>次</td>
+							</tr>s
+							<tr class="h50 white tc">
+							  <td>参加人数</td>
+								<td>300</td>
+								<td>425</td>
+								<td>725</td>
+								<td>人次</td>
+							</tr>
+							<tr class="h50 white tc">
+							  <td>交流论文</td>
+								<td>50</td>
+								<td>4</td>
+								<td>54</td>
+								<td>篇</td>
+							</tr>
+						</table>
+					</div>
+					<div class="fl w mt20">
+						<span class="fl mr10"><img src="/templates/view/dcdb/images/5fz_more_ico5.png"></span>
+						<span class="fl f20 mt3 ml5 white bold">科技开放与交流</span>
+					</div>
+					<div class="fl w mb20">
+						<table class="mt20 f18 w xzg_kf_table" border="0" cellspacing="0" cellpadding="0">
+							<tr class="h50 c_num02">
+								<th class="xzg_kf_tableTit w310">统计类目</th>
+								<th class="xzg_kf_tableTit w250">市科协</th>
+								<th class="xzg_kf_tableTit w250">市级学会</th>
+								<th class="xzg_kf_tableTit w250">合计</th>
+								<th class="xzg_kf_tableTit w100">单位</th>
+							</tr>
+							<tr class="h50 white tc">
+								<td>加入国际民间科技组织</td>
+								<td>0</td>
+								<td>13</td>
+								<td>13</td>
+								<td>个</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>参加国外科技活动人数</td>
+								<td>45</td>
+								<td>239</td>
+								<td>374</td>
+								<td>人次</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>参加港澳台地区科技活动人数</td>
+								<td>57</td>
+								<td>246</td>
+								<td>303</td>
+								<td>人次</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td> 接待国外专家学者</td>
+								<td>178</td>
+								<td>487</td>
+								<td>665</td>
+								<td>人次</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>接待港澳台地区专家学者</td>
+								<td>25</td>
+								<td>231</td>
+								<td>256</td>
+								<td>人次</td>
+							</tr>
+						</table>
+					</div>
+					<div class="fl w mt20">
+						<span class="fl mr10"><img src="/templates/view/dcdb/images/5fz_more_ico6.png"></span>
+						<span class="fl f20 mt3 ml5 white bold">科技服务</span>
+					</div>
+					<div class="fl w mb20">
+						<table class="mt20 f18 w xzg_kf_table" border="0" cellspacing="0" cellpadding="0">
+							<tr class="h50 c_num02">
+								<th class="xzg_kf_tableTit w310">统计类目</th>
+								<th class="xzg_kf_tableTit w250">市科协</th>
+								<th class="xzg_kf_tableTit w250">市级学会</th>
+								<th class="xzg_kf_tableTit w250">合计</th>
+								<th class="xzg_kf_tableTit w100">单位</th>
+							</tr>
+							<tr class="h50 white tc">
+								<td>提供决策咨询报告</td>
+								<td>14</td>
+								<td>50</td>
+								<td>64</td>
+								<td>篇</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>举办决策咨询活动</td>
+								<td>9</td>
+								<td>46</td>
+								<td>55</td>
+								<td>次</td>
+							</tr>
+						</table>
+					</div>
+					<div class="fl w mt20">
+						<span class="fl mr10"><img src="/templates/view/dcdb/images/5fz_more_ico7.png"></span>
+						<span class="fl f20 mt3 ml5 white bold">科技传播</span>
+					</div>
+					<div class="fl w mb20">
+						<table class="mt20 f18 w xzg_kf_table" border="0" cellspacing="0" cellpadding="0">
+							<tr class="h50 c_num02">
+								<th class="xzg_kf_tableTit w310">统计类目</th>
+								<th class="xzg_kf_tableTit w250">市科协</th>
+								<th class="xzg_kf_tableTit w250">市级学会</th>
+								<th class="xzg_kf_tableTit w250">合计</th>
+								<th class="xzg_kf_tableTit w100">单位</th>
+							</tr>
+							<tr class="h50 white tc">
+								<td>主办科技报纸种数</td>
+								<td>0</td>
+								<td>1</td>
+								<td>1</td>
+								<td>种</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>制作科普挂图种数</td>
+								<td>11</td>
+								<td>46</td>
+								<td>57</td>
+								<td>种</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>制作科技广播、影视节目套数</td>
+								<td>4</td>
+								<td>21</td>
+								<td>25</td>
+								<td>套</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td> 制作科技光盘种数</td>
+								<td>2</td>
+								<td>32</td>
+								<td>34</td>
+								<td>种</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>制作科普动漫作品套数</td>
+								<td>1</td>
+								<td>3</td>
+								<td>4</td>
+								<td>套</td>
+							</tr>
+							<tr class="h50 white tc">
+								<td>主办科技网站</td>
+								<td>4</td>
+								<td>59</td>
+								<td>63</td>
+								<td>个</td>
+							</tr>
+						</table>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sjly_div pa h38 tc"><span class="fl w mt13 tc">数据来源方：市统计局</span></div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width:"128px"
+		});
+	});
+</script>
+</html>

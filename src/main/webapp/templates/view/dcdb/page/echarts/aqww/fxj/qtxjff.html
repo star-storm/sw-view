@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>其他邪教防范处置情况</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:540px;height:270px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+    	var datas0=['判刑','刑事拘留','行政拘留','进转化班','教育释放','移交原籍','其他处理'];
+    	var datas1=[450, 420, 398, 370, 349, 280, 200];
+    
+	    var myChart = echarts.init(document.getElementById('main'));
+	    myChart.setOption({
+// 	    	  backgroundColor: '#000',
+	    	  title: {
+	                text: '单位：起',
+	            	x:'right',
+	            	padding: [-7,30,0,0],
+	                textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 16,
+	                    fontWeight: 'normal'
+	                }
+	    	  },
+	    	  tooltip: {
+	    	    trigger: 'item'
+	    	  },
+	    	  grid: {
+	    	    borderWidth: 0,
+	    	    top: '4%',
+	    	    left: '16%',
+	    	    right: '8%',
+	    	    bottom: '3%'
+	    	  },
+	    	  color: '#fff',
+	    	  yAxis: [{
+	    	    type: 'category',
+	    	    inverse: true,
+	    	    axisLine: {
+	    	      show: false
+	    	    },
+	    	    splitLine: {
+	    	      show: false
+	    	    },
+	    	    axisTick: {
+	    	      show: false
+	    	    },
+	    	    axisLabel: {
+	    	      	show: true,
+	                textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 14,
+	                    fontWeight: 'normal'
+	                }
+	    	    },
+	    	    data: datas0
+	    	  }],
+	    	  xAxis: {
+	    	    type: 'value',
+	    	    axisTick: {
+	    	      show: false
+	    	    },
+	    	    axisLine: {
+	    	      show: false
+	    	    },
+	    	    splitLine: {
+	    	      show: false
+	    	    },
+	    	    axisLabel: {
+	    	      	show: true,
+	                textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 16,
+	                    fontWeight: 'normal'
+	                }
+	    	    }
+	    	  },
+	    	  series: [
+	    	    {
+	    	      name: '',
+	    	      type: 'bar',
+	    	      barWidth: 14,
+	    	      itemStyle: {
+	    	        normal: {
+	    	          show: true,
+	    	          color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+	    	            offset: 0,
+	    	            color: 'rgba(169,243,58,1)'
+	    	          }, {
+	    	            offset: 1,
+	    	            color: 'rgba(215,251,160,1)'
+	    	          }], false),
+	    	          barBorderRadius: 10
+	    	        },
+	    	        emphasis: {
+	    	          shadowBlur: 15,
+	    	          shadowColor: 'rgba(0, 0, 0, 0.1)'
+	    	        }
+	    	      },
+	    	      data: datas1,
+	    	      animationDuration: 1500,
+	    	      label: {
+	    	        normal: {
+	    	          color: '#fff',
+	    	          show: true,
+	    	          position: 'right',
+	    	          textStyle: {
+	    	            fontSize: 16,
+	    	            fontStyle: 'italic',
+	    	            fontFamily: 'DINPro-Light'
+	    	          }
+	    	        }
+	    	      }
+	    	    }
+	    	  ],
+	    	  animationEasing: 'cubicOut'
+	    	});
+    </script>
+</body>
+</html>

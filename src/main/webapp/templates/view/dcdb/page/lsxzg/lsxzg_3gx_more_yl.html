@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    
+    <script>
+    	var datas = [
+    		['全市',      '东城区',   '西城区',   '朝阳区',   '海淀区',   '丰台区',   '石景山区',   '门头沟区',   '房山区',   '通州区',   '顺义区',   '昌平区',   '大兴区',   '平谷区',   '怀柔区',   '密云区',   '延庆区'],//各区
+    		[11311,       554,         702,        1730,       1249,       535,        228,         265,          1038,       616,        778,        1112,       823,        274,        483,        574,         333    ],//卫生医疗机构
+    		[733,         63,          -1,         -1,         -1,         78,         -1,          13,           -1,         23,         19,         82,         42,         7,          13,         -1,          -1     ],//医院
+    		[12.6,        11709,       17439,      23747,      15953,      13497,      5506,        3189,         6018,       5694,       4350,       13016,      6313,       2633,       2102,       1992,        1259   ],//编制床位数
+    		[11.8,        9938,        17411,      24487,      13546,      12622,      4868,        2981,         6489,       4113,       3909,       12237,      7501,       2123,       1982,       1802,        1102   ],//实有床位数
+    		[369139,      34183,       47261,      71583,      46473,      29156,      10408,       4804,         14565,      12935,      11449,      22571,      17436,      4986,       4889,       5139,        3380   ],//卫生人员
+    		[297259,      25943,       39257,      55759,      37140,      23329,      8470,        3769,         10883,      10217,      9050,       17549,      13448,      4156,       3843,       4052,        2743   ],//卫技人员
+    		[115771,      10245,       13966,      22190,      14314,      9536,       3209,        1357,         4158,       3933,       3916,       6687,       5076,       1723,       1691,       2053,        1194   ],//执业（助理）医师
+    		[131314,      10731,       17847,      24486,      16274,      9586,       3708,        1647,         4378,       3894,       3419,       7898,       5427,       1605,       1329,       1263,        1054   ],//注册护士
+    		[585,         12.52,       15.31,      7.05,       4.18,       6.23,       8.54,        8.67,         5.17,       2.46,       3.18,       5.65,       3.97,       4.6,        4.7,        3.58,        3.09   ],//每千人常住人口实有床位数
+    		[5.0,         2465.79,     -1,         -1,         -1,         2265.4,     -1,          414.5,        -1,         -1,         -1,         1338.4,     1028.8,     -1,         -1,         563.4,       -1     ],//医疗机构总诊疗
+    		[82.31,       84.25,       -1,         -1,         -1,         -1,         -1,          -1,           -1,         -1,         -1,         -1,         -1,         -1,         -1,         -1,          -1     ]//人均期望寿命
+    	];
+    	var qsData = [5.9, 17209.1];
+    
+    
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+	     window.parent.erjiHide(1);
+	     appendData(0);
+      });
+      function callback0() {}
+      
+      function appendData(i) {
+    	  $("#contentDiv").html("");
+    	  $("#titDiv").html(datas[0][i]+"医疗与养老情况（2019年）");
+    	  if (i==0)
+    		  $("#contentDiv").html(""
+// 	    			  + "<div class='fl w803 h52 lh32 f18 bold   mt10 ml15'>"+datas[0][i]+"</div>"
+        			  + "<div class='fl w803 h32 lh32 gx_tit01 ti10 mt10 ml15'>医院基本情况</div>"
+        			  + "<div class='fl w800 ml8 ml20'>"
+        			  + (datas[1][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+        			  + "		<span class='fl  ml20'>医疗卫生机构</span>"
+        			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[1][i]+"</span>"
+        			  + "		<span class='fl  ml10 white'>个</span>"
+        			  + "	</div>")
+        			  + (datas[2][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+        			  + "		<span class='fl  ml20'>医院</span>"
+        			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[2][i]+"</span>"
+        			  + "		<span class='fl  ml10 white'>家</span>"
+        			  + "	</div>")
+        			  + "</div>"
+        			  + "<div class='fl w800 ml8 ml20'>"
+        			  + (datas[3][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+        			  + "		<span class='fl  ml20'>医疗机构床位总数</span>"
+        			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[3][i]+"</span>"
+        			  + "		<span class='fl  ml10 white'>万张</span>"
+        			  + "	</div>")
+        			  + (datas[4][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+        			  + "		<span class='fl  ml20'>医院床位总数</span>"
+        			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[4][i]+"</span>"
+        			  + "		<span class='fl  ml10 white'>万张</span>"
+        			  + "	</div>")
+        			  + "</div>"
+        			  + "<div class='fl w803 h32 lh32 gx_tit01 ti10 mt10 ml15'>卫生人员情况</div>"
+        			  + "<div class='fl w800 ml8 ml20'>"
+	    			  + (datas[5][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>卫生人员</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[5][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>人</span>"
+	    			  + "	</div>")
+	    			  + (datas[6][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>卫技人员</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[6][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>人</span>"
+	    			  + "	</div>")
+	    			  + (datas[7][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>执业（助理）医师</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[7][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>人</span>"
+	    			  + "	</div>")
+	    			  + (datas[8][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>注册护士</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[8][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>人</span>"
+	    			  + "	</div>")
+	    			  + "</div>"
+        			  + "<div class='fl w803 h32 lh32 gx_tit01 ti10 mt10 ml10'>收养性单位情况</div>"
+        			  + "<div class='fl w800 ml8 ml20'>"
+        			  + (datas[9][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+        			  + "		<span class='fl  ml20'>收养性单位</span>"
+        			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[9][i]+"</span>"
+        			  + "		<span class='fl  ml10 white'>家</span>"
+        			  + "	</div>")
+        			  + (datas[10][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+        			  + "		<span class='fl  ml20'>年末在院人数</span>"
+        			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[10][i]+"</span>"
+        			  + "		<span class='fl  ml10 white'>万人</span>"
+        			  + "	</div>")
+        			  + "</div>"
+        			  + "<div class='fl w803 h32 lh32 gx_tit01 ti10 mt10 ml10'>卫生资源情况</div>"
+        			  + "<div class='fl w800 ml8 ml20'>"
+	    			  + (datas[9][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>每千人常住人口实有床位数</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+qsData[0]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>张</span>"
+	    			  + "	</div>")
+	    			  + (datas[10][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>医疗机构总诊疗</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+qsData[1]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>万人次</span>"
+	    			  + "	</div>")
+	    			  + "</div>"
+        			  + (datas[11][i]==-1?"":"<div class='fl w803 h32 lh32 gx_tit01 ti10 mt10 ml10'>人均期望寿命情况</div>"
+        			  + "<div class='fl w800 ml8 ml20'>"
+        			  + "	<div class='fl w h51 lh50 mt8 gx_conbg1 f16'>"
+        			  + "		<span class='fl  ml20'>人均期望寿命</span>"
+        			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[11][i]+"</span>"
+        			  + "		<span class='fl  ml10 white'>岁</span>"
+        			  + "	</div>"
+        			  + "</div>"));
+    	  else
+	    	  $("#contentDiv").html(""
+// 	    			  + "<div class='fl w803 h52 lh32 f18 bold   mt10 ml15'>"+datas[0][i]+"</div>"
+	    			  + "<div class='fl w803 h32 lh32 gx_tit01 ti10 mt10 ml15'>医院基本情况</div>"
+	    			  + "<div class='fl w800 ml8 ml20'>"
+	    			  + (datas[1][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>卫生医疗机构</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[1][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>个</span>"
+	    			  + "	</div>")
+	    			  + (datas[2][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>医院</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[2][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>个</span>"
+	    			  + "	</div>")
+	    			  + "</div>"
+	    			  + "<div class='fl w803 h32 lh32 gx_tit01 ti10 mt10 ml15'>医院床位情况</div>"
+	    			  + "<div class='fl w800 ml8 ml20'>"
+	    			  + (datas[3][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>编制床位数</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[3][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>张</span>"
+	    			  + "	</div>")
+	    			  + (datas[4][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>实有床位数</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[4][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>张</span>"
+	    			  + "	</div>")
+	    			  + "</div>"
+	    			  + "<div class='fl w803 h32 lh32 gx_tit01 ti10 mt10 ml10'>卫生人员情况</div>"
+	    			  + "<div class='fl w800 ml8 ml20'>"
+	    			  + (datas[5][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>卫生人员</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[5][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>人</span>"
+	    			  + "	</div>")
+	    			  + (datas[6][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>卫技人员</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[6][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>人</span>"
+	    			  + "	</div>")
+	    			  + (datas[7][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>执业（助理）医师</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[7][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>人</span>"
+	    			  + "	</div>")
+	    			  + (datas[8][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>注册护士</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[8][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>人</span>"
+	    			  + "	</div>")
+	    			  + "</div>"
+	    			  + "<div class='fl w803 h32 lh32 gx_tit01 ti10 mt10 ml10'>卫生资源情况</div>"
+	    			  + "<div class='fl w800 ml8 ml20'>"
+	    			  + (datas[9][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>每千人常住人口实有床位数</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[9][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>张</span>"
+	    			  + "	</div>")
+	    			  + (datas[10][i]==-1?"":"	<div class='fl w400 h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>医疗机构总诊疗</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[10][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>万人次</span>"
+	    			  + "	</div>")
+	    			  + "</div>"
+	    			  + (datas[11][i]==-1?"":"<div class='fl w803 h32 lh32 gx_tit01 ti10 mt10 ml10'>人均期望寿命情况</div>"
+	    			  + "<div class='fl w800 ml8 ml20'>"
+	    			  + "	<div class='fl w h51 lh50 mt8 gx_conbg1 f16'>"
+	    			  + "		<span class='fl  ml20'>人均期望寿命</span>"
+	    			  + "		<span class='fl  c_num_green  f24  ml20'>"+datas[11][i]+"</span>"
+	    			  + "		<span class='fl  ml10 white'>岁</span>"
+	    			  + "	</div>"
+	    			  + "</div>"));
+      }
+    </script>
+</head>
+<body>
+<div class="fl w1920 h1000 cx_morebg_zz">	
+	<div class="fl w h61 titbg">
+		<div class="fl ml610 w700 tl">
+			<span id="titDiv" class="fl w f24 white tc mt10 bold">医疗与养老情况（2019年）</span>
+		</div>
+		<div class="fr mr270 mt10"><a href="javascript:history.go(-1)"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w">
+		<div id="contentDiv" class="fl w860 h850 ml105 mt30 white">
+			<!-- <div class="fl w803 h52 lh32 f18 bold   mt10 ml15">东城区</div> -->
+			<div class="fl w803 h32 lh32 gx_tit01 ti10 mt10 ml15">医院基本情况</div>
+			<div class="fl w800 ml8 ml20">
+				<div class="fl w400 h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">卫生医疗机构</span>
+					<span class="fl  c_num_green  f24  ml20">554</span>
+					<span class="fl  ml10 white">个</span>
+				</div>
+				<div class="fl w400 h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">医院</span>
+					<span class="fl  c_num_green  f24  ml20">63</span>
+					<span class="fl  ml10 white">个</span>
+				</div>
+			</div>
+			<div class="fl w803 h32 lh32 gx_tit01 ti10 mt10 ml15">医院床位情况</div>
+			<div class="fl w800 ml8 ml20">
+				<div class="fl w400 h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">编制床位数</span>
+					<span class="fl  c_num_green  f24  ml20">11709</span>
+					<span class="fl  ml10 white">张</span>
+				</div>
+				<div class="fl w400 h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">实有床位数</span>
+					<span class="fl  c_num_green  f24  ml20">9938</span>
+					<span class="fl  ml10 white">张</span>
+				</div>
+			</div>
+			<div class="fl w803 h32 lh32 gx_tit01 ti10 mt10 ml10">卫生人员情况</div>
+			<div class="fl w800 ml8 ml20">
+				<div class="fl w400 h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">卫生人员</span>
+					<span class="fl  c_num_green  f24  ml20">34183</span>
+					<span class="fl  ml10 white">人</span>
+				</div>
+				<div class="fl w400 h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">卫技人员</span>
+					<span class="fl  c_num_green  f24  ml20">25943</span>
+					<span class="fl  ml10 white">人</span>
+				</div>
+				<div class="fl w400 h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">执业（助理）医师</span>
+					<span class="fl  c_num_green  f24  ml20">10245</span>
+					<span class="fl  ml10 white">人</span>
+				</div>
+				<div class="fl w400 h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">注册护士</span>
+					<span class="fl  c_num_green  f24  ml20">10731</span>
+					<span class="fl  ml10 white">人</span>
+				</div>
+			</div>
+			<div class="fl w803 h32 lh32 gx_tit01 ti10 mt10 ml10">卫生资源情况</div>
+			<div class="fl w800 ml8 ml20">
+				<div class="fl w400 h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">每千人常住人口实有床位数</span>
+					<span class="fl  c_num_green  f24  ml20">12.52</span>
+					<span class="fl  ml10 white">张</span>
+				</div>
+				<div class="fl w400 h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">医疗机构总诊疗</span>
+					<span class="fl  c_num_green  f24  ml20">2465.79</span>
+					<span class="fl  ml10 white">万人次</span>
+				</div>
+			</div>
+			<div class="fl w803 h32 lh32 gx_tit01 ti10 mt10 ml10">人均期望寿命情况</div>
+			<div class="fl w800 ml8 ml20">
+				<div class="fl w h51 lh50 mt8 gx_conbg1 f16">
+					<span class="fl  ml20">人均期望寿命</span>
+					<span class="fl  c_num_green  f24  ml20">84.25</span>
+					<span class="fl  ml10 white">岁</span>
+				</div>
+			</div>
+		</div>
+		<div class="fr w750 h750 mr125 mt70 white">
+			<div class="fl w h730 pr">					
+				<div class="fl w h600 tc mt12">
+					<iframe id="ylyl" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gxfz/ylyl/ylyl.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w520 cx_sczz_table  ml10 pa">
+					<div class="fl w520 h79">
+						<div class="fl w h36"><span class="fl mt3 ml20 f18 white">中心城区</span></div>
+						<div class="fl mt5 h42 ">
+							<a href="###"><span onclick="appendData(1)" class="fl w90 mt3 f16 color_blz tc">东城区</span></a>
+							<a href="###"><span onclick="appendData(2)" class="fl w80 mt3 f16 color_blz tc">西城区</span></a>
+							<a href="###"><span onclick="appendData(3)" class="fl w85 mt3 f16 color_blz tc">朝阳区</span></a>
+							<a href="###"><span onclick="appendData(4)" class="fl w80 mt3 f16 color_blz tc">海淀区 </span></a>
+							<a href="###"><span onclick="appendData(5)" class="fl w80 mt3 f16 color_blz tc">丰台区</span></a>
+							<a href="###"><span onclick="appendData(6)" class="fl w100 mt3 f16 color_blz tc">石景山区</span></a>
+						</div>				
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>		
+</div>
+<div class="sjly_div pa h38 tc"><span class="fl w mt13 tc">数据来源方：市卫生健康委、市统计局</span></div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width: "128px"
+		});
+	});
+</script>
+</html>

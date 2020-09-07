@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>教学资源管理系统</title>
+<link href="../css/menu.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="/static/manage/js/js.js"></script>
+
+<script type="text/javascript">
+
+var user;
+
+$(function(){	
+	
+	//导航切换
+	$(".menuson li").click(function(){
+		$(".menuson li.active").removeClass("active")
+		$(this).addClass("active");
+	});
+	
+	$('.title').click(function(){
+		$('dd').find('ul').slideUp();
+		
+// 		var $ul = $(this).next('ul');
+// 		if($ul.is(':visible')){
+// 			$(this).next('ul').slideUp();
+// 		}else{
+// 			$(this).next('ul').slideDown();
+// 		}
+		var $ul = $(this).next('ul');
+ 		var lis = $ul.find('li');
+		for (var i = 0; i <lis.length ; i++) {
+	 		if($(lis[i]).hasClass('visible')){
+	 			$ul.slideDown();
+	 			$(lis[i]).find('a')[0].click();
+	 			break;
+	 		}
+		}
+// 		var li = $('li', $("#" + this.id + "u"))[0];
+// 		$(li).find('a')[0].click();
+	});
+	$('.titleli').click(function(){
+		var $ul = $(this).next('ul');
+		$('dd').find('ul').slideUp();
+		if($ul.is(':visible')){
+			$(this).next('ul').slideUp();
+		}else{
+			$(this).next('ul').slideDown();
+		}
+	});
+	
+	//根据权限设置导航栏
+	setMenuByPer();
+	//检测用户
+	checkLogin0();
+	
+});
+
+function checkLogin0() {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/checkLogin",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if(resp.code == 200){
+				user = resp.data;
+// 				var $o = $("#" + user.type + "u");
+// 				$o.slideDown();
+// 				var li = $('li', $o)[0];
+// 				$(li).find('a')[0].click();
+				if (user.loginName=="audAdmin") {
+					$("#logTab .titleli a")[0].click();
+				}
+				else if (user.loginName=="secAdmin") {
+					$("#permissionTab .titleli a")[0].click();
+				}
+			}
+		}
+	});
+}
+
+function setMenuByPer() {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/perInfo",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if(resp.code == 200){
+// 				alert(resp.data);
+				pers = resp.data;
+				localStorage.setItem("pers", pers);
+				setMenu(pers);
+			} else {
+// 				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//根据权限设置导航栏
+function setMenu(pers) {
+	if (!perCheck("org", "")) 
+		$("#orgTab").css("display","none");
+	if (!perCheck("user", "")) 
+		$("#userTab").css("display","none");
+	if (!perCheck("role", "")) 
+		$("#roleTab").css("display","none");
+	if (!perCheck("permission", "")) 
+		$("#permissionTab").css("display","none");
+	if (!perCheck("app", "")) 
+		$("#appTab").css("display","none");
+	if (!perCheck("pwd", "")) 
+		$("#pwdTab").css("display","none");
+	if (!perCheck("threshold", "")) 
+		$("#thresholdTab").css("display","none");
+	if (!perCheck("warn", "")) 
+		$("#warnTab").css("display","none");
+	if (!perCheck("log", "")) 
+		$("#logTab").css("display","none");
+	if (!perCheck("forward", "")) 
+		$("#forwardTab").css("display","none");
+}
+
+//转到组织管理页面
+function gotoOrg() {
+	top.location.href="/templates/view/org/frame/main.html";
+}
+
+//转到修改密码页面
+function gotoPwd() {
+	top.location.href="/static/manage/frame/changePwd.html";
+}
+</script>
+</head>
+
+<body style="background:#eaeaea;">
+	<dl class="leftmenu"
+		style="background: #ffffff;">
+		<dd id="orgTab">
+			<div class="titleli">
+				<span><img src="../images/ico_menu1.png" /></span><a
+					target="#" href="#" onclick="gotoOrg()">部门</a>
+			</div>
+		</dd>
+		<dd id="userTab">
+			<div class="titleli">
+				<span><img src="../images/ico_menu2.png" /></span><a
+					target="rightFrame" href="/view/user/list">用户</a>
+			</div>
+		</dd>
+		<dd id="roleTab">
+			<div class="titleli">
+				<span><img src="../images/ico_menu3.png" /></span><a
+					target="rightFrame" href="/view/role/list">角色</a>
+			</div>
+		</dd>
+		<dd id="permissionTab">
+			<div class="titleli">
+				<span><img src="../images/ico_menu4.png" /></span><a
+					target="rightFrame" href="/view/permission/list">权限</a>
+			</div>
+		</dd>
+		<dd id="appTab">
+			<div class="titleli">
+				<span><img src="../images/ico_menu5.png" /></span><a
+					target="rightFrame" href="/view/app/list">应用</a>
+			</div>
+		</dd>
+		<dd id="forwardTab">
+			<div class="titleli">
+				<span><img src="../images/leftico01.png" /></span><a
+					target="rightFrame" href="/templates/view/system/redirect.html">重定向设置</a>
+			</div>
+		</dd>
+		<dd id="pwdTab">
+			<div class="titleli">
+				<span><img src="../images/ico_menu6.png" /></span><a
+					target="rightFrame" href="/static/manage/frame/changePwd.html">修改密码</a>
+			</div>
+		</dd>
+		<dd id="thresholdTab">
+			<div class="titleli">
+				<span><img src="../images/ico_menu7.png" /></span><a
+					target="rightFrame" href="/templates/view/system/threshold.html">阈值设置</a>
+			</div>
+		</dd>
+		<dd id="warnTab">
+			<div class="titleli">
+				<span><img src="../images/ico_menu8.png" /></span><a
+					target="rightFrame" href="/templates/view/system/warn.html">空间预警</a>
+			</div>
+		</dd>
+		<dd id="logTab">
+			<div class="titleli">
+				<span><img src="../images/ico_menu7.png" /></span><a
+					target="rightFrame" href="/templates/view/log/list.html">审计日志</a>
+			</div>
+		</dd>
+	</dl>
+</body>
+</html>

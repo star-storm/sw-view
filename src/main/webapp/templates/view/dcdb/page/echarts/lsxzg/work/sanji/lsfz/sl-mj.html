@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>森林资源情况-林地面积/湿地面积</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:1700px;height:380px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    
+    <script type="text/javascript">
+    
+    		var data1 = [552.44, 431.7, 11467.88, 17279.21, 9726.11, 3071.78, 134739.02, 140069.23, 33926.06, 41894.15, 89879.33, 34383.29, 70644.35, 185006.74, 169178.01, 163917.86];//林地面积
+    		var data2 = [88.01, 189.54, 1285.66, 1420.59, 1473.81, 293.22, 3350.75, 6510.37, 4336.39, 3899.61, 2933.76, 4682.38, 3070.06, 4150.66, 16378.10, 4620.01];//湿地面积
+			var topdata = [200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000];//峰值data
+		    			
+			var colors = ['rgba(251,210,73,0.7)'/* , 'rgba(251,210,73,0.7)', 'rgba(124,213,253,0.7)', 'rgba(124,213,253,0.7)', 'rgba(124,213,253,0.7)', 'rgba(124,213,253,0.7)', 'rgba(124,213,253,0.7)', 'rgba(124,213,253,0.7)', 'rgba(181,236,69,0.7)', 'rgba(181,236,69,0.7)', 'rgba(136,243,227,0.7)', 'rgba(136,243,227,0.7)', 'rgba(136,243,227,0.7)', 'rgba(136,243,227,0.7)' */];
+			var aCategorys = ['东城区','西城区','朝阳区','海淀区','丰台区','石景山区','门头沟区','房山区','通州区','顺义区','昌平区','大兴区','平谷区','怀柔区','密云区','延庆区'];
+
+			var option = {
+// 			    backgroundColor: '#0f375f',
+		        title: {
+		            x:'center',
+		            text: '各区林地及湿地面积情况',
+	                padding: [0, 0, 0, 0],
+		            textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 18,
+	                    fontWeight: 'bold',
+		            },
+		            subtext:'                                                                                                                                                                                                                                                                                             单位：平方米',
+		            subtextStyle: {
+	                    align: 'right',
+	                    verticalAlign: 'top',
+		            	color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 18,
+	                    fontWeight: 'normal',
+		            }
+		        },
+			    grid: {
+			        top: 100,
+			        left: 40,
+			        right: 50,
+			        bottom: 0,
+			        containLabel: true
+			    },
+			    tooltip: {
+			        trigger: 'axis',
+			        axisPointer: {
+			            type: 'shadow',
+			            label: {
+			                show: true,
+			                backgroundColor: '#333'
+			            }
+			        }
+			    },
+			    legend: {
+			        data: ['林地面积', '湿地面积'],
+			        top: 45,
+			        right: '20%',
+			        textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 18,
+	                    fontWeight: 'normal'
+			        }
+			    },
+			    xAxis: {
+			        data: aCategorys,
+			        axisLabel:{
+			            textStyle:{
+		                    color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 16,
+		                    fontWeight: 'normal'
+			            }
+			        },
+			        axisLine: {
+			            show: true,
+			            lineStyle:{
+			                color: 'rgb(23,255,243,0.3)'
+			            }
+                    },
+			        splitLine: {
+			            show: false,
+			            lineStyle:{
+			                color: 'rgb(23,255,243,0.3)'
+			            }
+			        }
+			    },
+			    yAxis: {
+			        axisLine: {
+			            show: true,
+			            lineStyle:{
+			            	width : 0.5,
+			                color: 'rgb(23,255,243,0.3)'
+			            }
+                    },
+    	            axisTick: {
+    	                show: false,
+    	            },
+    	            axisLabel: {
+    	                show: true,
+			            textStyle:{
+		                    color: 'white',
+		                    fontFamliy: 'Microsoft YaHei',
+		                    fontSize: 16,
+		                    fontWeight: 'normal'
+			            }
+    	            },
+			        splitLine: {
+			            show: true,
+			            lineStyle:{ 
+			            	width : 0.5,
+			                color: 'rgb(23,255,243,0.3)'
+			            }
+			        }
+			    },
+			    series: [{
+			        name: '林地面积',
+			        type: 'line',
+			        smooth: true,
+			        showAllSymbol: true,
+			        symbol: 'emptyCircle',
+			        symbolSize: 15,
+			        itemStyle: {
+			            normal: {
+			                color: 'yellow',
+			        		label : {
+			        			show: true,
+					            textStyle: {
+				                    color: 'white',
+				                    fontFamliy: 'Microsoft YaHei',
+				                    fontSize: 18,
+				                    fontWeight: 'normal',
+					            }
+			        		}
+			            }
+			        },
+			        data: data1
+			    }, {
+			        name: '湿地面积',
+			        type: 'bar',
+			        barWidth: 30,
+			        itemStyle: {
+			            normal: {
+			                barBorderRadius: 5,
+			                color: new echarts.graphic.LinearGradient(
+			                    0, 0, 0, 1,
+			                    [
+			                        {offset: 0, color: '#14c8d4'},
+			                        {offset: 1, color: '#43eec6'}
+			                    ]
+			                ),
+			        		label : {
+			        			show: true,
+					            textStyle: {
+				                    color: 'white',
+				                    fontFamliy: 'Microsoft YaHei',
+				                    fontSize: 18,
+				                    fontWeight: 'normal',
+					            },
+					            padding: [0, 0, 30, 0]
+			        		}
+			            }
+			        },
+			        data: data2
+			    }, {
+			        name: '林地面积',
+			        type: 'bar',
+			        barGap: '-100%',
+			        barWidth: 30,
+			        itemStyle: {
+			            normal: {
+			                color: new echarts.graphic.LinearGradient(
+			                    0, 0, 0, 1,
+			                    [
+			                        {offset: 0, color: 'rgba(20,200,212,0.5)'},
+			                        {offset: 0.2, color: 'rgba(20,200,212,0.2)'},
+			                        {offset: 1, color: 'rgba(20,200,212,0)'}
+			                    ]
+			                )
+			            }
+			        },
+			        z: -12,
+			        data: data1
+			    }, {
+			        name: '林地面积',
+			        type: 'pictorialBar',
+			        symbol: 'rect',
+			        itemStyle: {
+			            normal: {
+			                color: '#0f375f'
+			            }
+			        },
+			        symbolRepeat: true,
+			        symbolSize: [12, 4],
+			        symbolMargin: 1,
+			        z: -10,
+			        data: data1
+			    }]
+			};
+            //--- 折柱 ---
+	    	var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption(option);
+            
+    </script>
+</body>
+</html>

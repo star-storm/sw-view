@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>bottom</title>
+<!--base style!-->
+<link href="/static/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/top.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<div class="w bc h128 top">
+		<div class="fl w h128">
+			<div class="fl"><span class="fl ml30 f36 mt25 bold">大数据平台专题发布系统</span></div>
+			<div class="fr">				
+				<span class="fl White w120 mr25 ">
+					<span class="fl w tc mt23 h21"><img src="/static/images/ico_user.png" /></span>
+					<font id="userName" class="fl w tc mt15 White">欢迎&nbsp;</font>
+				</span>
+				<span class="fl White w100 mr15" style="cursor:pointer" onclick="logout()">
+					<span class="fl w tc mt23 h21"><img src="/static/images/ico_tc.png" /></span>
+					<a href="#" onclick="logout()" target="view_frame" class="fl w White tc mt15">退出系统</a>
+				</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script>
+
+//页面初始化
+(function($) {
+	checkLogin0();
+}(jQuery));
+
+function checkLogin0() {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/checkLogin",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if(resp.code == 200){
+				$("#userName").append(resp.data.name);
+			} else {
+				if (window.location.href.indexOf("/view/index") == -1) {
+//					alert("用户未登录");
+// 					top.location.href = "/view/index";
+				}
+			}
+		}
+	});
+}
+
+function logout() {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/logout",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if(resp.code == 200){
+				top.location.href = "/";
+			} else {
+				if (window.location.href.indexOf("/index") == -1) {
+//					alert("用户未登录");
+					top.location.href = "/index";
+				}
+			}
+		}
+	});
+}
+</script>

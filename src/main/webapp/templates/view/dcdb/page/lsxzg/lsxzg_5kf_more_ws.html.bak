@@ -1,0 +1,486 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+         
+ 		 $("#index").val("1");
+         
+//       alert("p01".split("").length);
+      
+      $("tr").click(function() {
+//      	 alert(this.id);
+			 if (this.id=="index00" || this.id=="index10" || this.id=="index20" || this.id=="index30" || this.id=="index40") 
+				 return;
+     	 	 $(".gx_jy_table_on").removeClass("gx_jy_table_on");
+     	 	 $(this).addClass("gx_jy_table_on");
+     	 	 
+			 if (this.id!=null && this.id.indexOf("index")>-1) {
+				 var tabTmp = this.id.replace("index","").split("")[0];
+				 var indexTmp = this.id.replace("index","").split("")[1];
+				 $("#index").val(indexTmp);
+	  	    	 document.getElementById("wstz"+tabTmp).src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/kffz/wstz.html?index="+indexTmp+"&tab="+tabTmp;
+	  	     }
+       });
+      
+       $("tr").mouseover(function() {
+			 if (this.id=="index00" || this.id=="index10" || this.id=="index20" || this.id=="index30" || this.id=="index40") 
+				 return;
+     	 	$(this).addClass("gx_jy_table_on");
+       });
+       $("tr").mouseout(function() {
+			 if (this.id=="index00" || this.id=="index10" || this.id=="index20" || this.id=="index30" || this.id=="index40") 
+				 return;
+			 var indexTmp = this.id.replace("index","").split("")[1];
+	     	 if (indexTmp!=$("#index").val())
+	     	 	$(this).removeClass("gx_jy_table_on");
+       });
+    });
+   
+    function gotoxtfz() {
+ 	   window.location.href="/templates/view/dcdb/page/lsxzg/lsxzg_2xt.html";
+    }
+
+    function callback0(id) {
+		var tabTmp = id.replace("tab","");
+		if (tabTmp > 1)return;
+ 	 	$(".gx_jy_table_on").removeClass("gx_jy_table_on");
+	 	$("#index"+tabTmp+"1").addClass("gx_jy_table_on");
+		$("#index").val("1");
+    	document.getElementById("wstz"+tabTmp).src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/kffz/wstz.html?index=1"+"&tab="+tabTmp;
+    }
+    
+    function gotogxfz() {
+  	  window.location.href="/templates/view/dcdb/page/lsxzg/lsxzg.html";
+    }
+    </script>
+</head>
+<body>
+<div class="fl w h1000">	
+	<div class="fl w h61 xgg_sj_tit">		
+		<div class="gg_sj_tit white f24 bold lh51">
+			外商投资企业实际利用情况 
+		</div>
+		<div class="gg_sj_fh mr270"><a "###" onclick="gotogxfz()"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w1837 h878 ml30 mt5 gx_yl_bg01">
+		<div class="fl ml45 w1747 mt40">
+			<div class="fl w ">
+				<span id="tab0" class="gx_jy_listOn" onclick="showCard(this,'gx_jy_list','gx_jy_list',callback0)">按产业划分</span>
+				<span id="tab1" class="gx_jy_listOff" onclick="showCard(this,'gx_jy_list','gx_jy_list',callback0)">按登记注册类型划分</span>
+				<span id="tab2" class="gx_jy_listOff" onclick="showCard(this,'gx_jy_list','gx_jy_list',callback0)">按行业划分</span>
+				<span id="tab3" class="gx_jy_listOff" onclick="showCard(this,'gx_jy_list','gx_jy_list',callback0)">按外商国别（地区）划分</span>
+			</div>
+			<div id="gx_jy_list0" class="fl w mt20">
+				<div class="fl ml10 w1730 h371">
+					<iframe id="wstz0" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/kffz/wstz.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr id="index00" class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+							<th>2013年</th>
+							<th>2012年</th>
+							<th>2011年</th>
+						</tr>
+						<tr id="index01" class="h60 tc gx_jy_table_on">
+							<td>第一产业</td>
+							<td>6725</td>
+							<td>838</td>
+							<td>2303</td>
+							<td>7620</td>
+							<td>13947</td>
+							<td>1717</td>
+							<td>733</td>
+							<td>214</td>
+						</tr>
+						<tr id="index02" class="h60 tc">
+							<td>第二产业</td>
+							<td>238435</td>
+							<td>111886</td>
+							<td>68266</td>
+							<td>59528</td>
+							<td>97254</td>
+							<td>149678</td>
+							<td>112326</td>
+							<td>80798</td>
+						</tr>
+						<tr id="index03" class="h60 tc">
+							<td>第三产业</td>
+							<td>1485929</td>
+							<td>2320185</td>
+							<td>1232289</td>
+							<td>1232487</td>
+							<td>792884</td>
+							<td>701014</td>
+							<td>691101</td>
+							<td>624435</td>
+						</tr>
+						<tr id="index04" class="h60 tc">
+							<td>总计</td>
+							<td>1731089</td>
+							<td>2432909</td>
+							<td>1302858</td>
+							<td>1299635</td>
+							<td>904085</td>
+							<td>852418</td>
+							<td>804160</td>
+							<td>705447</td>
+
+						</tr>
+					</table>
+					<input id="index" hidden="hidden"></input>
+				</div>
+			</div>
+			<div id="gx_jy_list1" class="fl w mt20" style="display:none;">
+				<div class="fl ml10 w1730 h371">
+					<iframe id="wstz1" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr id="index10" class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+							<th>2013年</th>
+							<th>2012年</th>
+							<th>2011年</th>
+						</tr>
+						<tr id="index11" class="h60 tc gx_jy_table_on">
+							<td>合资经营</td>
+							<td>312084</td>
+							<td>200974</td>
+							<td>792030</td>
+							<td>268500</td>
+							<td>154808</td>
+							<td>190667</td>
+							<td>191944</td>
+							<td>78983</td>
+						</tr>
+						<tr id="index12" class="h60 tc">
+							<td>合作经营</td>
+							<td>11375</td>
+							<td>8441</td>
+							<td>4021</td>
+							<td>563</td>
+							<td>5166</td>
+							<td>22887</td>
+							<td>14184</td>
+							<td>15068</td>
+						</tr>
+						<tr id="index13" class="h60 tc">
+							<td>独资经营</td>
+							<td>1136891</td>
+							<td>2195168</td>
+							<td>487714</td>
+							<td>995202</td>
+							<td>704367</td>
+							<td>593258</td>
+							<td>592310</td>
+							<td>594890</td>
+						</tr>
+						<tr id="index14" class="h60 tc">
+							<td>外商投资股份制</td>
+							<td>270739</td>
+							<td>28326</td>
+							<td>19093</td>
+							<td>35731</td>
+							<td>39744</td>
+							<td>45606</td>
+							<td>5722</td>
+							<td>16506</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="gx_jy_list2" class="fl w mt20" style="display:none;">
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+							<th>2013年</th>
+							<th>2012年</th>
+							<th>2011年</th>
+						</tr>
+						<tr class="h60 tc">
+							<td>农、林、牧、渔业</td>
+							<td>6725</td>
+							<td>838</td>
+							<td>2303</td>
+							<td>7620</td>
+							<td>13947</td>
+							<td>1717</td>
+							<td>733</td>
+							<td>214</td>
+						</tr>
+						<tr class="h60 tc bg_double_color" >
+							<td>制造业</td>
+							<td>102868</td>
+							<td>39318</td>
+							<td>63806</td>
+							<td>59397</td>
+							<td>84226</td>
+							<td>106848</td>
+							<td>86378</td>
+							<td>63303</td>
+						</tr>
+						<tr class="h60 tc">
+							<td>建筑业</td>
+							<td>15</td>
+							<td>2651</td>
+							<td>113</td>
+							<td>703</td>
+							<td>193</td>
+							<td>383</td>
+							<td>2343</td>
+							<td>411</td>
+						</tr>
+						<tr class="h60 tc bg_double_color">
+							<td>信息传输、计算机服务和软件业</td>
+							<td>452240</td>
+							<td>1317877</td>
+							<td>113490</td>
+							<td>48611</td>
+							<td>115292</td>
+							<td>119547</td>
+							<td>135121</td>
+							<td>109246</td>
+						</tr>
+						<tr class="h60 tc">
+							<td>批发与零售业</td>
+							<td>77612</td>
+							<td>182005</td>
+							<td>584292</td>
+							<td>242167</td>
+							<td>54792</td>
+							<td>92739</td>
+							<td>74311</td>
+							<td>115437</td>
+						</tr>
+						<tr class="h60 tc bg_double_color">
+							<td>住宿与餐饮业</td>
+							<td>30180</td>
+							<td>3161</td>
+							<td>3010</td>
+							<td>549</td>
+							<td>2047</td>
+							<td>1822</td>
+							<td>2877</td>
+							<td>1705</td>
+						</tr>
+						<tr class="h60 tc">
+							<td>房地产业</td>
+							<td>194690</td>
+							<td>206915</td>
+							<td>66160</td>
+							<td>27541</td>
+							<td>136822</td>
+							<td>148057</td>
+							<td>87739</td>
+							<td>141728</td>
+						</tr>
+						<tr class="h60 tc bg_double_color">
+							<td>租赁与商务服务业</td>
+							<td>271400</td>
+							<td>229595</td>
+							<td>120407</td>
+							<td>71199</td>
+							<td>339759</td>
+							<td>171079</td>
+							<td>161595</td>
+							<td>190363</td>
+						</tr>
+						<tr class="h60 tc">
+							<td>其他行业</td>
+							<td>595359</td>
+							<td>450549</td>
+							<td>349277</td>
+							<td>842420</td>
+							<td>156497</td>
+							<td>210416</td>
+							<td>255023</td>
+							<td>110297</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="gx_jy_list3" class="fl w mt20" style="display:none;">
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+							<th>2013年</th>
+							<th>2012年</th>
+							<th>2011年</th>
+						</tr>
+						<tr class="h60 tc">
+							<td>中国香港</td>
+							<td>1249888</td>
+							<td>2145130</td>
+							<td>561687</td>
+							<td>993199</td>
+							<td>541495</td>
+							<td>360481</td>
+							<td>440357</td>
+							<td>323041</td>
+						</tr>
+						<tr class="h60 tc bg_double_color">
+							<td>英属维尔京群岛</td>
+							<td>29389</td>
+							<td>30907</td>
+							<td>210649</td>
+							<td>189644</td>
+							<td>37592</td>
+							<td>51111</td>
+							<td>28882</td>
+							<td>112981</td>
+						</tr>
+						<tr class="h60 tc">
+							<td>开曼群岛</td>
+							<td>59455</td>
+							<td>36757</td>
+							<td>269682</td>
+							<td>5774</td>
+							<td>36835</td>
+							<td>43982</td>
+							<td>59320</td>							
+							<td>35982</td>
+						</tr>
+						<tr class="h60 tc bg_double_color">
+							<td>日本</td>
+							<td>20291</td>
+							<td>29609</td>
+							<td>12449</td>
+							<td>12293</td>
+							<td>31125</td>
+							<td>44781</td>
+							<td>59022</td>
+							<td>77196</td>
+						</tr>
+						<tr class="h60 tc">
+							<td>韩国</td>
+							<td>57825</td>
+							<td>31878</td>
+							<td>37807</td>
+							<td>8143</td>
+							<td>18584</td>
+							<td>21029</td>
+							<td>70959</td>
+							<td>22372</td>
+						</tr>
+						<tr class="h60 tc bg_double_color">
+							<td>美国</td>
+							<td>34892</td>
+							<td>14036</td>
+							<td>10182</td>
+							<td>3677</td>
+							<td>15634</td>
+							<td>38882</td>
+							<td>21097</td>
+							<td>30221</td>
+						</tr>
+						<tr class="h60 tc">
+							<td>新加坡</td>
+							<td>10744</td>
+							<td>11389</td>
+							<td>54266</td>
+							<td>16468</td>
+							<td>35631</td>
+							<td>19383</td>
+							<td>31656</td>
+							<td>12898</td>
+						</tr>
+						<tr class="h60 tc bg_double_color">
+							<td>巴巴多斯</td>
+							<td>-</td>
+							<td>-</td>
+							<td>-</td>
+							<td>3</td>
+							<td>3000</td>
+							<td>2839</td>
+							<td>200</td>
+							<td>821</td>
+						</tr>
+						<tr class="h60 tc">
+							<td>德国</td>
+							<td>28587</td>
+							<td>11784</td>
+							<td>95500</td>
+							<td>35761</td>
+							<td>99968</td>
+							<td>107467</td>
+							<td>25763</td>
+							<td>17939</td>
+						</tr>
+						<tr class="h60 tc bg_double_color">
+							<td>毛里求斯</td>
+							<td>1509</td>
+							<td>3612</td>
+							<td>774</td>
+							<td>275</td>
+							<td>3568</td>
+							<td>3297</td>
+							<td>1392</td>
+							<td>1311</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>		
+	</div>		
+</div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width: "128px"
+		});
+	});
+</script>
+</html>

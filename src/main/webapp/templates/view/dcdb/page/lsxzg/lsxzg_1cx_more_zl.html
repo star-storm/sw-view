@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+
+// 	//专利申请量,专利申请量同比,发明申请量,发明申请量同比,专利授权量,专利授权量同比,发明专利授权,发明专利授权同比
+// 	var data1s = [
+// 		[27637, 1, 7.39, 16152, 1, 5.99, 9427, 0, 16.60, 3232, 0, 29.51],//2020-01
+// 		[39079, 0, 4.45, 23287, 0, 3.55, 18859, 0, 8.84, 6775, 0, 24.24],//2020-02
+// 		[55119, 0, 3.23, 32523, 0, 1.00, 27365, 0, 15.27, 10361, 0, 28.44],//2020-03
+// 		[73032, 0, 0.52, 42892, 1, 1.78, 40207, 0, 6.94, 15021, 0, 22.13],//2020-04
+// 		[92817, 1, 3.18, 53652, 1, 4.37, 53413, 0, 1.08, 19558, 0, 18.39],//2020-05
+// 		[115775, 1, 7.32, 66393, 1, 8.04, 70637, 1, 8.74, 25850, 0, 8.95]//2020-06
+// 	];
+// 	//有效专利申请量,有效专利申请量同比,有效发明申请量,有效发明申请量同比,商标申请量,商标注册量
+// 	var data2s = [
+// 		[286735, 1, 17.45, 133.1, 1, 17.48, 5.0, 2.6],//2020-01
+// 		[289879, 1, 16.99, -1,   -1, -1, 6.8, 5.8],//2020-02
+// 		[-1, -1, -1, 292564, 1, 15.73, 10.3, 9.2],//2020-03
+// 		[-1, -1, -1, 296159, 1, 15.2, 15.5, 13.0],//2020-04
+// 		[-1, -1, -1, 299394, -1, -1, 20.2, 15.5],//2020-05
+// 		[-1, -1, -1, 304743, -1, -1, 26.0, 17.6]//2020-06
+// 	];
+		//专利申请量,专利申请量同比,发明申请量,发明申请量同比,专利授权量,专利授权量同比,发明专利授权,发明专利授权同比
+		var data1s = [
+			[2.8, 1, 7.39, 1.6, 1, 5.99, 0.9, 0, 16.60, 0.3, 0, 29.51],//2020-01
+			[3.9, 0, 4.45, 2.3, 0, 3.55, 1.9, 0, 8.84, 0.7, 0, 24.24],//2020-02
+			[5.5, 0, 3.23, 3.3, 0, 1.00, 2.7, 0, 15.27, 1.0, 0, 28.44],//2020-03
+			[7.3, 0, 0.52, 4.3, 1, 1.78, 4.0, 0, 6.94, 1.5, 0, 22.13],//2020-04
+			[9.3, 1, 3.18, 5.4, 1, 4.37, 5.3, 0, 1.08, 2.0, 0, 18.39],//2020-05
+			[11.6, 1, 7.32, 6.6, 1, 8.04, 7.1, 1, 8.74, 2.6, 0, 8.95]//2020-06
+		];
+		//有效专利申请量,有效专利申请量同比,有效发明申请量,有效发明申请量同比,商标申请量,商标注册量
+		var data2s = [
+			[28.7, 1, 17.45, 133.1, 1, 17.48, 5.0, 2.6],//2020-01
+			[29.0, 1, 16.99, 134.6, -1, -1, 6.8, 5.8],//2020-02
+			[29.2, 0, 15.73, 135.8, -1, -1, 10.3, 9.2],//2020-03
+			[29.6, 1, 15.2, 137.5, -1, -1, 15.5, 13.0],//2020-04
+			[30.0, -1, -1, 139.0, -1, -1, 20.2, 15.5],//2020-05
+			[30.5, -1, -1, 141.5, -1, -1, 26.0, 17.6]//2020-06
+		];
+    	
+		$(function(){
+			$(".scrollDiv").niceScroll({
+			cursorcolor:"#446ba9",
+			touchbehavior: true,
+			cursoropacitymax: 1,
+			cursorborder: "0",
+			cursorwidth: "10px",
+			autohidemode: true});
+		    window.parent.erjiHide(1);
+         
+			$("#contentDiv").html("");
+			for (var i=0; i<6; i++) {
+				appendData(i);
+			}
+// 			for (var i=num; i<13; i++) {
+// 				$("#contentDiv").append("<div id='conent"+num+++"'></div> ");
+// 			}
+         
+		});
+		
+    	function callback0(id) {
+//     		alert(id);
+    		var month = $("#"+id+" font").html();
+//     		alert(month);
+    		$("#titDiv").html("2020年"+month+"专利申请及授权情况");
+    	}
+    	
+// 		//专利申请量,专利申请量同比,发明申请量,发明申请量同比,专利授权量,专利授权量同比,发明专利授权,发明专利授权同比
+// 		var data1s = [
+// 			[2.8, 1, 7.39, 1.6, 1, 5.99, 0.9, 0, 16.60, 0.3, 0, 29.51],//2020-01
+// 			[3.9, 0, 4.45, 2.3, 0, 3.55, 1.9, 0, 8.84, 0.7, 0, 24.24],//2020-02
+// 			[5.5, 0, 3.23, 3.3, 0, 1.00, 2.7, 0, 15.27, 1.0, 0, 28.44],//2020-03
+// 			[7.3, 0, 0.52, 4.3, 1, 1.78, 4.0, 0, 6.94, 1.5, 0, 22.13],//2020-04
+// 			[9.3, 1, 3.18, 5.4, 1, 4.37, 5.3, 0, 1.08, 2.0, 0, 18.39],//2020-05
+// 			[11.6, 1, 7.32, 6.6, 1, 8.04, 7.1, 1, 8.74, 2.6, 0, 8.95]//2020-06
+// 		];
+// 		//有效专利申请量,有效专利申请量同比,有效发明申请量,有效发明申请量同比,商标申请量,商标注册量
+// 		var data2s = [
+// 			[28.7, 1, 17.45, 133.1, 1, 17.48, 5.0, 2.6],//2020-01
+// 			[29.0, 1, 16.99, -1,   -1, -1, 6.8, 5.8],//2020-02
+// 			[-1, -1, -1, 29.3, 1, 15.73, 10.3, 9.2],//2020-03
+// 			[-1, -1, -1, 29.6, 1, 15.2, 15.5, 13.0],//2020-04
+// 			[-1, -1, -1, 30.0, -1, -1, 20.2, 15.5],//2020-05
+// 			[-1, -1, -1, 30.5, -1, -1, 26.0, 17.6]//2020-06
+// 		];
+    	function appendData(i) {
+    		$("#contentDiv").append("<div class='fl w1360 h860 ml55 mt25' id='conent"+i+"'> "
+    				+ "	<div class='fl w541 h350 tc mt40 ml130 zl_moresjbg'> "
+    				+ "		<div class='fl w mt30 tc'><span class='f24 bold white'>专利申请情况</span></div> "
+    				+ "		<div class='fl w450 mt30 white ml90'> "
+    				+ "			<span class='fl'>专利申请量为<font class='color_yellow_yj f36'>"+data1s[i][0]+"</font>万件<font class='ml30'>同比</font>"
+    				+ "				<font class='"+(data1s[i][1]==1?"color_red":"color_green")+" ml5'>"+data1s[i][2]+"%</font></span> "
+    				+ "			<span class='fl mt27 ml5'><img src='/templates/view/dcdb/images/"+(data1s[i][1]==1?"n_xzg_btn02":"n_xzg_btn04")+".png'/></span> "
+    				+ "		</div> "
+    				+ "		<div class='fl w450 mt10 white ml90'> "
+    				+ "			<span class='fl '>其中，发明专利申请量<font class='color_yellow_yj f36'>"+data1s[i][3]+"</font>万件<font class='ml30'>同比</font>"
+    				+ "				<font class='"+(data1s[i][4]==1?"color_red":"color_green")+" ml5'>"+data1s[i][5]+"%</font></span> "
+    				+ "			<span class='fl mt27 ml5'><img src='/templates/view/dcdb/images/"+(data1s[i][4]==1?"n_xzg_btn02":"n_xzg_btn04")+".png'/></span> "
+    				+ "		</div> "
+    				+ "	</div> "
+    				+ "	<div class='fl w541 h350 tc mt40 zl_moresjbg'> "
+    				+ "		<div class='fl w mt30 tc'><span class='f24 bold white'>专利授权情况</span></div> "
+    				+ "		<div class='fl w450 mt30 white ml90'> "
+    				+ "			<span class='fl'>专利授权量为 <font class='color_yellow_yj f36'>"+data1s[i][6]+"</font>万件<font class='ml30'>同比</font>"
+    				+ "				<font class='"+(data1s[i][7]==1?"color_red":"color_green")+" ml5'>"+data1s[i][8]+"%</font></span> "
+    				+ "			<span class='fl mt27 ml5'><img src='/templates/view/dcdb/images/"+(data1s[i][7]==1?"n_xzg_btn02":"n_xzg_btn04")+".png'/></span> "
+    				+ "		</div> "
+    				+ "		<div class='fl w450 mt10  white ml90'> "
+    				+ "			<span class='fl '>其中，发明专利授权量 <font class='color_yellow_yj f36'>"+data1s[i][9]+"</font>万件<font class='ml30'>同比</font>"
+    				+ "				<font class='"+(data1s[i][10]==1?"color_red":"color_green")+" mr5'>"+data1s[i][11]+"%</font></span> "
+    				+ "			<span class='fl mt27 ml5'><img src='/templates/view/dcdb/images/"+(data1s[i][10]==1?"n_xzg_btn02":"n_xzg_btn04")+".png'/></span> "
+    				+ "		</div> "
+    				+ "	</div> "
+    				+ "	<div class='fl w541 h350 tc mt40 ml130 zl_moresjbg'> "
+    				+ "		<div class='fl w mt30 tc'><span class='f24 bold white'>有效发明专利情况</span></div> "
+    				+ "		<div class='fl w450 mt30 white ml90'> "
+    				+ "			<span class='fl'>有效发明专利量为<font class='color_yellow_yj f36'>"+data2s[i][0]+"</font>万件<font class='ml30'>同比</font>"
+    				+(data2s[i][1]==-1?"<font class='color_orange'>  -</font>": "				<font class='"+(data2s[i][1]==1?"color_red":"color_green")+" ml5'>"+data2s[i][2]+"%</font></span> "
+    				+ "			<span class='fl mt27 ml5'><img src='/templates/view/dcdb/images/"+(data2s[i][1]==1?"n_xzg_btn02":"n_xzg_btn04")+".png'/></span> ")
+    				+ "		</div> "
+    				+ "		<div class='fl w470 mt10 white ml90'> "
+    				+ "			<span class='fl '>其中，万人发明专利拥有量<font class='color_yellow_yj f36'>"+data2s[i][3]+"</font>件<font class='ml30'>同比</font>"
+    				+ (data2s[i][4]==-1?"<font class='color_orange'>  -</font>": "				<font class='"+(data2s[i][4]==1?"color_red":"color_green")+" ml5'>"+data2s[i][5]+"%</font></span> "
+    				+ "			<span class='fl mt27 ml5'><img src='/templates/view/dcdb/images/"+(data2s[i][4]==1?"n_xzg_btn02":"n_xzg_btn04")+".png'/></span> ")
+    				+ "		</div> "
+    				+ "	</div> "
+    				+ "	<div class='fl w541 h350 tc mt40 zl_moresjbg'> "
+    				+ "		<div class='fl w mt30 tc'><span class='f24 bold white'>商标情况</span></div> "
+    				+ "		<div class='fl w300 mt30 white ml170'> "
+    				+ "			<span class='fl'>商标申请量为 <font class='color_yellow_yj f36'>"+data2s[i][6]+"</font>万件</span> "
+    				+ "		</div> "
+    				+ "		<div class='fl w300 mt10  white ml170'> "
+    				+ "			<span class='fl '>其中，商标注册量 <font class='color_yellow_yj f36'>"+data2s[i][7]+"</font>万件</span> "
+    				+ "		</div> "
+    				+ "	</div> "
+    				+ "</div>");
+    		}
+    </script>
+</head>
+<body>
+<div class="fl w h1000 cx_morebg">	
+	<div class="fl w h61 titbg">
+		<div class="fl ml610 w700 tl">
+			<span id="titDiv" class="fl w f24 white tc mt10 bold">2020年1-6月专利申请及授权情况</span>
+		</div>
+		<div class="fr mr270 mt10"><a href="javascript:history.go(-1)"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w">
+		<div class="fl w410 h800">
+			<div class="fl w ml45 mt25 h40 lh40 white tc f24 bold">2020年</div>
+			<div class="fl w410 h760 ml45  scrollDiv" style="height:800px;overflow:auto;">
+				<div class="fl w390 ml10">
+					<span id="tab1" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">1月</font></span>
+					<span id="tab2" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2月</font></span>
+					<span id="tab3" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">3月</font></span>
+					<span id="tab4" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">4月</font></span>
+					<span id="tab5" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">5月</font></span>
+					<span id="tab6" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_On"><font class="fl w f24 tc mt10">1-6月</font></span>
+					<div  class="leftsub_Off_link"><font class="fl w f24 tc mt10">7月</font></div>
+					<div  class="leftsub_Off_link"><font class="fl w f24 tc mt10">8月</font></div>
+					<div  class="leftsub_Off_link"><font class="fl w f24 tc mt10">9月</font></div>
+					<div  class="leftsub_Off_link"><font class="fl w f24 tc mt10">10月</font></div>
+					<div  class="leftsub_Off_link"><font class="fl w f24 tc mt10">11月</font></div>
+					<div  class="leftsub_Off_link"><font class="fl w f24 tc mt10">12月</font></div>
+				</div>		
+			</div>
+		</div>
+		<div id="contentDiv">
+			<!-- <div class="fl w1360 h860 ml55 mt25" id="conent0">
+				<div class="fl w541 h350 tc mt40 ml130 zl_moresjbg">
+					<div class="fl w mt30 tc"><span class="f24 bold white">专利申请情况</span></div>
+					<div class="fl w450 mt30 white ml90">
+						<span class="fl">专利申请量为<font class="color_yellow_yj f36">22.6</font>万件<font class="ml30">同比</font><font class="color_red ml5">7.1%</font></span>
+						<span class="fl mt25 ml5"><img src="/templates/view/dcdb/images/n_xzg_btn02.png"/></span>
+					</div>
+					<div class="fl w450 mt10 white ml90">
+						<span class="fl ">其中，发明专利申请量<font class="color_yellow_yj f36">13</font>万件<font class="ml30">同比</font><font class="color_red ml5">10.4%</font></span>
+						<span class="fl mt25 ml5"><img src="/templates/view/dcdb/images/n_xzg_btn02.png"/></span>
+					</div>
+				</div>
+				<div class="fl w541 h350 tc mt40 zl_moresjbg">
+					<div class="fl w mt30 tc"><span class="f24 bold white">专利授权情况</span></div>
+					<div class="fl w450 mt30 white ml90">
+						<span class="fl">专利授权量为 <font class="color_yellow_yj f36">13.2</font>万件<font class="ml30">同比</font><font class="color_red ml5">6.7%</font></span>
+						<span class="fl mt25 ml5"><img src="/templates/view/dcdb/images/n_xzg_btn02.png"/></span>
+					</div>
+					<div class="fl w450 mt10  white ml90">
+						<span class="fl ">其中，发明专利授权量 <font class="color_yellow_yj f36">5.3</font>万件<font class="ml30">同比</font><font class="color_red mr5">13.1%</font></span>
+						<span class="fl mt25 ml5"><img src="/templates/view/dcdb/images/n_xzg_btn02.png"/></span>
+					</div>
+				</div>
+				<div class="fl w541 h350 tc mt40 ml130 zl_moresjbg">
+					<div class="fl w mt30 tc"><span class="f24 bold white">有效发明专利情况</span></div>
+					<div class="fl w450 mt30 white ml90">
+						<span class="fl">专利申请量为<font class="color_yellow_yj f36">22.6</font>万件<font class="ml30">同比</font><font class="color_red ml5">7.1%</font></span>
+						<span class="fl mt25 ml5"><img src="/templates/view/dcdb/images/n_xzg_btn02.png"/></span>
+					</div>
+					<div class="fl w450 mt10 white ml90">
+						<span class="fl ">其中，发明专利申请量<font class="color_yellow_yj f36">13</font>万件<font class="ml30">同比</font><font class="color_red ml5">10.4%</font></span>
+						<span class="fl mt25 ml5"><img src="/templates/view/dcdb/images/n_xzg_btn02.png"/></span>
+					</div>
+				</div>
+				<div class="fl w541 h350 tc mt40 zl_moresjbg">
+					<div class="fl w mt30 tc"><span class="f24 bold white">商标情况</span></div>
+					<div class="fl w300 mt30 white ml170">
+						<span class="fl">专利授权量为 <font class="color_yellow_yj f36">13.2</font>万件</span>
+					</div>
+					<div class="fl w300 mt10  white ml170">
+						<span class="fl ">其中，发明专利授权量 <font class="color_yellow_yj f36">5.3</font>万件</span>
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+</div>
+<div class="sjly_div pa h38 tc"><span class="fl w mt13 tc">数据来源方：市统计局</span></div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width:"128px"
+		});
+	});
+</script>
+</html>

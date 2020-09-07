@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+         
+ 		 $("#index").val("1");
+         
+//       alert("p01".split("").length);
+      
+      $("tr").click(function() {
+//      	 alert(this.id);
+			 if (this.id=="index00" || this.id=="index10" || this.id=="index20" || this.id=="index30" || this.id=="index40") 
+				 return;
+     	 	 $(".gx_jy_table_on").removeClass("gx_jy_table_on");
+     	 	 $(this).addClass("gx_jy_table_on");
+     	 	 
+			 if (this.id!=null && this.id.indexOf("index")>-1) {
+				 var tabTmp = this.id.replace("index","").split("")[0];
+				 var indexTmp = this.id.replace("index","").split("")[1];
+				 $("#index").val(indexTmp);
+	  	    	 document.getElementById("jyqk"+tabTmp).src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gxfz/jyqk.html?index="+indexTmp+"&tab="+tabTmp;
+	  	     }
+       });
+      
+       $("tr").mouseover(function() {
+			 if (this.id=="index00" || this.id=="index10" || this.id=="index20" || this.id=="index30" || this.id=="index40") 
+				 return;
+     	 	$(this).addClass("gx_jy_table_on");
+       });
+       $("tr").mouseout(function() {
+			 if (this.id=="index00" || this.id=="index10" || this.id=="index20" || this.id=="index30" || this.id=="index40") 
+				 return;
+			 var indexTmp = this.id.replace("index","").split("")[1];
+	     	 if (indexTmp!=$("#index").val())
+	     	 	$(this).removeClass("gx_jy_table_on");
+       });
+    });
+
+    function callback0(id) {
+		var tabTmp = id.replace("tab","");
+ 	 	$(".gx_jy_table_on").removeClass("gx_jy_table_on");
+	 	$("#index"+tabTmp+"1").addClass("gx_jy_table_on");
+		$("#index").val("1");
+    	document.getElementById("jyqk"+tabTmp).src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gxfz/jyqk.html?index=1"+"&tab="+tabTmp;
+    }
+    
+    function gotogxfz() {
+  	  window.location.href="/templates/view/dcdb/page/lsxzg/lsxzg_3gx.html";
+    }
+    </script>
+</head>
+<body>
+<div class="fl w h1000">	
+	<div class="fl w h61 xgg_sj_tit">		
+		<div class="gg_sj_tit white f24 bold lh51">
+			教育基本情况 
+		</div>
+		<div class="gg_sj_fh mr270"><a href="###" onclick="gotogxfz()"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w1837 h878 ml30 mt5 gx_yl_bg01">
+		<div class="fl ml25 lh50 f24 mt20 white">教育基本情况趋势图</div>
+		<div class="fl ml45 w1747">
+			<div class="fl w ">
+				<span id="tab0" class="gx_jy_listOn" onclick="showCard(this,'gx_jy_list','gx_jy_list',callback0)">全市各类学校数</span>
+				<span id="tab1" class="gx_jy_listOff" onclick="showCard(this,'gx_jy_list','gx_jy_list',callback0)">全市各类学校在校学生数</span>
+				<span id="tab2" class="gx_jy_listOff" onclick="showCard(this,'gx_jy_list','gx_jy_list',callback0)">全市各类学校招生数</span>
+				<span id="tab3" class="gx_jy_listOff" onclick="showCard(this,'gx_jy_list','gx_jy_list',callback0)">全市各类学校毕业生数</span>
+				<span id="tab4" class="gx_jy_listOff" onclick="showCard(this,'gx_jy_list','gx_jy_list',callback0)">专任教师数</span>
+			</div>
+			<div id="gx_jy_list0" class="fl w mt20">
+				<div class="fl ml10 w1730 h371">
+					<iframe id="jyqk0" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gxfz/jyqk.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr id="index00" class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+							<th>2013年</th>
+							<th>2012年</th>
+							<th>2011年</th>
+						</tr>
+						<tr id="index01" class="h60 tc gx_jy_table_on">
+							<td>普通高等学校</td>
+							<td>92</td>
+							<td>92</td>
+							<td>91</td>
+							<td>90</td>
+							<td>89</td>
+							<td>89</td>
+							<td>91</td>
+							<td>89</td>
+						</tr>
+						<tr id="index02" class="h60 tc">
+							<td>中等教育</td>
+							<td>757</td>
+							<td>766</td>
+							<td>767</td>
+							<td>768</td>
+							<td>766</td>
+							<td>757</td>
+							<td>760</td>
+							<td>769</td>
+						</tr>
+						<tr id="index03" class="h60 tc">
+							<td>小学</td>
+							<td>970</td>
+							<td>984</td>
+							<td>984</td>
+							<td>996</td>
+							<td>1040</td>
+							<td>1093</td>
+							<td>1081</td>
+							<td>1090</td>
+						</tr>
+						<tr id="index04" class="h60 tc">
+							<td>全市各类学校总数</td>
+							<td>3585</td>
+							<td>3556</td>
+							<td>3524</td>
+							<td>3454</td>
+							<td>3437</td>
+							<td>3439</td>
+							<td>3314</td>
+							<td>3367</td>
+						</tr>
+					</table>
+					<input id="index" hidden="hidden"></input>
+				</div>
+			</div>
+			<div id="gx_jy_list1" class="fl w mt20" style="display:none;">
+				<div class="fl ml10 w1730 h371">
+					<iframe id="jyqk1" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr id="index10" class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+							<th>2013年</th>
+							<th>2012年</th>
+							<th>2011年</th>
+						</tr>
+						<tr id="index11" class="h60 tc gx_jy_table_on">
+							<td>普通高等学校</td>
+							<td>581133</td>
+							<td>580663</td>
+							<td>588389</td>
+							<td>593448</td>
+							<td>594614</td>
+							<td>589234</td>
+							<td>581844</td>
+							<td>578633</td>
+						</tr>
+						<tr id="index12" class="h60 tc">
+							<td>中等教育</td>
+							<td>525434</td>
+							<td>522658</td>
+							<td>552468</td>
+							<td>587112</td>
+							<td>651443</td>
+							<td>706713</td>
+							<td>732224</td>
+							<td>711130</td>
+						</tr>
+						<tr id="index13" class="h60 tc">
+							<td>小学</td>
+							<td>913216</td>
+							<td>875849</td>
+							<td>868417</td>
+							<td>850321</td>
+							<td>821152</td>
+							<td>789276</td>
+							<td>718655</td>
+							<td>680457</td>
+						</tr>
+						<tr id="index14" class="h60 tc">
+							<td>全市各类学校在校生数</td>
+							<td>4083211</td>
+							<td>3861492</td>
+							<td>3733544</td>
+							<td>3734245</td>
+							<td>3774868</td>
+							<td>3736003</td>
+							<td>3568273</td>
+							<td>3426025</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="gx_jy_list2" class="fl w mt20" style="display:none;">
+				<div class="fl ml10 w1730 h371">
+					<iframe id="jyqk2" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr id="index20" class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+							<th>2013年</th>
+							<th>2012年</th>
+							<th>2011年</th>
+						</tr>
+						<tr id="index21" class="h60 tc gx_jy_table_on">
+							<td>普通高等学校</td>
+							<td>155784</td>
+							<td>153028</td>
+							<td>154715</td>
+							<td>152741</td>
+							<td>160056</td>
+							<td>163081</td>
+							<td>162042</td>
+							<td>157543</td>
+						</tr>
+						<tr id="index22" class="h60 tc">
+							<td>中等教育</td>
+							<td>172981</td>
+							<td>181936</td>
+							<td>180881</td>
+							<td>186517</td>
+							<td>202434</td>
+							<td>239010</td>
+							<td>254790</td>
+							<td>243754</td>
+						</tr>
+						<tr id="index23" class="h60 tc">
+							<td>小学</td>
+							<td>184339</td>
+							<td>157559</td>
+							<td>145274</td>
+							<td>145876</td>
+							<td>153249</td>
+							<td>165807</td>
+							<td>141738</td>
+							<td>132719</td>
+						</tr>
+						<tr id="index24" class="h60 tc">
+							<td>全市各类学校招生数</td>
+							<td>1286509</td>
+							<td>1248003</td>
+							<td>1115515</td>
+							<td>1091756</td>
+							<td>1113688</td>
+							<td>1182301</td>
+							<td>1108574</td>
+							<td>1050131</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="gx_jy_list3" class="fl w mt20" style="display:none;">
+				<div class="fl ml10 w1730 h371">
+					<iframe id="jyqk3" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr id="index30" class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+							<th>2013年</th>
+							<th>2012年</th>
+							<th>2011年</th>
+						</tr>
+						<tr id="index31" class="h60 tc gx_jy_table_on">
+							<td>普通高等学校</td>
+							<td>146654</td>
+							<td>152990</td>
+							<td>153005</td>
+							<td>152118</td>
+							<td>147023</td>
+							<td>148689</td>
+							<td>152980</td>
+							<td>151277</td>
+						</tr>
+						<tr id="index32" class="h60 tc">
+							<td>中等教育</td>
+							<td>158863</td>
+							<td>168125</td>
+							<td>182511</td>
+							<td>205795</td>
+							<td>229640</td>
+							<td>240225</td>
+							<td>224938</td>
+							<td>223955</td>
+						</tr>
+						<tr id="index33" class="h60 tc">
+							<td>小学</td>
+							<td>124610</td>
+							<td>125938</td>
+							<td>111481</td>
+							<td>103893</td>
+							<td>112819</td>
+							<td>111839</td>
+							<td>109492</td>
+							<td>101678</td>
+						</tr>
+						<tr id="index34" class="h60 tc">
+							<td>全市各类学校毕业生数</td>
+							<td>940336</td>
+							<td>939184</td>
+							<td>924267</td>
+							<td>961180</td>
+							<td>937209</td>
+							<td>923050</td>
+							<td>881804</td>
+							<td>838521</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="gx_jy_list4" class="fl w mt20" style="display:none;">
+				<div class="fl ml10 w1730 h371">
+					<iframe id="jyqk4" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr id="index40" class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+							<th>2013年</th>
+							<th>2012年</th>
+							<th>2011年</th>
+						</tr>
+						<tr id="index41" class="h60 tc gx_jy_table_on">
+							<td>平均每一专任教师负担学生数-普通中学</td>
+							<td>7.9</td>
+							<td>7.7</td>
+							<td>7.9</td>
+							<td>8.4</td>
+							<td>9.0</td>
+							<td>9.5</td>
+							<td>9.7</td>
+							<td>9.8</td>
+						</tr>
+						<tr id="index42" class="h60 tc">
+							<td>平均每一专任教师负担学生数-小学</td>
+							<td>13.9</td>
+							<td>13.6</td>
+							<td>14.0</td>
+							<td>14.3</td>
+							<td>14.4</td>
+							<td>14.4</td>
+							<td>13.7</td>
+							<td>13.4</td>
+						</tr>
+						<tr id="index43" class="h60 tc">
+							<td>专任教师数</td>
+							<td>241719</td>
+							<td>236346</td>
+							<td>231251</td>
+							<td>226043</td>
+							<td>225165</td>
+							<td>216463</td>
+							<td>204812</td>
+							<td>199789</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>		
+	</div>		
+</div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width: "128px"
+		});
+	});
+</script>
+</html>

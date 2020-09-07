@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--base style!-->
+<link href="/static/manage/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/top.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/web.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+</head>
+<body style="background:#f8f8f8;">
+	<div class="fl w mt20 ">
+		<div class="fl w ml100 ">
+			<ul class="fl w ">
+				<li  class="fl w mt10 mb10">
+					<span class="fl w200 tr mr10 mt5">输入原密码：</span>
+					<span class="fl w500 "><input type="password" id="pwd0" class="InputText w500"/></span>
+					<span class="fl red ml20">**</span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w200 tr mr10 mt5">输入新密码：</span>
+					<span class="fl w500 "><input type="password" id="pwd1" class="InputText w500"/></span>
+					<span class="fl red ml20">**</span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w200 tr mr10 mt5"></span>
+					<span class="fl red" style="margin-top:-12px">（密码长度不能小于10位，密码应包含大小写英文字母、数字和特使字符两者以上的组合）</span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w200 tr mr10 mt5">再次输入密码：</span>
+					<span class="fl w500"><input type="password" id="pwd2" class="InputText w500"/></span>
+					<span class="fl red ml20 mt7">**</span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w200 tr mr10 mt5">密码登录尝试次数：</span>
+					<span class="fl w500"><input id="tryCount" class="InputText w500" value="5" disabled="true"/></span>
+					<span class="fl ml20 mt7">次</span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w200 tr mr10 mt5">密码错误锁定账户时长：</span>
+					<span class="fl w500"><input id="tryCount" class="InputText w500" value="30" disabled="true"/></span>
+					<span class="fl ml20 mt7">分钟</span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w200 tr mr10 mt5">强制修改密码期限：</span>
+					<span class="fl w500"><input id="tryCount" class="InputText w500" value="7" disabled="true"/></span>
+					<span class="fl ml20 mt7">天</span>
+				</li>
+				<li  class="fl w mt10 mb10">
+					<span class="fl w200 tr mr10 mt5">密码复杂度要求：</span>
+					<span class="fl w500"><input id="tryCount" class="InputText w500" value="中级" disabled="true"/></span>
+					<span class="fl ml20 mt7">（好）</span>
+				</li>
+				<li  class="fl w mt10 mb10 ml300">
+					<button onclick="changePwd()" class="fl btn bg_green">确定</button>
+					<button type="submit" onclick="back();" value="Submit" class="fl ml20 btn bg_red">取消</button>
+				</li>
+		    </ul>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+var user;
+$(document).ready(function() {
+	//回车事件
+	$(document).keypress(function(e) {  
+		if(e.which == 13) {  
+			changePwd();
+		}
+	}); 
+});
+//修改密码
+function changePwd() {
+	if (!checkPwd())
+		return false;
+	$.ajax({
+		type : "post",
+		url : "/changePwd",
+		dataType : "json",
+		data : {
+			pwd0 : $("#pwd0").val(),
+			pwd : $("#pwd1").val()
+		},
+		success : function(resp) {
+			alert(resp.msg);
+			top.location.href = "/view/login";
+		}
+	});
+}
+//校验密码
+function checkPwd() {
+	var pwd0 = $("#pwd0").val();
+	if (pwd0 == null || pwd0 == "") {
+		alert("请输入原密码");
+		return false;
+	}
+	var pwd1 = $("#pwd1").val();
+	if (pwd1 == null || pwd1 == "") {
+		alert("请输入新密码");
+		return false;
+	}
+	var pwd2 = $("#pwd2").val();
+	if (pwd2 == null || pwd2 == "") {
+		alert("请输入确认密码");
+		return false;
+	}
+	if (pwd1 != pwd2) {
+		alert("新密码与确认密码不一致！请重新输入");
+		return false;
+	}
+	var reg = /(?!^(\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\w~!@#$%^&*?]{9,20}$/;
+	if (!reg.test(pwd1)) {
+		alert("密码至少由字母、数字、特殊字符2种以上组合，长度位10-20位！");
+		return false;
+	}
+	return true;
+}
+
+//返回
+function back() {
+	checkLogin0();
+// 	window.location.href = "view/index";
+	window.history.go(-1);
+}
+
+//校验session
+function checkLogin0() {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/checkLogin",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if(resp.code == 200){
+				if (resp.data.userPwd=="075091074065079095") {
+					logout();
+				}
+			}
+		}
+	});
+}
+function logout() {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/logout",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if(resp.code == 200){
+				top.location.href = "view/index";
+			} 
+		}
+	});
+}
+</script>

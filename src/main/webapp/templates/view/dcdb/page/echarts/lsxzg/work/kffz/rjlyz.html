@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>2019年北京市入境旅游者情况</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:520px;height:440px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    
+    <script type="text/javascript">
+
+	    var myChart = echarts.init(document.getElementById('main'));
+	    
+// 	    var arr  = [{name:'港澳台',amount:56.2,per:-7.3},{name:'亚洲',amount:112.5,per:-1.6},{name:'欧洲',amount:99.6,per:-1.6},
+// 	    	{name:'美洲',amount:83,per:-14.4},{name:'大洋洲',amount:16.6,per:-4.5},{name:'非洲',amount:7.4,per:-12.5},
+// 	    	{name:'其他',amount:1.6,per:6.4}];
+	    
+	    var arr  = [{name:'港、澳、台\n↓7.3%&56.2',amount:56.2},{name:'亚洲\n↓1.6%&112.5',amount:112.5},{name:'欧洲\n↓1.6%&99.6',amount:99.6},
+	    	{name:'美洲\n↓14.4%&83',amount:83},{name:'大洋洲\n↓4.5%&16.6',amount:16.6},{name:'非洲\n↓12.5%&7.4',amount:7.4},
+	    	{name:'其他\n↑6.4%&1.6',amount:1.6}];
+	    
+	    function rand(m, n) {
+	        if (!n) {
+	            return Math.floor(Math.random() * m);
+	        } else {
+	            var c = n - m + 1;
+	            return Math.floor(Math.random() * c + m);
+	        }
+	    }
+
+	    function getMax(arr, key) {
+	        var max = 0,
+	            len = arr.length;
+	        for (var i = 0; i < len; i++) {
+	            var item = arr[i][key];
+	            if (max < item) max = item;
+	        }
+	        return max;
+	    }
+
+	    function getValArr(arr, key) {
+	        var val = [],
+	            len = arr.length;
+	        for (var i = 0; i < len; i++) {
+	            val.push(arr[i][key]);
+	        }
+	        return val;
+	    }
+
+// 	    var arr = [];
+// 	    for (var i = 0; i < 10; i++) {
+// 	        arr.push({
+// 	            name: '类目名称' + rand(99),
+// 	            amount: rand(99999) / 100 // 采购金额
+// 	        });
+// 	    }
+
+	    var max = getMax(arr, 'amount'),
+	        angleAxisData = getValArr(arr, 'name');
+	    $.each(arr, function(i, e) {
+	        e.value = (e.amount / max * 100).toFixed(2);
+	    });
+	    option = {
+           	title: {
+           		show: false,
+            	text: '单位：万人次',
+            	x:'right',
+            	padding: [-6,80,0,0],
+                textStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 16,
+                    fontWeight: 'normal'
+                }
+            },
+	        grid: {
+	            top: 0,
+	            bottom: 0,
+	            right: 0,
+	            left: 0,
+	        },
+	        tooltip: {
+	            trigger: 'item',
+	            textStyle: {
+	                fontSize: 16,
+	                color: '#fff',
+	                fontFamily: 'Microsoft YaHei'
+	            },
+	            formatter: function (params) {
+	            	var name = params.name.substring(0,params.name.indexOf('\n'));
+	            	var update = "";
+	            	if (params.name.indexOf("↓")>-1)
+	            		update = "减少";
+	            	else if (params.name.indexOf("↑")>-1)
+	            		update = "增加";
+	            	var num = params.name.substring(params.name.indexOf('\n')+2, params.name.indexOf('&'))
+	            	return name+"\n"+update+num;
+	            }
+	        },
+	        angleAxis: {
+	            type: 'category',
+	            axisLine: {
+	                lineStyle: {
+	                    color: '#6d8a92'
+	                }
+	            },
+	            axisLabel: {
+	                interval: 0,
+	                fontSize: 16,
+	                color: '#fff',
+	                fontFamily: 'Microsoft YaHei',
+		            formatter: function (params) {
+		            	var name = params.substring(0,params.indexOf('\n'));
+		            	var value = params.substring(params.indexOf('&')+1);
+		            	return name+'\n'+value+'万人次';
+		            }
+	            },
+	            axisTick: {
+	                show: false
+	            },
+	            data: angleAxisData,
+	            z: 10
+	        },
+	        radiusAxis: {
+	            max: 100,
+	            min: 0,
+	            axisTick: {
+	                show: false
+	            },
+	            axisLine: {
+	                show: true,
+	                lineStyle: {
+	                    color: '#6d8a92'
+	                }
+	            },
+	            axisLabel: {
+	            	show: false,
+	                formatter: '{value}%',
+	                textStyle: {
+	                    fontSize: 11,
+	                    color: 'red',
+	                    fontFamily: 'Microsoft YaHei'
+	                }
+	            },
+	            splitLine: {
+	                show: true,
+	                lineStyle: {
+	                    color: '#6d8a92'
+	                }
+	            },
+	            splitArea: {
+	                areaStyle: {
+	                    color: 'transparent'
+	                }
+	            }
+	        },
+	        polar: {
+	            center: ['43%', '40%'],
+	            radius: '50%',
+	        },
+	        series: [{
+	            type: 'bar',
+	            data: arr,
+	            itemStyle: {
+	                color: function(params) {
+	                    var colorList = ['#5cc6ca', '#d87a7f', '#f5b97f', '#5ab1ef', '#b6a2de', '#8d98b3', '#e5d02d', '#97b552', '#956f6d', '#d0579c'];
+	                    return colorList[params.dataIndex];
+	                }
+	            },
+	            coordinateSystem: 'polar',
+	        }]
+	    };
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

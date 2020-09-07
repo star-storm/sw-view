@@ -1,0 +1,546 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv,.scrollDiv1").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+      });
+    </script>
+	<script language="javascript">
+      function sDialog(num) {
+		var uploadFile = $("#uploadFile"+num);
+		uploadFile.click();
+      }
+	</script>
+	<script type="text/javascript">
+	function viewPdf() {
+		$(".tip").fadeIn(200);
+		$(".con").fadeOut(200);
+	}
+	function viewPdf0(id) {
+		window.location.href="/templates/view/dcdb/page/area/sanji-detail.html?type=zddcsxDiv&id="+id;
+	}
+	
+	$(document).ready(function(){
+		$(".click").click(function(){
+		  $(".tip").fadeIn(200);
+		  $(".con").fadeOut(200);
+	  });
+	  $(".tiptop a").click(function(){
+		  $(".tip").fadeOut(200);  
+		  $(".con").fadeIn(200);
+	  });
+	  $("#listDiv tr").click(function(){
+// 		  alert("1."+this.id);
+		  if (this.id.indexOf("trTit")>-1)return;
+		  if (this.id!=$("#trId").val()) {
+			  $("#"+$("#trId").val()).removeClass("table_on");
+		  }
+		  $("#trId").val(this.id);
+		  $(this).addClass("table_on");
+	  });
+	  $("#listDiv tr").mouseover(function(){
+// 		  alert("2."+this.id);
+		  if (this.id==$("#trId").val() || this.id.indexOf("trTit")>-1)
+			  return;
+		  $(this).addClass("table_on");
+	  });
+	  $("#listDiv tr").mouseout(function(){
+// 		  alert("3."+this.id);
+		  if (this.id==$("#trId").val() || this.id.indexOf("trTit")>-1)
+			  return;
+		  $(this).removeClass("table_on");
+	  });
+	});
+	</script>
+  </head>
+<body>
+<div class="fl w h1000 bg_ej">
+	<div class="fl w h61">
+		<div class="fl ml610 w700 tc">
+			<!-- <span class="fl w110 white ml170 mt10">
+				<select id="mySelect">
+					<option VALUE="" selected="selected">全部</option>
+					<option value="2019">2019年</option>
+					<option value="2018">2018年</option>
+					<option value="2017">2017年</option>
+				</select>						
+			</span> -->
+			<span id="titDiv" class="fl w f24 white tc mt30 bold">媒体反映问题反馈报道情况</span>
+		</div>
+		<div class="fr mr270 mt30"><a href="####" onclick="gotomain()"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w1830 h61 ml48 ">
+		<div class="fl w h42 subTit mt2 subtit_line">
+			<span id="mediaWentiCount" onclick="showCard(this,'list','subCard',tabCallback);" class="subCardOn" >媒体反映问题数（0）</span>
+			<span id="mediaHechaBanJieCount" onclick="showCard(this,'list','subCard',tabCallback);" class="subCardOff">核查已办结数（0）</span>
+			<span id="mediaFankuiCount" onclick="showCard(this,'list','subCard',tabCallback);" class="subCardOff">反馈报道数（0）</span>
+		</div>
+	</div>
+	<div class="fl w1833 h750 ml43 mt13">
+		<!--2020-7-15-->
+		<div id="listDiv" class="fl w776 h745 ml30">
+			<div id="list0" style="display:inline;">
+				<!--2020-7-15-->
+				<div class="fl w h60 white bold mt20">
+					<table class=" f18 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<tr id="trTit1" class="h60">
+							<th class="w60 tc">序号</th>
+							<th class="w100 tc">立项日期</th>
+							<th>事项名称</th>
+							<th class="w100 tc">办理状态</th>
+						</tr>
+					</table>
+				</div>
+				<div class="fl w h681 scrollDiv" style="overflow:auto;">
+					<table id="mediaWentiDiv" class="f16 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<!-- <tr class="lh30 table_on">
+							<td class="w60 tc">2</td>
+							<td class="w100 tc">2020-07-15</td>
+							<td>落实中央八项规定精神情况汇报，落实中央八项规定自查报告落实中央八项规定自查报告</td>
+							<td class="w100 tc"><span class="tc color_yjb">已办结</span></td>
+						</tr> -->
+					</table>
+				</div>
+			</div>
+			<div id="list1" style="display:none;">
+				<div class="fl w h60 white bold mt20">
+					<table class=" f18 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<tr id="trTit2" class="h60">
+							<th class="w60 tc">序号</th>
+							<th class="w100 tc">立项日期</th>
+							<th>事项名称</th>
+						</tr>
+					</table>
+				</div>
+				<div class="fl w h681 scrollDiv" style="overflow:auto;">
+					<table id="mediaHechaBanJieDiv" class="f16 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<!-- <tr class="lh30 table_on">
+							<td class="w60 tc">2</td>
+							<td class="w100 tc">2020-07-15</td>
+							<td>落实中央八项规定精神情况汇报，落实中央八项规定自查报告落实中央八项规定自查报告</td>
+							<td class="w100 tc"><span class="tc color_yjb">已办结</span></td>
+						</tr> -->
+					</table>
+				</div>
+			</div>
+			<div id="list2" style="display:none;">
+				<div class="fl w h60 white bold mt20">
+					<table class=" f18 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<tr id="trTit3" class="h60">
+							<th class="w60 tc">序号</th>
+							<th class="w100 tc">立项日期</th>
+							<th>事项名称</th>
+						</tr>
+					</table>
+				</div>
+				<div class="fl w h681 scrollDiv" style="overflow:auto;">
+					<table id="mediaFankuiDiv" class="f16 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<!-- <tr class="lh30 table_on">
+							<td class="w60 tc">2</td>
+							<td class="w100 tc">2020-07-15</td>
+							<td>落实中央八项规定精神情况汇报，落实中央八项规定自查报告落实中央八项规定自查报告</td>
+							<td class="w100 tc"><span class="tc color_yjb">已办结</span></td>
+						</tr> -->
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="fl w30 ml60">
+			<span class="fl mt320"><img src="/templates/view/dcdb/images/ico_jt.png"></span>
+		</div>
+		<div class="fr w910 h745">
+			<!--2020-7-15-->
+			<div class="fl w810 ml50 mt20">
+					<table id="modelDiv" class=" f16 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<!-- <tr class="lh30">
+							<th class="w130 tr">立项日期</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">督办事项</th>
+							<td>当前我市厨余垃圾处理情况及相关建议（市委办公厅材料）当前我市厨余垃圾处理情况及相关建议（市委办公厅材料）当前我市厨余垃圾处理情况及相关建议（市委办公厅材料）</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">承办单位</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">批示领导/内容</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">办理状态</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">批示原件</th>
+							<td><a href="###" class="color_fj click">转文第277号-晓东同志批示.pdf</a></td>
+						</tr> -->
+					</table>
+			</div>
+			<!--2020-7-15  end-->
+			<input id="trId" type="hidden" ></input>
+		</div>
+	</div>
+	<!--城市运行 弹出页面-->
+	<div class="tip" style="display:none;">
+		<div class="fr w660 h780 mt110 mr140 pr">
+			<div class="fl w560 tiptop"><a></a></div>
+			<div class="fl w620 tc scrollDiv" style="height:820px;overflow:auto;">
+				<div id="pdf"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sjly_div h38 pa tc">
+   <span class="fl w mt13 tc">数据来源方：市委办公厅</span>
+</div>
+</body>
+</html>
+
+<!-- pdf -->
+<style>
+.pdfobject-container {
+	width: 100%;
+	max-width: 660px;
+	height: 800px;
+/* 	margin: 2em 0; */
+}
+</style>
+<script src="/templates/view/dcdb/page/pdf/pdfobject.min.js"></script>
+
+<script>
+	var options = {
+		width: '100%',
+		maxWidth: '660px',
+		height: '800px',
+		pdfOpenParams: {
+// 		    pagemode: "thumbs",
+		    toolbar: 0,
+		    navpanes: 0,
+		    statesbar: 0,
+		    view: 'FitBV,left',
+		    zoom: '112,0,0'
+		}
+	};
+	PDFObject.embed("/templates/view/dcdb/page/pdf/转文第277号-晓东同志批示.pdf", "#pdf", options);
+</script>
+
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script>
+
+//年份
+var year=getUrlParam("year");
+if (year=="" || year==null || year=="null" || year=="undefined")
+	year = "";
+
+//状态
+var status=getUrlParam("status");
+if (status=="" || status==null || status=="null" || status=="undefined")
+	status="0";
+	
+$("#titDiv").html((year==""?"":(year+"年"))+"媒体反映问题反馈报道情况");
+
+//页面初始化
+(function($) {
+
+	//媒体反映问题
+	mediaWenti(year);
+	
+	//核查已办结数
+	mediaHechaBanJieCount(year);
+	//媒体反馈数
+	mediaFankuiCount(year);
+
+	//核查已办结列表
+	mediaHechaBanJieList(year);
+	//核查反馈列表
+	mediaFankuiList(year);
+	
+	//触发详情点击
+	$(status=="0"?"#mediaWentiCount":status==1?"#mediaHechaBanJieCount":"#mediaFankuiCount").click();
+	tabCallback(status=="0"?"mediaWentiDiv":status==1?"mediaHechaBanJieDiv":"mediaFankuiDiv");
+		
+}(jQuery));
+
+//媒体反映问题
+function mediaWenti(year) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaWentiList",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				var countData = "媒体反映问题数（" + resp.data.length + "）";
+				$("#mediaWentiCount").html(countData);
+				$("#mediaWentiDiv").html("");
+				var data = resp.data;
+				var content = "";
+				for (var i=0; i<data.length; i++) {
+					var id=data[i].split("|")[0];
+					var name=data[i].split("|")[1];
+					var statusTmp = data[i].split("|")[2];
+					var statusStyle = statusTmp=="已办结"?" color_yjb ":" color_blz ";
+					var date=data[i].split("|")[3];
+					content += "<tr id='tr_"+id+"_0' class='lh27 ' onclick='mediaModel(\""+id+"\",this)'>"
+							+ "		<td class='w60 tc'>"+(i+1)+"</td>"
+							+ "		<td class='w100 tc'>"+timestampToDate(date)+"</td>"
+							+ "		<td>"+textEllipsis(name,20)+"</td>"
+							+ "		<td class='w100 tc'><span class='tc "+statusStyle+"'>"+statusTmp+"</span></td>"
+							+ "	</tr>";
+				}
+				$("#mediaWentiDiv").html(content);
+				refreshScroll();
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+
+//核查已办结数
+function mediaHechaBanJieCount(year) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaHechaBanJieCount",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				var data = "核查已办结数（" + resp.data + "）";
+				$("#mediaHechaBanJieCount").html(data);
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//核查已办结列表
+function mediaHechaBanJieList(year) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaHechaBanJieList",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				$("#mediaHechaBanJieDiv").html("");
+				var data = resp.data;
+				var content = "";
+				for (var i=0; i<data.length; i++) {
+					var id=data[i].split("|")[0];
+					var name=data[i].split("|")[1];
+					var date=data[i].split("|")[2];
+					content += "<tr id='tr_"+id+"_1' class='lh27 ' onclick='mediaModel(\""+id+"\",this)'>"
+							+ "		<td class='w60 tc'>"+(i+1)+"</td>"
+							+ "		<td class='w100 tc'>"+timestampToDate(date)+"</td>"
+							+ "		<td>"+textEllipsis(name,20)+"</td>"
+							+ "	</tr>";
+				}
+				$("#mediaHechaBanJieDiv").html(content);
+				refreshScroll();
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//媒体反馈数
+function mediaFankuiCount(year) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaFankuiCount",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				var data = "反馈报道数（" + resp.data + "）";
+				$("#mediaFankuiCount").html(data);
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//核查反馈列表
+function mediaFankuiList(year) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaFankuiList",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				$("#mediaFankuiDiv").html("");
+				var data = resp.data;
+				var content = "";
+				for (var i=0; i<data.length; i++) {
+					var id=data[i].split("|")[0];
+					var name=data[i].split("|")[1];
+					var date=data[i].split("|")[2];
+					content += "<tr id='tr_"+id+"_2' class='lh27 ' onclick='mediaModel(\""+id+"\",this)'>"
+							+ "		<td class='w60 tc'>"+(i+1)+"</td>"
+							+ "		<td class='w100 tc'>"+timestampToDate(date)+"</td>"
+							+ "		<td>"+textEllipsis(name,20)+"</td>"
+							+ "	</tr>";
+				}
+				$("#mediaFankuiDiv").html(content);
+				refreshScroll();
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//媒体详情
+function mediaModel(id,o) {
+	//设置该行高亮
+	if ($(".li_on").length>0)
+		$(".li_on").removeClass("li_on");
+	$(o.parentNode).addClass("li_on");
+	//获取详情数据
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaModel",
+		dataType : "json",
+		data : {
+			'id' : id
+		},
+		success : function(resp) {
+			clearRightData();
+			if(resp.code == 200){
+				if ((resp.data!=null) && (resp.data.length!=0)) {
+					$("#titleDiv").append("<span class='fl w tc color_yellow'>"+emptytoNull(resp.data.title)+"</span>");
+					$("#modelDiv").append("<tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>标题</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.title)+"&nbsp;</td>" 
+							+ " </tr>"
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>刊登媒体</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.mediapartyname)+"&nbsp;</td>" 
+							+ " </tr>"
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>下发日期</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.publishdate)+"&nbsp;</td>" 
+							+ " </tr>"
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>承办单位</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.speciapartyname)+"&nbsp;</td>" 
+							+ " </tr>" 
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>办理状态</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.handlestatus)+"&nbsp;</td>" 
+							+ " </tr>" 
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>摘要</th>" 
+							+ " 	<td>无</td>"
+							+ " </tr>");
+				}
+				refreshScroll();
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+//选择年份事件
+function selectYear(year) {
+	//年份
+	var year = $("#mySelect").find("option:selected").val();
+
+	//媒体反映问题
+	mediaWenti(year);
+	
+	//核查已办结数
+	mediaHechaBanJieCount(year);
+	//媒体反馈数
+	mediaFankuiCount(year);
+
+	//核查已办结列表
+	mediaHechaBanJieList(year);
+	//核查反馈列表
+	mediaFankuiList(year);
+
+	//切换标签重载右侧详情数据
+	$(status=="0"?"#mediaWentiCount":status==1?"#mediaHechaBanJieCount":"#mediaFankuiCount").click();
+	tabCallback(status=="0"?"mediaWentiDiv":status==1?"mediaHechaBanJieDiv":"mediaFankuiDiv");
+}
+
+//根据TAB设置显示-回调函数
+function tabCallback(id) {
+	clearRightData();
+	var divId = id.replace("Count","Div");
+	var o = $("#"+divId+" tr");
+	if (o.length>0) {
+		if (($("#trId").val()!="") && ($("#trId").val()!=o[0].id)) {
+			$("#"+$("#trId").val()).removeClass("table_on");
+		}
+		$("#trId").val(o[0].id);
+		$(o[0]).click();
+		$(o[0]).addClass("table_on");
+	}
+}
+
+//切换标签清理右侧详情数据
+function clearRightData() {
+	$("#titleDiv").html("");
+	$("#modelDiv").html("");
+}
+
+//返回主页
+function gotomain() {
+	window.location.href="/templates/view/dcdb/page/dcdb.html?year="+year;
+}
+
+</script>

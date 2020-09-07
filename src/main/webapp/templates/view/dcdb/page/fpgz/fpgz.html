@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<style>
+		.scrollDiv{
+			overflow-y: scroll;
+			overflow-x: hidden;
+		}
+	</style>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+	<script>
+        $(function(){
+            $(".scrollDiv").niceScroll({
+                cursorcolor:"#446ba9",
+                touchbehavior: true,
+                cursoropacitymax: 1,
+                cursorborder: "0",
+                cursorwidth: "10px",
+                autohidemode: true}
+            );
+
+        });
+        function callback0() {}
+
+        window.onload = function() {
+            $("#con_tr1").hide();
+            $("#listUl_con1").hide();
+        };
+        
+        function hideTab() {
+//         	$("#fp", window.parent.document).removeClass('now');
+        }
+	</script>
+</head>
+<body>
+<div class="fl w h1000 bg_fpgz">
+	<div class="fl w h41">
+		<div class="fr w387 mr310 mt7 bor_t">
+			<a href="fpgz.html" class="sub_navOn_fp">
+				<span class="f20 white ">扶贫援助合作</span>
+			</a>
+			<a href="fpgz_1bf.html" class="sub_navOff_fp">
+				<span class="f20 white">低收入农户帮扶</span>
+			</a>
+		</div>
+	</div>
+	<div class="fl w1920">
+		<!--left-->
+		<div class="fl w576 h800 ml10">
+			<div class="fl w mt30">
+				<span class="fl ml10 "><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl  f24  ml10 color_yellow">扶贫基本情况</span>
+				<span class="fl f18 mt5 ml10 color_yellow">（2019年）</span>
+			</div>
+			<div class="fl w h220" >
+				<img src="/templates/view/dcdb/images/fpgz_img_01.png">
+			</div>
+			<div class="fl w h280 fpgzbg1">
+				<div class="fl w477 h56 lh56 ml55 mt10 tc" >
+					<span class="f18 white">安排脱贫攻坚项目 </span>
+					<span class="f30 color_yellow pl10 pr10">1839 </span>
+					<span class="f18 white">个</span>
+				</div>
+				<div class="fl w228 h90 lh45 ml55 mt10 tc">
+					<span class="f18 white">选派挂职干部人才</span>
+					<span class="fl w ">
+						<font class="f30 color_yellow pl10 pr10">2252</font>
+						<font class="f18 white">人</font>
+					</span>
+				</div>
+				<div class="fl w228 h90 lh45 ml15 mt10 tc" >
+					<span class="f18 white">接收挂职干部人才</span>
+					<span class="fl w ">
+						<font class="f30 color_yellow pl10 pr10">1191</font>
+						<font class="f18 white">人</font>
+					</span>
+				</div>
+				<div class="fl w228 h90 lh45 ml55 mt10 tc" >
+					<span class="fl w f18 white">销售扶贫产品总额</span>
+					<span class="fl w ">
+						<font class="f30 color_yellow pl10 pr10">177</font>
+						<font class="f18 white">亿元</font>
+					</span>
+				</div>
+				<div class="fl w228 h90 lh45 ml15 mt10 tc" >
+					<span class="fl w f18 white">培训各类人员</span>
+					<span class="fl w ">
+						<font class="f30 color_yellow pl10 pr10">9.75</font>
+						<font class="f18 white">万人次</font>
+					</span>
+				</div>
+			</div>
+			<div class="fl w h45 mt36">
+				<span class="fl ml10 "><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl  f24  ml10 color_yellow">北京市受援地区脱贫成果</span>
+			</div>
+			<div class="fl w540 tc h42 subtit_line ml5">
+				<div class="fl w390 subTit fpzg_tit">
+					<span onclick="showCardMore(this,'listUl_con','more_dw','subCardMore')" class="subCardMoreOn">贫困人口情况</span>
+					<span onclick="showCardMore(this,'listUl_con','more_dw','subCardMore')" class="subCardMoreOff">脱贫县级地区情况</span>
+				</div>
+				<div class="fr w100 tc mt10">
+					<div class="fl w h58 white mr12" id="more_dw0" >单位：万人</div>
+					<div class="fl w h58 white mr12" id="more_dw1" style="display:none;">单位：个</div>
+				</div>
+			</div>
+			<div class="fl w h185 tc" id="listUl_con0" style="display:inline;">
+				<iframe src="/templates/view/dcdb/page/echarts/fpgz/fpyz/pkrk.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+			<div class="fl w h185 tc" id="listUl_con1" >
+				<iframe src="/templates/view/dcdb/page/echarts/fpgz/fpyz/tpxj.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+		</div>
+		<!--center-->
+		<div class="fl w706 h850 ml18 white">
+			<div class="fl w h45 mt30 ">
+				<span class="fl ml15 "><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24  ml10 color_yellow">北京市各区结对情况一览表</span>
+				<span class="fl f18 mt5 ml10 color_yellow">（2019年）</span>
+				<a href="fpgz_more_jdqk.html" onclick="hideTab();" class="fr mr10"><img src="/templates/view/dcdb/images/btn_more.png"></a>
+			</div>
+			<div class="fl w h720 pr tc">
+				<div class="fl w h670">
+					<iframe id="gqjd" src="/templates/view/dcdb/page/echarts/fpgz/fpyz/gqjd.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w671 fp_table pa  ml10">
+					<div class="fl w520 h124">
+						<div class="fl w h36"><span class="fl lh35 ml28 f18 white">中心城区</span></div>
+						<div class="fl mt5 h42 ">
+							<span class="fl w90 mt3 f18 color_blz tc hand" onclick="goGqdk(1)">东城区</span>
+							<span class="fl w80 mt3 f18 color_blz tc hand" onclick="goGqdk(2)">西城区</span>
+							<span class="fl w85 mt3 f18 color_blz tc hand" onclick="goGqdk(3)">朝阳区</span>
+							<span class="fl w80 mt3 f18 color_blz tc hand" onclick="goGqdk(4)">海淀区 </span>
+							<span class="fl w80 mt3 f18 color_blz tc hand" onclick="goGqdk(5)">丰台区</span>
+							<span class="fl w100 mt3 f18 color_blz tc hand" onclick="goGqdk(6)">石景山区</span>
+						</div>
+						<div class="fl mt5 h42">
+							<span class="fl w90 mt3 f18 color_yellow tc hand" onclick="goGqdk(1)">5</span>
+							<span class="fl w80 mt3 f18 color_yellow tc hand" onclick="goGqdk(2)">6</span>
+							<span class="fl w85 mt3 f18 color_yellow tc hand" onclick="goGqdk(3)">7</span>
+							<span class="fl w80 mt3 f18 color_yellow tc hand" onclick="goGqdk(4)">7 </span>
+							<span class="fl w80 mt3 f18 color_yellow tc hand" onclick="goGqdk(5)">5</span>
+							<span class="fl w100 mt3 f18 color_yellow tc hand" onclick="goGqdk(6)">5</span>
+						</div>
+					</div>
+					<div class="fr w140 h87 ml5 mt33">
+						<span class="fl w h40 lh40 mt3 f18 color_blz tc hand" onclick="goGqdk(17)">经济技术开发区</span>
+						<span class="fl w h40 lh40 mt3 f18 color_yellow tc hand" onclick="goGqdk(17)">1</span>
+					</div>
+				</div>
+			</div>
+			<div class="fl w674 h92  tc mt10 ml10">
+				<a href="fpgz_more_map.html"><img src="/templates/view/dcdb/images/fpgz_img_06_1.png" width="674" height="92"></a>
+			</div>
+		</div>
+		<!--right-->
+		<div class="fr w570 h880 mr15">
+			<div class="fl w h45 mt30">
+				<span class="fl ml10 "><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24  ml10 color_yellow">北京对外援建项目</span>
+				<span class="fl f18 mt5 ml10 color_yellow">（2019年）</span>
+			</div>
+			<div class="fl w572 h306 tc mt10 fp_yzbg1">
+				<span class="fl w275 h62 hl62 mt43 f18 white ml55 tl">援建支持<font class="color_yellow mr5 ml5 bold">290</font>多家医院和卫生院</span>
+				<span class="fl w185 h62 hl62 mt43 f18 white ml55 tl">援建学校<font class="color_yellow mr5 ml5 bold">400</font>多所</span>
+				<span class="fl w275 h62 hl62 mt35 f18 white ml55 tl">完成基础设施管网<font class="color_yellow mr5 ml5 bold">200</font>多公里</span>
+				<span class="fl w185 h62 hl62 mt35 f18 white ml55 tl">新建道路<font class="color_yellow mr5 ml5 bold">300</font>余公里</span>
+				<span class="fl w275 h62 hl62 mt40 f18 white ml55 tl">支持危房改造建设近<font class="color_yellow mr5 ml5 bold">5</font>万套</span>
+				<span class="fl w185 h62 hl62 mt40 f18 white ml55 tl">改造厕所<font class="color_yellow mr5 ml5 bold">5000</font>多座</span>
+			</div>
+			<div class="fl w h45 mt23">
+				<span class="fl ml10 mt30"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 mt30 ml10 color_yellow">投入情况</span>
+			</div>
+			<div class="fl w tc mt50 h42 subtit_line">
+				<div class="fl w390 subTit fpzg_tit">
+					<span onclick="showCard(this,'con_tr','subCard',callback0)" class="subCardOn">资金投入情况</span>
+					<span onclick="showCard(this,'con_tr','subCard',callback0)" class="subCardOff">援派干部情况</span>
+				</div>
+			</div>
+			<div class="fl w h366 mt10 tc" id="con_tr0" style="display:inline;">
+				<iframe src="/templates/view/dcdb/page/echarts/fpgz/fpyz/trqk.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				<!--	<img src="/templates/view/dcdb/images/fpgz_img_07.png">-->
+			</div>
+			<div class="fl w h366 mt10 tc" id="con_tr1" >
+				<iframe  src="/templates/view/dcdb/page/echarts/fpgz/fpyz/ypgb.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+
+				<!--	<img src="/templates/view/dcdb/images/fpgz_img_08.png">-->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sjly_div pa h38 tc"><span class="fl w mt13 tc">数据来源方：市扶贫支援办</span></div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#mySelect").select({
+            width:"128px"
+        });
+    });
+
+    function goGqdk(o) {
+        window.location.href = "/templates/view/dcdb/page/fpgz/fpgz_more_jdqk.html?area="+o;
+    }
+</script>
+</html>

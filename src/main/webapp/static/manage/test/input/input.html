@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+首页-tmp
+<form>
+<input id="test" name="test" type="text" style="width: 100px; height:32px; line-height:32px"/>
+<button id="check" style="width: 72px; height:24px; line-height:24px">确定</button>
+</form>
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+	
+	$("#check").click(function() {
+		var test = $("#test"); 
+		//test.val("nihhao"); 
+		//alert(test[0].offsetWidth);
+// 		alert(getStrleng(test.val()));
+
+
+		var n = test.val();
+		alert(formatSize(n));
+	});
+});
+
+function getStrleng(str) {  
+    myLen = 0;  
+    i = 0;  
+    for (; (i < str.length); i++) {  
+        if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128)  
+            myLen++;  
+        else  
+            myLen += 2;  
+    }  
+    return myLen;  
+} 
+
+//格式化文件大小
+function formatSize(n) {
+	if (n < 0) 
+		return "";
+	else if (n >= 0 && n < 1000)
+		return n + "字节";
+	else if (n >= 1000 && n < 1000 * 1000) {
+		var n1 = n / 1000;
+		var n2 = n1.toFixed(2);//保留两位小数
+		return n2 + "K";
+	}
+	else if (n >= 1000 * 1000 && n < 1000 * 1000 * 1000) {
+		var n1 = n / (1000 * 1000);
+		var n2 = n1.toFixed(2);//保留两位小数
+		return n2 + "M";
+	}
+	else if (n >= 1000 * 1000 * 1000 && n < 1000 * 1000 * 1000 * 1000) {
+		var n1 = n / (1000 * 1000 * 1000);
+		var n2 = n1.toFixed(2);//保留两位小数
+		return n2 + "G";
+	}
+	else if (n >= 1000 * 1000 * 1000 * 1000 && n < 1000 * 1000 * 1000 * 1000 * 1000) {
+		var n1 = n / (1000 * 1000 * 1000 * 1000);
+		var n2 = n1.toFixed(2);//保留两位小数
+		return n2 + "T";
+	}
+	else {
+		return "太大了";
+	}
+	
+}
+</script>

@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>其他邪教情况通报数量</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:540px;height:330px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+	    var myChart = echarts.init(document.getElementById('main'));
+	    myChart.setOption({
+	        grid: {
+	        	show: true,
+	            x:0,
+	            y:30,
+	            x2:30,
+	            y2:80,
+	            borderWidth: 1,
+	            borderColor : '#305078',
+	            containLabel: true
+	        },
+            title: {
+                text: '单位：起',
+            	x:'right',
+            	padding: [-7,30,0,0],
+                textStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 16,
+                    fontWeight: 'normal'
+                }
+            },
+	        tooltip: {
+	            trigger: 'axis',
+	        },
+	        xAxis: [{
+                type : 'category',
+                data : ['呼喊派','门徒会','全范围教会','灵灵教','新约教会'],
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: 'white',
+                        fontFamliy: 'Microsoft YaHei',
+                        fontSize: 14
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        type: 'solid',
+                        color:'rgba(255,255,255,.1)',
+                        width: 0.1
+                    }
+                }
+            }
+        ], yAxis: [{
+                type : 'value',
+                min: 0,
+                max: 50,
+                splitNumber: 5,
+	            axisLabel: {
+	                show: true,
+	                textStyle: {
+	                	color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 16
+	                }
+	            },
+	            splitLine: {
+                    show: true,
+                    lineStyle: {
+                        type: 'solid',
+                        color:'rgba(255,255,255,.1)',
+                        width: 1
+                    }
+	            },
+	            axisTick: {
+	                show: true
+	            },
+	            axisLine: {
+	                show: false
+	            }
+	        }],
+	        series: [{
+	            type: 'bar',
+	            data: [36, 44, 14, 17, 9],
+	            barWidth: 32,
+	            itemStyle: {
+	                normal: {
+	                    barBorderRadius: 9,
+	                    color: '#7932E0'
+	                }
+	            },
+	            label: {
+	                normal: {
+	                    show: true,
+	                    position: 'top',
+                        textStyle: {
+                            color: 'white',
+                            fontFamliy: 'Microsoft YaHei',
+                            fontSize: 16
+                        }
+	                }
+	            },
+	        }]
+	    });
+    </script>
+</body>
+</html>

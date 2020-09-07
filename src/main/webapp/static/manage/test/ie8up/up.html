@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<title>无标题文档</title>
+<script type="text/javascript"> 
+	$(document).ready(function() {
+		$('#uf-input-upload').on('change', function (e) {
+		    if (e.target.value.length>0) {
+		    	alert("yes");
+		        $('#uf-form').submit();
+		        console.log("上传文件");
+		    }
+		    else {
+		    	alert("no");
+		    }
+		});
+		//监听frame的load事件判断是否有返回信息
+		$('#uf-frame').on('load', function () {
+		    var response = $("#uf-frame").contents().find("body").find("pre").html();
+		    console.log(response);
+		    if (response.length > 0) {
+		        try {
+		            response = JSON.parse(response);
+		           console.log("返回的信息:"+response.data );
+		        }
+		        catch(err){
+		        	
+		        }
+		    } else {
+		        message.add("上传文件失败", "error");
+		    }
+
+		});
+	});
+</script>
+<style type="text/css">
+.upload-file .uf-button form {
+            position: relative;
+}
+
+.upload-file .uf-button form input {
+    
+}
+</style>
+</head>
+<body>
+	<div class="upload-file">
+     <div class="uf-button">
+         <form id="uf-form" method="post" 
+                action="/file/upload/bmyb" 
+                target="uf-frame"  
+                encoding="multipart/form-data" 
+                enctype="multipart/form-data">
+                
+                <input id="uf-input-upload" type="file" name="file" style="width:200px;height: 32px;border: 1px solid black;"/>
+                <button id="up-btn" style="width:120px;height: 24px;border: 1px solid black;"></button>
+            </form>
+            <iframe id="uf-frame" name="uf-frame" style="width:200px;height: 200px;border: 1px solid black; padding-top: 32px;"></iframe>
+<!--             <iframe id="uf-frame" name="uf-frame" style="visibility:hidden;height: 0;border: 0;"></iframe> -->
+    </div>
+</div>
+</body>
+</html>

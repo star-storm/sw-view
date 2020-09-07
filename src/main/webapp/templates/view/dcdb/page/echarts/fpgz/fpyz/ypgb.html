@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>援派干部</title>
+</head>
+
+<body>
+<!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+<!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+<div id="main" style="width:540px;height:380px;"></div>
+
+<!--Step:2 Import echarts.js-->
+<!--Step:2 引入echarts.js-->
+<script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+
+<script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        myChart.setOption({
+            grid: {
+                show: true,
+                x:0,
+                y:30,
+                x2:30,
+                y2:60,
+                borderWidth: 1,
+                borderColor : '#305078',
+                containLabel: true
+            },
+            title: {
+                text: '2015年-2019年援派干部情况                         单位：人',
+                x:'right',
+                padding: [-4,24,0,0],
+                textStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 16,
+                    fontWeight: 'normal'
+                },
+            },
+            tooltip: {
+                trigger: 'axis',
+            },
+            xAxis: [{
+                type : 'category',
+                data : ['2015年','2016年','2017年','2018年','2019年'],
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: 'white',
+                        fontFamliy: 'Microsoft YaHei',
+                        fontSize: 16
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        type: 'solid',
+                        color:'rgba(255,255,255,.1)',
+                        width: 0.1
+                    }
+                }
+            }
+            ], yAxis: [{
+                type : 'value',
+                min: 0,
+                max: 2500,
+                splitNumber: 5,
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: 'white',
+                        fontFamliy: 'Microsoft YaHei',
+                        fontSize: 16
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: true
+                },
+                axisLine: {
+                    show: false
+                }
+            }],
+            series: [{
+                type: 'bar',
+
+                data: [440, 601, 798, 1739, 2252],
+                barWidth: 22,
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 12,
+                        color: '#37D789'
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        textStyle: {
+                            color: 'white',
+                            fontFamliy: 'Microsoft YaHei',
+                            fontSize: 16
+                        }
+                    }
+                },
+            }]
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+.cate {
+	float: left;
+	height: 30px;
+	line-height:28px;
+	text-align:left;
+	padding-right:20px;
+	position:relative;
+}
+.cate .cate_wrp {
+	overflow: hidden;
+	border: 1px solid #D4D4D4;
+	background: #fff;
+	position:relative;
+	z-index:1;
+}
+.cate .cate_inp {
+	text-indent:15px;
+	height: 28px;
+	float: left;
+}
+.cate a.cate_tri:link,  .cate a.cate_tri:visited {
+	width:30px;
+	height:30px;
+	float:right;
+	background: transparent url('../images/select_right.gif') no-repeat center center;
+}
+.cate .cate_drop {
+	position:relative;
+	z-index:2;
+	background:#f6f6f6;
+	border:1px solid #ADADAD;
+	border-radius: 2px;
+	overflow:auto;
+	height:112px;
+}
+.cate .cate_drop li {
+	line-height:35px;
+	text-indent:15px;
+}
+.cate .cate_drop li:hover {
+	background: #01a1ff;
+	color: #fff;
+	cursor: pointer;
+}

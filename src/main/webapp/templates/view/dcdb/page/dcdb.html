@@ -1,0 +1,747 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+      });
+    </script>
+
+</head>
+<body>
+<div class="fl w h1000 bg_dcdb">
+	<div class="fl w h51">
+		<div class="fl ml610 w700 tc">
+			<span class="fl w110 blue ml170 mt15">
+				<select id="mySelect">
+					<option VALUE="" selected="selected">全部</option>
+					<option value="2019">2019年</option>
+					<option value="2018">2018年</option>
+					<option value="2017">2017年</option>
+				</select>	
+			</span>
+			<span class="fl f24 white tc mt20 bold ml50">全市督查件整理情况</span>
+		</div>
+	</div>
+	<div class="fl w1920 h61">
+		<!--left-->
+		<div class="fl w640 h800 ml30 mt40" >
+			<div class="fl w mr30">
+				<span class="fr mr15 white f18 mt15">单位：件</span>
+				<img src="/templates/view/dcdb/images/ico_dcjs.png" class="fl mt10">
+				<span class="fl f24 mt10 ml20 color_yellow">督查件数</span>
+			</div>
+			<div class="fl w h130 mt20">
+				<a href="###" onclick="gotodcjall('',0)">
+					<div class="fl w280 h80 ml130  mt20" >					
+						<span class="fl w70 white f24 mt15 tr">督查件<br/>总&nbsp;&nbsp;&nbsp;数</span>
+						<span id="allDiv" class="fl w200 white f44 color_zs tc ml10 lh80">0</span>
+					</div>
+				</a>
+				<a href="###" onclick="gotodcjall('',2)">
+					<div class="fl w160 h40 ml25 mt10" >
+						<span class="fl w70 white f24 mt13">办理中</span>
+						<span id="procDiv" class="fl w90 white f36 tr color_blz">0</span>
+					</div>
+				</a>
+				<a href="###" onclick="gotodcjall('',1)">
+					<div class="fl w160 h40 ml25 mt10">
+						<span class="fl w70 white f24 mt13">已办结</span>
+						<span id="endDiv" class="fl w90 white f36 tr color_yjb">0</span>					
+					</div>
+				</a>
+			</div>
+			<div class="fl w h600 mt13">
+				<ul class="fl w f18">
+					<li class="fl w h59 mb18" style="mouserover:cursor">
+						<span class="fl w130 h58 lh58 tr white f18 bold hand"  onclick="gotodcj('zddcsx',0)">重点督查事项</span>
+						<span class="fl w70 h58 lh58 tc white hand" onclick="gotodcj('zddcsx',0)">总数</span>
+						<span id="zddcsxTot" class="fl w90 h58 lh58 tr f36 color_zs hand" onclick="gotodcj('zddcsx',0)">0</span>
+						<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcj('zddcsx',2)">办理中</span>
+						<span id="zddcsxProc" class="fl w80 h58 lh58 tr f36 color_blz hand" onclick="gotodcj('zddcsx',2)">0</span>
+						<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcj('zddcsx',1)">已办结</span>
+						<span id="zddcsxEnd" class="fl w80 h58 lh58 tr f36 color_yjb hand" onclick="gotodcj('zddcsx',1)">0</span>
+					</li>
+					<li class="fl w h59 mb18">
+							<span class="fl w130 h58 lh58 tr white f18 bold hand" onclick="gotodcjpsj('ldpsj',0)">领导批示件</span>
+							<span class="fl w70 h58 lh58 tc white hand" onclick="gotodcjpsj('ldpsj',0)">总数</span>
+							<span id="ldpsjTot" class="fl w90 h58 lh58 tr f36 color_zs hand" onclick="gotodcjpsj('ldpsj',0)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcjpsj('ldpsj',2)">办理中</span>
+							<span id="ldpsjProc" class="fl w80 h58 lh58 tr f36 color_blz hand" onclick="gotodcjpsj('ldpsj',2)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcjpsj('ldpsj',1)">已办结</span>
+							<span id="ldpsjEnd" class="fl w80 h58 lh58 tr f36 color_yjb hand" onclick="gotodcjpsj('ldpsj',1)">0</span>
+					</li>
+					<li class="fl w h59 mb18">
+							<span class="fl w130 h58 lh58 tr white f18 bold hand" onclick="gotodcjpsj('ldzssx',0)">领导指示事项</span>
+							<span class="fl w70 h58 lh58 tc white hand" onclick="gotodcjpsj('ldzssx',0)">总数</span>
+							<span id="ldzssxTot" class="fl w90 h58 lh58 tr f36 color_zs hand" onclick="gotodcjpsj('ldzssx',0)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcjpsj('ldzssx',2)">办理中</span>
+							<span id="ldzssxProc" class="fl w80 h58 lh58 tr f36 color_blz hand" onclick="gotodcjpsj('ldzssx',2)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcjpsj('ldzssx',1)">已办结</span>
+							<span id="ldzssxEnd" class="fl w80 h58 lh58 tr f36 color_yjb hand" onclick="gotodcjpsj('ldzssx',1)">0</span>
+					</li>
+					<li class="fl w h59 mb18">
+							<span class="fl w130 h58 lh58 tr white f18 bold hand" onclick="gotodyzssx('dyzssx',0)">调研指示事项</span>
+							<span class="fl w70 h58 lh58 tc white hand" onclick="gotodyzssx('dyzssx',0)">总数</span>
+							<span id="dyzssxTot" class="fl w90 h58 lh58 tr f36 color_zs hand" onclick="gotodyzssx('dyzssx',0)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodyzssx('dyzssx',2)">办理中</span>
+							<span id="dyzssxProc" class="fl w80 h58 lh58 tr f36 color_blz hand" onclick="gotodyzssx('dyzssx',2)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodyzssx('dyzssx',1)">已办结</span>
+							<span id="dyzssxEnd" class="fl w80 h58 lh58 tr f36 color_yjb hand" onclick="gotodyzssx('dyzssx',1)">0</span>
+					</li>
+					<li class="fl w h59 mb18">
+							<span class="fl w130 h58 lh58 tr white f18 bold hand" onclick="gotodyzssx('hyjdsx',0)">会议决定事项</span>
+							<span class="fl w70 h58 lh58 tc white hand" onclick="gotodyzssx('hyjdsx',0)">总数</span>
+							<span id="hyjdsxTot" class="fl w90 h58 lh58 tr f36 color_zs hand" onclick="gotodyzssx('hyjdsx',0)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodyzssx('hyjdsx',2)">办理中</span>
+							<span id="hyjdsxProc" class="fl w80 h58 lh58 tr f36 color_blz hand" onclick="gotodyzssx('hyjdsx',2)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodyzssx('hyjdsx',1)">已办结</span>
+							<span id="hyjdsxEnd" class="fl w80 h58 lh58 tr f36 color_yjb hand" onclick="gotodyzssx('hyjdsx',1)">0</span>
+					</li>
+					<li class="fl w h59 mb18">
+							<span class="fl w130 h58 lh58 tr white f18 bold hand" onclick="gotodcjmedia('mtfywt',0)">媒体反映问题</span>
+							<span class="fl w70 h58 lh58 tc white hand" onclick="gotodcjmedia('mtfywt',0)">总数</span>
+							<span id="mtfywtTot" class="fl w90 h58 lh58 tr f36 color_zs hand" onclick="gotodcjmedia('mtfywt',0)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcjmedia('mtfywt',0)">办理中</span>
+							<span id="mtfywtProc" class="fl w80 h58 lh58 tr f36 color_blz hand" onclick="gotodcjmedia('mtfywt',0)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcjmedia('mtfywt',0)">已办结</span>
+							<span id="mtfywtEnd" class="fl w80 h58 lh58 tr f36 color_yjb hand" onclick="gotodcjmedia('mtfywt',0)">0</span>
+					</li>
+					<li class="fl w h59 mb18">
+							<span class="fl w130 h58 lh58 tr white f18 bold hand" onclick="gotodcjmedia('smrx',0)">市民热线</span>
+							<span class="fl w70 h58 lh58 tc white hand" onclick="gotodcjmedia('smrx',0)">总数</span>
+							<span id="smrxTot" class="fl w90 h58 lh58 tr f36 color_zs hand" onclick="gotodcjmedia('smrx',0)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcjmedia('smrx',2)">办理中</span>
+							<span id="smrxProc" class="fl w80 h58 lh58 tr f36 color_blz hand" onclick="gotodcjmedia('smrx',2)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcjmedia('smrx',1)">已办结</span>
+							<span id="smrxEnd" class="fl w80 h58 lh58 tr f36 color_yjb hand" onclick="gotodcjmedia('smrx',1)">0</span>
+					</li>
+					<li class="fl w h59 mb18">
+							<span class="fl w130 h58 lh58 tr white f18 bold hand" onclick="gotodcjmedia('qt',0)">其他</span>
+							<span class="fl w70 h58 lh58 tc white hand" onclick="gotodcjmedia('qt',0)">总数</span>
+							<span id="qtTot" class="fl w90 h58 lh58 tr f36 color_zs hand" onclick="gotodcjmedia('qt',0)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcjmedia('qt',2)">办理中</span>
+							<span id="qtProc" class="fl w80 h58 lh58 tr f36 color_blz hand" onclick="gotodcjmedia('qt',2)">0</span>
+							<span class="fl w70 h58 lh58 tc white ml15 hand" onclick="gotodcjmedia('qt',1)">已办结</span>
+							<span id="qtEnd" class="fl w80 h58 lh58 tr f36 color_yjb hand" onclick="gotodcjmedia('qt',1)">0</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--center-->
+		<div class="fl w640 h850 ml50 mt20 white">
+			<div class="fl w h58 pr">
+				<div class="fl w h58 pa tit">
+					<span onclick="showCardMore(this,'listUl_fwbg','more_fwbg','subCardMore')" class="subCardMoreOn">十六区</span> 
+					<span id="otherTab" onclick="showCardMore(this,'listUl_fwbg','more_fwbg','subCardMore')" class="subCardMoreOff">其他承办单位</span>
+				</div>				
+				<div class="fl w h58 tit_1" id="more_fwbg0" ></div>
+				<div class="fl w h58 tit_2" id="more_fwbg1" style="display:none;"></div>
+			</div>
+			<div class="fl w h789">
+				<div class="fl w h789 " id="listUl_fwbg1" style="display:none;">
+					<div class="fl w640 h50">
+						<span class="fl w134 ml75 mt10"><img src="/templates/view/dcdb/images/top10.png"></span>
+						<a href="##" onclick="gotomore()" class="fr w101 mr50"><img src="/templates/view/dcdb/images/btn_more.png"></a>
+					</div>
+					<div class="fl w qtdw">
+					<a href="###" onclick="dcjOther(1)" class="fl ml90 mb10 qtdw_lioff">
+						<span id="otherName1" class="fl ml30 mt15 f24">1. </span>
+						<span class="fr mr35 mt30 f16 tr">件</span>
+						<span id="otherNum1" class="fr w100 mr10 mt10 f36 tr">0</span>
+					</a>
+					<a href="###" onclick="dcjOther(2)" class="fl ml126 mb10 qtdw_lioff">
+						<span id="otherName2" class="fl ml30 mt15 f24">2. </span>
+						<span class="fr mr35 mt30 f16 tr">件</span>
+						<span id="otherNum2" class="fr w100 mr10 mt10 f36 tr">0</span>
+					</a>
+					<a href="###" onclick="dcjOther(3)" class="fl ml147 mb10 qtdw_lioff">
+						<span id="otherName3" class="fl ml30 mt15 f24">3. </span>
+						<span class="fr mr35 mt30 f16 tr">件</span>
+						<span id="otherNum3" class="fr w100 mr10 mt10 f36 tr">0</span>
+					</a>
+					<a href="###" onclick="dcjOther(4)" class="fl ml167 mb10 qtdw_lioff">
+						<span id="otherName4" class="fl ml30 mt15 f24">4. </span>
+						<span class="fr mr35 mt30 f16 tr">件</span>
+						<span id="otherNum4" class="fr w100 mr10 mt10 f36 tr">0</span>
+					</a>
+					<a href="###" onclick="dcjOther(5)" class="fl ml178 mb10 qtdw_lioff">
+						<span id="otherName5" class="fl ml30 mt15 f24 ">5. </span>
+						<span class="fr mr35 mt30 f16 tr">件</span>
+						<span id="otherNum5" class="fr w100 mr10 mt10 f36 tr">0</span>
+					</a>
+					<a href="###" onclick="dcjOther(6)" class="fl ml178 mb10 qtdw_lioff">
+						<span id="otherName6" class="fl ml30 mt15 f24 ">6. </span>
+						<span class="fr mr35 mt30 f16 tr">件</span>
+						<span id="otherNum6" class="fr w100 mr10 mt10 f36 tr">0</span>
+					</a>
+					<a href="###" onclick="dcjOther(7)" class="fl ml167 mb10 qtdw_lioff">
+						<span id="otherName7" class="fl ml30 mt15 f24">7. </span>
+						<span class="fr mr35 mt30 f16 tr">件</span>
+						<span id="otherNum7" class="fr w100 mr10 mt10 f36 tr">0</span>
+					</a>
+					<a href="###" onclick="dcjOther(8)" class="fl ml147 mb10 qtdw_lioff">
+						<span id="otherName8" class="fl ml30 mt15 f24">8. </span>
+						<span class="fr mr35 mt30 f16 tr">件</span>
+						<span id="otherNum8" class="fr w100 mr10 mt10 f36 tr">0</span>
+					</a>
+					<a href="###" onclick="dcjOther(9)" class="fl ml126 mb10 qtdw_lioff">
+						<span id="otherName9" class="fl ml30 mt15 f24">9. </span>
+						<span class="fr mr35 mt30 f16 tr">件</span>
+						<span id="otherNum9" class="fr w100 mr10 mt10 f36 tr">0</span>
+					</a>
+					<a href="###" onclick="dcjOther(10)" class="fl ml90 mb10 qtdw_lioff">
+						<span id="otherName10" class="fl ml30 mt15 f24">10. </span>
+						<span class="fr mr35 mt30 f16 tr">件</span>
+						<span id="otherNum10" class="fr w100 mr10 mt10 f36 tr">0</span>
+					</a>
+					</div>
+				</div>				
+				<div class="fl w h789 " id="listUl_fwbg0">
+					<div class="fl w h640">
+						<iframe id="map" src="echarts/map/map.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w h124 mapsj">
+						<div class="fl w h36"><span class="fl lh35 ml48 f18 white">中心城区</span></div>
+						<div class="fl mt5 h42">
+							<span onclick="dcjSix('东城区')" class="fl w98 mt3 ml24 f18 color_blz tc" style="cursor:pointer">东城区</span>
+							<span onclick="dcjSix('西城区')" class="fl w98 mt3 f18 color_blz tc" style="cursor:pointer">西城区</span>
+							<span onclick="dcjSix('朝阳区')" class="fl w98 mt3 f18 color_blz tc" style="cursor:pointer">朝阳区</span>
+							<span onclick="dcjSix('海淀区')" class="fl w98 mt3 f18 color_blz tc" style="cursor:pointer">海淀区 </span>
+							<span onclick="dcjSix('丰台区')" class="fl w98 mt3 f18 color_blz tc" style="cursor:pointer">丰台区</span>
+							<span onclick="dcjSix('石景山区')" class="fl w108 mt3 f18 color_blz tc" style="cursor:pointer">石景山区</span>
+						</div>
+						<div class="fl mt5 h42">
+							<span id="dongchengNum" onclick="dcjSix('东城区')" class="fl w98 mt3 ml24 f18 color_yellow tc" style="cursor:pointer">0</span>
+							<span id="xichengNum" onclick="dcjSix('西城区')" class="fl w98 mt3 f18 color_yellow tc" style="cursor:pointer">0</span>
+							<span id="chaoyangNum" onclick="dcjSix('朝阳区')" class="fl w98 mt3 f18 color_yellow tc" style="cursor:pointer">0</span>
+							<span id="haidianNum" onclick="dcjSix('海淀区')" class="fl w98 mt3 f18 color_yellow tc" style="cursor:pointer">0</span>
+							<span id="fengtaiNum" onclick="dcjSix('丰台区')" class="fl w98 mt3 f18 color_yellow tc" style="cursor:pointer">0</span>
+							<span id="shijingshanNum" onclick="dcjSix('石景山区')" class="fl w108 mt3 f18 color_yellow tc" style="cursor:pointer">0</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--right-->
+		<div class="fl w490 h800 mt40 ml45">
+			<div class="fl w mr30">
+				<span class="fr mr15 white f18 mt15">单位：件</span>
+				<img src="/templates/view/dcdb/images/ico_mtfy.png" class="fl mt10">
+				<span class="fl f24 mt10 ml20 color_yellow">媒体反映问题反馈报道情况</span>
+			</div>
+			<div class="fl w h345 pr">
+				<a href="###" onclick="gotomedia(0)">
+					<div class="fl w132 pa div_mt">
+						<span id="mediaWentiCount" class="fl w tc white f36 mt37 color_green">0</span>
+						<span class="fl w tc white f18 mt60">媒体反映问题数</span>				
+					</div>
+				</a>
+				<a href="###" onclick="gotomedia(1)">
+					<div class="fl w122 pa div_hc">
+						<span id="mediaHechaBanJieCount" class="fl w tc white f36 mt36 white">0</span>
+						<span class="fl w tc white f18 mt50">核查已办结数</span>				
+					</div>
+				</a>
+				<a href="###" onclick="gotomedia(2)">
+					<div class="fl w132 pa div_fk" >
+						<span id="mediaFankuiCount" class="fl w tc white f36 mt77 color_yellow">0</span>
+						<span class="fl w tc white f18 mt46">反馈报道数</span>				
+					</div>
+				</a>
+			</div>
+			<div class="fl w mr30 mt50">
+					<span class="fr mr15 white f18 mt15">单位：件</span>
+<!-- 				<a href="###" onclick="gotopsj()"> -->
+					<img src="/templates/view/dcdb/images/ico_tsj.png" class="fl mt10">
+					<span class="fl f24 mt10 ml20 color_yellow">批示件载体</span>
+<!-- 				</a> -->
+			</div>
+			<div class="fl w h330 w500 white">
+				<iframe id="psjFrame" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sjly_div h38 pa tc">
+   <span class="fl w mt13 tc">数据来源方：市委办公厅</span>
+</div>
+</body>
+</html>
+
+<script>
+
+var areaArray = new Array();
+var psjConut = 0;
+
+//页面初始化
+(function($) {
+
+	//年份
+	var year=getUrlParam("year");
+	if (year=="" || year==null || year=="null" || year=="undefined")
+		year = $("#mySelect").find("option:selected").val();
+	else
+		$("#mySelect").find("option:contains('"+year+"')").attr("selected",true);
+	
+	//显示地图或其他区参数
+	var index = getUrlParam("index");
+	if (index == null || index=="undefied" || index=="null")
+		index="1";
+
+	//督办件数
+	dcjCount(year);
+	mediaCount(year);
+	pishiCount(year);
+
+	
+// 	$("#procDiv").html(totProcCount);
+// 	$("#endDiv").html(totEndCount);
+// 	$("#allDiv").html(totProcCount+totEndCount);
+	
+	//其他区域
+	areaCount2();
+	
+	//核查已办结数
+	mediaHechaBanJieCount(year);
+	//媒体反馈数
+	mediaFankuiCount(year);
+
+	//批示件载体
+// 	document.getElementById("psjFrame").src="/templates/view/dcdb/page/echarts/pie.html?year="+year+"&count="+psjConut;
+	
+	//显示地图或其他区
+	if (index=="2") {
+		$("#otherTab").click();
+	}
+		
+}(jQuery));
+
+function getValueById(id) {
+	var v = $("#"+id).html();
+	if (v == "" || v == "null" || v == null)
+		return 0;
+	else
+		return parseInt(v);
+}
+
+function setValueById(id, v) {
+	$("#"+id).html(v);
+}
+
+//督办件数-督查件
+function dcjCount(year) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/dcj/dcjCount",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				var totProcCount = 0, totEndCount = 0;
+				var zddcsxTot = 0, dyzssxTot = 0, hyjdsxTot = 0, mtfywtTot = 0, smrxTot = 0, ldpsjTot = 0, ldzssxTot = 0;
+				var zddcsxProc = 0, dyzssxProc = 0, hyjdsxProc = 0, mtfywtProc = 0, smrxProc = 0, ldpsjProc = 0, ldzssxProc = 0;
+				var zddcsxEnd = 0, dyzssxEnd = 0, hyjdsxEnd = 0, mtfywtEnd = 0, smrxEnd = 0, ldpsjEnd = 0, ldzssxEnd = 0;
+				for (var i=0; i<resp.data.length; i++) {
+					var data = resp.data[i];
+					var name = data.businesstypename;
+					var status = data.handlestatus;
+					var num = data.num;
+					$("#allDiv").html(getValueById("allDiv")+num);
+					if (name=="重点督查事项") {
+						if (status=="已办结") {
+							$("#endDiv").html(getValueById("endDiv")+num);
+							zddcsxEnd = num;
+						}
+						else if (status=="办理中") {
+							$("#procDiv").html(getValueById("procDiv")+num);
+							zddcsxProc = num;
+						}
+					}
+					else if (name=="调研指示事项") {
+						if (status=="已办结") {
+							$("#endDiv").html(getValueById("endDiv")+num);
+							dyzssxEnd = num;
+						}
+						else if (status=="办理中") {
+							$("#procDiv").html(getValueById("procDiv")+num);
+							dyzssxProc = num;
+						}
+					}
+					else if (name=="会议决定事项") {
+						if (status=="已办结") {
+							$("#endDiv").html(getValueById("endDiv")+num);
+							hyjdsxEnd = num;
+						}
+						else if (status=="办理中") {
+							$("#procDiv").html(getValueById("procDiv")+num);
+							hyjdsxProc = num;
+						}
+					}
+				}
+				$("#zddcsxEnd").html(zddcsxEnd);
+				$("#zddcsxProc").html(zddcsxProc);
+				$("#dyzssxEnd").html(dyzssxEnd);
+				$("#dyzssxProc").html(dyzssxProc);
+				$("#hyjdsxEnd").html(hyjdsxEnd);
+				$("#hyjdsxProc").html(hyjdsxProc);
+				
+				$("#zddcsxTot").html(zddcsxEnd+zddcsxProc);
+				$("#dyzssxTot").html(dyzssxEnd+dyzssxProc);
+				$("#hyjdsxTot").html(hyjdsxEnd+hyjdsxProc);
+				
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+	return false;
+}
+
+//督办件数-媒体
+function mediaCount(year) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaCount",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			var totProcCount = 0, totEndCount = 0;
+			var zddcsxTot = 0, dyzssxTot = 0, hyjdsxTot = 0, mtfywtTot = 0, smrxTot = 0, ldpsjTot = 0, ldzssxTot = 0;
+			var zddcsxProc = 0, dyzssxProc = 0, hyjdsxProc = 0, mtfywtProc = 0, smrxProc = 0, ldpsjProc = 0, ldzssxProc = 0;
+			var zddcsxEnd = 0, dyzssxEnd = 0, hyjdsxEnd = 0, mtfywtEnd = 0, smrxEnd = 0, ldpsjEnd = 0, ldzssxEnd = 0;
+			if(resp.code == 200){
+				var otherProc = 0, otherEnd = 0;
+				for (var i=0; i<resp.data.length; i++) {
+					var data = resp.data[i];
+					var name = data.businesstypename;
+					var status = data.handlestatus;
+					var num = data.num;
+					$("#allDiv").html(getValueById("allDiv")+num);
+					if (name=="媒体反映问题") {
+						if (status=="已办结") {
+							$("#endDiv").html(getValueById("endDiv")+num);
+							mtfywtEnd = num;
+						}
+						else if (status=="办理中") {
+							$("#procDiv").html(getValueById("procDiv")+num);
+							mtfywtProc = num;
+						}
+					}
+					else if (name=="市民热线") {
+						if (status=="已办结") {
+							$("#endDiv").html(getValueById("endDiv")+num);
+							smrxEnd = num;
+						}
+						else if (status=="办理中") {
+							$("#procDiv").html(getValueById("procDiv")+num);
+							smrxProc = num;
+						}
+					}
+					else {
+						if (status=="已办结") {
+							$("#endDiv").html(getValueById("endDiv")+num);
+							otherEnd += num;
+						}
+						else if (status=="办理中") {
+							$("#procDiv").html(getValueById("procDiv")+num);
+							otherProc += num;
+						}
+					}
+				}
+				$("#mtfywtEnd").html(mtfywtEnd);
+				$("#mtfywtProc").html(mtfywtProc);
+				$("#smrxEnd").html(smrxEnd);
+				$("#smrxProc").html(smrxProc);
+				$("#qtEnd").html(otherEnd);
+				$("#qtProc").html(otherProc);
+				
+				$("#mtfywtTot").html(mtfywtEnd+mtfywtProc);
+				$("#mediaWentiCount").html(mtfywtEnd+mtfywtProc);
+				$("#smrxTot").html(smrxEnd+smrxProc);
+				$("#qtTot").html(otherEnd+otherProc);
+				
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+	return false;
+}
+
+//督办件数-批示件
+function pishiCount(year) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/psj/pishiCount",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			var totProcCount = 0, totEndCount = 0;
+			var zddcsxTot = 0, dyzssxTot = 0, hyjdsxTot = 0, mtfywtTot = 0, smrxTot = 0, ldpsjTot = 0, ldzssxTot = 0;
+			var zddcsxProc = 0, dyzssxProc = 0, hyjdsxProc = 0, mtfywtProc = 0, smrxProc = 0, ldpsjProc = 0, ldzssxProc = 0;
+			var zddcsxEnd = 0, dyzssxEnd = 0, hyjdsxEnd = 0, mtfywtEnd = 0, smrxEnd = 0, ldpsjEnd = 0, ldzssxEnd = 0;
+			if(resp.code == 200){
+				for (var i=0; i<resp.data.length; i++) {
+					var data = resp.data[i];
+					var name = data.businesstypename;
+					var status = data.handlestatus;
+					var num = data.num;
+					$("#allDiv").html(getValueById("allDiv")+num);
+					if (name=="领导批示件") {
+						if (status=="已办结") {
+							$("#endDiv").html(getValueById("endDiv")+num);
+							ldpsjEnd = num;
+						}
+						else if (status=="办理中") {
+							$("#procDiv").html(getValueById("procDiv")+num);
+							ldpsjProc = num;
+						}
+					}
+					else if (name=="领导指示事项") {
+						if (status=="已办结") {
+							$("#endDiv").html(getValueById("endDiv")+num);
+							ldzssxEnd = num;
+						}
+						else if (status=="办理中") {
+							$("#procDiv").html(getValueById("procDiv")+num);
+							ldzssxProc = num;
+						}
+					}
+				}
+				$("#ldpsjEnd").html(ldpsjEnd);
+				$("#ldpsjProc").html(ldpsjProc);
+				$("#ldzssxEnd").html(ldzssxEnd);
+				$("#ldzssxProc").html(ldzssxProc);
+							
+				$("#ldpsjTot").html(ldpsjEnd+ldpsjProc);
+				$("#ldzssxTot").html(ldzssxEnd+ldzssxProc);
+				
+				psjCount = ldpsjEnd+ldpsjProc+ldzssxEnd+ldzssxProc;
+// 				$("#psjTit").html("（共"+(ldpsjEnd+ldpsjProc+ldzssxEnd+ldzssxProc)+"件）");
+				//批示件载体
+				document.getElementById("psjFrame").src="/templates/view/dcdb/page/echarts/pie.html?year="+year+"&count="+psjCount;
+				
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+	return false;
+}
+
+//核查已办结数
+function mediaHechaBanJieCount(year) {
+	$.ajax({
+//		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaHechaBanJieCount",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				$("#mediaHechaBanJieCount").html(resp.data);
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+	return false;
+}
+
+//媒体反馈数
+function mediaFankuiCount(year) {
+	$.ajax({
+//		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaFankuiCount",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				$("#mediaFankuiCount").html(resp.data);
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+	return false;
+}
+
+//区域统计：16区
+// function areaCount1() {
+// 	$.ajax({
+// //		async : false,
+// 		type : "post",
+// 		url : "/api/dcdb/dcj/areaCount",
+// 		dataType : "json",
+// 		data : {
+// 			'year' : $("#mySelect").find("option:selected").val(),
+// 			'area' : '0'
+// 		},
+// 		success : function(resp) {
+// 			if(resp.code == 200){
+// 				alert(resp.data);
+// 			} else {
+// 				alert(resp.msg);
+// 			}
+// 		}
+// 	});
+// }
+
+//区域统计：其他
+function areaCount2() {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/dcj/areaCount",
+		dataType : "json",
+		data : {
+			'year' : $("#mySelect").find("option:selected").val(),
+			'area' : '1'
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+// 				alert(resp.data);
+				areaArray.length=0;
+				var count = resp.data.length>10?10:resp.data.length;
+				for (var i=0; i<count; i++) {
+					var name = resp.data[i].split("|")[0];
+					var num = resp.data[i].split("|")[1];
+					$("#otherName"+(i+1)).html((i+1)+". "+name);
+					$("#otherNum"+(i+1)).html(num);
+					areaArray.push(name);
+				}
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+	return false;
+}
+
+//选择年份事件
+function selectYear(year) {
+	//年份
+	var year = $("#mySelect").find("option:selected").val();
+	
+	setValueById("procDiv", 0);
+	setValueById("endDiv", 0);
+	setValueById("allDiv", 0);
+	
+	//督办件数
+	dcjCount(year);
+	mediaCount(year);
+	pishiCount(year);
+
+// 	$("#procDiv").html(totProcCount);
+// 	$("#endDiv").html(totEndCount);
+// 	$("#allDiv").html(totProcCount+totEndCount);
+	
+	//其他区域
+	areaCount2();
+	
+	//核查已办结数
+	mediaHechaBanJieCount(year);
+	//媒体反馈数
+	mediaFankuiCount(year);
+	
+	//批示件载体
+// 	document.getElementById("psjFrame").src="/templates/view/dcdb/page/echarts/pie.html?year="+year;
+	//批示件载体
+	document.getElementById("map").src="/templates/view/dcdb/page/echarts/map/map.html?year="+year;
+}
+
+//督查件页面跳转
+function gotodcjall(param,status) {
+	window.location.href = "./dcj/dcj-all.html?param="+param+"&year="+$("#mySelect").find("option:selected").val()+"&status="+status;
+}
+function gotodcj(param,status) {
+	window.location.href = "./dcj/dcj.html?param="+param+"&year="+$("#mySelect").find("option:selected").val()+"&status="+status;
+}
+function gotodyzssx(param,status) {
+	window.location.href = "./dcj/dcj-dyzssx.html?param="+param+"&year="+$("#mySelect").find("option:selected").val()+"&status="+status;
+}
+function gotodcjmedia(param,status) {
+	window.location.href = "./dcj/dcj-media.html?param="+param+"&year="+$("#mySelect").find("option:selected").val()+"&status="+status;
+}
+function gotodcjpsj(param,status) {
+	window.location.href = "./dcj/dcj-psj.html?param="+param+"&year="+$("#mySelect").find("option:selected").val()+"&status="+status;
+}
+
+
+//中心6区页面跳转
+function dcjSix(param) {
+	window.location.href = "./area/sixteen.html?year="+$("#mySelect").find("option:selected").val()+"&area="+encodeURI(param);
+}
+
+//其他单位页面跳转
+function dcjOther(n) {
+	window.location.href = "./area/other.html?year="+$("#mySelect").find("option:selected").val()+"&area="+encodeURI(areaArray[n-1]);
+}
+
+//其他单位更多页面跳转
+function gotomore() {
+	window.location.href = "./area/more/other-more.html?year="+$("#mySelect").find("option:selected").val();
+}
+
+//媒体页面跳转
+function gotomedia(status) {
+	window.location.href = "./media/media.html?year="+$("#mySelect").find("option:selected").val()+"&status="+status;
+}
+
+//批示件页面跳转
+function gotopsj() {
+	window.location.href = "./psj/psj.html?year="+$("#mySelect").find("option:selected").val();
+}
+
+</script>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width: "128px"
+		});
+	});
+</script>

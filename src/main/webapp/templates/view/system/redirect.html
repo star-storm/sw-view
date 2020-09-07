@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+</head>
+<style>
+	*{margin:0; padding:0;}
+	.box{width:677px; height:330px; margin:auto; font-family:"微软雅黑"; margin-top:50px;}
+	.title{width:100%;height:30px;margin-top:50px;}
+	.xxcon{background:url(/static/images/conbg.png) top center no-repeat; width:677px; height:288px;}
+	.name{font-size:24px;color:#1381b3; font-weight:bold;text-align:left; height:100px; line-height:100px; margin-left:70px;}
+	.list{width:590px; margin-left:70px;}
+	.red{color:#1381b3; font-size:30px; font-weight:bold;}
+	.inputcss{width:398px; height:40px; background:#ffffff; border:1px #a7cee4 solid; line-height:40px;}
+	a img{border:none;} 
+</style>
+<script type="text/javascript">
+
+//页面初始化
+$(document).ready(function(e){  
+	getRedirectTime();
+});
+
+function getRedirectTime(){
+	$.ajax({
+		type:'post',
+		url:'/api/sys/getRedirectTime',
+		data:{},
+		dataType:'json',
+		success:function (resp){
+			if(resp.code == 200){
+				$("#sessiomTime").val(resp.data);
+			}
+			else if (resp.code == 501){
+				alert("用户已注销，请重新登录");
+			}
+			else {
+				alert("获取数据错误");
+			}
+		}
+	});
+}
+
+function setRedirectTime(){
+	var sessiomTime = document.getElementById("sessiomTime").value;
+	if(sessiomTime == ""){
+		alert("请输入阈值设置的值!!");
+	}else if(!/^[0-9]{1,8}([.][0-9]{1,5})?$/.test(sessiomTime)){
+		alert("对不起，请输入数字。");
+	}else{
+		$.ajax({
+			type:'post',
+			url:'/api/sys/setRedirectTime',
+			data:{sessiomTime:sessiomTime},
+			dataType:'json',
+			success:function (resp){
+				if(resp.code == 200){
+					alert("设置成功");
+				}
+				else if (resp.code == 501){
+					alert("用户已注销，请重新登录");
+				}
+				else {
+					alert("设置失败");
+				}
+			}
+		});
+	}
+}
+</script>
+<body>
+<div class="box">
+    <div class="xxcon">
+    	<div class="name">超时时间设定值</div>
+        <div class="list">
+        	<table width="100%" border="0" style="background:none;">
+              <tr>
+                <td width="70%" height="50" align="left" valign="middle"><input id="sessiomTime" value="" type="text" class="inputcss" /></td>
+                <td width="6%" height="50" align="left" valign="middle" class="red">分</td>
+                <td width="24%" height="50" align="left" valign="middle"><a href="#" onclick="setRedirectTime();"><img src="/static/images/btn_sz.png" width="106" height="42" /></a></td>
+              </tr>
+              <tr>
+                <td height="50" align="right" valign="middle">&nbsp;</td>
+                <td height="50" align="left" valign="middle">&nbsp;</td>
+                <td height="50" valign="middle">&nbsp;</td>
+              </tr>
+            </table>
+      </div>
+    </div>
+</div>
+</body>
+</html>

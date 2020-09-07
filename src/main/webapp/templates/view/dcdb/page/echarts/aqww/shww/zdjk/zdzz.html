@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>重点监控分布图-重点组织</title>
+</head>
+<body>
+
+<div id="overView1_meddle_cont_maps_bjMap" style="width:650px;height:570px; color:#fff;font-size:16px;margin-left:20px"></div>
+
+
+<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/js.js"></script>
+<script>
+
+    //页面初始化
+    (function($) {
+
+        //编号
+        index = 1;
+
+        //16区
+// 		areaCount1();
+
+        areaArray = [
+            [
+                {'name':'东城区','value':35},
+                {'name':'西城区','value':26},
+                {'name':'朝阳区','value':17},
+                {'name':'海淀区','value':47},
+                {'name':'丰台区','value':52},
+                {'name':'石景山区','value':51},
+                {'name':'门头沟区','value':35},
+                {'name':'房山区','value':26},
+                {'name':'通州区','value':15},
+                {'name':'顺义区','value':126},
+                {'name':'昌平区','value':135},
+                {'name':'大兴区','value':160},
+                {'name':'平谷区','value':153},
+                {'name':'怀柔区','value':123},
+                {'name':'密云区','value':167},
+                {'name':'延庆区','value':202}
+            ]
+        ];
+
+    }(jQuery));
+
+    //区域统计：16区
+    function areaCount1() {
+        $.ajax({
+            async : false,
+            type : "post",
+            url : "/api/dcdb/dcj/areaCount",
+            dataType : "json",
+            data : {
+                'year' : $("#mySelect",window.parent.document).find("option:selected").val(),
+                'area' : '0'
+            },
+            success : function(resp) {
+                if(resp.code == 200){
+//	 				alert(resp.data);
+                    for (var i=0; i<resp.data.length; i++) {
+                        var name = resp.data[i].split("|")[0];
+                        var num = resp.data[i].split("|")[1];
+                        $("#otherName"+(i+1)).html((i+1)+". "+name);
+                        $("#otherNum"+(i+1)).html(num);
+                        areaArray.push({'name':name,'value':num});
+
+                        if (name=="东城区") {
+                            $("#dongchengNum",window.parent.document).html(num);
+                        }
+                        else if (name=="西城区") {
+                            $("#xichengNum",window.parent.document).html(num);
+                        }
+                        else if (name=="海淀区") {
+                            $("#haidianNum",window.parent.document).html(num);
+                        }
+                        else if (name=="朝阳区") {
+                            $("#chaoyangNum",window.parent.document).html(num);
+                        }
+                        else if (name=="丰台区") {
+                            $("#fengtaiNum",window.parent.document).html(num);
+                        }
+                        else if (name=="石景山区") {
+                            $("#shijingshanNum",window.parent.document).html(num);
+                        }
+                    }
+                } else {
+                    alert(resp.msg);
+                }
+            }
+        });
+    }
+
+</script>
+
+<!-- ECharts单文件引入 -->
+<script src="/templates/view/dcdb/page/echarts/map/require/require.js"></script>
+
+<script>
+    require.config({
+        urlArgs : 'v=' + (new Date()).getTime(),
+        paths : {
+            jquery : '/templates/view/dcdb/page/echarts/map/jquery/jquery-1.7.2.min',
+            json : '/templates/view/dcdb/page/echarts/map/json/BJMapGeoJson',
+            echarts : '/templates/view/dcdb/page/echarts/map/echarts/echarts.min',
+            ProvinceMapUtilColor : '/templates/view/dcdb/page/echarts/aqww/shww/zdjk/ProvinceMapUtilColor'
+        },
+        shim : {
+
+        }
+    });
+
+    require([ 'jquery', 'ProvinceMapUtilColor' ], function($, ProvinceMapUtilColor) {
+        ProvinceMapUtilColor.showProvince({
+            idName : "overView1_meddle_cont_maps_bjMap",
+            IdNames : "overView1_meddle_cont_maps_bjMap",
+            data : areaArray[0],
+            Company : "无",
+            clickCallBack : function(param) {
+                var index = (param.dataIndex+1);
+//                 window.parent.location.href = "/templates/view/dcdb/page/fpgz/fpgz_more_jdqk.html?area="+index;
+            },
+            MapparamDefaultTrue : true,
+            optionData : {
+                series : [ {
+                    zoom : 1.25,
+                    markLine : {
+                        symbol : [ 'none', 'arrow' ],
+                        lineStyle : {
+                            type : 'solid',
+                            width : 1.5,
+                            color : '#58c7ee'//rgba(88,199,238,.5)
+                        },
+                        data : [ [ {
+                            x : '46.5%',
+                            y : '71.5%'
+                        }, {
+                            x : '27%',
+                            y : '97%'
+                        } ],// 东城区
+							/* [ {
+								x : '50.5%',
+								y : '80.5%'
+							}, {
+								x : '87%',
+								y : '100%'
+							} ] */// 经济技术开发区
+                        ]
+                    }
+                } ]
+            }
+        })
+    });
+</script>
+
+</body>

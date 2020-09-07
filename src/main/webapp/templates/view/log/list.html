@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--base style!-->
+<link href="/static/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/web.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/static/css/jqtransformplugin/jqtransform.css" type="text/css" media="all" />	
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/js.js"></script>
+<script type="text/javascript" src="/static/css/jqtransformplugin/jquery.jqtransform.js" ></script>
+<script language="javascript">
+	$(function(){
+		$('form').jqTransform({imgPath:'jqtransformplugin/img/' width:'240px'});
+	});
+</script>
+
+</head>
+<body>
+	<div class="fl w  fixdiv">
+		<span class="fl f18 ti20 bold  h20 lh20 titBg mt15 ml20" onclick="send()">访问统计</span>
+		<!-- <span class="fr f18 ti20 bold  h20 lh20 titBg mt15 mr20" style="cursor:pointer" onclick="gotomsg()">短信系统</span> -->
+	</div>
+	<div class="fl w mt50">
+		<form action="" method="get">
+			<div class="fl w h120 bor_t pb20">
+				<ul class="fl  w  mb35">
+					<li class="fl w_32 mt20">
+						<span class="fl w80 mt5 tr">姓名</span>
+						<span class="fl ml15"><input id="userName" type="text" name="inputtext" class="InputText w240"/></span>
+					</li>
+					<li class="fl w_32 mt20">
+						<span class="fl w80 mt5 tr">系统</span>
+						<span class="fl ml15">
+							<select id="modelId" class="InputText w240">
+								<option value="">请选择</option>
+								<option value="0">通讯录</option>
+								<option value="1">短信</option>
+							</select>
+						</span>
+					</li>
+					<li class="fl w_32 mt20">
+						<button id="search" type="button" value="" class="btn bg_bule fl">查询</button>
+						<button id="reset" type="button" value="" class="btn fl ml30">重置</button>
+					</li>
+				</ul>
+				<div id="totNum" class="ml100  h30 mt30">				
+					<span class="fl  mt5 tr">总访问量：<b>0</b></span>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="fl w mt40" style="min-height:240px">
+	<table id="logTb" width="100%" border="0" cellspacing="0" cellpadding="0" class="tablelist bor_t">
+		<tr class="tableTit">
+			<td class="tc w50">序号</td>
+			<td class="tc ">姓名</td>
+			<td class="tc ">操作名称</td>
+			<td class="tc ">操作内容</td>
+			<td class="tc ">操作时间</td>
+			<td class="tc ">操作结果</td>
+		</tr>
+		<!--
+		<tr>
+			<td class="tc">1</td>
+			<td class="tc"><span>办公厅</span></td>
+			<td class="tc">010-65457895</td>
+			<td class="tc">010-65457895</td>
+			<td class="tc">
+				<a href="page_xq.html"class="btn_cz">查看</a>
+			</td>
+		</tr>
+		<tr class="trbgColor">
+			<td class="tc">2</td>
+			<td class="tc"><span>信访办</span></td>
+			<td class="tc">010-65457895</td>
+			<td class="tc">010-65457895</td>
+			<td class="tc">
+				<a href="page_xq.html"class="btn_cz">查看</a>
+			</td>
+		</tr>
+		-->
+	</table>	
+	</div>
+	<div class="fl w mt20 mb60">
+		<div class="bc w500 mt25 pageDiv tc" >
+			<a href="#" onclick="firstPage()" class="pageoff ml10">首页</a>
+			<a href="#" onclick="prevPage()" class="pageoff ml10">上一页</a>
+			<label class="fl ml20 pt4 pr4">第</label>
+			<input id="pageIndex" type="text" class="InputText fl mt4" style="width: 36px; height: 20px; line-height: 20px;padding:0; text-align:center">
+			<label class="fl pt4 pl4">页</label>
+			<label id="pageNum" class="fl pt4 pl4">(共0页)</label>
+			<a href="#" onclick="gotoPage()" class="pageoff ml10">跳转</a>
+			<a href="#" onclick="nextPage()" class="pageoff ml10">下一页</a>
+			<a href="#" onclick="lastPage()" class="pageoff ml10">尾页</a>
+		</div>
+	</div>
+	<!-- <div class="tip">
+	   <div class="tiptop"><span>提示信息</span><a></a></div>        
+       <div class="tipinfo">
+        <span><img src="../images/ticon.png" /></span>
+			<div class="tipright">
+			<p>是否确认对信息的删除 ？</p>
+			<cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+			</div>
+		</div>
+	</div> -->
+</body>
+</html>
+
+<script type="text/javascript">
+
+//分页
+var pageIndex = 1;
+var pageNum = 0;
+var pageSize = 10;
+
+//记录查询条件
+var modelTmp = "";
+var userNameTmp = "";
+
+ //页面初始化
+ (function($) {
+	//验证登录，根据权限显示菜单
+	checkLogin();
+	
+	//审计列表
+	list();
+	
+	//搜索
+	$("#search").click(function() {
+		pageIndex = 1;
+		list();
+	});
+		
+	//重置
+	$("#reset").click(function() {
+		$("#userName").val("");
+		$("#modelId").val("");
+	});
+	
+ }(jQuery));
+	
+	//网络模板列表
+	function list() {
+		 $.ajax({
+			type : "post",
+			url : "/api/log/list",
+			dataType : "json",
+			data : {
+				'nowPage' : pageIndex,
+				'userName' : $("#userName").val(),
+				'modelId' : $("#modelId").val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$("#logTb").html("");
+					if(resp.data.length != 0) {
+						$("#logTb").append(formList(resp.data));
+						//$("#logTb").listview("refresh");//在使用'ul'标签时才使用，作用:刷新列表
+						$("#logTb").trigger("create");
+						
+						pageNum = (resp.count % pageSize == 0) ? (resp.count / pageSize) : (Math.floor(resp.count / pageSize) + 1);
+					}
+					else {
+						pageNum = 0;
+					}
+					$("#pageIndex").val(pageIndex);
+					$("#pageNum").text("(共" + pageNum + "页)");
+					userNameTmp = $("#userName").val();
+					
+					$("#dataId").val("");
+					$("#totNum").html("");
+					$("#totNum").append("<span class='fl  mt5 tr'>总访问量：<b>"+resp.count+"</b>");
+				} else {
+					//alert(resp.msg);
+				}
+			}
+		});
+	}
+
+	//网络模板数据
+	function formList(list) {
+		//组织数据
+		var html = "<tr class='tableTit'>"
+			+ "	<td class='tc w50'>序号</td>"
+			+ "	<td class='tc w80'>姓名</td>"
+			+ "	<td class='tc w160'>操作名称</td>"
+			+ "	<td class='tc w160'>操作内容</td>"
+			+ "	<td class='tc w120'>操作时间</td>"
+// 			+ "	<td class='tc w120'>结果</td>"
+			+ "</tr>";
+		for (var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var trCss = (i % 2 != 0) ? "class='trbgColor'" : "";
+			html += "<tr "  + trCss + ">" 
+				+ "	<td class='tc w30'>" + (i + 1) + "</td>"
+				+ "	<td class='tc w80' title='" + (item.userName == null?"":item.userName) + "'>" + textEllipsis((item.userName == null?"":item.userName), 5) + "</td>"
+				+ "	<td class='tc w200' title='" + (item.options == null?"":item.options) + "'>" + textEllipsis((item.options == null?"":item.options), 12) + "</td>"
+				+ "	<td class='tc w160'>" + (item.content == null?"":item.content) + "</td>"
+				+ "	<td class='tc w120'>" + (item.optionDate == null?"":timestampToTime(item.optionDate)) + "</td>"
+// 				+ "	<td class='tc w40'>" + formResult(item.result) + "</td>"
+// 				+ "	<td class='tc w40'>"
+// 				+ "		<a href='#' onclick='show(1, " + item.id + ");' class='mr7 unl btn_ck Black'>查看</a>"
+// 				+ "	</td>"
+				+ "</tr>";
+
+		}
+		return html;
+	}
+	
+	function formResult(result) {
+		if (result == null || result == "")
+			return "";
+		else if (result == "0" || result == 0)
+			return "操作失败";
+		else if (result == "1" || result == 1)
+			return "操作成功";
+		else if (result == "2" || result == 2)
+			return "发生错误";
+	}
+	
+	//查询条件是否有更新
+	function checkSearchItem() {
+		return (userNameTmp == $("#userName").val()) 
+	}
+	
+
+</script>

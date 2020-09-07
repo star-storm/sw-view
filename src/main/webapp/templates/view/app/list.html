@@ -1,0 +1,515 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link rel="icon" type="image/x-icon" href="/static/manage/images/favicon.ico">
+<!--base style!-->
+<link href="/static/manage/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/manage/css/web.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/manage/css/select.css"/>
+<script type="text/javascript" src="/static/manage/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/manage/js/js.js"></script>
+</head>
+<body style="padding-left:20px; padding-right:20px;">
+
+	<!--弹出框-->
+	<div id="bg1"></div>
+	<div id="show1"  class="fl w930 pb50 bg_white">
+		<div class="fl w h45 lh45 tit_zx ti20">
+				<span class="white f16 bold">应用详情</span>
+			<a href="###" onclick="hide(1);" class="fr mt10 mr15"><img src="/static/manage/images/close20.png"/></a>
+		</div>
+		<div class="fl w ">
+			<iframe id="iframe1" src="/templates/view/app/detail.html" frameborder="0" width="100%" height="470" scrolling="auto"></iframe>	
+		</div>	
+		<div class="fl w200 h30 ml424 mt20" >
+			<button type="submit" onclick="hide(1);" class="fl btn bg_green">返回</button>
+		</div>
+		
+	</div>
+	<!--弹出框 end-->
+	<!--弹出框-->
+	<div id="bg2"></div>
+	<div id="show2"  class="fl w930 pb50 bg_white">
+		<div class="fl w h45 lh45 tit_zx ti20">
+				<span class="white f16 bold">编辑应用</span>
+		</div>
+		<div class="fl w ">
+			<iframe id="iframe2" src="/templates/view/app/edit.html" frameborder="0" width="100%" height="470" scrolling="auto"></iframe>	
+		</div>	
+		<div class="fl w200 h30 ml370 mt20" >
+			<button onclick="update()" class="fl btn bg_green">确定</button>
+			<button type="submit" onclick="hide(2);" value="Submit" class="fr btn bg_red">取消</button>
+		</div>
+		
+	</div>
+	<!--弹出框 end-->
+	<!--弹出框-->
+	<div id="bg3"></div>
+	<div id="show3"  class="fl w930 pb50 bg_white">
+		<div class="fl w h45 lh45 tit_zx ti20">
+				<span class="white f16 bold">新建应用</span>
+		</div>
+		<div class="fl w ">
+			<iframe id="iframe3" src="/templates/view/app/add.html" frameborder="0" width="100%" height="470" scrolling="auto"></iframe>	
+		</div>	
+		<div class="fl w200 h30 ml370 mt20" >
+			<button onclick="add()" class="fl btn bg_green">确定</button>
+			<button type="submit" onclick="hide(3);" value="Submit" class="fr btn bg_red">取消</button>
+		</div>
+		
+	</div>
+	<!--弹出框 end-->
+
+	<div class="w bc">
+		<!--right start-->
+		<div class="fr w ">
+			<div class="fl w titBg titColor bold f18 h48 lh46 ">
+				<span class="fl h48 titBgon">系统管理 &nbsp;/&nbsp;应用管理</span>
+			</div>
+			<div class="fl w  mt10 ">
+					<div class="fl w_82 ">
+						<ul class="fl ">
+						<li class="fl w350 mt10 "><span class="fl w80 tl mt5">应用名称：</span>
+							<span class="fl w250"><input type="text" id="name"
+								class="InputText w250" /></span></li>
+						<!-- <li class="fr w350 mt10 ">
+							<span class="fl w50 tl mt5">说明：</span>
+							<span class="fl w280 "> <input type="text" id="perName" class="InputText w280" />
+						</span></li> -->
+					</ul>
+				</div>
+					<div class="fr w180">
+						<button id="search" class="btn bg_green mt8">查 询</button>
+						<button id="reset" class="btn bg_bule mt12 ml12">重 置</button>
+					</div>
+					<input id="appId" type="hidden"/>
+			</div>
+			<div class="fl w  mt15 ">
+					<div class="fl w bgBtn f18 h35 lh35">
+						<a id="addHref" href="###" onclick="show(3);" class="fl f16 Black bold ti30 btn_xz">新增</a>
+						<a id="delBatchHref" href="#" onclick="delBatch();" class="fl f16 Black bold ti30 btn_plsc ml10">批量删除</a>
+					</div>
+					<div class="fl w mt10">
+						<table id="appTb" width="100%" border="0" cellspacing="0" cellpadding="0" class="tablelist">
+						  <tr class="tableTit">
+							<td class="tc w30">选择</td>
+							<td class="tc w30">序号</td>
+							<td class="tc w80">应用名称</td>
+							<td class="tc w150">所需权限</td>
+							<td class="tc w180">操作</td>
+						  </tr>
+						  <!-- <tr>
+							<td class="tc"><input name="" type="checkbox" value="" class="CheckBox" /></td>
+							<td class="tc">1</td>
+							<td class="tc">王晓红</td>
+							<td class="tc">系统管理员</td>
+							<td class="tc">信息化管理办公室科员</td>
+							<td class="tc">管理员</td>
+							<td class="tc">
+								<a href="page_2-ck.html" class="mr15 unl btn_ck">查看</a>
+								<a href="#" class="mr15 unl btn_xg">编辑</a>
+								<a href="#" class="btn_del unl">删除</a>
+							</td>
+						  </tr> -->
+						</table>
+					</div>
+					<div class="fl w h20 bc"></div>
+					<div class="w550 mt25 pageDiv bc" >
+						<a href="#" onclick="firstPage()" class="pageoff ml10">首页</a>
+						<a href="#" onclick="prevPage()" class="pageoff ml10">上一页</a>
+						<label class="fl ml20 pt4 pr4">第</label>
+						<input id="pageIndex" type="text" class="InputText fl mt4" style="width: 36px; height: 20px; line-height: 20px">
+						<label class="fl pt4 pl4">页</label>
+						<label id="pageNum" class="fl pt4 pl4">(共0页)</label>
+						<a href="#" onclick="gotoPage()" class="pageoff ml4">跳转</a>
+						<a href="#" onclick="nextPage()" class="pageoff ml10">下一页</a>
+						<a href="#" onclick="lastPage()" class="pageoff ml10">末页</a>
+					</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+ //页面初始化
+ (function($) {
+	//验证登录，根据应用显示菜单
+	checkLogin();
+	
+	//应用列表
+	list();
+		
+	$("#search").click(function() {
+		pageIndex = 1;
+		list();
+	});
+		
+	//重置
+	$("#reset").click(function() {
+		$("#name").val("");
+		$("#descrip").val("");
+	});
+	
+	//根据应用显示
+	if (!perCheck("user", "")) {
+		$("#addHref").css("display", "none");
+		$("#delBatchHref").css("display", "none");
+	}
+	
+ }(jQuery));
+
+
+	//分页
+	var pageIndex = 1;
+	var pageNum = 0;
+	var pageSize = 10;
+	
+	//记录查询条件
+	var nameTmp = "";
+	var descripTmp = "";
+	
+	//用户列表
+	function list() {
+		 $.ajax({
+			type : "post",
+			url : "/api/app/list",
+			dataType : "json",
+			data : {
+				'nowPage' : pageIndex,
+				'name' : $("#name").val(),
+				'descrip' : $("#descrip").val()
+			},
+			success : function(resp) {
+				$("#appTb").html("");
+				if(resp.code == 200){
+					if(resp.data.length != 0) {
+						$("#appTb").append(formPermissions(resp.data));
+						//$("#appTb").listview("refresh");//在使用'ul'标签时才使用，作用:刷新列表
+						$("#appTb").trigger("create");
+						
+						pageNum = (resp.count % pageSize == 0) ? (resp.count / pageSize) : (Math.floor(resp.count / pageSize) + 1);
+					}
+					else {
+						pageNum = 0;
+					}
+					$("#pageIndex").val(pageIndex);
+					$("#pageNum").text("(共" + pageNum + "页)");
+					nameTmp = $("#name").val();
+					descripTmp = $("#descrip").val();
+					
+					$("#appId").val("");
+				} else {
+					//alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//应用数据
+	var selectTab = false;
+	function formPermissions(list) {
+		//判断应用
+		var ep = perCheck("user", "");
+		var dp = perCheck("user", "");
+		//组织数据
+		var html = "<tr class='tableTit'>"
+			+ "	<td class='tc w50'><span id='checkItem' onclick='selectAll()' style='cursor:pointer'>全选</span></td>"
+			+ "	<td class='tc w50'>序号</td>"
+			+ "	<td class='tc w80'>应用名称</td>"
+			+ "	<td class='tc w150'>所需权限</td>"
+			+ "	<td class='tc w180'>操作</td>"
+			+ "</tr>";
+		for (var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var trCss = (i % 2 != 0) ? "class='trbgColor'" : "";
+			html += "<tr "  + trCss + ">" 
+				+ "	<td class='tc w30'><input name='dataList' onclick='selectSingle()' type='checkbox' value='" + item.id + "' class='CheckBox' /></td>"
+				+ "	<td class='tc w30'>" + (i + 1) + "</td>"
+				+ "	<td class='tc w80' title='" + (item.name == null?"":item.name) + "'>" + textEllipsis((item.name == null?"":item.name), 16) + "</td>"
+				+ "	<td class='tc w150' title='" + (item.permission.descrip == null?"":item.permission.descrip) + "'>" + textEllipsis((item.permission.descrip == null?"":item.permission.descrip), 12) + "</td>"
+				+ "	<td class='tc w180'>"
+				+ "		<a href='#' onclick='show(1, " + item.id + ");' class='mr15 unl btn_ck Black'>查看</a>"
+				+ (ep ? "		<a href='#' onclick='show(2, " + item.id + ");' class='mr15 unl btn_xg Black'>编辑</a>" : "")
+				+ (dp ? "		<a href='#' onclick='delPermission(" + item.id + ");' class='btn_del unl Black'>删除</a>" : "")
+				+ "	</td>"
+				+ "</tr>";
+		}
+		return html;
+	}
+	
+	//查询条件是否有更新
+	function checkSearchItem() {
+		return (nameTmp == $("#name").val()) &&
+			(descripTmp == $("#descrip").val()) 
+	}
+	
+	//删除应用
+	function delPermission(id) {
+		if (!confirm("确定删除？"))
+			return;
+		$.ajax({
+			type : "post",
+			url : "/api/app/delete",
+			dataType : "json",
+			data : {
+				"id" : id
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("应用删除成功！");
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//批量删除应用
+	function delBatch() {
+		var ids = "";
+		$("input:checkbox[name=dataList]:checked'").each(function(i){  
+        	ids += $(this).val() + ",";  
+        });
+		if (ids == "") {
+			alert("请选择要删除的应用");
+			return;
+		}
+//		alert(ids);return;
+		if (!confirm("确定删除？"))
+			return;
+		$.ajax({
+			type : "post",
+			url : "/api/app/delBatch",
+			dataType : "json",
+			data : {
+				"ids" : ids
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("应用删除成功！");
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	
+	
+	//---------------------------------------------------------------------------
+	// 弹出框
+	//---------------------------------------------------------------------------
+	/**
+	 * 弹出框
+	 */
+	function show(i, id) {
+	    $("#appId").val(id);
+
+		showdiv(i);
+	    if (i == 1)//查询
+			detail();
+	    else if (i == 2) {//编辑
+			if (!perCheck("user", "")) {
+				alert("您没有权限！");
+				return;
+			}
+			edit();
+	    }
+	    else if (i == 3) {//新建
+			if (!perCheck("user", "")) {
+				alert("您没有权限！");
+				return;
+			}
+	    }
+		showDivAlign0("iframe" + i, "show" + i);
+	}
+	
+	//---------------------------------------------------------------------------
+	// 子页面--应用详情页
+	//---------------------------------------------------------------------------
+	/**
+	 * 应用详情页
+	 */
+	function detail() {
+		 $.ajax({
+			async : false,
+			type : "post",
+			url : "/api/app/model",
+			dataType : "json",
+			data : {
+				'id' : $('#appId').val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$(document).contents().find("#iframe1")[0].contentWindow.$("#name").text(resp.data.name==null?"":resp.data.name);
+					$(document).contents().find("#iframe1")[0].contentWindow.$("#code").text(resp.data.code==null?"":resp.data.code);
+					$(document).contents().find("#iframe1")[0].contentWindow.$("#url").text(resp.data.url==null?"":resp.data.url);
+					$(document).contents().find("#iframe1")[0].contentWindow.$("#owner").text(resp.data.owner==null?"":resp.data.owner);
+					$(document).contents().find("#iframe1")[0].contentWindow.$("#per").text(resp.data.permission==null?"":resp.data.permission.descrip);
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	
+	//---------------------------------------------------------------------------
+	// 子页面--应用新建页
+	//---------------------------------------------------------------------------
+	/**
+	 * 新建应用
+	 */
+	function add() {
+		var name = $(document).contents().find("#iframe3")[0].contentWindow.$("#name").val();
+		var code = $(document).contents().find("#iframe3")[0].contentWindow.$("#code").val();
+		var url = $(document).contents().find("#iframe3")[0].contentWindow.$("#url").val();
+		var owner = $(document).contents().find("#iframe3")[0].contentWindow.$("#owner").val();
+		var pid = $(document).contents().find("#iframe3")[0].contentWindow.$("input[name='per']:checked");
+		if (!checkInfo(name, url, pid))
+			return;
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/app/update",
+			dataType : "json",
+			data : {
+				'name' : name,
+				'code' : code,
+				'url' : url,
+				'owner' : owner,
+				'pid' : pid[0].value
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("操作成功");
+					//隐藏弹出框
+					hide(3);
+					$(document).contents().find("#iframe3")[0].contentWindow.$("#name").val("");
+					$(document).contents().find("#iframe3")[0].contentWindow.$("#code").val("");
+					$(document).contents().find("#iframe3")[0].contentWindow.$("#url").val("");
+					$(document).contents().find("#iframe3")[0].contentWindow.$("#owner").val("");
+					$(document).contents().find("#iframe3")[0].contentWindow.$("input[name='per']:checked").attr("checked",false);
+					//刷新页面
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//校验字段
+	function checkInfo(name, url, pid) {
+		if (name == '') {
+			alert("请输入应用名称");
+			return false;
+		}
+		else if(name.length > 120) {
+			alert("应用名称字数过多，请重新输入");
+			return false;
+		}
+		if (url == '') {
+			alert("请输入应用地址");
+			return false;
+		}
+		else if(url.length > 1200) {
+			alert("应用地址字数过多，请重新输入");
+			return false;
+		}
+		else if (pid.length == 0) {
+			alert("请输入对应权限");
+			return false;
+		}
+		return true;
+	}
+	
+
+	//---------------------------------------------------------------------------
+	// 子页面--应用编辑页
+	//---------------------------------------------------------------------------
+	/**
+	 * 编辑应用-初始化数据
+	 */
+	function edit() {
+		//查询用户应用
+		$.ajax({
+			async : false,
+			type : "post",
+			url : "/api/app/model",
+			dataType : "json",
+			data : {
+				'id' : $('#appId').val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#name").val(resp.data.name);
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#code").val(resp.data.code);
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#url").val(resp.data.url);
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#owner").val(resp.data.owner);
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#p_" + resp.data.permission.id).attr("checked", "checked");
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	/**
+	 * 编辑应用
+	 */
+	function update() {
+		var name = $(document).contents().find("#iframe2")[0].contentWindow.$("#name").val();
+		var code = $(document).contents().find("#iframe2")[0].contentWindow.$("#code").val();
+		var url = $(document).contents().find("#iframe2")[0].contentWindow.$("#url").val();
+		var owner = $(document).contents().find("#iframe2")[0].contentWindow.$("#owner").val();
+		var pid = $(document).contents().find("#iframe2")[0].contentWindow.$("input[name='per']:checked");
+		if (!checkInfo(name, url, pid))
+			return;
+		//编辑应用
+		$.ajax({
+			type : "post",
+			url : "/api/app/update",
+			dataType : "json",
+			data : {
+				'id' : $('#appId').val(),
+				'name' : name,
+				'code' : code,
+				'url' : url,
+				'owner' : owner,
+				'pid' : pid[0].value
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("操作成功");
+					//隐藏弹出框
+					hide(2);
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#name").val("");
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#code").val("");
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#url").val("");
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#owner").val("");
+// 					$(document).contents().find("#iframe2")[0].contentWindow.$("#p_" + pid).attr("checked", "false");
+					$(document).contents().find("#iframe3")[0].contentWindow.$("input[name='per']:checked").attr("checked",false);
+					//刷新页面
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+</script>

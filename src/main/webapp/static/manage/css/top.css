@@ -1,0 +1,19 @@
+body{
+	overflow-x:hidden;
+	background:url("../images/bg_top.png") repeat-x center top #eaeaea;
+	font-size:16px;}
+a:hover{color:#f49b01;}
+.top{
+	background:url("../images/topbg.png")  no-repeat left top;}
+.ico_uer{
+	background:url("../images/icon_user.png") no-repeat left center;}
+.ico_tc{
+	background:url("../images/icon_tc.png") no-repeat left center;}
+.ico_xg{
+	background:url("../images/icon_xg.png") no-repeat left center;}
+.ico_fh{
+	background:url("../images/icon_fh.png") no-repeat left center;}
+.topline{
+	background:url("../images/topline.png") no-repeat right center;}
+.icon_tz{
+	background:url("../images/icon_tz.png") no-repeat left center;}

@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>外商投资企业实际利用情况</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:1700px;height:370px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    
+    <script type="text/javascript">
+    	
+	    var myChart = echarts.init(document.getElementById('main'));
+	    
+	    // 数据
+	    var xAxisData = ['2018年','2017年','2016年','2015年','2014年','2013年','2012年','2011年'];
+	    var minDatas = [
+	    	[100, 50000, 600000, 600000],
+	    	[50000, 200, 600000, 4000],
+	    ];
+	    var maxDatas = [
+	    	[15000, 250000, 2500000, 2600000],
+	    	[900000, 30000, 2500000, 300000],
+	    ];
+	    var datas = [
+	    	[[6725,838,2303,7620,13947,1717,733,214],//第一产业
+	    	[238435,111886,68266,59528,97254,149678,112326,80798],//第二产业
+	    	[1485929,2320185,1232289,1232487,792884,701014,691101,624435],//第三产业
+	    	[1731089,2432909,1302858,1299635,904085,852418,804160,705447]],//总计
+	    	
+	    	[[312084,200974,792030,268500,154808,190667,191944,78983],//合资经营
+	    	[11375,8441,4021,563,5166,22887,14184,15068],//合作经营
+	    	[1136891,2195168,487714,995202,704367,593258,592310,594890],//独资经营
+	    	[270739,28326,19093,35731,39744,45606,5722,16506]]//外商投资股份制
+	    ];
+
+		var index=getUrlParam("index");
+	    if (index=="" || index==null || index=="null" || index=="undefined")
+	    	index = 0;
+	    else
+	    	index = parseInt(index)-1;
+// 	    alert(index);
+
+		var tab=getUrlParam("tab");
+	    if (tab=="" || tab==null || tab=="null" || tab=="undefined")
+	    	tab = 0;
+	    else
+	    	tab = parseInt(tab);
+	    
+	    var danwei="万美元";
+	    
+	    var yAxisData = datas[tab][index];
+	    var minData = minDatas[tab][index];
+	    var maxData = maxDatas[tab][index];
+	    
+	    var option = {
+	        title: {
+	        	show: false,
+	            text: '教育基本情况',
+	            textStyle: {
+	                color: '#fff',
+	                fontSize: 32,
+	                fontWeight: 'normal'
+	            },
+	            top: 50,
+	            x: 'center'
+// 	            left: 80
+	        },
+	        tooltip: {
+	            trigger: 'item'
+	        },
+	        grid: {
+	        	show: true,
+	            left: 60,
+	            right: 20,
+	            bottom: 40,
+	            top: '16%',
+	            borderWidth: 1,
+	            borderColor : 'rgba(255,255,255,.1)',
+	        },
+	        xAxis: {
+	            type: 'category',
+	            position: 'bottom',
+	            axisLine: true,
+	            axisLabel: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 18,
+                    fontWeight: 'normal'
+	            },
+	            data: xAxisData,
+	        },
+	        yAxis: {
+	            name: danwei,
+	            nameLocation: 'end',
+	            nameGap: 24,
+	            nameTextStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 18,
+                    fontWeight: 'normal'
+	            },
+	            min: minData,
+	            max: maxData,
+	            splitNumber: 6,
+	            axisLine: {
+	                lineStyle: {
+	                    opacity: 0
+	                }
+	            },
+	            splitLine: {
+	                show: true,
+	                lineStyle: {
+	                    color: '#fff',
+	                    opacity: .1
+	                }
+	            },
+	            axisLabel: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 14,
+                    fontWeight: 'normal'
+	            }
+	        },
+	        series: [{
+	            name: '',
+	            type: 'bar',
+	            zlevel: 3,
+	            barWidth: 96,
+                itemStyle: {
+                	normal: {
+//                 		color: 'red',
+                		color: {
+                			type: 'liner',
+                		    x: 0,
+                		    y: 0,
+                		    x2: 0,
+                		    y2: 1,
+                		    colorStops: [{
+                		        offset: 0, color: 'rgba(101,243,255,1)' // 0% 处的颜色
+                		    }, {
+                		        offset: 1, color: 'rgba(54,74,255,1)' // 100% 处的颜色
+                		    }]
+                		},
+                		label: {
+							show: true, 
+							position: 'top', 
+							textStyle: { 
+                            	color: 'white',
+                                fontFamliy: 'Microsoft YaHei',
+                                fontSize: 18
+							}
+						}
+                	}
+                },
+	            label: {
+	                show: true,
+	                textStyle: {
+	                    color: 'white',
+	                    fontFamliy: 'Microsoft YaHei',
+	                    fontSize: 18,
+	                    fontWeight: 'normal'
+		            },
+	            },
+	            data: yAxisData,
+	            lineSmooth: true,
+	            tooltip: {
+	                position: 'top',
+	                formatter: '{b}： {c}',
+	                backgroundColor: 'rgba(28,152,232,.2)',
+	                padding: 12
+	            }
+	        }]
+	    };
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

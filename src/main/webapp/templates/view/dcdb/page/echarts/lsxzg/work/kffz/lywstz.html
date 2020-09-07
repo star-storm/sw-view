@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>2019年分行业实际利用外商投资情况</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:920px;height:590px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    
+    <script type="text/javascript">
+
+	    var myChart = echarts.init(document.getElementById('main'));
+
+	    data = [{name:'农、林、牧、渔业',value:63,per:-99.1},{name:'制造业',value:33682,per:-67.3},{name:'建筑业',value:813,per:5320},
+	    	{name:'交通运输、仓储和邮政业',value:26599,per:-76.4},{name:'信息传输、软件和信息技术服务业',value:534844,per:18.3},{name:'批发和零售业',value:52899,per:-31.8},
+	    	{name:'住宿和餐饮业',value:1873,per:-93.8},{name:'金融业',value:162521,per:76.4},{name:'房地产业',value:70022,per:-64.0},
+	    	{name:'租赁和商务服务业',value:110025,per:-59.5},{name:'科学研究和技术服务业',value:367736,per:52.9},{name:'水利、环境和公共设施管理业',value:7608,per:26.1},
+	    	{name:'居民服务和其他服务业',value:2227,per:3.8},{name:'文化、体育和娱乐业',value:11544,per:101.6}];
+	    
+	    getArrByKey = (data, k) => {
+	        let key = k || "value";
+	        let res = [];
+	        if (data) {
+	            data.forEach(function (t) {
+	                res.push(t[key]);
+	            });
+	        }
+	        return res;
+	    };
+	    opt = {
+	        index: 0
+	    }
+	    color = ['#FC619D', '#FF904D', '#48BFE3', '#0000CD', '#1E90FF', '#8FBC8F', '#00FF00', '#ADFF2F', 
+	    	'#556B2F', '#F0E68C', '#FFA500', '#F4A460', '#FF7F50', '#FF0000', '#FA8072', '#A9A9A9', '#808080', '#696969'];
+// 	    data = data.sort((a,b) => {
+// 	        return b.value - a.value
+// 	    });
+	    option = {
+           	title: {
+            	text: '单位：万美元',
+            	x:'right',
+            	padding: [-7,200,0,0],
+                textStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 16,
+                    fontWeight: 'normal'
+                }
+            },
+	        grid: {
+	            top: 40,
+	            bottom: 20,
+	            right: 40,
+	            left: 20,
+	            containLabel: true
+	        },
+	        xAxis: {
+	            show: false
+	        },
+	        yAxis: [{
+	            triggerEvent: true,
+	            show: true,
+	            inverse: true,
+	            data: getArrByKey(data, 'name'),
+	            axisLine: {
+	                show: false
+	            },
+	            splitLine: {
+	                show: false
+	            },
+	            axisTick: {
+	                show: false
+	            },
+	            axisLabel: {
+	                show: false,
+	                interval: 0,
+	                color: '#666',
+	                align: 'left',
+	                margin: 80,
+	                fontSize: 16,
+	                formatter: function (value, index) {
+	                    if (opt.index === 0 && index < 3) {
+	                        return '{idx' + index + '|' + (1 + index) + '} {title|' + value + '}'
+	                    } else if (opt.index !== 0 && (index + opt.index) < 9) {
+	                        return '{idx|0' + (1 + index + opt.index) + '} {title|' + value + '}'
+	                    } else {
+	                        return '{idx|' + (1 + index + opt.index) + '} {title|' + value + '}'
+	                    }
+	                },
+	                rich: {
+	                    idx0: {
+	                        color: '#FB375E',
+	                        backgroundColor: '#FFE8EC',
+	                        borderRadius: 100,
+	                        padding: [5, 8]
+	                    },
+	                    idx1: {
+	                        color: '#FF9023',
+	                        backgroundColor: '#FFEACF',
+	                        borderRadius: 100,
+	                        padding: [5, 8]
+	                    },
+	                    idx2: {
+	                        color: '#01B599',
+	                        backgroundColor: '#E1F7F3',
+	                        borderRadius: 100,
+	                        padding: [5, 8]
+	                    },
+	                    idx: {
+	                        color: '#333',
+	                        borderRadius: 100,
+	                        padding: [5, 8]
+	                    },
+	                    title: {
+	                        width: 165
+	                    }
+	                }
+	            },
+	        }, {
+	            triggerEvent: true,
+	            show: true,
+	            inverse: true,
+	            data: getArrByKey(data, 'name'),
+	            axisLine: {
+	                show: false
+	            },
+	            splitLine: {
+	                show: false
+	            },
+	            axisTick: {
+	                show: false
+	            },
+	            axisLabel: {
+	                interval: 0,
+	                shadowOffsetX: '-20px',
+	                color: ['white'],
+	                align: 'right',
+	                verticalAlign: 'bottom',
+	                lineHeight: 30,
+	                fontSize: 16,
+//                     fontWeight: 'bold'
+	                formatter: function (value, index) {
+	                	var v = data[index].value;
+	                	var p = data[index].per;
+	                	var sort = p>=0?(Math.abs(p) + '%  '+'{arrow1|}  '):(Math.abs(p) + '%  '+'{arrow2|}  ');
+	                	var tmp = "";
+	                	for (var i=0; i<(24-sort.length); i++) {
+	                		tmp += " ";
+	                	}
+	                    return v + tmp + sort;
+	                },
+	                rich: {
+	                	arrow1: {
+	                		backgroundColor: {
+	                            image: '/templates/view/dcdb/images/n_xzg_btn02.png',
+	                        },
+							width: 14,
+							height: 14,
+// 							padding: [0, 10, 0, 0]	
+	                    },
+	                	arrow2: {
+	                		backgroundColor: {
+	                            image: '/templates/view/dcdb/images/n_xzg_btn04.png',
+	                        },
+							width: 14,
+							height: 14
+	                    }
+	                }
+	            }
+	        }],
+	        series: [{
+	            name: '条',
+	            type: 'bar',
+	            showBackground: true,
+	            barBorderRadius: 30,
+	            yAxisIndex: 0,
+	            data: data,
+	            barWidth: 9,
+	            // align: left,
+	            itemStyle: {
+	                color: (val) => {
+                        return color[val.dataIndex];
+	                },
+	                barBorderRadius: 30,
+	            },
+	            label: {
+	                normal: {
+	                    color: 'white',
+	                    show: true,
+	                    position: [0, '-24px'],
+	                    textStyle: {
+	                        fontSize: 16
+	                    },
+	                    formatter: function(a, b) {
+	                        return a.name
+	                    }
+	                }
+	            }
+	        }]
+	    };
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

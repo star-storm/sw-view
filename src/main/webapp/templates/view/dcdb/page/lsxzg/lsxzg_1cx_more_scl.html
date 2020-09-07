@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+         callback0("2018");
+	     window.parent.erjiHide(1);
+      });
+    	function callback0(year) {
+//     		alert(year);
+    		var url = "/templates/view/dcdb/page/echarts/lsxzg/work/sanji/cxfz/shldscl.html?year="+year;
+    		document.getElementById("shldscl-"+year).src=url;
+    	}
+    </script>
+</head>
+<body>
+<div class="fl w h1000 cx_morebg">	
+	<div class="fl w h61 titbg">
+		<div class="fl ml610 w700 tl">
+			<span class="fl w f24 white tc mt10 bold">社会劳动生产率</span>
+		</div>
+		<div class="fr mr270 mt10"><a href="javascript:history.go(-1)"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w">
+		<div class="fl w410 h800 ml45 mt25 scrollDiv" style="height:800px;overflow:auto;">
+			<div class="fl w390 ml10">
+				<span id="2018" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_On"><font class="fl w f24 tc mt10">2018年</font></span>
+				<span id="2017" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2017年</font></span>
+				<span id="2016" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2016年</font></span>
+				<span id="2015" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2015年</font></span>
+				<span id="2014" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2014年</font></span>
+				<span id="2013" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2013年</font></span>
+				<span id="2012" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2012年</font></span>
+				<span id="2011" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2011年</font></span>
+				<span id="2010" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2010年</font></span>
+				<span id="2009" onclick="showCard(this,'conent','leftsub_',callback0)" class="leftsub_Off"><font class="fl w f24 tc mt10">2009年</font></span>
+			</div>		
+		</div>
+		<div class="fl w1360 h860 ml55 mt25" id="conent0">
+			<div class="fl w tc"><span class="f30 white">社会劳动生产率（2018年）</span></div>
+			<div class="fl w tc mt40">
+				<span class="tl w340 h100 word_scl">244067</span>
+				<span class="mt55 f18 white ml30">元/人</span>
+			</div>
+			<div class="fl w ">
+				<div class="fl w495 h463 scv_erbg ml100 mt100">
+					<div class="fl w420 h80 ml43 ldscvlbg mt60">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第一产业</span>
+						<span class="fl w130 f30 white tr mt5">25197</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第二产业</span>
+						<span class="fl w130 f30 white tr mt5">301192</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第三产业</span>
+						<span class="fl w130 f30 white tr mt5">243661</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>				
+				</div>
+				<div class="fl w559 h463 scv_ejtbbg ml100 mt100">
+					<div class="fl w h396 tc">
+						<iframe id="shldscl-2018" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w tc mt20"><span class="f20 color_yellow">全市产业结构统计</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="fl w1360 h860 ml55 mt25" id="conent1" style="display:none;">
+			<div class="fl w tc"><span class="f30 white">社会劳动生产率（2017年）</span></div>
+			<div class="fl w tc mt40">
+				<span class="tl w340 h100 word_scl">227131</span>
+				<span class="mt55 f18 white ml30">元/人</span>
+			</div>
+			<div class="fl w ">
+				<div class="fl w495 h463 scv_erbg ml100 mt100">
+					<div class="fl w420 h80 ml43 ldscvlbg mt60">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第一产业</span>
+						<span class="fl w130 f30 white tr mt5">24472</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第二产业</span>
+						<span class="fl w130 f30 white tr mt5">276136</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第三产业</span>
+						<span class="fl w130 f30 white tr mt5">227647</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>				
+				</div>
+				<div class="fl w559 h463 scv_ejtbbg ml100 mt100">
+					<div class="fl w h396 tc">
+						<iframe id="shldscl-2017" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w tc mt20"><span class="f20 color_yellow">全市产业结构统计</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="fl w1360 h860 ml55 mt25" id="conent2" style="display:none;">
+			<div class="fl w tc"><span class="f30 white">社会劳动生产率（2016年）</span></div>
+			<div class="fl w tc mt40">
+				<span class="tl w340 h100 word_scl">213356</span>
+				<span class="mt55 f18 white ml30">元/人</span>
+			</div>
+			<div class="fl w ">
+				<div class="fl w495 h463 scv_erbg ml100 mt100">
+					<div class="fl w420 h80 ml43 ldscvlbg mt60">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第一产业</span>
+						<span class="fl w130 f30 white tr mt5">25984</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第二产业</span>
+						<span class="fl w130 f30 white tr mt5">251114</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第三产业</span>
+						<span class="fl w130 f30 white tr mt5">215372</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>				
+				</div>
+				<div class="fl w559 h463 scv_ejtbbg ml100 mt100">
+					<div class="fl w h396 tc">
+						<iframe id="shldscl-2016" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w tc mt20"><span class="f20 color_yellow">全市产业结构统计</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="fl w1360 h860 ml55 mt25" id="conent3" style="display:none;">
+			<div class="fl w tc"><span class="f30 white">社会劳动生产率（2015年）</span></div>
+			<div class="fl w tc mt40">
+				<span class="tl w340 h100 word_scl">202200</span>
+				<span class="mt55 f18 white ml30">元/人</span>
+			</div>
+			<div class="fl w ">
+				<div class="fl w495 h463 scv_erbg ml100 mt100">
+					<div class="fl w420 h80 ml43 ldscvlbg mt60">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第一产业</span>
+						<span class="fl w130 f30 white tr mt5">27339</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第二产业</span>
+						<span class="fl w130 f30 white tr mt5">226963</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第三产业</span>
+						<span class="fl w130 f30 white tr mt5">206459</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>				
+				</div>
+				<div class="fl w559 h463 scv_ejtbbg ml100 mt100">
+					<div class="fl w h396 tc">
+						<iframe id="shldscl-2015" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w tc mt20"><span class="f20 color_yellow">全市产业结构统计</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="fl w1360 h860 ml55 mt25" id="conent4" style="display:none;">
+			<div class="fl w tc"><span class="f30 white">社会劳动生产率（2014年）</span></div>
+			<div class="fl w tc mt40">
+				<span class="tl w340 h100 word_scl">191009</span>
+				<span class="mt55 f18 white ml30">元/人</span>
+			</div>
+			<div class="fl w ">
+				<div class="fl w495 h463 scv_erbg ml100 mt100">
+					<div class="fl w420 h80 ml43 ldscvlbg mt60">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第一产业</span>
+						<span class="fl w130 f30 white tr mt5">29530</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第二产业</span>
+						<span class="fl w130 f30 white tr mt5">221650</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第三产业</span>
+						<span class="fl w130 f30 white tr mt5">193563</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>				
+				</div>
+				<div class="fl w559 h463 scv_ejtbbg ml100 mt100">
+					<div class="fl w h396 tc">
+						<iframe id="shldscl-2014" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w tc mt20"><span class="f20 color_yellow">全市产业结构统计</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="fl w1360 h860 ml55 mt25" id="conent5" style="display:none;">
+			<div class="fl w tc"><span class="f30 white">社会劳动生产率（2013年）</span></div>
+			<div class="fl w tc mt40">
+				<span class="tl w340 h100 word_scl">180848</span>
+				<span class="mt55 f18 white ml30">元/人</span>
+			</div>
+			<div class="fl w ">
+				<div class="fl w495 h463 scv_erbg ml100 mt100">
+					<div class="fl w420 h80 ml43 ldscvlbg mt60">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第一产业</span>
+						<span class="fl w130 f30 white tr mt5">28362</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第二产业</span>
+						<span class="fl w130 f30 white tr mt5">207452</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第三产业</span>
+						<span class="fl w130 f30 white tr mt5">184305</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>				
+				</div>
+				<div class="fl w559 h463 scv_ejtbbg ml100 mt100">
+					<div class="fl w h396 tc">
+						<iframe id="shldscl-2013" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w tc mt20"><span class="f20 color_yellow">全市产业结构统计</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="fl w1360 h860 ml55 mt25" id="conent6" style="display:none;">
+			<div class="fl w tc"><span class="f30 white">社会劳动生产率（2012年）</span></div>
+			<div class="fl w tc mt40">
+				<span class="tl w340 h100 word_scl">168582</span>
+				<span class="mt55 f18 white ml30">元/人</span>
+			</div>
+			<div class="fl w ">
+				<div class="fl w495 h463 scv_erbg ml100 mt100">
+					<div class="fl w420 h80 ml43 ldscvlbg mt60">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第一产业</span>
+						<span class="fl w130 f30 white tr mt5">25491</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第二产业</span>
+						<span class="fl w130 f30 white tr mt5">188050</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第三产业</span>
+						<span class="fl w130 f30 white tr mt5">173646</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>				
+				</div>
+				<div class="fl w559 h463 scv_ejtbbg ml100 mt100">
+					<div class="fl w h396 tc">
+						<iframe id="shldscl-2012" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w tc mt20"><span class="f20 color_yellow">全市产业结构统计</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="fl w1360 h860 ml55 mt25" id="conent7" style="display:none;">
+			<div class="fl w tc"><span class="f30 white">社会劳动生产率（2011年）</span></div>
+			<div class="fl w tc mt40">
+				<span class="tl w340 h100 word_scl">158263</span>
+				<span class="mt55 f18 white ml30">元/人</span>
+			</div>
+			<div class="fl w ">
+				<div class="fl w495 h463 scv_erbg ml100 mt100">
+					<div class="fl w420 h80 ml43 ldscvlbg mt60">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第一产业</span>
+						<span class="fl w130 f30 white tr mt5">22330</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第二产业</span>
+						<span class="fl w130 f30 white tr mt5">177919</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第三产业</span>
+						<span class="fl w130 f30 white tr mt5">163451</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>				
+				</div>
+				<div class="fl w559 h463 scv_ejtbbg ml100 mt100">
+					<div class="fl w h396 tc">
+						<iframe id="shldscl-2011" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w tc mt20"><span class="f20 color_yellow">全市产业结构统计</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="fl w1360 h860 ml55 mt25" id="conent8" style="display:none;">
+			<div class="fl w tc"><span class="f30 white">社会劳动生产率（2010年）</span></div>
+			<div class="fl w tc mt40">
+				<span class="tl w340 h100 word_scl">142289</span>
+				<span class="mt55 f18 white ml30">元/人</span>
+			</div>
+			<div class="fl w ">
+				<div class="fl w495 h463 scv_erbg ml100 mt100">
+					<div class="fl w420 h80 ml43 ldscvlbg mt60">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第一产业</span>
+						<span class="fl w130 f30 white tr mt5">19877</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第二产业</span>
+						<span class="fl w130 f30 white tr mt5">168425</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第三产业</span>
+						<span class="fl w130 f30 white tr mt5">145358</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>				
+				</div>
+				<div class="fl w559 h463 scv_ejtbbg ml100 mt100">
+					<div class="fl w h396 tc">
+						<iframe id="shldscl-2010" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w tc mt20"><span class="f20 color_yellow">全市产业结构统计</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="fl w1360 h860 ml55 mt25" id="conent9" style="display:none;">
+			<div class="fl w tc"><span class="f30 white">社会劳动生产率（2009年）</span></div>
+			<div class="fl w tc mt40">
+				<span class="tl w340 h100 word_scl">125496</span>
+				<span class="mt55 f18 white ml30">元/人</span>
+			</div>
+			<div class="fl w ">
+				<div class="fl w495 h463 scv_erbg ml100 mt100">
+					<div class="fl w420 h80 ml43 ldscvlbg mt60">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第一产业</span>
+						<span class="fl w130 f30 white tr mt5">18653</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第二产业</span>
+						<span class="fl w130 f30 white tr mt5">140386</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>
+					<div class="fl w420 h80 ml43 ldscvlbg mt50">
+						<span class="fl w160 f21 ml30 scv_color1 bold mt10 tc">第三产业</span>
+						<span class="fl w130 f30 white tr mt5">130552</span>					
+						<span class="fl w60 f14 mt20 tr scv_color2 mt15">元/人</span>
+					</div>				
+				</div>
+				<div class="fl w559 h463 scv_ejtbbg ml100 mt100">
+					<div class="fl w h396 tc">
+						<iframe id="shldscl-2009" src="" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+					</div>
+					<div class="fl w tc mt20"><span class="f20 color_yellow">全市产业结构统计</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sjly_div pa h38 tc"><span class="fl w mt13 tc">数据来源方：市统计局</span></div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width:"128px"
+		});
+	});
+</script>
+</html>

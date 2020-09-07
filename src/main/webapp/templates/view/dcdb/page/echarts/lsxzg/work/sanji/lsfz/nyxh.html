@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>能源消耗趋势图</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:1200px;height:370px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+    
+    		var data = [[72,80.4,84.6,91.7,97.3,98.1],//第一产业
+		    			[1844.2,1870.8,1902.7,1998.4,2079.2,2082.1],//第二产业
+		    			[3519.3,3414.4,3312.6,3236.5,3109.1,2967],//第三产业
+		    			[1697.3,1596.1,1552.7,1504.6,1438.3,1416.9],//生活消费
+		    			[7132.8,6961.7,6852.6,6831.2,6723.9,6564.1]];//能源消耗总量
+
+            //--- 折柱 ---
+	    	var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption({
+            	grid:{
+                    x:60,
+                    y:60,
+                    x2:30,
+                    y2:40,
+                    borderWidth: 1, 
+                    borderColor: 'blue'
+                },
+                title: {
+                	text: '单位：万吨标准煤',
+                	x:'right',
+                	padding: [0, 30, 0, 0],
+                    textStyle: {
+                        color: 'white',
+                        fontFamliy: 'Microsoft YaHei',
+                        fontSize: 18,
+	                    fontWeight: 'normal'
+                    },
+                },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:['第一产业','第二产业','第三产业','生活消费','能源消耗总量'],
+                    orient:"horizontal",
+                    x:'left',
+                    textStyle: {
+                        color: 'white',
+                        fontFamliy: 'Microsoft YaHei',
+                        fontSize: 18
+                    }
+                },
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : ['2012年','2013年','2014年','2015年','2016年','2017年'],
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                            	color: 'white',
+                                fontFamliy: 'Microsoft YaHei',
+                                fontSize: 18
+                            }
+                        },
+                        splitLine: {
+                        	show: false
+                        },
+                        axisTick: {
+                        	show: false
+                        },
+                        axisLine: {
+                        	show: true,
+                        	lineStyle: {
+                                type: 'solid',
+                                color:'blue',
+                                width: 1
+                            }
+                        }
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value',
+        	            min: 0,
+        	            max: 8000,
+        	            splitNumber: 8,
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                            	color: 'white',
+                                fontFamliy: 'Microsoft YaHei',
+                                fontSize: 18
+                            }
+                        },
+                        axisLine: {
+                        	show: false
+                        },
+						splitLine: {
+							show: true,
+							lineStyle: {
+								type: 'solid',
+								color: 'blue',
+								width: 1
+							}
+						}
+                    }
+                ],
+                series : [
+                    {
+                        name:'第一产业',
+                        type:'bar',
+                        data:data[0],
+    	                barWidth: 24,
+                        itemStyle: {
+                        	normal: {
+                        		color: '#9B65FA',
+//                         		color: {
+//                         			type: 'radial',
+//                         		    x: 0.5,
+//                         		    y: 0.5,
+//                         		    r: 0.5,
+//                         		    colorStops: [{
+//                         		        offset: 0, color: 'red' // 0% 处的颜色
+//                         		    }, {
+//                         		        offset: 1, color: 'blue' // 100% 处的颜色
+//                         		    }]
+//                         		}
+                        		label: {
+									show: true, 
+									position: 'top', 
+									textStyle: { 
+		                            	color: 'white',
+		                                fontFamliy: 'Microsoft YaHei',
+		                                fontSize: 18
+									}
+								}
+                        	}
+                        }
+                    },
+                    {
+                        name:'第二产业',
+                        type:'bar',
+                        data:data[1],
+    	                barWidth: 24,
+//     	                barGap: '-12%',
+//     	                barCategoryGap: '12%',
+                        itemStyle: {
+                        	normal: {
+                        		color: '#3F69FF',
+//                         		color: {
+//                         			type: 'linear',
+//                         		    x: 0,
+//                         		    y: 0,
+//                         		    x2: 0,
+//                         		    y2: 1,
+//                         		    colorStops: [{
+//                         		        offset: 0, color: 'red' // 0% 处的颜色
+//                         		    }, {
+//                         		        offset: 1, color: 'blue' // 100% 处的颜色
+//                         		    }],
+//                         		    globalCoord: false
+//                         		}
+                        		label: {
+									show: true, 
+									position: 'top', 
+									textStyle: { 
+		                            	color: 'white',
+		                                fontFamliy: 'Microsoft YaHei',
+		                                fontSize: 18
+									}
+								}
+                        	}
+                        }
+                    },
+                    {
+                        name:'第三产业',
+                        type:'bar',
+                        data:data[2],
+    	                barWidth: 24,
+                        itemStyle: {
+                        	normal: {
+                        		color: '#72FEA1',
+//                         		color: {
+//                         			type: 'linear',
+//                         		    x: 0,
+//                         		    y: 0,
+//                         		    x2: 0,
+//                         		    y2: 1,
+//                         		    colorStops: [{
+//                         		        offset: 0, color: 'red' // 0% 处的颜色
+//                         		    }, {
+//                         		        offset: 1, color: 'blue' // 100% 处的颜色
+//                         		    }],
+//                         		    globalCoord: false
+//                         		}
+                        		label: {
+									show: true, 
+									position: 'top', 
+									textStyle: { 
+		                            	color: 'white',
+		                                fontFamliy: 'Microsoft YaHei',
+		                                fontSize: 18
+									}
+								}
+                        	}
+                        }
+                    },
+                    {
+                        name:'生活消费',
+                        type:'bar',
+                        data:data[3],
+    	                barWidth: 24,
+                        itemStyle: {
+                        	normal: {
+                        		color: '#FFC700',
+//                         		color: {
+//                         			type: 'linear',
+//                         		    x: 0,
+//                         		    y: 0,
+//                         		    x2: 0,
+//                         		    y2: 1,
+//                         		    colorStops: [{
+//                         		        offset: 0, color: 'red' // 0% 处的颜色
+//                         		    }, {
+//                         		        offset: 1, color: 'blue' // 100% 处的颜色
+//                         		    }],
+//                         		    globalCoord: false
+//                         		}
+                        		label: {
+									show: true, 
+									position: 'top', 
+									textStyle: { 
+		                            	color: 'white',
+		                                fontFamliy: 'Microsoft YaHei',
+		                                fontSize: 18
+									}
+								}
+                        	}
+                        }
+                    },
+                    {
+                        name:'能源消耗总量',
+                        type:'bar',
+                        data:data[4],
+    	                barWidth: 24,
+                        itemStyle: {
+                        	normal: {
+                        		color: 'red',
+//                         		color: {
+//                         			type: 'linear',
+//                         		    x: 0,
+//                         		    y: 0,
+//                         		    x2: 0,
+//                         		    y2: 1,
+//                         		    colorStops: [{
+//                         		        offset: 0, color: 'red' // 0% 处的颜色
+//                         		    }, {
+//                         		        offset: 1, color: 'blue' // 100% 处的颜色
+//                         		    }],
+//                         		    globalCoord: false
+//                         		}
+                        		label: {
+									show: true, 
+									position: 'top', 
+									textStyle: { 
+		                            	color: 'white',
+		                                fontFamliy: 'Microsoft YaHei',
+		                                fontSize: 18
+									}
+								}
+                        	}
+                        }
+                    }
+                ]
+            });
+            
+    </script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>社会劳动生产率</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:400px;height:310px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+    	
+//     data:
+//     	570047
+// 		25197   0.4%      544853
+// 		301192  52.8%      268855
+// 		243661  42.7%      326386
+
+// 		var data = [-2.5, 4.5, 6.4];
+		var data = [0.3, 16.2, 83.5];
+		var data0 = new Array();
+    	var tot = 0;//35371.3
+    	for(var i=0; i<data.length; i++) {
+    		tot += data[i];
+    	}
+    	for(var i=0; i<data.length; i++) {
+    		data0.push(tot-data[i]);
+    	}
+    
+	    var myChart = echarts.init(document.getElementById('main'));
+	    myChart.setOption({
+        	grid:{
+                x:0,
+                y:40,
+                x2:30,
+                y2:40,
+            },
+	        title: {
+	            text: '',
+	            x: 'center'
+	        },
+	        tooltip: {
+	            trigger: 'none',
+	        },
+	        xAxis: {
+	            data: ["第一产业", "第二产业", "第三产业"],
+	            axisTick: {
+	                show: false
+	            },
+	            axisLine: {
+	                show: false
+	            },
+	            axisLabel: {
+	            	show: false,
+	                textStyle: {
+                    	color: 'white',
+                        fontFamliy: 'Microsoft YaHei',
+                        fontSize: 16,
+	                },
+	                margin: 10, //刻度标签与轴线之间的距离。
+	            },
+
+	        },
+	        yAxis: {
+                show: false,
+	            splitLine: {
+	                show: false,
+	            },
+	            axisTick: {
+	                show: false
+	            },
+	            axisLine: {
+	                show: false
+	            },
+	            axisLabel: {
+	                textStyle: {
+	                    color: '#888'
+	                }
+	            }
+	        },
+	        series: [
+	            {//底部圆片
+	                "name": "",
+	                "type": "pictorialBar",
+	                "symbolSize": [70, 12],
+	                "symbolOffset": [0, 7],
+	                "z": 12,
+	                "data": [{
+	                    "name": "",
+	                    "value": data[0],
+	                    "itemStyle": {
+	                        "normal": {
+	                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+	                                    offset: 0,
+	                                    color: "rgba(178,189,41,0.7)"
+	                                },
+	                                {
+	                                    offset: 1,
+	                                    color: "rgba(178,189,41,0.7)"
+	                                }
+	                            ])
+	                        }
+	                    }
+	                }, {
+	                    "name": "",
+	                    "value": data[1],
+	                    "itemStyle": {
+	                        "normal": {
+	                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+	                                    offset: 0,
+	                                    color: "rgba(9,100,227,0.7)"
+	                                },
+	                                {
+	                                    offset: 1,
+	                                    color: "rgba(9,100,227,0.7)"
+	                                }
+	                            ])
+	                        }
+	                    }
+	                }, {
+	                    "name": "",
+	                    "value": data[2],
+	                    "itemStyle": {
+	                        "normal": {
+	                           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+	                                    offset: 0,
+                                        color: "rgba(3,150,136,0.7)"
+	                                },
+	                                {
+	                                    offset: 1,
+                                        color: "rgba(3,150,136,0.7)"
+	                                }
+	                            ])
+	                        }
+	                    }
+	                }]
+	            }, 
+	            { //下半截柱状图
+	                name: '',
+	                type: 'bar',
+	                barWidth: 70,
+	                barGap: '-100%',
+	                itemStyle: {//lenged文本
+	                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+	                            offset: 0,
+	                            color: "rgba(55,255,249,1)"
+	                        },
+	                        {
+	                            offset: 1,
+	                            color: "rgba(0,222,215,0.2)"
+	                        }
+	                    ])
+	                },
+	               
+	                data: [{
+	                    "name": "",
+	                    "value": data[0],
+	                    "itemStyle": {
+	                        "normal": {
+	                            "color": {
+	                                "x": 0,
+	                                "y": 0,
+	                                "x2": 0,
+	                                "y2": 1,
+	                                "type": "linear",
+	                                "global": false,
+	                                "colorStops": [{//第一节下面
+	                                    "offset": 0,
+	                                    color: "rgba(178,189,41,0.6)"
+	                                }, {
+	                                    "offset": 1,
+	                                    color: "rgba(178,189,41,0.6)"
+	                                }]
+	                            }
+	                        }
+	                    }
+	                }, {
+	                    "name": "",
+	                    "value": data[1],
+	                    "itemStyle": {
+	                        "normal": {
+	                            "color": {
+	                                "x": 0,
+	                                "y": 0,
+	                                "x2": 0,
+	                                "y2": 1,
+	                                "type": "linear",
+	                                "global": false,
+	                                "colorStops": [{//第二个柱状图下面
+	                                    "offset": 0,
+	                                    color: "rgba(9,100,227,0.6)"
+	                                }, {
+	                                    "offset": 1,
+	                                    color: "rgba(9,100,227,0.6)"
+	                                }]
+	                            }
+	                        }
+	                    }
+	                }, {
+	                    "name": "",
+	                    "value": data[2],
+	                    "itemStyle": {
+	                        "normal": {
+	                            "color": {
+	                                "x": 0,
+	                                "y": 0,
+	                                "x2": 0,
+	                                "y2": 1,
+	                                "type": "linear",
+	                                "global": false,
+	                                "colorStops": [{//第三个柱状图下半截
+	                                    "offset": 0,
+                                        color: "rgba(3,150,136,0.6)"
+	                                }, {
+	                                    "offset": 1,
+                                        color: "rgba(3,150,136,0.6)"
+	                                }]
+	                            }
+	                        }
+	                    }
+	                }]
+	            }, 
+	            
+	            { // 顶部圆片
+	                type: 'bar',
+	                barWidth: 70,
+	                barGap: '-100%',
+	                stack: '广告',
+	                itemStyle: {
+	                    color: 'transparent'
+	                },
+	                data: [data[0], data[1], data[2]]
+	            },
+	            {
+	                "name": "", //头部
+	                "type": "pictorialBar",
+	                "symbolSize": [70, 12],
+	                "symbolOffset": [0, -7],
+	                "z": 12,
+	                "data": [{
+	                    "name": "",
+	                    "value": tot,
+	                    "symbolPosition": "end",
+	                    "itemStyle": {
+	                        "normal": {
+	                            color: new echarts.graphic.LinearGradient(0,0,0,1,
+	                                [{
+	                                        offset: 0,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    },
+	                                    {
+	                                        offset: 1,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    }
+	                                ],
+	                                false
+	                            ),
+	                        }
+	                    }
+	                }, {
+	                    "name": "",
+	                    "value": tot,
+	                    "symbolPosition": "end",
+	                    "itemStyle": {
+	                        "normal": {
+	                            color: new echarts.graphic.LinearGradient(0,0,0,1,
+	                                [{
+	                                        offset: 0,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    },
+	                                    {
+	                                        offset: 1,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    }
+	                                ],
+	                                false
+	                            ),
+	                        }
+	                    }
+	                }, {
+	                    "name": "",
+	                    "value": tot,
+	                    "symbolPosition": "end",
+	                    "itemStyle": {
+	                        "normal": {
+	                            color: new echarts.graphic.LinearGradient(0,0,0,1,
+	                                [{
+	                                        offset: 0,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    },
+	                                    {
+	                                        offset: 1,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    }
+	                                ],
+	                                false
+	                            ),
+	                        }
+	                    }
+	                }]
+	            },
+	            
+	            {//中间圆片
+	                "name": "",
+	                "type": "pictorialBar",
+	                "symbolSize": [70, 12],
+	                "symbolOffset": [0, -4],
+	                "z": 12,
+	                "data": [{
+	                    "name": "",
+	                    "value": data[0],
+	                    "symbolPosition": "end",
+		                label: {
+		                    normal: {
+		                        show: true,
+		                        position: 'top',
+// 			                    formatter: function() {
+// 			                    	return '0.4%';
+// 			                    },
+				                textStyle: {
+				                	color: 'white',
+				                    fontFamliy: 'Microsoft YaHei',
+				                    fontSize: 18
+				                },
+				                formatter:function(param) {
+				                	return param.value+"%";
+				                }
+		                    }
+		                },
+	                    "itemStyle": {
+	                        "normal": {
+	                            color: new echarts.graphic.LinearGradient(0,0,0,1,
+	                                [{
+	                                        offset: 0,
+		                                    color: "rgba(178,189,41,0.47)"
+	                                    },
+	                                    {
+	                                        offset: 1,
+		                                    color: "rgba(178,189,41,0.4)"
+	                                    }
+	                                ],
+	                                false
+	                            ),
+	                        }
+	                    }
+	                }, {
+	                    "name": "",
+	                    "value": data[1],
+	                    "symbolPosition": "end",
+		                label: {
+		                    normal: {
+		                        show: true,
+		                        position: 'top',
+// 			                    formatter: function() {
+// 			                    	return '18.6%';
+// 			                    },
+				                textStyle: {
+				                	color: 'white',
+				                    fontFamliy: 'Microsoft YaHei',
+				                    fontSize: 18
+				                },
+				                formatter:function(param) {
+				                	return param.value+"%";
+				                }
+		                    }
+		                },
+	                    "itemStyle": {
+	                        "normal": {
+	                            color: new echarts.graphic.LinearGradient(0,0,0,1,
+	                                [{
+	                                        offset: 0,
+		                                    color: "rgba(9,100,227,0.7)"
+	                                    },
+	                                    {
+	                                        offset: 1,
+		                                    color: "rgba(9,100,227,0.7)"
+	                                    }
+	                                ],
+	                                false
+	                            ),
+	                        }
+	                    }
+	                }, {
+	                    "name": "",
+	                    "value": data[2],
+	                    "symbolPosition": "end",
+		                label: {
+		                    normal: {
+		                        show: true,
+		                        position: 'top',
+// 			                    formatter: function() {
+// 			                    	return '81.0%';
+// 			                    },
+				                textStyle: {
+				                	color: 'white',
+				                    fontFamliy: 'Microsoft YaHei',
+				                    fontSize: 18
+				                },
+				                formatter:function(param) {
+				                	return param.value+"%";
+				                }
+		                    }
+		                },
+	                    "itemStyle": {
+	                        "normal": {
+	                             color: new echarts.graphic.LinearGradient(0,0,0,1,
+	                                [{
+	                                        offset: 0,
+	                                        color: "rgba(3,150,136,0.7)"
+	                                    },
+	                                    {
+	                                        offset: 1,
+	                                        color: "rgba(3,150,136,0.7)"
+	                                    }
+	                                ],
+	                                false
+	                            ),
+	                        }
+	                    }
+	                }]
+	            },
+	            
+	            {//上半段柱子
+	                name: '社会劳动生产率',
+	                type: 'bar',
+	                barWidth: 70,
+	                barGap: '-100%',
+	                stack: '广告',
+	                itemStyle: {
+	                    // barBorderRadius: 20, 
+	                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+	                            offset: 1,
+	                            color: "red"
+	                        },
+	                        {
+	                            offset: 1,
+	                            color: "red"
+	                        }
+	                    ])
+	                },
+	                data: [{
+	                        "name": "第一产业",
+	                        "value": data0[0],
+	                        "trueVal": data0[0],
+	                        "itemStyle": {
+	                            "normal": {
+	                                "color": {
+	                                    "x": 0,
+	                                    "y": 0,
+	                                    "x2": 0,
+	                                    "y2": 1,
+	                                    "type": "linear",
+	                                    "global": false,
+	                                    "colorStops": [{
+	                                        offset: 0,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    },
+	                                    {
+	                                        offset: 1,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    }],
+	                                }
+	                            }
+	                        }
+	                    }, {
+	                        "name": "第二产业",
+	                        "value": data0[1],
+	                        "trueVal": data0[1],
+	                        "itemStyle": {
+	                            "normal": {
+	                                "color": {
+	                                    "x": 0,
+	                                    "y": 0,
+	                                    "x2": 0,
+	                                    "y2": 1,
+	                                    "type": "linear",
+	                                    "global": false,
+	                                    "colorStops": [{
+	                                        offset: 0,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    },
+	                                    {
+	                                        offset: 1,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    }],
+	                                }
+	                            }
+	                        }
+	                    }, {
+	                        "name": "第三产业",
+	                        "value": data0[2],
+	                        "trueVal": data0[2],
+	                        "itemStyle": {
+	                            "normal": {
+	                                "color": {
+	                                    "x": 0,
+	                                    "y": 0,
+	                                    "x2": 0,
+	                                    "y2": 1,
+	                                    "type": "linear",
+	                                    "global": false,
+	                                    "colorStops": [{
+	                                        offset: 0,
+	                                        color: "rgba(54,127,223,0.1)" 
+	                                    },
+	                                    {
+	                                        offset: 1,
+	                                         color: "rgba(94,162,254,0.1)" 
+	                                    }],
+	                                }
+	                            }
+	                        }
+	                    }
+
+	                ]
+	            } 
+	        ]
+	    });
+    </script>
+</body>
+</html>

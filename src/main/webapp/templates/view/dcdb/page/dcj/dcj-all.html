@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv,.scrollDiv1").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+      });
+    </script>
+	<script language="javascript">
+      function sDialog(num) {
+		var uploadFile = $("#uploadFile"+num);
+		uploadFile.click();
+      }
+	</script>
+	<script type="text/javascript">
+	function viewPdf() {
+		$(".tip").fadeIn(200);
+		$(".con").fadeOut(200);
+	}
+	function viewPdf0(id) {
+		window.location.href="/templates/view/dcdb/page/area/sanji-detail.html?type=zddcsxDiv&id="+id;
+	}
+	
+	$(document).ready(function(){
+		$(".click").click(function(){
+		  $(".tip").fadeIn(200);
+		  $(".con").fadeOut(200);
+	  });
+	  $(".tiptop a").click(function(){
+		  $(".tip").fadeOut(200);  
+		  $(".con").fadeIn(200);
+	  });
+	  $("#listDiv tr").click(function(){
+// 		  alert("1."+this.id);
+		  if (this.id.indexOf("trTit")>-1)return;
+		  if (this.id!=$("#trId").val()) {
+			  $("#"+$("#trId").val()).removeClass("table_on");
+		  }
+		  $("#trId").val(this.id);
+		  $(this).addClass("table_on");
+	  });
+	  $("#listDiv tr").mouseover(function(){
+// 		  alert("2."+this.id);
+		  if (this.id==$("#trId").val() || this.id.indexOf("trTit")>-1)
+			  return;
+		  $(this).addClass("table_on");
+	  });
+	  $("#listDiv tr").mouseout(function(){
+// 		  alert("3."+this.id);
+		  if (this.id==$("#trId").val() || this.id.indexOf("trTit")>-1)
+			  return;
+		  $(this).removeClass("table_on");
+	  });
+	});
+	</script>
+  </head>
+<body>
+<div class="fl w h1000 bg_ej">
+	<div class="fl w h61">
+		<div class="fl ml610 w700 tc">
+			<!-- <span class="fl w110 white ml170 mt10">
+				<select id="mySelect">
+					<option VALUE="" selected="selected">全部</option>
+					<option value="2019">2019年</option>
+					<option value="2018">2018年</option>
+					<option value="2017">2017年</option>
+				</select>						
+			</span> -->
+			<span id="typeDiv" class="fl w f24 white tc mt30 bold">督查件整体情况</span>
+		</div>
+		<div class="fr mr270 mt30"><a href="####" onclick="gotomain()"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<!-- <div class="fl w1830 h61 ml45">
+		<div class="fl mr30">
+			<img src="/templates/view/dcdb/images/ico_dcdb01.png" class="fl mt10">
+			<span id="typeDiv" class="fl bold f24 mt10 ml20 white">重点督查事项</span>
+		</div>-->
+	<div class="fl w1830 h61 ml48 ">
+		<div class="fl w h42 subTit mt2 subtit_line">
+			<span id="dcjAllCount" onclick="showCard(this,'list','subCard',tabCallback)" class="subCardOff" >全部（0）</span>
+			<span id="dcjProcCount" onclick="showCard(this,'list','subCard',tabCallback)" class="subCardOff">办理中（0）</span>
+			<span id="dcjEndCount" onclick="showCard(this,'list','subCard',tabCallback)" class="subCardOff">已办结（0）</span>
+		</div>
+	</div>
+	<div class="fl w1833 h750 ml43 mt13">
+		<!--2020-7-15-->
+		<div id="listDiv" class="fl w776 h745 ml30">
+			<div id="list0" style="display:inline;">
+				<!--2020-7-15-->
+				<div class="fl w h60 white bold mt20">
+					<table class=" f18 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<tr id="trTit1" class="h60">
+							<th class="w60 tc">序号</th>
+							<th class="w100 tc">立项日期</th>
+							<th>事项名称</th>
+							<th class="w100 tc">办理状态</th>
+						</tr>
+					</table>
+				</div>
+				<div class="fl w h681 scrollDiv" style="overflow:auto;">
+					<table id="dcjAllDiv" class="f16 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<!-- <tr class="lh30 table_on">
+							<td class="w60 tc">2</td>
+							<td class="w100 tc">2020-07-15</td>
+							<td>落实中央八项规定精神情况汇报，落实中央八项规定自查报告落实中央八项规定自查报告</td>
+							<td class="w100 tc"><span class="tc color_yjb">已办结</span></td>
+						</tr> -->
+					</table>
+				</div>
+			</div>
+			<div id="list1" style="display:none;">
+				<div class="fl w h60 white bold mt20">
+					<table class=" f18 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<tr id="trTit2" class="h60">
+							<th class="w60 tc">序号</th>
+							<th class="w100 tc">立项日期</th>
+							<th>事项名称</th>
+						</tr>
+					</table>
+				</div>
+				<div class="fl w h681 scrollDiv" style="overflow:auto;">
+					<table id="dcjProcDiv" class="f16 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<!-- <tr class="lh30 table_on">
+							<td class="w60 tc">2</td>
+							<td class="w100 tc">2020-07-15</td>
+							<td>落实中央八项规定精神情况汇报，落实中央八项规定自查报告落实中央八项规定自查报告</td>
+							<td class="w100 tc"><span class="tc color_yjb">已办结</span></td>
+						</tr> -->
+					</table>
+				</div>
+			</div>
+			<div id="list2" style="display:none;">
+				<div class="fl w h60 white bold mt20">
+					<table class=" f18 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<tr id="trTit3" class="h60">
+							<th class="w60 tc">序号</th>
+							<th class="w100 tc">立项日期</th>
+							<th>事项名称</th>
+						</tr>
+					</table>
+				</div>
+				<div class="fl w h681 scrollDiv" style="overflow:auto;">
+					<table id="dcjEndDiv" class="f16 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<!-- <tr class="lh30 table_on">
+							<td class="w60 tc">2</td>
+							<td class="w100 tc">2020-07-15</td>
+							<td>落实中央八项规定精神情况汇报，落实中央八项规定自查报告落实中央八项规定自查报告</td>
+							<td class="w100 tc"><span class="tc color_yjb">已办结</span></td>
+						</tr> -->
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="fl w30 ml60">
+			<span class="fl mt320"><img src="/templates/view/dcdb/images/ico_jt.png"></span>
+		</div>
+		<div class="fr w910 h745">
+			<!--2020-7-15-->
+			<div class="fl w810 ml50 mt20">
+					<table id="modelDiv" class=" f16 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<!-- <tr class="lh30">
+							<th class="w130 tr">立项日期</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">督办事项</th>
+							<td>当前我市厨余垃圾处理情况及相关建议（市委办公厅材料）当前我市厨余垃圾处理情况及相关建议（市委办公厅材料）当前我市厨余垃圾处理情况及相关建议（市委办公厅材料）</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">承办单位</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">批示领导/内容</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">办理状态</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">批示原件</th>
+							<td><a href="###" class="color_fj click">转文第277号-晓东同志批示.pdf</a></td>
+						</tr> -->
+					</table>
+			</div>
+			<!--2020-7-15  end-->
+			<input id="trId" type="hidden" ></input>
+		</div>
+	</div>
+	<!--城市运行 弹出页面-->
+	<div class="tip" style="display:none;">
+		<div class="fr w660 h780 mt110 mr140 pr">
+			<div class="fl w560 tiptop"><a></a></div>
+			<div class="fl w620 tc scrollDiv" style="height:820px;overflow:auto;">
+				<div id="pdf"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sjly_div h38 pa tc">
+   <span class="fl w mt13 tc">数据来源方：市委办公厅</span>
+</div>
+</body>
+</html>
+
+<!-- pdf -->
+<style>
+.pdfobject-container {
+	width: 100%;
+	max-width: 660px;
+	height: 800px;
+/* 	margin: 2em 0; */
+}
+</style>
+<script src="/templates/view/dcdb/page/pdf/pdfobject.min.js"></script>
+
+<script>
+	var options = {
+		width: '100%',
+		maxWidth: '660px',
+		height: '800px',
+		pdfOpenParams: {
+// 		    pagemode: "thumbs",
+		    toolbar: 0,
+		    navpanes: 0,
+		    statesbar: 0,
+		    view: 'FitBV,left',
+		    zoom: '112,0,0'
+		}
+	};
+	PDFObject.embed("/templates/view/dcdb/page/pdf/转文第277号-晓东同志批示.pdf", "#pdf", options);
+</script>
+
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script>
+
+//年份
+var year=getUrlParam("year");
+if (year=="" || year==null || year=="null" || year=="undefined")
+	year = "";
+
+//状态
+var status=getUrlParam("status");
+if (status=="" || status==null || status=="null" || status=="undefined")
+	status="0";
+
+//类型
+var param=getUrlParam("param");
+var type = "";
+if (param=="zddcsx")
+	type="重点督查事项";
+if (param=="ldpsj")
+	type="领导批示件";
+if (param=="ldzssx")
+	type="领导指示事项";
+if (param=="dyzssx")
+	type="调研指示事项";
+if (param=="hyjdsx")
+	type="会议决定事项";
+if (param=="mtfywt")
+	type="媒体反映问题";
+if (param=="smrx")
+	type="市民热线";
+if (param=="qt")
+	type="其他";
+var typeDivTmp = (year==""?"":(year+"年"))+(type==""?"督查件":type)+"整体情况";
+$("#typeDiv").html(typeDivTmp);
+
+//页面初始化
+(function($) {
+
+	$("#mySelect").select({
+		width: "128px"
+	});
+	
+	//督查列表
+	dcjAllList(year, "", "");
+	dcjAllList(year, "办理中", "");
+	dcjAllList(year, "已办结", "");
+	
+	//触发详情点击
+	$(status=="0"?"#dcjAllCount":status==1?"#dcjEndCount":"#dcjProcCount").click();
+	tabCallback(status=="0"?"dcjAllDiv":status==1?"dcjEndDiv":"dcjProcDiv");
+		
+}(jQuery));
+
+//督办件列表
+function dcjAllList(year, status0, type) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/dcj/dcjAllList",
+		dataType : "json",
+		data : {
+			'year' : year,
+			'status' : status0,
+			'type' : type
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				var divName = "";
+				var statusIndex = -1;
+				if (status0=="") {
+					divName = "dcjAllDiv";
+					statusIndex = 0;
+					$("#dcjAllCount").html("全部（"+resp.data.length+"）");
+				}
+				if (status0=="办理中") {
+					divName = "dcjProcDiv";
+					statusIndex = 1;
+					$("#dcjProcCount").html("办理中（"+resp.data.length+"）");
+				}
+				if (status0=="已办结") {
+					divName = "dcjEndDiv";
+					statusIndex = 2;
+					$("#dcjEndCount").html("已办结（"+resp.data.length+"）");
+				}
+				$("#"+divName).html("");
+				var data = resp.data;
+				var content = "";
+				for (var i=0; i<data.length; i++) {
+					var id=data[i].prjid;
+					var name=data[i].title;
+					var statusTmp = data[i].handlestatus;
+					var statusStyle = statusTmp=="已办结"?" color_yjb ":" color_blz ";
+					content += "<tr id='tr_"+id+"_"+statusIndex+"' class='lh27 ' onclick='model(\""+id+"\",\""+data[i].type+"\",this)'>"
+						+ "	<td class='w60 tc'>"+(i+1)+"</td>"
+						+ "	<td class='w100 tc'>"+timestampToDate(data[i].date)+"</td>"
+						+ "	<td>"+textEllipsis(name,24)+"</td>"
+						+ ((status0!="")?"":"	<td class='w100 tc'><span class='tc "+statusStyle+"'>"+statusTmp+"</span></td>")
+						+ "</tr>";
+				}
+				$("#"+divName).html(content);
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//督查件详情
+function model(id,type,o) {
+	//设置该行高亮
+	if ($(".li_on").length>0)
+		$(".li_on").removeClass("li_on");
+	$(o.parentNode).addClass("li_on");
+	var url = "";
+	if (type=="zddcsx" || type=="dcj")
+		url = "/api/dcdb/dcj/model";
+	else if (type=="psj")
+		url = "/api/dcdb/psj/model";
+	else if (type=="media")
+		url = "/api/dcdb/media/mediaModel";
+	//获取详情数据
+	$.ajax({
+//		async : false,
+		type : "post",
+		url : url,
+		dataType : "json",
+		data : {
+			'id' : id
+		},
+		success : function(resp) {
+			clearRightData();
+			if(resp.code == 200){
+				if ((resp.data!=null) && (resp.data.length!=0)) {
+// 					$("#titleDiv").append("<span class='fl w tc color_yellow'>"+emptytoNull(resp.data.title)+"</span>");
+					if (type=="zddcsx") {
+						$("#modelDiv").append("<tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>立项日期</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.estabprojdate)+"&nbsp;</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>督办事项</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.title)+"&nbsp;</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>承办单位</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.speciapartyname)+"&nbsp;</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>批示领导/内容</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.instrleadername)+"&nbsp;</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>办理状态</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.handlestatus)+"&nbsp;</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>批示原件</th>" 
+								+ " 	<td><a href='###' onclick='viewPdf()' class='color_fj click'>转文第277号-晓东同志批示.pdf</a></td>" 
+// 								+ " 	<td>无</td>" 
+								+ " </tr>");
+					}
+					else if (type=="dcj") {
+						$("#modelDiv").append("<tr class='lh30'>"
+								+ " 	<th class='w130 tr'>立项日期</th>"
+								+ " 	<td>"+emptytoNull(resp.data.estabprojdate)+"&nbsp;</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>督办事项</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.title)+"&nbsp;</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>承办单位</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.speciapartyname)+"&nbsp;</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>办理状态</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.handlestatus)+"&nbsp;</td>" 
+								+ " </tr>" );
+					}
+					else if (type=="psj") {
+						$("#modelDiv").append("<tr class='lh30'>"
+								+ " 	<th class='w130 tr'>立项日期</th>"
+								+ " 	<td>"+emptytoNull(resp.data.estabprojdate)+"&nbsp;</td>" 
+								+ " </tr>"
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>限结日期</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.limitdate)+"&nbsp;</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>承办单位</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.speciapartyname)+"&nbsp;</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>批示领导/内容</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.instrleadername)+"&nbsp;</td>" 
+								+ " </tr>"  
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>办理状态</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.handlestatus)+"&nbsp;</td>" 
+								+ " </tr>"
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>批示原件</th>" 
+								+ " 	<td><a href='###' onclick='viewPdf()' class='color_fj click'>转文第277号-晓东同志批示.pdf</a></td>" 
+// 								+ " 	<td>无</td>" 
+								+ " </tr>");
+					}
+					else if (type=="media") {
+						$("#modelDiv").append("<tr class='lh30'>"
+								+ " 	<th class='w130 tr'>刊登媒体</th>"
+								+ " 	<td>"+emptytoNull(resp.data.mediapartyname)+"</td>" 
+								+ " </tr>"
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>下发日期</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.publishdate)+"</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>承办单位</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.partyname)+"</td>" 
+								+ " </tr>" 
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>办理状态</th>" 
+								+ " 	<td>"+emptytoNull(resp.data.handlestatus)+"</td>" 
+								+ " </tr>"
+								+ " <tr class='lh30'>" 
+								+ " 	<th class='w130 tr'>摘要</th>" 
+								+ " 	<td>无</td>" 
+								+ " </tr>");
+					}
+				}
+				refreshScroll();
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//选择年份事件
+function selectYear(year) {
+	//年份
+	var year = $("#mySelect").find("option:selected").val();
+	
+	//督查列表
+	dcjAllList(year, "", type);
+	dcjAllList(year, "办理中", type);
+	dcjAllList(year, "已办结", type);
+
+	//切换标签重载右侧详情数据
+	$(status=="0"?"#dcjAllCount":status==1?"#dcjEndCount":"#dcjProcCount").click();
+	tabCallback(status=="0"?"dcjAllDiv":status==1?"dcjEndDiv":"dcjProcDiv");
+}
+
+//根据TAB设置显示-回调函数
+function tabCallback(id) {
+	clearRightData();
+	var divId = id.replace("Count","Div");
+	var o = $("#"+divId+" tr");
+	if (o.length>0) {
+		if (($("#trId").val()!="") && ($("#trId").val()!=o[0].id)) {
+			$("#"+$("#trId").val()).removeClass("table_on");
+		}
+		$("#trId").val(o[0].id);
+		$(o[0]).click();
+		$(o[0]).addClass("table_on");
+	}
+}
+
+//切换标签清理右侧详情数据
+function clearRightData() {
+	$("#titleDiv").html("");
+	$("#modelDiv").html("");
+}
+
+//返回主页
+function gotomain() {
+	window.location.href="/templates/view/dcdb/page/dcdb.html?year="+year;
+}
+
+</script>

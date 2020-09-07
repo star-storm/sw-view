@@ -1,0 +1,650 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv,.scrollDiv1").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+      });
+    </script>
+	<script language="javascript">
+      function sDialog(num) {
+		var uploadFile = $("#uploadFile"+num);
+		uploadFile.click();
+      }
+	</script>
+	<script type="text/javascript">
+	function viewPdf() {
+		$(".tip").fadeIn(200);
+		$(".con").fadeOut(200);
+	}
+	function viewPdf0(id) {
+		window.location.href="/templates/view/dcdb/page/area/sanji-detail.html?type=zddcsxDiv&id="+id;
+	}
+	
+	$(document).ready(function(){
+		$(".click").click(function(){
+		  $(".tip").fadeIn(200);
+		  $(".con").fadeOut(200);
+	  });
+	  $(".tiptop a").click(function(){
+		  $(".tip").fadeOut(200);  
+		  $(".con").fadeIn(200);
+	  });
+	  $("#listDiv tr").click(function(){
+// 		  alert("1."+this.id);
+		  if (this.id.indexOf("trTit")>-1)return;
+		  if (this.id!=$("#trId").val()) {
+			  $("#"+$("#trId").val()).removeClass("table_on");
+		  }
+		  $("#trId").val(this.id);
+		  $(this).addClass("table_on");
+	  });
+	  $("#listDiv tr").mouseover(function(){
+// 		  alert("2."+this.id);
+		  if (this.id==$("#trId").val() || this.id.indexOf("trTit")>-1)
+			  return;
+		  $(this).addClass("table_on");
+	  });
+	  $("#listDiv tr").mouseout(function(){
+// 		  alert("3."+this.id);
+		  if (this.id==$("#trId").val() || this.id.indexOf("trTit")>-1)
+			  return;
+		  $(this).removeClass("table_on");
+	  });
+	});
+	</script>
+  </head>
+<body>
+<div class="fl w h1000 bg_ej">
+	<div class="fl w h61">
+		<div class="fl ml610 w700 tc">
+			<!-- <span class="fl w110 white ml170 mt10">
+				<select id="mySelect">
+					<option VALUE="" selected="selected">全部</option>
+					<option value="2019">2019年</option>
+					<option value="2018">2018年</option>
+					<option value="2017">2017年</option>
+				</select>						
+			</span> -->
+			<span id="titDiv" class="fl w f24 white tc mt20 bold">批示件载体情况</span>
+		</div>
+		<div class="fr mr270 mt30"><a href="####" onclick="gotomain()"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w1830 h61 ml48 ">
+		<div id="tabDiv" class="fl w h42 subTit mt2 subtit_line">
+			<!-- <span id="zykwTabCount" onclick="showCard(this,'list','subCard',tabCallback)" class="subCardOn" >中央刊物（0）</span>
+			<span id="gwTabCount" onclick="showCard(this,'list','subCard',tabCallback)" class="subCardOff">公文（0）</span>
+			<span id="sskwTabCount" onclick="showCard(this,'list','subCard',tabCallback)" class="subCardOff">市属刊物（0）</span>
+			<span id="psjTabCount" onclick="showCard(this,'list','subCard',tabCallback)" class="subCardOff">批示件（0）</span>
+			<span id="qtkwTabCount" onclick="showCard(this,'list','subCard',tabCallback)" class="subCardOff">其他刊物（0）</span>
+			<span id="qtTabCount" onclick="showCard(this,'list','subCard',tabCallback)" class="subCardOff">其他（0）</span> -->
+		</div>
+	</div>
+	<div class="fl w1833 h750 ml43 mt13">
+		<div id="listDiv" class="fl w776 h745 ml30">
+			<!-- <div id="list0">
+				<div class="fl w h40 white bold f22">
+					<span class="fl w80 tc">序号</span>
+					<span class="fl w626 tc">事项名称</span>
+					<span class="fr w130 tc">办理状态</span>
+				</div>
+				<div class="fl w h705 scrollDiv" style="height:705px;overflow:auto;">
+				<ul id="zykwTabDiv" class="fl w f22 listUl">
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">1</span>
+							<span class="fl w600 h90 lh90 tl white">京市会同北京大学党委稳妥做好重点学生滋事处置工作</span>
+							<span class="fr w130 h90 lh90 tc color_yjb">已办结</span>
+						</a>
+					</li>
+					<li class="fl w h90 li_on">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">2</span>
+							<span class="fl w600 h90 lh90 tl white">京市会同北京大学党委稳妥做好重点学生滋事处置工作</span>
+							<span class="fr w130 h90 lh90 tc color_blz">办理中</span>
+						</a>
+					</li>
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">3</span>
+							<span class="fl w600 h90 lh90 tl white">京市会同北京大学党委稳妥做好重点学生滋事处置工作</span>
+							<span class="fr w130 h90 lh90 tc color_yjb">已办结</span>
+						</a>
+					</li>
+					<li class="fl w h90">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">4</span>
+							<span class="fl w600 h90 lh90 tl white">京市会同北京大学党委稳妥做好重点学生滋事处置工作</span>
+							<span class="fr w130 h90 lh90 tc color_yjb">已办结</span>
+						</a>
+					</li>
+				</ul>
+				</div>
+			</div>
+			<div id="list1" style="display:none;">
+				<div class="fl w h40 white bold f22">
+					<span class="fl w80 tc">序号</span>
+					<span class="fl w626 tc">事项名称</span>
+					<span class="fr w130 tc">办理状态</span>
+				</div>
+				<div class="fl w h705 scrollDiv" style="height:705px;overflow:auto;">
+				<ul id="gwTabDiv" class="fl w f22 listUl">
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">1</span>
+							<span class="fl w756 h90 lh90 tl white">稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90 li_on">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">2</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥</span>
+						</a>
+					</li>
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">3</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">4</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+				</ul>
+				</div>
+			</div>
+			<div id="list2" style="display:none;">
+				<div class="fl w h40 white bold f22">
+					<span class="fl w80 tc">序号</span>
+					<span class="fl w626 tc">事项名称</span>
+					<span class="fr w130 tc">办理状态</span>
+				</div>
+				<div class="fl w h705 scrollDiv" style="height:705px;overflow:auto;">
+				<ul id="sskwTabDiv" class="fl w f22 listUl">
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">1</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90 li_on">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">2</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">3</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">4</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+				</ul>
+				</div>
+			</div>
+			<div id="list3" style="display:none;">
+				<div class="fl w h40 white bold f22">
+					<span class="fl w80 tc">序号</span>
+					<span class="fl w626 tc">事项名称</span>
+					<span class="fr w130 tc">办理状态</span>
+				</div>
+				<div class="fl w h705 scrollDiv" style="height:705px;overflow:auto;">
+				<ul id="psjTabDiv" class="fl w f22 listUl">
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">1</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90 li_on">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">2</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">3</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">4</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+				</ul>
+				</div>
+			</div>
+			<div id="list4" style="display:none;">
+				<div class="fl w h40 white bold f22">
+					<span class="fl w80 tc">序号</span>
+					<span class="fl w626 tc">事项名称</span>
+					<span class="fr w130 tc">办理状态</span>
+				</div>
+				<div class="fl w h705 scrollDiv" style="height:705px;overflow:auto;">
+				<ul id="qtkwTabDiv" class="fl w f22 listUl">
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">1</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90 li_on">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">2</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">3</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">4</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+				</ul>
+				</div>
+			</div>
+			<div id="list5" style="display:none;">
+				<div class="fl w h40 white bold f22">
+					<span class="fl w80 tc">序号</span>
+					<span class="fl w626 tc">事项名称</span>
+					<span class="fr w130 tc">办理状态</span>
+				</div>
+				<div class="fl w h705 scrollDiv" style="height:705px;overflow:auto;">
+				<ul id="qtTabDiv" class="fl w f22 listUl">
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">1</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90 li_on">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">2</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90 bgli">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">3</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+					<li class="fl w h90">
+						<a href="###" class="fl w h90">
+							<span class="fl w80 h90 lh90 tc white">4</span>
+							<span class="fl w756 h90 lh90 tl white">市会同北京大学党委稳妥重点学生滋事处置工作</span>
+						</a>
+					</li>
+				</ul>
+				</div>
+			</div> -->
+		</div>
+		<div class="fl w30 ml60">
+			<span class="fl mt320"><img src="/templates/view/dcdb/images/ico_jt.png"></span>
+		</div>
+		<div class="fr w910 h745">
+			<!--2020-7-15-->
+			<div class="fl w810 ml50 mt20">
+					<table id="modelDiv" class=" f16 w table_style white" border="0" cellspacing="0" cellpadding="0">
+						<!-- <tr class="lh30">
+							<th class="w130 tr">立项日期</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">督办事项</th>
+							<td>当前我市厨余垃圾处理情况及相关建议（市委办公厅材料）当前我市厨余垃圾处理情况及相关建议（市委办公厅材料）当前我市厨余垃圾处理情况及相关建议（市委办公厅材料）</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">承办单位</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">批示领导/内容</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">办理状态</th>
+							<td>2020-7-15</td>
+						</tr>
+						<tr class="lh30">
+							<th class="w130 tr">批示原件</th>
+							<td><a href="###" class="color_fj click">转文第277号-晓东同志批示.pdf</a></td>
+						</tr> -->
+					</table>
+			</div>
+			<!--2020-7-15  end-->
+			<input id="trId" type="hidden" ></input>
+		</div>
+	</div>
+	<!--城市运行 弹出页面-->
+	<div class="tip" style="display:none;">
+		<div class="fr w660 h780 mt110 mr140 pr">
+			<div class="fl w560 tiptop"><a></a></div>
+			<div class="fl w620 tc scrollDiv" style="height:820px;overflow:auto;">
+				<div id="pdf"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sjly_div h38 pa tc">
+   <span class="fl w mt13 tc">数据来源方：市委办公厅</span>
+</div>
+</body>
+</html>
+
+<!-- pdf -->
+<style>
+.pdfobject-container {
+	width: 100%;
+	max-width: 660px;
+	height: 800px;
+/* 	margin: 2em 0; */
+}
+</style>
+<script src="/templates/view/dcdb/page/pdf/pdfobject.min.js"></script>
+
+<script>
+	var options = {
+		width: '100%',
+		maxWidth: '660px',
+		height: '800px',
+		pdfOpenParams: {
+// 		    pagemode: "thumbs",
+		    toolbar: 0,
+		    navpanes: 0,
+		    statesbar: 0,
+		    view: 'FitBV,left',
+		    zoom: '112,0,0'
+		}
+	};
+	PDFObject.embed("/templates/view/dcdb/page/pdf/转文第277号-晓东同志批示.pdf", "#pdf", options);
+</script>
+
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script>
+
+//年份
+var year=getUrlParam("year");
+if (year=="" || year==null || year=="null" || year=="undefined")
+	year = "";
+$("#titDiv").html((year==""?"":(year+"年"))+"批示件载体情况");
+
+//根据TAB设置显示-回调函数
+// function tabCallback(index) {
+// 	tabIndex = index;
+// 	alert("###"+index);
+// }
+
+// //回调函数
+// function callbacktest(param) {
+// 	alert("your param is "+param);
+// }
+
+// //测试回调函数
+// function test(param, callback) {
+// 	callback(param);
+// }
+
+//批示件类别
+var psjType = new Array();
+
+//页面初始化
+(function($) {
+	
+// 	//测试回调函数
+// 	test("hello",callbacktest);
+
+	psjType.length = 0;
+	//批示件数
+	count(year);
+	
+	//批示件列表
+// 	list("中央刊物", year);
+// 	list("公文", year);
+// 	list("市属刊物", year);
+// 	list("批示件", year);
+	for (var i=0; i<psjType.length; i++) {
+		list(psjType[i], year, i);
+	}
+	
+	//触发详情点击
+	$("#tabCount0").click();
+	
+}(jQuery));
+
+//批示件数
+function count(year) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/psj/count",
+		dataType : "json",
+		data : {
+			'year' : year
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				$("#tabDiv").html("");
+				$("#listDiv").html("");
+// 				$("#zykwTabCount").html("中央刊物（0）");
+// 				$("#gwTabCount").html("公文（0）");
+// 				$("#sskwTabCount").html("市属刊物（0）");
+// 				$("#psjTabCount").html("批示件（0）");
+// 				$("#qtkwTabCount").html("其他刊物（0）");
+// 				$("#qtTabCount").html("其他（0）");
+				for (var i=0; i<resp.data.length; i++) {
+					var name = resp.data[i].split("|")[0];
+					var num = resp.data[i].split("|")[1];
+					var item = name+"（"+num+"）";
+					psjType.push(name);
+					$("#tabDiv").append('<span id="tabCount'+i+'" onclick="showCard(this,\'list\',\'subCard\',tabCallback)" class="subCardOff" >'+item+'</span>');
+					$("#listDiv").append('<div id="list'+i+'"  '+(i==0?'':'style="display:none;"')+'> '
+							+ '	<div class="fl w h60 white bold mt20"> '
+							+ '		<table class=" f18 w table_style white" border="0" cellspacing="0" cellpadding="0"> '
+							+ '			<tr id="trTit'+(i+1)+'" class="h60"> '
+							+ '				<th class="w60 tc">序号</th> '
+							+ '				<th class="w100 tc">立项日期</th> '
+							+ '				<th>事项名称</th> '
+							+ '				<th class="w100 tc">办理状态</th> '
+							+ '			</tr> '
+							+ '		</table> '
+							+ '	</div> '
+							+ '	<div class="fl w h675 scrollDiv" style="overflow:auto;"> '
+							+ ' 	<table id="tabDiv'+i+'" class="f16 w table_style white" border="0" cellspacing="0" cellpadding="0">'
+							+ '		</table> '
+							+ '	</div> '
+							+ '</div>');
+				}
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//批示件列表
+function list(type, year, index) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/psj/list",
+		dataType : "json",
+		data : {
+			'year' : year,
+			'type' : type
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				$("#tabDiv"+i).html("");
+				var data = resp.data;
+				var content = "";
+				for (var i=0; i<data.length; i++) {
+// 					alert($("#list"+i+" ul")[0].id);
+					var id=data[i].split("|")[0];
+					var name=data[i].split("|")[1];
+					var status=data[i].split("|")[2];
+					var date=data[i].split("|")[3];
+					var statusStyle = status=="已办结"?" color_yjb ":" color_blz ";
+					content += "<tr id='tr_"+id+"_"+type+"' class='lh30 ' onclick='model(\""+id+"\",this)'>"
+						+ "	<td class='w60 tc'>"+(i+1)+"</td>"
+						+ "	<td class='w100 tc'>"+timestampToDate(date)+"</td>"
+						+ "	<td>"+textEllipsis(name,20)+"</td>"
+						+ "	<td class='w100 tc'><span class='tc "+statusStyle+"'>"+status+"</span></td>"
+						+ "</tr>";
+				}
+				$("#tabDiv"+index).html(content);
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//媒体详情
+function model(id,o) {
+	//设置该行高亮
+	if ($(".li_on").length>0)
+		$(".li_on").removeClass("li_on");
+	$(o.parentNode).addClass("li_on");
+	$.ajax({
+//		async : false,
+		type : "post",
+		url : "/api/dcdb/psj/model",
+		dataType : "json",
+		data : {
+			'id' : id
+		},
+		success : function(resp) {
+			clearRightData();
+			if(resp.code == 200){
+				if ((resp.data!=null) && (resp.data.length!=0)) {
+// 					$("#titleDiv").append("<span class='fl w tc color_yellow'>"+emptytoNull(resp.data.title)+"</span>");
+					$("#modelDiv").append("<tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>立项日期</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.estabprojdate)+"&nbsp;</td>" 
+							+ " </tr>" 
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>限结日期</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.limitdate)+"&nbsp;</td>"
+							+ " </tr>"
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>督办事项</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.title)+"&nbsp;</td>" 
+							+ " </tr>" 
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>承办单位</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.speciapartyname)+"&nbsp;</td>" 
+							+ " </tr>"
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>领导批示/内容</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.instrleadername)+"&nbsp;</td>" 
+							+ " </tr>"  
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>办理状态</th>" 
+							+ " 	<td>"+emptytoNull(resp.data.handlestatus)+"&nbsp;</td>" 
+							+ " </tr>"
+							+ " <tr class='lh30'>" 
+							+ " 	<th class='w130 tr'>批示原件</th>" 
+							+ " 	<td><a href='###' onclick='viewPdf()' class='color_fj click'>转文第277号-晓东同志批示.pdf</a></td>" 
+// 								+ " 	<td>无</td>" 
+							+ " </tr>");
+				}
+				refreshScroll();
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//选择年份事件
+function selectYear(year) {
+	//年份
+	var year = $("#mySelect").find("option:selected").val();
+
+	psjType.length = 0;
+	//批示件数
+	count(year);
+	
+	//批示件列表
+	for (var i=0; i<psjType.length; i++) {
+		list(psjType[i], year, i);
+	}
+
+	//切换标签重载右侧详情数据
+	$("#tabCount0").click();
+}
+
+//根据TAB设置显示-回调函数
+function tabCallback(id) {
+	clearRightData();
+	var divId = id.replace("Count","Div");
+	var o = $("#"+divId+" tr");
+	if (o.length>0) {
+		if (($("#trId").val()!="") && ($("#trId").val()!=o[0].id)) {
+			$("#"+$("#trId").val()).removeClass("table_on");
+		}
+		$("#trId").val(o[0].id);
+		$(o[0]).click();
+		$(o[0]).addClass("table_on");
+	}
+}
+
+//切换标签清理右侧详情数据
+function clearRightData() {
+	$("#titleDiv").html("");
+	$("#modelDiv").html("");
+}
+
+//返回主页
+function gotomain() {
+	window.location.href="/templates/view/dcdb/page/dcdb.html?year="+year;
+}
+
+</script>

@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>重大事项分类</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="width:540px;height:300px;"></div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="/templates/view/dcdb/page/echarts/echarts.min.js"></script>
+    
+    <script type="text/javascript">
+    	var data = [{
+            'name': '重大政策',
+            'value': 35
+        }, {
+            'name': '重大项目',
+            'value': 70
+        }, {
+            'name': '重大活动',
+            'value': 228
+        }, {
+            'name': '重点事件',
+            'value': 108
+        }, {
+            'name': '重要执法活动',
+            'value': 112
+        }];
+	    var colorList = ['#73DDFF', '#73ACFF', '#FDD56A', '#FDB36A', '#FD866A', '#9E87FF', '#58D5FF']
+	    var option = {
+	        title: {
+	            text: '单位：件',
+	            x: 'right',
+	            y: 'top',
+	            textStyle: {
+	                fontSize: 16,
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontWeight: 'normal'
+	            },
+	            padding:[-4, 70, 0, 0]
+	        },
+	        tooltip: {
+	            trigger: 'item'
+	        },
+            legend: {
+                data:['重大政策','重大项目','重大活动','重点事件','重要执法活动'],
+                orient:"vertical",
+                x:'right',
+                textStyle: {
+                    color: 'white',
+                    fontFamliy: 'Microsoft YaHei',
+                    fontSize: 16
+                },
+                padding:[30, 40, 0, 0]
+            },
+	        series: [{
+	            type: 'pie',
+	            center: ['35%', '40%'],
+	            radius: ['24%', '55%'],
+	            clockwise: true,
+	            avoidLabelOverlap: true,
+	            hoverOffset: 15,
+	            itemStyle: {
+	                normal: {
+	                    color: function(params) {
+	                        return colorList[params.dataIndex]
+	                    }
+	                }
+	            },
+	            label: {
+	                show: true,
+	                position: 'top',
+	                formatter: '{c}',
+	                color: 'white',
+                   fontFamliy: 'Microsoft YaHei',
+                   fontSize: 16,
+	                rich: {
+	                    a: {
+	                        //padding: [-30, 15, -20, 15]
+	                    }
+	                }
+	            },
+	            labelLine: {
+	                normal: {
+	                    length: 20,
+	                    length2: 30,
+	                    lineStyle: {
+	                        width: 1,
+		                    color:"#526799"
+	                    },
+	                }
+	            },
+	            data: data,
+	        }]
+	    };
+	    var myChart = echarts.init(document.getElementById('main'));
+	    myChart.setOption(option);
+    </script>
+</body>
+</html>

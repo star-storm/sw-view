@@ -1,0 +1,10 @@
+*{padding:0;margin:0;}
+/*tip*/
+.w1920{width:1920px;}
+.con{position:absolute;top:80px;left:0;z-index:1;}
+.con iframe{z-index:2;}
+.tip{width:100%; height:1080px;position:absolute;top:0; left:0;display:none;z-index:9999;}
+.tiptop{height:40px; line-height:40px;cursor:pointer;position:absolute;right:10px; background:none;z-index:10001;}
+.tiptop a{display:block; background:url(../images/btn_fh.png) no-repeat; width:120px; height:40px;float:right;margin-right:20px; margin-top:45px; cursor:pointer;}
+.tiptop a:hover{background:url(../images/btn_fh.png) no-repeat;}
+.titcon{position:absolute;top:10px;left:0;width:1920px;height:1080px;background:none;z-index:10000;}

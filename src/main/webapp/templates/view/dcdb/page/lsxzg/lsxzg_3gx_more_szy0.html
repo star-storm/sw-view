@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+	     window.parent.erjiHide(1);
+      });
+      function callback0() {}
+    </script>
+</head>
+<body>
+<div class="fl w h1000 bg_ej_gx_szy">
+	<div class="fl w h61 titbg">
+		<div class="fl ml610 w700 tl">
+			<span class="fl w f24 white tc mt10 bold">水资源基本情况</span>
+		</div>
+		<div class="fr mr270 mt10"><a href="javascript:history.go(-1)"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w540 mt5 ml40">
+		<div class="fl w h430 mt10">
+			<div class="fl ml25 lh50 f24 mt20 white">全市人均水资源趋势图</div>
+			<div class="fl ml16 mt10 w502 h331">
+				<iframe id="" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gxfz/szyqk/rjszy.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+		</div>
+		<div class="fl mt30 w h430">
+			<div class="fl ml25 lh50 f24 mt20 white">全市万元地区生产总值趋势图</div>
+			<div class="fl ml16 mt10 w502 h331">
+				<iframe id="szysh" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gxfz/szysh/szysh.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+		</div>
+	</div>
+	<div class="fl w1235 h890 ml40 mt5">
+		<div class="fl ml25 lh50 f24 mt20 white mt15">水资源情况趋势图</div>
+		<div class="fl ml15 w1203 mt30">
+			<div class="fl w subTit subtit_line">
+				<span class="subCardOn" onclick="showCard(this,'con','subCard',callback0)">全年水资源总量</span>
+				<span class="subCardOff" onclick="showCard(this,'con','subCard',callback0)">全年供水总量</span>
+				<span class="subCardOff" onclick="showCard(this,'con','subCard',callback0)">全年用水总量</span>
+			</div>
+			<div id="con0" class="fl w mt20">
+				<div class="fl ml10 w1203 h372">
+					<iframe id="qnszyzl" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gxfz/szyqs/qnszyzl.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+						</tr>
+						<tr class="h60 tc ">
+							<td>全年水资源总量</td>
+							<td>35.5</td>
+							<td>29.8</td>
+							<td>35.1</td>
+							<td>26.8</td>
+							<td>20.3</td>
+						</tr>
+						<tr class="h60 tc ">
+							<td>地表水资源量</td>
+							<td>14.3</td>
+							<td>12.0</td>
+							<td>14.0</td>
+							<td>9.3</td>
+							<td>6.5</td>
+						</tr>
+						<tr class="h60 tc ">
+							<td>地下水资源量</td>
+							<td>21.1</td>
+							<td>17.7</td>
+							<td>21.1</td>
+							<td>17.4</td>
+							<td>13.8</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="con1" class="fl w mt20" style="display:none;">
+				<div class="fl ml10 w1203 h372">
+					<iframe id="qngszl" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gxfz/szyqs/qngszl.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+						</tr>
+						<tr class="h60 tc ">
+							<td>地表水</td>
+							<td>3.0</td>
+							<td>3.6</td>
+							<td>2.9</td>
+							<td>2.9</td>
+							<td>8.5</td>
+						</tr>
+						<tr class="h60 tc ">
+							<td>地下水</td>
+							<td>16.3</td>
+							<td>16.6</td>
+							<td>17.5</td>
+							<td>18.2</td>
+							<td>19.6</td>
+						</tr>
+						<tr class="h60 tc ">
+							<td>再生水</td>
+							<td>10.8</td>
+							<td>10.5</td>
+							<td>10.0</td>
+							<td>9.5</td>
+							<td>8.6</td>
+						</tr>
+						<tr class="h60 tc ">
+							<td>南水北调水</td>
+							<td>9.3</td>
+							<td>8.8</td>
+							<td>8.4</td>
+							<td>7.6</td>
+							<td>0.8</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="con2" class="fl w mt20" style="display:none;">
+				<div class="fl ml10 w1203 h372">
+					<iframe id="qngyszl" src="/templates/view/dcdb/page/echarts/lsxzg/work/sanji/gxfz/szyqs/qnyszl.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w mt20">
+					<table class=" f18 w ls_ny_table_01 white mt10" border="0" cellspacing="0" cellpadding="0">
+						<tr class="h60">
+							<th>统计类目</th>
+							<th>2018年</th>
+							<th>2017年</th>
+							<th>2016年</th>
+							<th>2015年</th>
+							<th>2014年</th>
+						</tr>
+						<tr class="h60 tc ">
+							<td>农业用水</td>
+							<td>4.2</td>
+							<td>5.1</td>	
+							<td>6.1</td>	
+							<td>6.5</td>	
+							<td>8.2</td>
+						</tr>
+						<tr class="h60 tc ">
+							<td>工业用水</td>
+							<td>3.3</td>
+							<td>3.5</td>	
+							<td>3.8</td>	
+							<td>3.8</td>	
+							<td>5.1</td>	
+						</tr>
+						<tr class="h60 tc ">
+							<td>生活用水</td>
+							<td>18.4</td>
+							<td>18.3</td>	
+							<td>17.8</td>	
+							<td>17.5</td>	
+							<td>17.0</td>	
+						</tr>
+						<tr class="h60 tc ">
+							<td>生态环境用水</td>
+							<td>13.4</td>
+							<td>12.6</td>	
+							<td>11.1</td>	
+							<td>10.4</td>	
+							<td>7.2	</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>		
+	</div>		
+</div>
+<div class="sjly_div pa h38 tc"><span class="fl w mt13 tc">数据来源方：市生态环境局</span></div>
+
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width: "128px"
+		});
+	});
+</script>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+      });
+      function callback0() {}
+      function callback1() {}
+    </script>
+</head>
+<body>
+<div class="fl w1920 h1000 bg_shww">	
+	<div class="fl w h51">
+		<div class="fr w4540 mr500 mt7 bor_t">
+			<a href="aqww_1zhzl.html" class="sub_navOff">
+				<span class="f20 white">综合治理</span>
+			</a>
+			<a href="aqww_2shww.html" class="sub_navOn">
+				<span class="f20 white ">社会维稳</span>
+			</a>						
+			<a href="aqww_3fxj.html" class="sub_navOff">
+				<span class="f20 white ">反邪教</span>
+			</a>
+		</div>	
+	</div>
+	<div class="fl w">
+		<!--left-->
+		<div class="fl w530 h850 ml31 mt20">
+			<div class="fl w h40 mt5">			
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">重点人员等级数量</span>
+				<div class="fr mr15 f14 white mt15">单位：件</div>
+			</div>
+			<div class="fl w498 h242 shww_bg_1 ml20 mt20">				
+				<div class="fl w220 h45 f16 mt20 ml130">
+					<span class="fl w tc color_red lh25 f24">214,924</span>					
+					<span class="fl w tc white f14 lh25">总人数</span>
+				</div>
+				<div class="fl w120 h45 f16  ml30">
+					<span class="fl w tc color_yellow lh25 f24">18,764</span>					
+					<span class="fl w tc white f14 lh25">一级人数</span>
+				</div>
+				<div class="fr w120 h45 f16  mr30">
+					<span class="fl w tc color_red1 lh25 f24">23,921</span>					
+					<span class="fl w tc white f14 lh25">二级人数</span>
+				</div>
+				<div class="fl w120 h45 f16 mt20  ml90">
+					<span class="fl w tc color_blue lh25 f24">48,269</span>					
+					<span class="fl w tc white f14 lh25">三级人数</span>
+				</div>
+				<div class="fr w120 h45 f16 mt20  mr90">
+					<span class="fl w tc color_green lh25 f24">123,970</span>					
+					<span class="fl w tc white f14 lh25">四级人数</span>
+				</div>
+			</div>
+			<div class="fl w h40 mt40">			
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">重点组织分类统计</span>
+			</div>
+			<div class="fl w h172 tc ">
+				<iframe id="zdzzfl" src="/templates/view/dcdb/page/echarts/aqww/shww/zdzz.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+			<div class="fl w h40 mt45">			
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">重大事项分类</span>
+			</div>
+			<div class="fl w h240 tc ">
+				<iframe id="zdsx" src="/templates/view/dcdb/page/echarts/aqww/shww/zdsx.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+		</div>
+		<!--center-->
+		<div class="fl w650 h850 ml65 mt20 white">
+			<div class="fl w tc">
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">重点监控分布图</span>
+			</div>
+			<div class="fl w tc mt10 h42 subtit_line">
+				<div class="fl w subTit gjtit">
+					<span onclick="showCard(this,'con_gj','subCard',callback0)" class="subCardOn" >重点人</span>
+					<span onclick="showCard(this,'con_gj','subCard',callback0)" class="subCardOff">重点组织</span>
+					<span onclick="showCard(this,'con_gj','subCard',callback0)" class="subCardOff">敏感案事件</span>
+				</div>
+			</div>
+			<div class="fl w mt10 h740 tc pr" id="con_gj0">					
+				<div class="fl w h640 mt20 ">
+				<iframe id="zdr" src="/templates/view/dcdb/page/echarts/aqww/shww/zdjk/zdr.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+				<div class="fl w520 fp_dsr_table ml10 pa">
+					<div class="fl w520 h124">
+						<div class="fl w h36"><span class="fl mt3 ml20 f18 white">中心城区</span></div>
+						<div class="fl mt5 h42 ">
+							<span class="fl w90 mt3 f16 color_blz tc">东城区</span>
+							<span class="fl w80 mt3 f16 color_blz tc">西城区</span>
+							<span class="fl w85 mt3 f16 color_blz tc">朝阳区</span>
+							<span class="fl w80 mt3 f16 color_blz tc">海淀区 </span>
+							<span class="fl w80 mt3 f16 color_blz tc">丰台区</span>
+							<span class="fl w100 mt3 f16 color_blz tc">石景山区</span>
+						</div>
+						<div class="fl mt5 h42">
+							<span class="fl w90 mt3 f16 color_yellow tc">10551</span>
+							<span class="fl w80 mt3 f16 color_yellow tc">12607</span>
+							<span class="fl w85 mt3 f16 color_yellow tc">10723</span>
+							<span class="fl w80 mt3 f16 color_yellow tc">11753</span>
+							<span class="fl w80 mt3 f16 color_yellow tc">14501</span>
+							<span class="fl w100 mt3 f16 color_yellow tc">12521</span>
+						</div>					
+					</div>
+				</div>
+			</div>
+			<div class="fl w mt10  h740 tc pr" id="con_gj1" style="display:none;">
+				<div class="fl w h640 mt20 ">
+					<iframe id="zdzz" src="/templates/view/dcdb/page/echarts/aqww/shww/zdjk/zdzz.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w520 fp_dsr_table ml10 pa">
+					<div class="fl w520 h124">
+						<div class="fl w h36"><span class="fl mt3 ml20 f18 white">中心城区</span></div>
+						<div class="fl mt5 h42 ">
+							<span class="fl w90 mt3 f16 color_blz tc">东城区</span>
+							<span class="fl w80 mt3 f16 color_blz tc">西城区</span>
+							<span class="fl w85 mt3 f16 color_blz tc">朝阳区</span>
+							<span class="fl w80 mt3 f16 color_blz tc">海淀区 </span>
+							<span class="fl w80 mt3 f16 color_blz tc">丰台区</span>
+							<span class="fl w100 mt3 f16 color_blz tc">石景山区</span>
+						</div>
+						<div class="fl mt5 h42">
+							<span class="fl w90 mt3 f16 color_yellow tc">35</span>
+							<span class="fl w80 mt3 f16 color_yellow tc">26</span>
+							<span class="fl w85 mt3 f16 color_yellow tc">17</span>
+							<span class="fl w80 mt3 f16 color_yellow tc">47 </span>
+							<span class="fl w80 mt3 f16 color_yellow tc">52</span>
+							<span class="fl w100 mt3 f16 color_yellow tc">51</span>
+						</div>					
+					</div>
+				</div>
+			</div>
+			<div class="fl w mt10  h740 tc pr" id="con_gj2" style="display:none;">
+				<div class="fl w h640 mt20 ">
+					<iframe id="mgasj" src="/templates/view/dcdb/page/echarts/aqww/shww/zdjk/mgasj.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+				</div>
+				<div class="fl w520 fp_dsr_table ml10 pa">
+					<div class="fl w520 h124">
+						<div class="fl w h36"><span class="fl mt3 ml20 f18 white">中心城区</span></div>
+						<div class="fl mt5 h42 ">
+							<span class="fl w90 mt3 f16 color_blz tc">东城区</span>
+							<span class="fl w80 mt3 f16 color_blz tc">西城区</span>
+							<span class="fl w85 mt3 f16 color_blz tc">朝阳区</span>
+							<span class="fl w80 mt3 f16 color_blz tc">海淀区 </span>
+							<span class="fl w80 mt3 f16 color_blz tc">丰台区</span>
+							<span class="fl w100 mt3 f16 color_blz tc">石景山区</span>
+						</div>
+						<div class="fl mt5 h42">
+							<span class="fl w90 mt3 f16 color_yellow tc">5</span>
+							<span class="fl w80 mt3 f16 color_yellow tc">6</span>
+							<span class="fl w85 mt3 f16 color_yellow tc">17</span>
+							<span class="fl w80 mt3 f16 color_yellow tc">17 </span>
+							<span class="fl w80 mt3 f16 color_yellow tc">15</span>
+							<span class="fl w100 mt3 f16 color_yellow tc">12</span>
+						</div>					
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--right-->
+		<div class="fr w565 h880 mt20 mr20" >
+			<div class="fl w tc h40">
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">本月热点舆情事件领域类型分布</span>
+			</div>
+			<div class="fl w h226  tc">
+				<iframe id="rdyq" src="/templates/view/dcdb/page/echarts/aqww/shww/rdyq.html" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+			<div class="fl w tc h40 mt45">
+				<span class="fl ml10"><img src="/templates/view/dcdb/images/ico_titcx.png"></span>
+				<span class="fl f24 ml20 color_yellow">反馈上级单位接收情况</span>
+			</div>
+			<div class="fl w tc h42 subtit_line">
+				<div class="fl  subTit gjtit">
+					<span onclick="showCard(this,'con_fk','subCard',callback1)" class="subCardOn" >涉稳问题</span>
+					<span onclick="showCard(this,'con_fk','subCard',callback1)" class="subCardOff">矛盾排查</span>
+					<span onclick="showCard(this,'con_fk','subCard',callback1)" class="subCardOff">重大事项</span>
+				</div>
+				<div class="fr mr5 f14 white mt15">单位：件</div>
+			</div>
+			<div class="fl w h484 tc " id="con_fk0" style="display:inline;">
+				<iframe id="fksj1" src="/templates/view/dcdb/page/echarts/aqww/shww/fksj.html?index=1" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+			<div class="fl w h484 tc  white" id="con_fk1" style="display:none;">
+				<iframe id="fksj2" src="/templates/view/dcdb/page/echarts/aqww/shww/fksj.html?index=2" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+			<div class="fl w h484 tc  white" id="con_fk2" style="display:none;">
+				<iframe id="fksj3" src="/templates/view/dcdb/page/echarts/aqww/shww/fksj.html?index=3" frameborder="0" width="100%" height="100%" scrolling="no" style="overflow-x:hidden"></iframe>
+			</div>
+
+		</div>	
+	</div>
+</div>
+<div class="sjly_div h38 pa tc"> 
+	<span class="fl w mt13 tc">数据来源方：太极整理</span>
+</div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width:"128px"
+		});
+	});
+</script>
+</html>

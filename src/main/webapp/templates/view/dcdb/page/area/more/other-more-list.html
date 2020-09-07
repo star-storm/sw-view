@@ -1,0 +1,830 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv,.scrollDiv1").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+      });
+    </script>
+	<script language="javascript">
+      function sDialog(num) {
+		var uploadFile = $("#uploadFile"+num);
+		uploadFile.click();
+      }
+	</script>
+	<script type="text/javascript">
+	function viewPdf() {
+		$(".tip").fadeIn(200);
+		$(".con").fadeOut(200);
+	}
+	function viewPdf0(id) {
+		window.location.href="/templates/view/dcdb/page/area/sanji-detail.html?type=zddcsxDiv&id="+id;
+	}
+	
+	$(document).ready(function(){
+		$(".click").click(function(){
+		  $(".tip").fadeIn(200);
+		  $(".con").fadeOut(200);
+	  });
+	  $(".tiptop a").click(function(){
+		  $(".tip").fadeOut(200);  
+		  $(".con").fadeIn(200);
+	  });
+	  $("#listDiv tr").click(function(){
+// 		  alert("1."+this.id);
+		  if (this.id!=$("#trId").val()) {
+			  $("#"+$("#trId").val()).removeClass("table_on");
+		  }
+		  $("#trId").val(this.id);
+		  $(this).addClass("table_on");
+	  });
+	  $("#listDiv tr").mouseover(function(){
+// 		  alert("2."+this.id);
+		  if (this.id==$("#trId").val() || this.id.indexOf("trTit")>-1)
+			  return;
+		  $(this).addClass("table_on");
+	  });
+	  $("#listDiv tr").mouseout(function(){
+// 		  alert("3."+this.id);
+		  if (this.id==$("#trId").val() || this.id.indexOf("trTit")>-1)
+			  return;
+		  $(this).removeClass("table_on");
+	  });
+	});
+  	
+  	function showCard0(cardid, infoid, clsName) {
+  		var cardList = cardid.parentNode.getElementsByTagName("span");
+  		for (i = 0; i < cardList.length; i++) {
+  			if (cardid == cardList[i]) {
+  				cardList[i].className = clsName + "On";
+  				if (infoid!="conent") 
+  					eval("document.getElementById('" + infoid + i + "').style.display=\"inline\";");
+  			}
+  			if (cardid != cardList[i]) {
+  				cardList[i].className = clsName + "Off";
+  				if (infoid!="conent") 
+  					eval("document.getElementById('" + infoid + i + "').style.display=\"none\";");
+  			}
+  		}
+		refreshScroll();
+  	}
+    </script>
+
+</head>
+<body>
+<div class="fl w1920 h1000 bg_ej_dt">	
+	<div class="fl w h61">
+		<div class="fl ml610 w700 tc">
+			<!-- <span class="fl w110 white ml170 mt10">
+				<select id="mySelect">
+					<option value="" selected="selected">全部</option>
+					<option value="2019">2019年</option>
+					<option value="2018">2018年</option>
+					<option value="2017">2017年</option>
+				</select>						
+			</span> -->
+			<span id="titDiv" class="fl w f24 white tc mt25 bold">其他单位督查件整体情况</span>
+		</div>
+		<div class="fr mr270 mt25"><a href="####" onclick="gotoothermore()"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w1833 h750 ml43 mt53">
+		<div class="fl w450 h745">			
+			<div class="fl w h120">
+				<div class="fl w230 h80 ml20 bor_r" >
+					<span class="fl w70 white f24 mt15 tr">督查件<br/>总&nbsp;&nbsp;&nbsp;数</span>
+					<span id="allDiv0" class="fl w150 white font_f tc mt20">0</span>
+				</div>
+				<div class="fl w160 h40 ml25" >
+					<span class="fl w70 white f24 mt5">办理中</span>
+					<span id="procDiv0" class="fl w70 white f30 tr color_blz">0</span>
+				</div>
+				<div class="fl w160 h40 ml25">
+					<span class="fl w70 white f24 mt13">已办结</span>
+					<span id="endDiv0" class="fl w70 white f30 tr mt10 color_yjb">0</span>
+				</div>
+			</div>
+			<div class="fl w390 ml30">
+				<span id="zddcsxDiv" onclick="showCard0(this,'conent','leftsub_');areaLists(1);" class="leftsub_On"><font class="fl w300  f24 tr mt10">重点督查事项（0）</font></span>
+				<span id="ldpsjDiv" onclick="showCard0(this,'conent','leftsub_');areaLists(2);" class="leftsub_Off"><font class="fl w300 f24 tr mt10">领导批示件（0）</font></span>
+				<span id="ldzssxDiv" onclick="showCard0(this,'conent','leftsub_');areaLists(3);" class="leftsub_Off"><font class="fl w300  f24 tr mt10">领导指示事项（0）</font></span>
+				<span id="dyzssxDiv" onclick="showCard0(this,'conent','leftsub_');areaLists(4);" class="leftsub_Off"><font class="fl w300  f24 tr mt10">调研指示事项（0）</font></span>
+				<span id="hyjdsxDiv" onclick="showCard0(this,'conent','leftsub_');areaLists(5);" class="leftsub_Off"><font class="fl w300  f24 tr mt10">会议决定事项（0）</font></span>
+				<span id="mtfywtDiv" onclick="showCard0(this,'conent','leftsub_');areaLists(6);" class="leftsub_Off"><font class="fl w300  f24 tr mt10">媒体反映问题（0）</font></span>
+				<span id="smrxDiv" onclick="showCard0(this,'conent','leftsub_');areaLists(7);" class="leftsub_Off"><font class="fl w300  f24 tr mt10">市民热线（0）</font></span>
+				<span id="qtDiv" onclick="showCard0(this,'conent','leftsub_');areaLists(8);" class="leftsub_Off"><font class="fl w300  f24 tr mt10">其他（0）</font></span>
+			</div>
+		</div>
+		<div class="fr w1195 h745 mr50">
+		<div class="fl w" id="conent0">
+			<div class="fl w subTit mt6 subtit_line">
+				<span id="allDiv" onclick="showCard0(this,'list','subCard')" class="subCardOn" >全部（0）</span>
+				<span id="procDiv" onclick="showCard0(this,'list','subCard')" class="subCardOff">办理中（0）</span>
+				<span id="endDiv" onclick="showCard0(this,'list','subCard')" class="subCardOff">已办结（0）</span>
+			</div>
+			<div class="fl w ">
+				<div id="list0" class="fl w">
+					<!--2020-7-15-->
+					<div id="tbTit1" class="fl w h60 white bold mt9">
+						<table class=" f18 w table_style white" border="0" cellspacing="0" cellpadding="0">
+							<tr id="trTit1" class="h60">
+								<th class="w60 tc">序号</th>
+								<th class="w100 tc">立项日期</th>
+								<th>事项名称</th>
+								<th class="w100 tc">办理状态</th>
+							</tr>
+						</table>
+					</div>
+					<div id="tbTit10" class="fl w h60 white bold mt20 tc f18" style="display:none">
+						暂无数据
+					</div>
+					<div class="fl w h658 scrollDiv" style="overflow:auto">
+						<table id="dcjAllDiv" class="f16 w table_style white" border="0" cellspacing="0" cellpadding="0">			
+							<!-- <tr class="lh30 table_on">
+								<td class="w60 tc">2</td>
+								<td class="w100 tc">2020-07-15</td>
+								<td>落实中央八项规定精神情况汇报，落实中央八项规定自查报告落实中央八项规定自查报告</td>
+								<td class="w100 tc"><span class="tc color_yjb">已办结</span></td>
+							</tr> -->
+						</table>
+					</div>
+				</div>
+				<div id="list1"  class="fl w" style="display:none;">		
+					<!--2020-7-15-->
+					<div id="tbTit2" class="fl w h60 white bold mt9">
+						<table class=" f18 w table_style white" border="0" cellspacing="0" cellpadding="0">
+							<tr id="trTit2" class="h60">
+								<th class="w60 tc">序号</th>
+								<th class="w100 tc">立项日期</th>
+								<th>事项名称</th>
+							</tr>
+						</table>
+					</div>
+					<div id="tbTit20" class="fl w h60 white bold mt20 tc f18" style="display:none">
+						暂无数据
+					</div>
+					<div class="fl w h658 scrollDiv" style="overflow:auto;">		
+						<table id="dcjProcDiv" class="f16 w table_style white" border="0" cellspacing="0" cellpadding="0">			
+							<!-- <tr class="lh30 table_on">
+								<td class="w60 tc">2</td>
+								<td class="w100 tc">2020-07-15</td>
+								<td>落实中央八项规定精神情况汇报，落实中央八项规定自查报告落实中央八项规定自查报告</td>
+								<td class="w100 tc"><span class="tc color_yjb">已办结</span></td>
+							</tr> -->
+						</table>
+					</div>
+				</div>
+				<div id="list2"  class="fl w" style="display:none;">		
+					<!--2020-7-15-->
+					<div id="tbTit3" class="fl w h60 white bold mt9">
+						<table class=" f18 w table_style white" border="0" cellspacing="0" cellpadding="0">
+							<tr id="trTit3" class="h60">
+								<th class="w60 tc">序号</th>
+								<th class="w100 tc">立项日期</th>
+								<th>事项名称</th>
+							</tr>
+						</table>
+					</div>
+					<div id="tbTit30" class="fl w h60 white bold mt20 tc f18" style="display:none">
+						暂无数据
+					</div>
+					<div class="fl w h658 scrollDiv" style="overflow:auto;">					
+						<table id="dcjEndDiv" class="f16 w table_style white" border="0" cellspacing="0" cellpadding="0">			
+							<!-- <tr class="lh30 table_on">
+								<td class="w60 tc">2</td>
+								<td class="w100 tc">2020-07-15</td>
+								<td>落实中央八项规定精神情况汇报，落实中央八项规定自查报告落实中央八项规定自查报告</td>
+								<td class="w100 tc"><span class="tc color_yjb">已办结</span></td>
+							</tr> -->
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+<div class="sjly_div h38 pa tc">
+   <span class="fl w mt13 tc">数据来源方：市委办公厅</span>
+</div>
+</body>
+</html>
+
+<script>
+
+//年份
+var year=getUrlParam("year");
+if (year=="" || year==null || year=="null" || year=="undefined")
+	year = "";
+
+//区域
+var areaName=decodeURI(getUrlParam("area"));
+$("#titDiv").html((year==""?"":(year+"年"))+areaName+"督查件整体情况");
+//分类
+var type=getUrlParam("type");
+if (type=="" || type==null)
+	type="zddcsxDiv";
+//状态
+var status=getUrlParam("status");
+if (status=="" || status==null)
+	status="allDiv";
+
+var totProcCount = 0, totEndCount = 0;
+var zddcsxTot = 0, dyzssxTot = 0, hyjdsxTot = 0, mtfywtTot = 0, smrxTot = 0, ldpsjTot = 0, ldzssxTot = 0;
+
+//父级的左标签
+var tab=getUrlParam("tab");
+
+//页面初始化
+(function($) {
+
+	//督办件数
+	dcjCount(year, areaName);
+	mediaCount(year, areaName);
+	pishiCount(year, areaName);
+	
+	$("#procDiv0").html(totProcCount);
+	$("#endDiv0").html(totEndCount);
+	$("#allDiv0").html(totProcCount+totEndCount);
+	
+	//右侧区域
+	clearRight();
+	
+// 	$("#"+type).addClass("leftsub_On");
+	$("#"+type).click();
+// 	$("#"+status).addClass("subCardOn");
+	$("#"+status).click();
+		
+}(jQuery));
+
+//督办件数-督查件
+function dcjCount(year, areaName) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/dcj/dcjCount",
+		dataType : "json",
+		data : {
+			'year' : year,
+			'area' : areaName
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				for (var i=0; i<resp.data.length; i++) {
+					var data = resp.data[i];
+					var name = data.businesstypename;
+					var status = data.handlestatus;
+					var num = data.num;
+					if (name=="重点督查事项") {
+						zddcsxTot+=num;
+						if (status=="已办结") {
+							totEndCount += num;
+							$("#zddcsxEnd").html(num);
+						}
+						else if (status=="办理中") {
+							totProcCount += num;
+							$("#zddcsxProc").html(num);
+						}
+					}
+					else if (name=="调研指示事项") {
+						dyzssxTot+=num;
+						if (status=="已办结") {
+							totEndCount += num;
+							$("#dyzssxEnd").html(num);
+						}
+						else if (status=="办理中") {
+							totProcCount += num;
+							$("#dyzssxProc").html(num);
+						}
+					}
+					else if (name=="会议决定事项") {
+						hyjdsxTot+=num;
+						if (status=="已办结") {
+							totEndCount += num;
+							$("#hyjdsxEnd").html(num);
+						}
+						else if (status=="办理中") {
+							totProcCount += num;
+							$("#hyjdsxProc").html(num);
+						}
+					}
+				}
+				var zddcsx = "<font class='fl w300  f24 tr mt10'>重点督查事项（"+zddcsxTot+"）</font>";
+				$("#zddcsxDiv").html(zddcsx);
+				var dyzssx = "<font class='fl w300  f24 tr mt10'>调研指示事项（"+dyzssxTot+"）</font>";
+				$("#dyzssxDiv").html(dyzssx);
+				var hyjdsx = "<font class='fl w300  f24 tr mt10'>会议决定事项（"+hyjdsxTot+"）</font>";
+				$("#hyjdsxDiv").html(hyjdsx);
+				
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//督办件数-媒体
+function mediaCount(year, areaName) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaCount",
+		dataType : "json",
+		data : {
+			'year' : year,
+			'area' : areaName
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				var otherProc = 0, otherEnd = 0;
+				for (var i=0; i<resp.data.length; i++) {
+					var data = resp.data[i];
+					var name = data.businesstypename;
+					var status = data.handlestatus;
+					var num = data.num;
+					if (name=="媒体反映问题") {
+						mtfywtTot+=num;
+						if (status=="已办结") {
+							totEndCount += num;
+							$("#mtfywtEnd").html(num);
+						}
+						else if (status=="办理中") {
+							totProcCount += num;
+							$("#mtfywtProc").html(num);
+						}
+					}
+					else if (name=="市民热线") {
+						smrxTot+=num;
+						if (status=="已办结") {
+							totEndCount += num;
+							$("#smrxEnd").html(num);
+						}
+						else if (status=="办理中") {
+							totProcCount += num;
+							$("#smrxProc").html(num);
+						}
+					}
+					else {
+						hyjdsxTot+=num;
+						if (status=="已办结") {
+							totEndCount += num;
+							otherEnd += num;
+						}
+						else if (status=="办理中") {
+							totProcCount += num;
+							otherProc += num;
+						}
+					}
+				}
+				$("#qtEnd").html(otherEnd);
+				$("#qtProc").html(otherProc);
+				var qt = "<font class='fl w300  f24 tr mt10'>其他（"+(otherEnd+otherProc)+"）</font>";
+				$("#qtDiv").html(qt);
+
+				var mtfywt = "<font class='fl w300  f24 tr mt10'>媒体反映问题（"+mtfywtTot+"）</font>";
+				$("#mtfywtDiv").html(mtfywt);
+				var smrx = "<font class='fl w300  f24 tr mt10'>市民热线（"+smrxTot+"）</font>";
+				$("#smrxDiv").html(smrx);
+				
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//督办件数-批示件
+function pishiCount(year, areaName) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/psj/pishiCount",
+		dataType : "json",
+		data : {
+			'year' : year,
+			'area' : areaName
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				for (var i=0; i<resp.data.length; i++) {
+					var data = resp.data[i];
+					var name = data.businesstypename;
+					var status = data.handlestatus;
+					var num = data.num;
+					if (name=="领导批示件") {//ldpsjTot
+						ldpsjTot+=num;
+						if (status=="已办结") {
+							totEndCount += num;
+							$("#ldpsjEnd").html(num);
+						}
+						else if (status=="办理中") {
+							totProcCount += num;
+							$("#ldpsjProc").html(num);
+						}
+					}
+					else if (name=="领导指示事项") {
+						ldzssxTot+=num;
+						if (status=="已办结") {
+							totEndCount += num;
+							$("#ldzssxEnd").html(num);
+						}
+						else if (status=="办理中") {
+							totProcCount += num;
+							$("#ldzssxProc").html(num);
+						}
+					}
+				}
+				var ldpsj = "<font class='fl w300  f24 tr mt10'>领导批示件（"+ldpsjTot+"）</font>";
+				$("#ldpsjDiv").html(ldpsj);
+				var ldzssx = "<font class='fl w300  f24 tr mt10'>领导指示事项（"+ldzssxTot+"）</font>";
+				$("#ldzssxDiv").html(ldzssx);
+				
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//分类
+function nameOfType(n) {
+	var type = "";
+	if (n==1)
+		type="重点督查事项";
+	if (n==2)
+		type="领导批示件";
+	if (n==3)
+		type="领导指示事项";
+	if (n==4)
+		type="调研指示事项";
+	if (n==5)
+		type="会议决定事项";
+	if (n==6)
+		type="媒体反映问题";
+	if (n==7)
+		type="市民热线";
+	if (n==8)
+		type="其他";
+	return type;
+}
+
+//督办件列表
+function areaLists(n) {
+
+	if (n==1 || n==4 || n==5) {
+		
+		//督查列表
+		dcjList(year, "", nameOfType(n), areaName);
+		dcjList(year, "办理中", nameOfType(n), areaName);
+		dcjList(year, "已办结", nameOfType(n), areaName);
+		
+	}
+	else if (n==2 || n==3) {
+
+		//督查列表
+		psjList(year, "", nameOfType(n), areaName);
+		psjList(year, "办理中", nameOfType(n), areaName);
+		psjList(year, "已办结", nameOfType(n), areaName);
+	}
+	else if (n==6 || n==7 || n==8) {
+
+		//督查列表
+		mediaList(year, "", nameOfType(n), areaName);
+		mediaList(year, "办理中", nameOfType(n), areaName);
+		mediaList(year, "已办结", nameOfType(n), areaName);
+	}
+}
+
+//督办件列表
+function dcjList(year, status0, type0, areaName) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/dcj/dcjList",
+		dataType : "json",
+		data : {
+			'year' : year,
+			'status' : status0,
+			'type' : type0,
+			'area' : areaName
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				var divName = "";
+				if (status0=="") {
+					if (resp.data.length==0) {
+						$("#tbTit1").css("display","none");
+						$("#tbTit10").css("display","block");
+					}
+					else {
+						$("#tbTit1").css("display","block");
+						$("#tbTit10").css("display","none");
+					} 
+					divName = "dcjAllDiv";
+					$("#allDiv").html("全部（"+resp.data.length+"）");
+				}
+				if (status0=="办理中") {
+					if (resp.data.length==0) {
+						$("#tbTit2").css("display","none");
+						$("#tbTit20").css("display","block");
+					}
+					else {
+						$("#tbTit2").css("display","block");
+						$("#tbTit20").css("display","none");
+					} 
+					divName = "dcjProcDiv";
+					$("#procDiv").html("办理中（"+resp.data.length+"）");
+				}
+				if (status0=="已办结") {
+					if (resp.data.length==0) {
+						$("#tbTit3").css("display","none");
+						$("#tbTit30").css("display","block");
+					}
+					else {
+						$("#tbTit3").css("display","block");
+						$("#tbTit30").css("display","none");
+					} 
+					divName = "dcjEndDiv";
+					$("#endDiv").html("已办结（"+resp.data.length+"）");
+				}
+				$("#"+divName).html("");
+				var data = resp.data;
+				var content = "";
+				for (var i=0; i<data.length; i++) {
+					var id=data[i].prjid;
+					var name=data[i].title;
+					var statusTmp = data[i].handlestatus;
+					var bgliStyle = i%2!=0?"":"bgli";
+					var statusStyle = statusTmp=="已办结"?" color_yjb ":" color_blz ";
+					var modelTmp = "";
+					if (type0=="重点督查事项")
+						modelTmp = "model";
+					else
+						modelTmp = "model2";
+					content += "<tr id='tr_"+id+"_"+divName+"' class='lh25 ' onclick='"+modelTmp+"(\""+id+"\",this, \""+type+"\")'>"
+							+ "	<td class='w60 tc hand'>"+(i+1)+"</td>"
+							+ "	<td class='w100 tc hand'>"+timestampToDate(data[i].date)+"</td>"
+							+ "	<td title='"+name+"' class='hand'>"+textEllipsis(name,20)+"</td>"
+							+ ((status0!="")?"":"	<td class='w100 tc hand'><span class='tc "+statusStyle+"'>"+statusTmp+"</span></td>")
+							+ "</tr>";
+				}
+				$("#"+divName).html(content);
+				refreshScroll();
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//督办件列表
+function mediaList(year, status0, type, areaName) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/media/mediaList",
+		dataType : "json",
+		data : {
+			'year' : year,
+			'status' : status0,
+			'type' : type,
+			'area' : areaName
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				var divName = "";
+				if (status0=="") {
+					if (resp.data.length==0) {
+						$("#tbTit1").css("display","none");
+						$("#tbTit10").css("display","block");
+					}
+					else {
+						$("#tbTit1").css("display","block");
+						$("#tbTit10").css("display","none");
+					} 
+					divName = "dcjAllDiv";
+					$("#allDiv").html("全部（"+resp.data.length+"）");
+				}
+				if (status0=="办理中") {
+					if (resp.data.length==0) {
+						$("#tbTit2").css("display","none");
+						$("#tbTit20").css("display","block");
+					}
+					else {
+						$("#tbTit2").css("display","block");
+						$("#tbTit20").css("display","none");
+					} 
+					divName = "dcjProcDiv";
+					$("#procDiv").html("办理中（"+resp.data.length+"）");
+				}
+				if (status0=="已办结") {
+					if (resp.data.length==0) {
+						$("#tbTit3").css("display","none");
+						$("#tbTit30").css("display","block");
+					}
+					else {
+						$("#tbTit3").css("display","block");
+						$("#tbTit30").css("display","none");
+					} 
+					divName = "dcjEndDiv";
+					$("#endDiv").html("已办结（"+resp.data.length+"）");
+				}
+				$("#"+divName).html("");
+				var data = resp.data;
+				var content = "";
+				for (var i=0; i<data.length; i++) {
+					var id=data[i].prjid;
+					var name=data[i].title;
+					var statusTmp = data[i].handlestatus;
+					var bgliStyle = i%2!=0?"":"bgli";
+					var statusStyle = statusTmp=="已办结"?" color_yjb ":" color_blz ";
+					content += "<tr id='tr_"+id+"_"+divName+"' class='lh25 ' onclick='model2(\""+id+"\",this, \""+type+"\")'>"
+							+ "	<td class='w60 tc hand'>"+(i+1)+"</td>"
+							+ "	<td class='w100 tc hand'>"+timestampToDate(data[i].date)+"</td>"
+							+ "	<td title='"+name+"' class='hand'>"+textEllipsis(name,20)+"</td>"
+							+ ((status0!="")?"":"	<td class='w100 tc hand'><span class='tc "+statusStyle+"'>"+statusTmp+"</span></td>")
+							+ "</tr>";
+				}
+				$("#"+divName).html(content);
+
+				refreshScroll();
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//督办件列表
+function psjList(year, status0, type, areaName) {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/api/dcdb/psj/pishiList",
+		dataType : "json",
+		data : {
+			'year' : year,
+			'status' : status0,
+			'type' : type,
+			'area' : areaName
+		},
+		success : function(resp) {
+			if(resp.code == 200){
+				var divName = "";
+				if (status0=="") {
+					if (resp.data.length==0) {
+						$("#tbTit1").css("display","none");
+						$("#tbTit10").css("display","block");
+					}
+					else {
+						$("#tbTit1").css("display","block");
+						$("#tbTit10").css("display","none");
+					} 
+					divName = "dcjAllDiv";
+					$("#allDiv").html("全部（"+resp.data.length+"）");
+				}
+				if (status0=="办理中") {
+					if (resp.data.length==0) {
+						$("#tbTit2").css("display","none");
+						$("#tbTit20").css("display","block");
+					}
+					else {
+						$("#tbTit2").css("display","block");
+						$("#tbTit20").css("display","none");
+					} 
+					divName = "dcjProcDiv";
+					$("#procDiv").html("办理中（"+resp.data.length+"）");
+				}
+				if (status0=="已办结") {
+					if (resp.data.length==0) {
+						$("#tbTit3").css("display","none");
+						$("#tbTit30").css("display","block");
+					}
+					else {
+						$("#tbTit3").css("display","block");
+						$("#tbTit30").css("display","none");
+					} 
+					divName = "dcjEndDiv";
+					$("#endDiv").html("已办结（"+resp.data.length+"）");
+				}
+				$("#"+divName).html("");
+				var data = resp.data;
+				var content = "";
+				for (var i=0; i<data.length; i++) {
+					var id=data[i].prjid;
+					var name=data[i].title;
+					var statusTmp = data[i].handlestatus;
+					var bgliStyle = i%2!=0?"":"bgli";
+					var statusStyle = statusTmp=="已办结"?" color_yjb ":" color_blz ";
+					content += "<tr id='tr_"+id+"_"+divName+"' class='lh25 hand' onclick='model(\""+id+"\",this, \""+type+"\")'>"
+							+ "	<td class='w60 tc hand'>"+(i+1)+"</td>"
+							+ "	<td class='w100 tc hand'>"+timestampToDate(data[i].date)+"</td>"
+							+ "	<td title='"+name+"' class='hand'>"+textEllipsis(name,20)+"</td>"
+							+ ((status0!="")?"":"	<td class='w100 tc hand'><span class='tc "+statusStyle+"'>"+statusTmp+"</span></td>")
+							+ "</tr>";
+				}
+				$("#"+divName).html(content);
+
+				refreshScroll();
+			} else {
+				alert(resp.msg);
+			}
+		}
+	});
+}
+
+//督查件详情
+function model(id) {
+// 	alert($(".leftsub_On")[0].id);
+	var type=$(".leftsub_On")[0].id;
+// 	alert($(".subCardOn")[0].id);
+	var status=$(".subCardOn")[0].id;
+	window.location.href="/templates/view/dcdb/page/area/more/other-more-detail.html?id="+id
+			+"&year="+year+"&area="+areaName
+			+"&type="+type+"&status="+status+"&tab="+tab;
+}
+
+//督查件详情
+function model2(id) {
+//	alert($(".leftsub_On")[0].id);
+	var type=$(".leftsub_On")[0].id;
+//	alert($(".subCardOn")[0].id);
+	var status=$(".subCardOn")[0].id;
+	window.location.href="/templates/view/dcdb/page/area/more/other-more-detail2.html?id="+id
+			+"&year="+year+"&area="+areaName
+			+"&type="+type+"&status="+status+"&tab="+tab;
+}
+
+//选择年份事件
+function selectYear(year) {
+	//年份
+	year = $("#mySelect").find("option:selected").val();
+
+	totProcCount = 0, totEndCount = 0;
+	zddcsxTot = 0, dyzssxTot = 0, hyjdsxTot = 0, mtfywtTot = 0, smrxTot = 0, ldpsjTot = 0, ldzssxTot = 0;
+
+	//督办件数
+	dcjCount(year, areaName);
+	mediaCount(year, areaName);
+	pishiCount(year, areaName);
+	
+	$("#procDiv0").html(totProcCount);
+	$("#endDiv0").html(totEndCount);
+	$("#allDiv0").html(totProcCount+totEndCount);
+	
+	//右侧区域
+	clearRight();
+	
+ 	$("#zddcsxDiv").trigger("click");
+}
+
+//清空右侧区域
+function clearRight() {
+	$("#dcjAllDiv").html("");
+	$("#dcjProcDiv").html("");
+	$("#dcjEndDiv").html("");
+	
+}
+
+//返回主页
+function gotoothermore() {
+	window.location.href="/templates/view/dcdb/page/area/more/other-more.html?year="+year+"&tab="+tab;
+}
+
+</script>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#mySelect").select({
+			width: "128px"
+		});
+	});
+
+</script>

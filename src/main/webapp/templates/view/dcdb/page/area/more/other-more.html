@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--style-->
+	<link href="/templates/view/dcdb/css/base.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_width.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_height.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_margin.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/base_padding.css" type="text/css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/style.css" type="text/css"  rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/select.css" rel="stylesheet" />
+	<link href="/templates/view/dcdb/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+	<script type="text/javascript" src="/templates/view/dcdb/js/js.js"></script>
+	<script type="text/javascript" src="/templates/view/dcdb/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/js.js"></script>
+    <style>
+      .scrollDiv{
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    </style>
+    <script type="text/javascript" src="/templates/view/dcdb/js/jquery.nicescroll.js" ></script>
+    <script>
+      $(function(){
+         $(".scrollDiv").niceScroll({
+		 cursorcolor:"#446ba9",
+		 touchbehavior: true,
+		 cursoropacitymax: 1,
+		 cursorborder: "0",
+		 cursorwidth: "10px",
+		 autohidemode: true});
+      });
+    </script>
+</head>
+<body>
+<div class="fl w1920 h1000 bg_ej_dt">	
+	<div class="fl w h61">
+		<div class="fl ml610 w700 tc">
+			<!-- <span class="fl w110 white ml170 mt10">
+				<select id="mySelect">
+					<option VALUE="" selected="selected">全部</option>
+					<option value="2019">2019年</option>
+					<option value="2018">2018年</option>
+					<option value="2017">2017年</option>
+				</select>											
+			</span> -->
+			<span id="titDiv" class="fl w f24 white tc mt28 bold">其他单位督查件整体情况</span>
+		</div>
+		<div class="fr mr270 mt28"><a href="###" onclick="gotomain()"><img src="/templates/view/dcdb/images/btn_fh.png"></a></div>
+	</div>
+	<div class="fl w1833 h750 ml43 mt53" id="menuDiv">
+		<div class="fl w450 h745">
+			<div class="fl w390 ml30">
+				<span id="tab1" onclick="showCard(this,'conent','leftsub_',tabCallback)" class="leftsub_On"><font class="fl w390  f24 tc mt10">市委系统</font></span>
+				<span id="tab2" onclick="showCard(this,'conent','leftsub_',tabCallback)" class="leftsub_Off"><font class="fl w390 f24 tc mt10">市政府系统</font></span>
+				<span id="tab3" onclick="showCard(this,'conent','leftsub_',tabCallback)" class="leftsub_Off"><font class="fl w390  f24 tc mt10">检察院</font></span>
+				<span id="tab4" onclick="showCard(this,'conent','leftsub_',tabCallback)" class="leftsub_Off"><font class="fl w390  f24 tc mt10">法院</font></span>
+				<span id="tab5" onclick="showCard(this,'conent','leftsub_',tabCallback)" class="leftsub_Off"><font class="fl w390  f24 tc mt10">金融</font></span>
+				<span id="tab6" onclick="showCard(this,'conent','leftsub_',tabCallback)" class="leftsub_Off"><font class="fl w390  f24 tc mt10">农业系统</font></span>
+				<span id="tab7" onclick="showCard(this,'conent','leftsub_',tabCallback)" class="leftsub_Off"><font class="fl w390  f24 tc mt10">教育系统</font></span>
+				<span id="tab8" onclick="showCard(this,'conent','leftsub_',tabCallback)" class="leftsub_Off"><font class="fl w390  f24 tc mt10">市国资委监管企（事）业单位</font></span>
+				<span id="tab9" onclick="showCard(this,'conent','leftsub_',tabCallback)" class="leftsub_Off"><font class="fl w390  f24 tc mt10">北京市人大</font></span>
+			</div>
+		</div>
+		<div class="fr w1300 h745 mr10">
+		<div class="fl w white h735 scrollDiv" id="conent0">
+			<!-- <span class="leftsub_Off ml32">
+				<table  border="0" cellspacing="0" cellpadding="0">					
+                    <tr class="h59">	
+                    	<td class=" w300 f18 tl white ti30">市纪委市监委机关</td>
+						<td class="f24 tr  color_blz">302&nbsp;&nbsp;件</td>
+					</tr>
+				</table>
+			</span> -->
+		</div>
+		<div class="fl w white h735 scrollDiv" id="conent1" style="display:none;" >
+		</div>
+		<div class="fl w white h735 scrollDiv" id="conent2" style="display:none;">
+		</div>
+		<div class="fl w white h735 scrollDiv" id="conent3" style="display:none;">
+		</div>
+		<div class="fl w white h735 scrollDiv" id="conent4" style="display:none;">
+		</div>
+		<div class="fl w white h735 scrollDiv" id="conent5" style="display:none;">
+		</div>
+		<div class="fl w white h735 scrollDiv" id="conent6" style="display:none;">
+		</div>
+		<div class="fl w white h735 scrollDiv" id="conent7" style="display:none;">
+		</div>
+		<div class="fl w white h735 scrollDiv" id="conent8" style="display:none;">
+		</div>
+		<div class="fl w white h735 scrollDiv" id="conent9" style="display:none;">
+		</div>
+	</div>
+</div>
+<div class="sjly_div h38 pa tc">
+   <span class="fl w mt13 tc">数据来源方：市委办公厅</span>
+</div>
+</body>
+<script src="/templates/view/dcdb/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/templates/view/dcdb/js/jquery.select.js"></script>
+<script type="text/javascript">
+
+	//年份
+	var year=getUrlParam("year");
+	if (year=="" || year==null || year=="null" || year=="undefined")
+		year = "";
+	$("#titDiv").html((year==""?"":(year+"年"))+"其他单位督查件整体情况");
+	
+	//分类
+	var tab=getUrlParam("tab");
+	if (tab=="" || tab==null)
+		tab="tab1";
+		
+	//页面初始化
+	(function($) {
+		
+		//其他单位
+		areaCount2();
+		
+		$("#"+tab).click();
+			
+	}(jQuery));
+
+	//区域统计：其他
+	function areaCount2() {
+		$.ajax({
+//			async : false,
+			type : "post",
+			url : "/api/dcdb/dcj/areaCount",
+			dataType : "json",
+			data : {
+				'year' : year,
+				'area' : '1'
+			},
+			success : function(resp) {
+				$("#conent0").html("");
+				if(resp.code == 200){
+//	 				alert(resp.data);
+					for (var i=0; i<resp.data.length; i++) {
+						var name = resp.data[i].split("|")[0];
+						var num = resp.data[i].split("|")[1];
+						$("#conent0").append("<span class='leftsub_Off ml32' onclick='gotodetail(\""+name+"\")'>"
+								+ "<table border='0' cellspacing='0' cellpadding='0'>"
+								+ " <tr class='h59'>"
+								+ " <td class=' w300 f22 tl white pl10'>"+name+"</td>"
+								+ " <td class='f24 tr color_blz'>"+num+"&nbsp;&nbsp;件</td>"
+								+ " </tr>"
+								+ "</table> "
+// 								+ "	<font class='fl w216 f24 tl mt10 ml20'>"+name+"</font>"
+// 								+ "	<font class='fl w115 f24 tr mt10 mr20 color_blz'>"+num+"&nbsp;&nbsp;件</font>"
+								+ "</span>");
+					}
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+
+	//选择年份事件
+	function selectYear(year) {
+		//年份
+		year = $("#mySelect").find("option:selected").val();
+
+		//其他单位
+		areaCount2();
+		
+		$("#"+tab).click();
+
+	}
+
+	//返回主页
+	function gotomain() {
+		window.location.href="/templates/view/dcdb/page/dcdb.html?index=2&year="+year;
+	}
+
+	//督查件详情
+	function gotodetail(area) {
+		var tab=$(".leftsub_On")[0].id;
+		window.location.href="/templates/view/dcdb/page/area/more/other-more-list.html?year="+year+"&area="+encodeURI(area)+"&tab="+tab;
+	}
+
+	//根据TAB设置显示-回调函数
+	function tabCallback(id) {
+		
+	}
+	
+	$(function () {
+		$("#mySelect").select({
+			width: "128px"
+		});
+	});
+</script>
+</html>

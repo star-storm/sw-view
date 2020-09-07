@@ -1,0 +1,665 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--base style!-->
+<link href="/static/css/base.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_width.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_height.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_margin.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/base_padding.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/web.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/css/select.css"/>
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/js.js"></script>
+</head>
+<body>
+
+	<!--弹出框-->
+	<div id="bg1"></div>
+	<div id="show1"  class="fl w930 pb50 bg_white">
+		<div class="fl w h45 lh45 tit_zx ti20">
+				<span class="white f16 bold">分类详情</span>
+		</div>
+		<div class="fl w ">
+			<iframe id="iframe1" src="/templates/view/classify/detail.html" frameborder="0" width="100%" scrolling="auto"></iframe>	
+		</div>	
+		<div class="fl w200 h30 ml370 mt20" >
+			<button type="submit" onclick="hidediv(1);" class="fl btn bg_green">确定</button>
+		</div>
+		
+	</div>
+	<!--弹出框 end-->
+	<!--弹出框-->
+	<div id="bg2"></div>
+	<div id="show2"  class="fl w930 pb50 bg_white">
+		<div class="fl w h45 lh45 tit_zx ti20">
+				<span class="white f16 bold">编辑分类</span>
+		</div>
+		<div class="fl w ">
+			<iframe id="iframe2" src="/templates/view/classify/edit.html" frameborder="0" width="100%" scrolling="auto"></iframe>	
+		</div>	
+		<div class="fl w200 h30 ml370 mt20" >
+			<button onclick="update()" class="fl btn bg_green">确定</button>
+			<button type="submit" onclick="hidediv(2);" value="Submit" class="fr btn bg_red">取消</button>
+		</div>
+		
+	</div>
+	<!--弹出框 end-->
+	<!--弹出框-->
+	<div id="bg3"></div>
+	<div id="show3"  class="fl w930 pb50 bg_white">
+		<div class="fl w h45 lh45 tit_zx ti20">
+				<span class="white f16 bold">新建分类</span>
+		</div>
+		<div class="fl w ">
+			<iframe id="iframe3" src="/templates/view/classify/add.html" frameborder="0" width="100%" scrolling="auto"></iframe>	
+		</div>	
+		<div class="fl w200 h30 ml370 mt20" >
+			<button onclick="add()" class="fl btn bg_green">确定</button>
+			<button type="submit" onclick="hidediv(3);" value="Submit" class="fr btn bg_red">取消</button>
+		</div>
+		
+	</div>
+	<!--弹出框 end-->
+
+	<!--top start-->
+	<div class="w bc h95">
+		<iframe src="/static/iframe/top.html" allowtransparency="true" style="background-color=transparent"  frameborder="0" width="100%" height="95" scrolling="no"></iframe>
+	</div>
+	<!--top end-->
+	<div class="w1200 bc">
+		<!--menu start-->
+		<div class="fl w209 h834 menuDiv mt20">
+			<iframe src="/static/iframe/menu.html" allowtransparency="true" style="background-color=transparent"  frameborder="0" width="209" height="834" scrolling="no"></iframe>
+		</div>
+		<!--menu end-->
+		<!--right start-->
+		<div class="fr w989 h834 con mt20">
+			<div class="fl w976 mt5 ml6 titBg titColor bold f18 h40 lh36 ti20"><span class="gray6">分类管理</span></div>
+			<div class="fl w930 ml30 mt10 h80">
+					<div class="fl w840">
+						<ul class="fl w ">
+							<li  class="fl w420 mt10 ">
+								<span class="fl w75 tl mt5">资源名称：</span>
+								<span class="fl w320"><input type="text" id="name" class="InputText w300"/></span>
+							</li>
+							<li  class="fl w420 mt10 ">
+								<span class="fl w75 tl mt5">资源分类：</span>
+								<span class="fl w300 ">
+									<div id="cate" class="cate w300">
+										<div class="w cate_wrp h30">
+											<div class="cate_inp w265 cate_tri">请选择资源分类</div>
+											<a href="###" class="cate_tri"></a>
+									  </div>
+									   <div class="cate_drop" style="display:none">
+										  <ul id="classifyList">
+											<!-- <li>资源分类1</li>
+											<li>资源分类2</li>
+											<li>资源分类3</li>
+											<li>资源分类4</li> -->
+										  </ul>
+									   </div>
+									</div>		
+								</span>
+							</li>
+						</ul>
+					</div>
+					<div class="fr w80">
+						<button id="reset" class="btn bg_green mt8">重置</button>
+						<button id="search" class="btn bg_bule mt12">查询</button>
+					</div>
+					<input id="dataId" type="hidden"/>
+					<input id="classify" type="hidden"/>
+			</div>
+			<div class="fl w930 ml30 mt15 ">
+					<div class="fl w bgBtn f18 h35 lh35">
+						<a href="###" onclick="show(3);" class="fl f16 Black bold ti30 btn_xz">新增</a>
+						<a href="#" onclick="delBatch();" class="fl f16 Black bold ti30 btn_plsc ml10">批量删除</a>
+					</div>
+					<div class="fl w mt10">
+						<table id="classifyTb" width="100%" border="0" cellspacing="0" cellpadding="0" class="tablelist">
+						  <tr class="tableTit">
+							<td class="tc w30">选择</td>
+							<td class="tc w30">序号</td>
+							<td class="tc ">资源名称</td>
+							<td class="tc w150">所属分类</td>
+							<td class="tc w180">操作</td>
+						  </tr>
+						</table>
+					</div>
+					<div class="fl w500 mt25 pageDiv tc ml210" >
+						<a href="#" onclick="firstPage()" class="pageoff ml10">首页</a>
+						<a href="#" onclick="prevPage()" class="pageoff ml10">上一页</a>
+						第
+						<input id="pageIndex" type="text" class="InputText" style="width: 36px; height: 20px;">
+						页
+						<label id="pageNum">(共0页)</label>
+						<a href="#" onclick="gotoPage()" class="pageoff ml10">跳转</a>
+						<a href="#" onclick="nextPage()" class="pageoff ml10">下一页</a>
+						<a href="#" onclick="lastPage()" class="pageoff ml10">末页</a>
+					</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+//下拉列表js
+(function($) {
+  var $cate = $('#cate'),
+    $tri = $('.cate_tri', $cate),
+    $drop = $('div.cate_drop', $cate),
+    $inp = $('div.cate_inp', $cate);
+
+    $tri.on('click', function(event) {
+        var $el = $(this);
+        if( $el.data('active') !== 'on' ) {
+          $drop[0].style.display = 'block';
+          $el.data('active', 'on');
+        } else {
+          $drop[0].style.display = 'none';
+          $el.data('active', 'off')
+        }
+    });
+
+    $drop.on('mouseover', 'li', function(event) {
+      $inp[0].innerHTML = this.innerHTML; 
+      $("#classify").val(this.value == 0 ? "" : this.value);
+    }).on('click', 'li', function(event) {
+      // do something
+      $drop[0].style.display = 'none';
+      $tri.data('active', 'off');
+    });
+}(jQuery));
+
+ //页面初始化
+ (function($) {
+	//资源分类
+	classifyList();
+	//分类列表
+	list();
+		
+	$("#search").click(function() {
+		pageIndex = 1;
+		list();
+	});
+		
+	//重置
+	$("#reset").click(function() {
+		$("#name").val("");
+		$("#classify").val("");
+		$('div.cate_inp', $('#cate'))[0].innerHTML = "请选择资源分类";
+	});
+	
+ }(jQuery));
+
+ 	//资源分类
+	function classifyList() {
+		$.ajax({
+			type : "post",
+			url : "/api/classify/members",
+			dataType : "json",
+			data : {},
+			success : function(resp) {
+				if(resp.code == 200){
+					$("#classifyList").html("<li value=''>请选择资源分类</li>");
+					for (var i = 0; i < resp.data.length; i++) {
+						$("#classifyList").append("<li value='" + resp.data[i].id + "'>" + resp.data[i].name + "</li>");
+					}
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+
+	//分页
+	var pageIndex = 1;
+	var pageNum = 0;
+	var pageSize = 10;
+	
+	//记录查询条件
+	var nameTmp = "";
+	var classifyTmp = "";
+	
+	//分类列表
+	function list() {
+		 $.ajax({
+			type : "post",
+			url : "/api/classify/list",
+			dataType : "json",
+			data : {
+				'nowPage' : pageIndex,
+				'name' : $("#name").val(),
+				'type' : $("#classify").val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$("#classifyTb").html("");
+					if(resp.data.length != 0) {
+						$("#classifyTb").append(formList(resp.data));
+						//$("#classifyTb").listview("refresh");//在使用'ul'标签时才使用，作用:刷新列表
+						$("#classifyTb").trigger("create");
+						
+						pageNum = (resp.count % pageSize == 0) ? (resp.count / pageSize) : (Math.floor(resp.count / pageSize) + 1);
+					}
+					else {
+						pageNum = 0;
+					}
+					$("#pageIndex").val(pageIndex);
+					$("#pageNum").text("(共" + pageNum + "页)");
+					nameTmp = $("#name").val();
+					classifyTmp = $("#classify").val();
+					
+					$("#dataId").val("");
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+
+	//分类数据
+	function formList(list) {
+		var html = "<tr class='tableTit'>"
+			+ "	<td class='tc w30'>选择</td>"
+			+ "	<td class='tc w30'>序号</td>"
+			+ "	<td class='tc '>资源名称</td>"
+			+ "	<td class='tc w150'>所属分类</td>"
+			+ "	<td class='tc w180'>操作</td>"
+			+ "</tr>";
+		for (var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var parent = (item.parent == null)?"":item.parent.name;
+			html += "<tr>"
+				+ "	<td class='tc w30'><input name='dataList' type='checkbox' value='" + item.id + "' class='CheckBox' /></td>"
+				+ "	<td class='tc w30'>" + (i + 1) + "</td>"
+				+ "	<td class='tc '>" + item.name + "</td>"
+				+ "	<td class='tc w150'>" + rootCalssify(item.parent) + "</td>"
+				+ "	<td class='tc w180'>"
+				+ "		<a href='#' onclick='show(1, " + item.id + ");' class='mr15 unl btn_ck'>查看</a>"
+				+ "		<a href='#' onclick='show(2, " + item.id + ");' class='mr15 unl btn_ck'>修改</a>"
+				+ "		<a href='#' onclick='delRole(" + item.id + ");' class='btn_del unl'>删除</a>"
+				+ "	</td>"
+				+ "</tr>";
+		}
+		return html;
+	}
+	
+	//递归查找根节点
+	function rootCalssify(parent) {
+		if (parent == null)
+			return "";
+		var name = parent.name;
+		while (parent != null) {
+			name = parent.name;
+			parent = parent.parent;
+		}
+		return name;
+	}
+	
+	//回车键事件 
+	$(document).keypress(function(e) {  
+		if(e.which == 13) {  
+			$("#search").click();  
+		}
+	}); 
+	
+	/**
+	 * 分页跳转
+	 */
+	//首页
+	function firstPage() {
+		if (pageIndex == 1)
+			return;
+		else {
+			pageIndex = 1;
+			list();
+		}
+	}
+	//上一页
+	function prevPage() {
+		if (checkSearchItem()) {
+			if (pageIndex == 1)
+				return;
+			else {
+				pageIndex -= 1;
+				list();
+			}
+		}
+		else {
+			pageIndex = 1;
+			list();
+		}
+	}
+	//下一页
+	function nextPage() {
+		if (checkSearchItem()) {
+			if (pageIndex == pageNum)
+				return;
+			else {
+				pageIndex += 1;
+				list();
+			}
+		}
+		else {
+			pageIndex = 1;
+			list();
+		}
+	}
+	//末页
+	function lastPage() {
+		if (checkSearchItem()) {
+			if (pageIndex == pageNum)
+				return;
+			else {
+				pageIndex = pageNum;
+				list();
+			}
+		}
+		else {
+			pageIndex = 1;
+			list();
+		}
+	}
+	//跳转到某页
+	function gotoPage() {
+		if (checkSearchItem()) {
+			var index = $("#pageIndex").val();
+			if (index > pageNum) {
+				alert("最多只有" + pageNum + "页");
+				return;
+			}
+			else {
+				if (pageIndex == index)
+					return;
+				else {
+					pageIndex = index;
+					list();
+				}
+			}
+		}
+		else {
+			pageIndex = 1;
+			list();
+		}
+	}
+	
+	//查询条件是否有更新
+	function checkSearchItem() {
+		return (nameTmp == $("#name").val())
+			&& (classifyTmp == $("#classify").val()) 
+	}
+	
+	//删除分类
+	function delRole(id) {
+		if (!confirm("确定删除？"))
+			return;
+		$.ajax({
+			type : "post",
+			url : "/api/classify/delete",
+			dataType : "json",
+			data : {
+				"id" : id
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("操作成功！");
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//批量删除分类
+	function delBatch() {
+		var ids = "";
+		$("input:checkbox[name=dataList]:checked'").each(function(i){  
+        	ids += $(this).val() + ",";  
+        });
+		if (ids == "") {
+			alert("请选择要删除的数据");
+			return;
+		}
+//		alert(ids);return;
+		if (!confirm("确定删除？"))
+			return;
+		$.ajax({
+			type : "post",
+			url : "/api/classify/delBatch",
+			dataType : "json",
+			data : {
+				"ids" : ids
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("操作成功！");
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	
+	
+	//---------------------------------------------------------------------------
+	// 弹出框
+	//---------------------------------------------------------------------------
+	/**
+	 * 弹出框
+	 */
+	function show(i, id) {
+	    $("#dataId").val(id);
+
+	    if (i == 1)
+			detail();
+	    else if (i == 2)
+			edit();
+		
+		showdiv(i);
+	}
+	
+
+	//---------------------------------------------------------------------------
+	// 子页面--分类详情页
+	//---------------------------------------------------------------------------
+	/**
+	 * 分类详情页
+	 */
+	function detail() {
+		 $.ajax({
+			type : "post",
+			url : "/api/classify/model",
+			dataType : "json",
+			data : {
+				'id' : $('#dataId').val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$(document).contents().find("#iframe1")[0].contentWindow.$("#name").text(resp.data.name);
+					$(document).contents().find("#iframe1")[0].contentWindow.$("#classify").text(rootCalssifyList(resp.data.parent));
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//递归查找根节点
+	function rootCalssifyList(parent) {
+		if (parent == null)
+			return "";
+		var name = parent.name;
+		while (parent.parent != null) {
+			parent = parent.parent;
+			name += " -> " + parent.name;
+		}
+		return name;
+	}
+	
+	
+	//---------------------------------------------------------------------------
+	// 子页面--分类新建页
+	//---------------------------------------------------------------------------
+	/**
+	 * 新建分类
+	 */
+	function add() {
+		var name = $(document).contents().find("#iframe3")[0].contentWindow.$("#name").val();
+		var classify = $(document).contents().find("#iframe3")[0].contentWindow.$("#classify").val();
+		if (!checkInfo(name, classify))
+			return;
+		$.ajax({
+			type : "post",
+			url : "/api/classify/update",
+			dataType : "json",
+			data : {
+				'name' : name,
+				'classify' : classify
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("操作成功");
+					//隐藏弹出框
+					hidediv(3);
+					//清空弹出框数据
+					$(document).contents().find("#iframe3")[0].contentWindow.$("#name").val("");
+					$(document).contents().find("#iframe3")[0].contentWindow.$("#classify").val("");
+					
+					//分类下拉赋值
+					var $cate = $(document).contents().find("#iframe3")[0].contentWindow.$('#cate');
+			        var $inp = $(document).contents().find("#iframe3")[0].contentWindow.$('div.cate_inp', $cate);
+					$inp[0].innerHTML = "";
+					
+					//刷新页面
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//校验字段
+	function checkInfo(name, classify) {
+		if (name == '') {
+			alert("请输入分类名称");
+			return false;
+		}
+		else if(name.length > 120) {
+			alert("分类名称字数过多，请重新输入");
+			return false;
+		}
+		/* else if (classify == '') {
+			alert("请输入资源分类");
+			return false;
+		}
+		else if (imp == '') {
+			alert("请输入植入方法");
+			return false;
+		} */
+		return true;
+	}
+	
+
+	//---------------------------------------------------------------------------
+	// 子页面--分类编辑页
+	//---------------------------------------------------------------------------
+	/**
+	 * 编辑分类-初始化数据
+	 */
+	function edit() {
+		//查询分类
+		$.ajax({
+			type : "post",
+			url : "/api/classify/model",
+			dataType : "json",
+			data : {
+				'id' : $('#dataId').val()
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#name").val(resp.data.name);
+					$(document).contents().find("#iframe2")[0].contentWindow.$("#classify").val(resp.data.id);
+					var zTree = $(document).contents().find("#iframe2")[0].contentWindow.$.fn.zTree.getZTreeObj("treeDemo");
+					zTree.expandAll(true);
+					var nodes = zTree.getNodes();
+					iterateNode(nodes, resp.data.id, zTree);
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	
+	//遍历tree，初始化数据
+	function iterateNode(nodes, id, zTree) {
+		if (nodes == null) return;
+		for (var i = 0; i < nodes.length; i++) {
+			if (nodes[i].id == id) {
+				zTree.selectNode(nodes[i]);
+			}
+			iterateNode(nodes[i].children, id, zTree);
+		}
+	}
+	
+	//遍历tree，读取数据
+	function iterateClassify(nodes, zTree) {
+		if (nodes == null) return;
+		for (var i = 0; i < nodes.length; i++) {
+			if (zTree.isSelectedNode(nodes[i])) {
+				return nodes[i].id;
+			}
+			iterateClassify(nodes[i].children, zTree);
+		}
+	}
+	
+	/**
+	 * 编辑分类
+	 */
+	function update() {
+		var name = $(document).contents().find("#iframe2")[0].contentWindow.$("#name").val();
+		var zTree = $(document).contents().find("#iframe2")[0].contentWindow.$.fn.zTree.getZTreeObj("treeDemo");
+		var nodes = zTree.getNodes();
+		var id = iterateClassify(nodes, zTree);
+		if (!checkInfo(name, classify))
+			return;
+		//编辑分类
+		$.ajax({
+			type : "post",
+			url : "/api/classify/update",
+			dataType : "json",
+			data : {
+				'id' : $('#dataId').val(),
+				'name' : name,
+				'type' : id
+			},
+			success : function(resp) {
+				if(resp.code == 200){
+					alert("操作成功");
+					//隐藏弹出框
+					hidediv(2);
+					//清空弹出框数据
+					$(document).contents().find("#iframe3")[0].contentWindow.$("#name").val("");
+					$(document).contents().find("#iframe3")[0].contentWindow.$("#classify").val("");
+					
+					//刷新页面
+					pageIndex = 1;
+					list();
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+</script>
