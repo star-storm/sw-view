@@ -60,7 +60,7 @@ public class RequestFilter implements Filter {
 		//非登录验证资源
 		boolean noLogCheck = false;
 		String uri = request.getRequestURI();
-//		System.out.println("uri = " + uri);
+		System.out.println("uri = " + uri);
 //		logger.info("uri = " + uri);
 		for (String s : directUriList) {
 			if (uri.startsWith(s)) {
