@@ -46,6 +46,11 @@ public class Constant {
 	public final static String DOWNLOAD_DIR="upload";
 	
 	/**
+	 * 日志文件名称
+	 */
+	public final static String LOG_FILE="sw-view.xlsx";
+	
+	/**
 	 * 返回值
 	 */
 	public final static String RESULT_SUCCESS="处理成功";

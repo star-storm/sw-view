@@ -48,6 +48,7 @@
 					<li class="fl w_36 mt20 ml26">
 						<button id="search" type="button" value="" class="btn bg_bule fl">查询</button>
 						<button id="reset" type="button" value="" class="btn fl ml30">重置</button>
+						<button id="exportLog" type="button" value="" class="btn fl ml30">导出</button>
 					</li>
 				</ul>
 				<!-- <div id="totNum" class="ml100  h30 mt30">				
@@ -151,6 +152,11 @@ var endTimeTmp = "";
 		$("#endTime").val("");
 	});
 	
+	//导出
+	$("#exportLog").click(function() {
+		window.location.href = "/file/download?content="+$("#content").val()+"&userName="+$("#userName").val()+"&startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val();
+	});
+		
  }(jQuery));
 	
 	//网络模板列表
@@ -182,6 +188,9 @@ var endTimeTmp = "";
 					$("#pageIndex").val(pageIndex);
 					$("#pageNum").text("(共" + pageNum + "页)");
 					userNameTmp = $("#userName").val();
+					contentTmp = $("#content").val();
+					startTimeTmp = $("#startTime").val();
+					endTimeTmp = $("#endTime").val();
 					
 					$("#dataId").val("");
 					$("#totNum").html("");

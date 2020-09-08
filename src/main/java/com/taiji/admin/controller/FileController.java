@@ -201,13 +201,9 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/download", method = {RequestMethod.GET, RequestMethod.POST}, produces = MediaType.TEXT_HTML_VALUE)
 	@ResponseBody
-	public ResponseInfo download(HttpServletResponse response, @RequestHeader String referer, String type, Integer id,
-			String name, String officePhone, String salePhone) throws Exception {
+	public ResponseInfo download(HttpServletResponse response, @RequestHeader String referer, String modelId, String content, String userName, String startTime, String endTime) throws Exception {
 		System.out.println(referer);
-		int result = 0;
-		if (type != null){
-			result = fileService.downTxl(request, response, type, id, name, officePhone, salePhone);
-		}
+		int result = fileService.exportLog(request, response, modelId, content, userName, startTime, endTime);
 		ResponseInfo resp = new ResponseInfo();
 		switch (result) {
 		case 0:
@@ -233,9 +229,8 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/hrefdown", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public ResponseInfo hrefdown(HttpServletResponse response, String type, Integer id,
-			String name, String officePhone, String salePhone) throws Exception {
-		int result = fileService.downTxl(request, response, type, id, name, officePhone, salePhone);
+	public ResponseInfo hrefdown(HttpServletResponse response, String modelId, String content, String userName, String startTime, String endTime) throws Exception {
+		int result = fileService.exportLog(request, response, modelId, content, userName, startTime, endTime);
 		ResponseInfo resp = new ResponseInfo();
 		switch (result) {
 		case 0:

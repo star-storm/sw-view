@@ -271,14 +271,12 @@ public class FileServiceImp implements FileService {
 	}
 	
 	/**
-	 * 下载通讯录
+	 * 导出日志 
 	 */
 	@Override
-	public int downTxl(HttpServletRequest request, HttpServletResponse response, String type, Integer id,
-			String name, String officePhone, String salePhone) throws Exception {
+	public int exportLog(HttpServletRequest request, HttpServletResponse response, String modelId, String content, String userName, String startTime, String endTime) throws Exception {
 		try {
-			File file = downloadServiceImp.createTxl(type, id, name, officePhone, salePhone);
-//			File file = new File("D:\\work\\workspace3\\jgj-txl\\target\\classes\\templates\\upload\\通讯录.xlsx");
+			File file = downloadServiceImp.exportLog(request, modelId, content, userName, startTime, endTime);
 			if (!file.exists()) {
 				return 1;
 			}

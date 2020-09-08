@@ -31,6 +31,12 @@ public interface SLogService {
 	List<SLog> logPage(PageInfo pageInfo, String modelId, String content, String userName, String startTime, String endTime, Integer roleId);
 	
 	/**
+	 * 所有数据
+	 */
+	List<SLog> logDatas(String modelId, String content, String userName, String startTime, String endTime,
+			Integer roleId);
+	
+	/**
 	 * 详情
 	 */
 	SLog getLog(Integer id);

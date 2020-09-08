@@ -61,10 +61,9 @@ public interface FileService {
 	int hrefdown(HttpServletRequest request, HttpServletResponse response, String fid) throws Exception;
 	
 	/**
-	 * 下载通讯录
+	 * 导出日志
 	 */
-	int downTxl(HttpServletRequest request, HttpServletResponse response, String type, Integer id,
-			String name, String officePhone, String salePhone) throws Exception;
+	int exportLog(HttpServletRequest request, HttpServletResponse response, String modelId, String content, String userName, String startTime, String endTime) throws Exception;
 
 	/**
 	 * 分段上传文件

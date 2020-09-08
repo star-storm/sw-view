@@ -85,6 +85,32 @@ public class SLogServiceImp implements SLogService {
 		example.setOrderByClause(" option_date desc, id desc");
 		return logMapper.selectByExample(example);
 	}
+
+	/**
+	 * 所有数据
+	 */
+	@Override
+	public List<SLog> logDatas(String modelId, String content, String userName, String startTime, String endTime, Integer roleId) {
+		SLogExample example = new SLogExample();
+		SLogExample.Criteria criteria = example.createCriteria();
+		if (!StringUtils.isEmpty(modelId))
+			criteria.andModelIdEqualTo(Integer.valueOf(modelId));
+		if (!StringUtils.isEmpty(content))
+			criteria.andOptionsLike("%" + content + "%");
+		if (!StringUtils.isEmpty(userName))
+			criteria.andUserNameLike("%" + userName + "%");
+		if (roleId==4)//安全员：查看审计员和普通用户日志
+			criteria.andRoleUser();
+		else if (roleId==5)//审计员：查看系统管理员和安全员日志
+			criteria.andRoleManeger();
+		if (!StringUtils.isEmpty(startTime))
+			criteria.andOptionDateMoreThan(startTime);
+		if (!StringUtils.isEmpty(endTime))
+			criteria.andOptionDateLessThan(endTime);
+		criteria.andDelFlgEqualTo("0");
+		example.setOrderByClause(" option_date desc, id desc");
+		return logMapper.selectByExample(example);
+	}
 	
 	/**
 	 * 详情
