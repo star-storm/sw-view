@@ -41,7 +41,7 @@ $(function(){
 // 		$(li).find('a')[0].click();
 	});
 	$('.titleli').click(function(){
-		checkLogin0();
+		checkLogin0(this);
 		var $ul = $(this).next('ul');
 		$('dd').find('ul').slideUp();
 		if($ul.is(':visible')){
@@ -58,7 +58,7 @@ $(function(){
 	
 });
 
-function checkLogin0() {
+function checkLogin0(o) {
 	$.ajax({
 		async : false,
 		type : "post",
@@ -73,10 +73,10 @@ function checkLogin0() {
 // 				var li = $('li', $o)[0];
 // 				$(li).find('a')[0].click();
 				if (user.loginName=="audAdmin") {
-					$("#logTab .titleli a")[0].click();
+					$("#logTab")[0].click();
 				}
 				else if (user.loginName=="secAdmin") {
-					$("#permissionTab .titleli a")[0].click();
+					$("#roleTab")[0].click();
 				}
 			}
 			else {
@@ -145,66 +145,76 @@ function gotoPwd() {
 <body style="background:#eaeaea;">
 	<dl class="leftmenu"
 		style="background: #ffffff;">
-		<dd id="orgTab">
-			<div class="titleli">
-				<span><img src="../images/ico_menu1.png" /></span><a
-					target="#" href="#" onclick="gotoOrg()">部门</a>
-			</div>
-		</dd>
-		<dd id="userTab">
-			<div class="titleli">
-				<span><img src="../images/ico_menu2.png" /></span><a
-					target="rightFrame" href="/view/user/list">用户</a>
-			</div>
-		</dd>
-		<dd id="roleTab">
-			<div class="titleli">
-				<span><img src="../images/ico_menu3.png" /></span><a
-					target="rightFrame" href="/view/role/list">角色</a>
-			</div>
-		</dd>
-		<dd id="permissionTab">
-			<div class="titleli">
-				<span><img src="../images/ico_menu4.png" /></span><a
-					target="rightFrame" href="/view/permission/list">权限</a>
-			</div>
-		</dd>
-		<dd id="appTab">
-			<div class="titleli">
-				<span><img src="../images/ico_menu5.png" /></span><a
-					target="rightFrame" href="/view/app/list">应用</a>
-			</div>
-		</dd>
-		<dd id="forwardTab">
-			<div class="titleli">
-				<span><img src="../images/leftico01.png" /></span><a
-					target="rightFrame" href="/templates/view/system/redirect.html">重定向设置</a>
-			</div>
-		</dd>
-		<dd id="pwdTab">
-			<div class="titleli">
-				<span><img src="../images/ico_menu6.png" /></span><a
-					target="rightFrame" href="/static/manage/frame/changePwd.html">修改密码</a>
-			</div>
-		</dd>
-		<dd id="thresholdTab">
-			<div class="titleli">
-				<span><img src="../images/ico_menu7.png" /></span><a
-					target="rightFrame" href="/templates/view/system/threshold.html">阈值设置</a>
-			</div>
-		</dd>
-		<dd id="warnTab">
-			<div class="titleli">
-				<span><img src="../images/ico_menu8.png" /></span><a
-					target="rightFrame" href="/templates/view/system/warn.html">空间预警</a>
-			</div>
-		</dd>
-		<dd id="logTab">
-			<div class="titleli">
-				<span><img src="../images/ico_menu7.png" /></span><a
-					target="rightFrame" href="/templates/view/log/list.html">审计日志</a>
-			</div>
-		</dd>
+		<a target="#" href="#" onclick="gotoOrg()">
+			<dd id="orgTab" class="title">
+				<div class="titleli">
+					<span><img src="../images/ico_menu1.png" /></span>部门
+				</div>
+			</dd>
+		</a>
+		<a target="rightFrame" href="/view/user/list">
+			<dd id="userTab" class="title">
+				<div class="titleli">
+					<span><img src="../images/ico_menu2.png" /></span>用户
+				</div>
+			</dd>
+		</a>
+		<a target="rightFrame" href="/view/role/list">
+			<dd id="roleTab" class="title">
+				<div class="titleli">
+					<span><img src="../images/ico_menu3.png" /></span>角色
+				</div>
+			</dd>
+		</a>
+		<a target="rightFrame" href="/view/permission/list">
+			<dd id="permissionTab" class="title">
+				<div class="titleli">
+					<span><img src="../images/ico_menu4.png" /></span>权限
+				</div>
+			</dd>
+		</a>
+		<a target="rightFrame" href="/view/app/list">
+			<dd id="appTab" class="title">
+				<div class="titleli">
+					<span><img src="../images/ico_menu5.png" /></span>应用
+				</div>
+			</dd>
+		</a>
+		<a target="rightFrame" href="/templates/view/system/redirect.html">
+			<dd id="forwardTab" class="title">
+				<div class="titleli">
+					<span><img src="../images/leftico01.png" /></span>重定向设置
+				</div>
+			</dd>
+		</a>
+		<a target="rightFrame" href="/static/manage/frame/changePwd.html">
+			<dd id="pwdTab" class="title">
+				<div class="titleli">
+					<span><img src="../images/ico_menu6.png" /></span>修改密码
+				</div>
+			</dd>
+		</a>
+		<a target="rightFrame" href="/templates/view/system/threshold.html">
+			<dd id="thresholdTab" class="title">
+				<div class="titleli">
+					<span><img src="../images/ico_menu7.png" /></span>阈值设置
+				</div>
+			</dd>
+		</a>
+		<a target="rightFrame" href="/templates/view/system/warn.html">
+			<dd id="warnTab" class="title">
+				<div class="titleli">
+					<span><img src="../images/ico_menu8.png" /></span>空间预警
+				</div>
+			</dd>
+		</a>
+		<a id="logTab" target="rightFrame" href="/templates/view/log/list.html">
+			<dd class="title">
+				<div class="titleli">
+					<span><img src="../images/ico_menu7.png" /></span>审计日志
+				</div>
+			</dd>
+		</a>
 	</dl>
 </body>
 </html>

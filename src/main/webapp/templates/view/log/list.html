@@ -9,15 +9,9 @@
 <link href="/static/css/base_margin.css" type="text/css" rel="stylesheet" />
 <link href="/static/css/base_padding.css" type="text/css" rel="stylesheet" />
 <link href="/static/css/web.css" type="text/css" rel="stylesheet" />
-<link rel="stylesheet" href="/static/css/jqtransformplugin/jqtransform.css" type="text/css" media="all" />	
 <script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/static/js/js.js"></script>
-<script type="text/javascript" src="/static/css/jqtransformplugin/jquery.jqtransform.js" ></script>
-<script language="javascript">
-	$(function(){
-		$('form').jqTransform({imgPath:'jqtransformplugin/img/' width:'240px'});
-	});
-</script>
+<script language="javascript" type="text/javascript" src="/static/manage/test/calander/My97DatePicker/WdatePicker.js"></script>
 
 </head>
 <body>
@@ -29,21 +23,29 @@
 		<form action="" method="get">
 			<div class="fl w h120 bor_t pb20">
 				<ul class="fl  w  mb35">
-					<li class="fl w_32 mt20">
+					<li class="fl w_36 mt20">
 						<span class="fl w80 mt5 tr">姓名</span>
 						<span class="fl ml15"><input id="userName" type="text" name="inputtext" class="InputText w240"/></span>
 					</li>
-					<li class="fl w_32 mt20">
-						<span class="fl w80 mt5 tr">系统</span>
+					<li class="fl w_36 mt20">
+						<span class="fl w80 mt5 tr">操作内容</span>
 						<span class="fl ml15">
-							<select id="modelId" class="InputText w240">
-								<option value="">请选择</option>
-								<option value="0">通讯录</option>
-								<option value="1">短信</option>
-							</select>
+							<input id="content" type="text" name="inputtext" class="InputText w240"/>
 						</span>
 					</li>
-					<li class="fl w_32 mt20">
+					<li class="fl w_47 mt20">
+						<span class="fl w80 mt5 tr">操作时间</span>
+						<span class="fl ml15">
+							<input id="startTime" class="Wdate" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"> 
+							&nbsp;&nbsp;<font color="#bcbcbc">-</font>
+							<div class="time"></div>
+						</span>
+						<span class="fl ml15">
+							<input id="endTime" class="Wdate" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"> 
+							<div class="time"></div>
+						</span>
+					</li>
+					<li class="fl w_36 mt20 ml26">
 						<button id="search" type="button" value="" class="btn bg_bule fl">查询</button>
 						<button id="reset" type="button" value="" class="btn fl ml30">重置</button>
 					</li>
@@ -122,6 +124,9 @@ var pageSize = 10;
 //记录查询条件
 var modelTmp = "";
 var userNameTmp = "";
+var contentTmp = "";
+var startTimeTmp = "";
+var endTimeTmp = "";
 
  //页面初始化
  (function($) {
@@ -141,6 +146,9 @@ var userNameTmp = "";
 	$("#reset").click(function() {
 		$("#userName").val("");
 		$("#modelId").val("");
+		$("#content").val("");
+		$("#startTime").val("");
+		$("#endTime").val("");
 	});
 	
  }(jQuery));
@@ -154,7 +162,9 @@ var userNameTmp = "";
 			data : {
 				'nowPage' : pageIndex,
 				'userName' : $("#userName").val(),
-				'modelId' : $("#modelId").val()
+				'content' : $("#content").val(),
+				'startTime' : $("#startTime").val(),
+				'endTime' : $("#endTime").val()
 			},
 			success : function(resp) {
 				if(resp.code == 200){
@@ -226,7 +236,11 @@ var userNameTmp = "";
 	
 	//查询条件是否有更新
 	function checkSearchItem() {
-		return (userNameTmp == $("#userName").val()) 
+		return (userNameTmp == $("#userName").val()
+			&& (contentTmp == $("#content").val())
+			&& (startTimeTmp == $("#startTime").val())
+			&& (endTimeTmp == $("#endTime").val())
+		) 
 	}
 	
 

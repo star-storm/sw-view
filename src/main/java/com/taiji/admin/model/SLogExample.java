@@ -224,19 +224,37 @@ public class SLogExample {
             return (Criteria) this;
         }
 
+        //审计员和普通用户范围
         public Criteria andRoleUser() {
             addCriterion("u.id in (select u.id from s_user_role j "
             	+ " left join s_user u on j.uid=u.id "
 				+ " left join s_role r on j.rid=r.id "
-				+ " where r.id=2 or r.id=3)");
+				+ " and r.del_flg=0 "
+				+ " where r.id not in (3,4))");
             return (Criteria) this;
         }
         
+        //系统管理员和安全管理员范围
         public Criteria andRoleManeger() {
         	addCriterion("u.id in (select u.id from s_user_role j "
         			+ " left join s_user u on j.uid=u.id "
         			+ " left join s_role r on j.rid=r.id "
+    				+ " and r.del_flg=0 "
         			+ " where r.id=3 or r.id=4)");
+        	return (Criteria) this;
+        }
+        
+//        option_date>str_to_date('2020-08-17 18:37:14','%Y-%m-%d %H:%i:%s')
+
+        //操作时间小于
+        public Criteria andOptionDateLessThan(String value) {
+        	addCriterion(" t.option_date < str_to_date('"+value+"','%Y-%m-%d %H:%i:%s')");
+        	return (Criteria) this;
+        }
+        
+        //操作时间大于
+        public Criteria andOptionDateMoreThan(String value) {
+        	addCriterion(" t.option_date >= str_to_date('"+value+"','%Y-%m-%d %H:%i:%s')");
         	return (Criteria) this;
         }
         

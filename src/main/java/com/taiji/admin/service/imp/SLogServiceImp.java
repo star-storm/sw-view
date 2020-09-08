@@ -36,7 +36,7 @@ public class SLogServiceImp implements SLogService {
 	 * 计数
 	 */
 	@Override
-	public long count(String modelId, String content, String userName, String roleName) {
+	public long count(String modelId, String content, String userName, String startTime, String endTime, Integer roleId) {
 		SLogExample example = new SLogExample();
 		SLogExample.Criteria criteria = example.createCriteria();
 //		System.out.println("com.taiji.admin.service.imp.SLogServiceImp: modelId = " + modelId + ", content = " + content + ", userName = " + userName);
@@ -46,8 +46,15 @@ public class SLogServiceImp implements SLogService {
 			criteria.andOptionsLike("%" + content + "%");
 		if (!StringUtils.isEmpty(userName))
 			criteria.andUserNameLike("%" + userName + "%");
+		if (roleId==4)//安全员：查看审计员和普通用户日志
+			criteria.andRoleUser();
+		else if (roleId==5)//审计员：查看系统管理员和安全员日志
+			criteria.andRoleManeger();
+		if (!StringUtils.isEmpty(startTime))
+			criteria.andOptionDateMoreThan(startTime);
+		if (!StringUtils.isEmpty(endTime))
+			criteria.andOptionDateLessThan(endTime);
 		criteria.andDelFlgEqualTo("0");
-		criteria.andRoleManeger();
 		return logMapper.countByExample(example);
 	}
 
@@ -55,7 +62,7 @@ public class SLogServiceImp implements SLogService {
 	 * 列表
 	 */
 	@Override
-	public List<SLog> logPage(PageInfo pageInfo, String modelId, String content, String userName, String roleName) {
+	public List<SLog> logPage(PageInfo pageInfo, String modelId, String content, String userName, String startTime, String endTime, Integer roleId) {
 		SLogExample example = new SLogExample();
 		example.setFrom(pageInfo.getFrom());
 		example.setSize(pageInfo.getSize());
@@ -66,8 +73,15 @@ public class SLogServiceImp implements SLogService {
 			criteria.andOptionsLike("%" + content + "%");
 		if (!StringUtils.isEmpty(userName))
 			criteria.andUserNameLike("%" + userName + "%");
+		if (roleId==4)//安全员：查看审计员和普通用户日志
+			criteria.andRoleUser();
+		else if (roleId==5)//审计员：查看系统管理员和安全员日志
+			criteria.andRoleManeger();
+		if (!StringUtils.isEmpty(startTime))
+			criteria.andOptionDateMoreThan(startTime);
+		if (!StringUtils.isEmpty(endTime))
+			criteria.andOptionDateLessThan(endTime);
 		criteria.andDelFlgEqualTo("0");
-		criteria.andRoleManeger();
 		example.setOrderByClause(" option_date desc, id desc");
 		return logMapper.selectByExample(example);
 	}

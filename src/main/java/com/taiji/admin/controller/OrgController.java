@@ -78,7 +78,7 @@ public class OrgController {
 		ResponseInfo resp = new ResponseInfo();
 		resp.setCode(200);
 		resp.setData(org);
-//		logUtil.appendLog(request, "", "查询组织详情", logUtil.appendParam(String.valueOf(id), org.getName()), Constant.RESULT_SUCCESS_CODE);
+		logUtil.appendLog(request, "", "查询组织详情", logUtil.appendParam(String.valueOf(id), org.getName()), Constant.RESULT_SUCCESS_CODE);
 		return resp;
 	}
 	
@@ -114,7 +114,7 @@ public class OrgController {
 		if (result == 0){
 			resp.setCode(200);
 			resp.setMsg("操作成功");
-//			logUtil.appendLog(request, "", tag, logUtil.appendParam(String.valueOf(id), name), Constant.RESULT_SUCCESS_CODE);
+			logUtil.appendLog(request, "", tag, logUtil.appendParam(String.valueOf(org.getId()), org.getName()), Constant.RESULT_SUCCESS_CODE);
 		}
 		else {
 			resp.setCode(500);

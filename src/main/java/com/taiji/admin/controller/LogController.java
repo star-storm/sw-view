@@ -47,7 +47,7 @@ public class LogController {
 	 */
 	@RequestMapping("/list")
 	@ResponseBody
-	public ResponseInfo logPage(Integer nowPage, Integer pageSize, String modelId, String content, String userName) throws IOException {
+	public ResponseInfo logPage(Integer nowPage, Integer pageSize, String modelId, String content, String userName, String startTime, String endTime) throws IOException {
 		ResponseInfo resp = new ResponseInfo();
 		SUser host = (SUser) request.getSession().getAttribute(Constant.SESSION_USER_KEY);
 		if (host == null) {
@@ -55,10 +55,10 @@ public class LogController {
 			resp.setData(null);
 		}
 		else {
-			String roleName = "admin";
+			Integer roleId = host.getRoles().get(0).getId();
 			PageInfo pageInfo = new PageInfo(nowPage, pageSize);
-			long count = logService.count(modelId, content, userName, roleName);
-			List<SLog> logs = logService.logPage(pageInfo, modelId, content, userName, roleName);
+			long count = logService.count(modelId, content, userName, startTime, endTime, roleId);
+			List<SLog> logs = logService.logPage(pageInfo, modelId, content, userName, startTime, endTime, roleId);
 			resp.setCode(200);
 			resp.setCount(count);
 			resp.setData(logs);

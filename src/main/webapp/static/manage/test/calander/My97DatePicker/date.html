@@ -1,0 +1,149 @@
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="./WdatePicker.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<input id="date" class="Wdate" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"> 
+<div class="time" id="startTime">
+</div>
+<script>
+    WdatePicker({
+        eCont:'startTime',onpicked:function(dp){
+            alert(dp.cal.getDateStr())
+        }
+    })
+</script>
+<button id="btn"></button>
+<script type="text/javascript">
+	 //页面初始化
+	 (function($) {
+		$("#btn").click(function() {
+			alert($("#date").val());
+		});
+		testDate();
+	 }(jQuery));
+	 
+	 
+	 function testDate() {
+		 var date = new Date();
+		 alert(timestampToDay(date));
+	 }
+
+	 /**
+	  * 浏览器版本
+	  */
+	 function BrowserType() { 
+	   var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串 
+	 //  alert(userAgent);
+	   var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器 
+	   var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器 
+	   var isEdge = userAgent.indexOf("Windows NT") > -1 && userAgent.indexOf("Trident/7.0") > -1 && !isIE; //判断是否IE的Edge浏览器 
+	   var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器 
+	   var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器 
+	   var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器 
+	  
+	   if (isIE) { 
+	      var reIE = new RegExp("MSIE (\\d+\\.\\d+);"); 
+	      reIE.test(userAgent); 
+	      var fIEVersion = parseFloat(RegExp["$1"]); 
+	      if(fIEVersion == 7) 
+	      { return "IE7";} 
+	      else if(fIEVersion == 8) 
+	      { return "IE8";} 
+	      else if(fIEVersion == 9) 
+	      { return "IE9";} 
+	      else if(fIEVersion == 10) 
+	      { return "IE10";} 
+	      else if(fIEVersion == 11) 
+	      { return "IE11";} 
+	      else
+	      { return "IE"}//IE版本过低 
+	    }//isIE end 
+	      
+	    if (isFF) { return "FF";} 
+	    if (isOpera) { return "Opera";} 
+	    if (isSafari) { return "Safari";} 
+	    if (isChrome) { return "Chrome";} 
+	    if (isEdge) { return "IEEdge";} 
+	    return "";
+	  }
+
+	 
+	 /**
+	  * 日期，时间
+	  */
+	 function timestampToDate(t) {
+	 	if (t == null)return "";
+	 	var date =  new Date(t);
+	     var y = "";
+	     if (BrowserType().indexOf("IE") == -1) {
+	     	y = 1900+date.getYear();
+	     }
+	     else {
+	     	y = date.getYear();
+	     }
+	     var m = "0"+(date.getMonth()+1);
+	     var d = "0"+date.getDate();
+	     return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+	 }
+	 function timestampToDay(t) {
+	 	alert(t);
+	 	if (t == null)return "";
+	 	var date =  new Date(t);
+	 	var y = "";
+	 	if (BrowserType().indexOf("IE") == -1) {
+	 		y = 1900+date.getYear();
+	 	}
+	 	else {
+	 		y = date.getYear();
+	 	}
+	 	var m = "0"+(date.getMonth()+1);
+	 	var d = "0"+date.getDate();
+	 	var s = m.substring(m.length-2,m.length);
+	 	alert(s);
+	 	return y+"年"+m.substring(m.length-2,m.length)+"月"+d.substring(d.length-2,d.length) + "日 ";
+	 }
+	 function timestampToTime(t) {
+	 	if (t == null)return "";
+	 	var date =  new Date(t);
+	 	var y = "";
+	 	if (BrowserType().indexOf("IE") == -1) {
+	 		y = 1900+date.getYear();
+	 	}
+	 	else {
+	 		y = date.getYear();
+	 	}
+	 	var m = "0"+(date.getMonth()+1);
+	 	var d = "0"+date.getDate();
+	 	var h = date.getHours();
+	 	h = h < 10 ? ("0" + h) : h;
+	 	var min = date.getMinutes();
+	 	min = min < 10 ? ("0" + min) : min;
+	 	var s = date.getSeconds();
+	 	s = s < 10 ? ("0" + s) : s;
+	 	return y+"年"+m.substring(m.length-2,m.length)+"月"+d.substring(d.length-2,d.length) + "日 " + h + ":"  + min + ":" + s;
+	 }
+	 function timestampToHour(t) {
+	 	if (t == null)return "";
+	 	var date =  new Date(t);
+	 	var h = date.getHours();
+	 	var min = date.getMinutes();
+	 	min = min < 10 ? ("0" + min) : min;
+	 	return h + ":"  + min;
+	 }
+	 function timestampToAMPM(t) {
+	 	if (t == null)return "";
+	 	var date =  new Date(t);
+	 	var h = date.getHours();
+	 	return h < 12 ? 'AM' : 'PM';
+	 }
+ 
+	 
+</script>
+<style>
+.WdateDiv{
+	width:266px;
+	height:172px;
+	background-color: #FFFFFF;
+	border: #bbb 1px solid;
+	padding: 2px
+}
+</style>

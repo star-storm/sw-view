@@ -17,8 +17,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.taiji.admin.constant.Constant;
@@ -45,7 +43,7 @@ public class RequestFilter implements Filter {
     
 	private List<String> directUriList;
 	
-	private Logger logger = LoggerFactory.getLogger(RequestFilter.class);
+//	private Logger logger = LoggerFactory.getLogger(RequestFilter.class);
 
 	public void destroy() {
 		
@@ -60,7 +58,7 @@ public class RequestFilter implements Filter {
 		//非登录验证资源
 		boolean noLogCheck = false;
 		String uri = request.getRequestURI();
-		System.out.println("uri = " + uri);
+//		System.out.println("uri = " + uri);
 //		logger.info("uri = " + uri);
 		for (String s : directUriList) {
 			if (uri.startsWith(s)) {

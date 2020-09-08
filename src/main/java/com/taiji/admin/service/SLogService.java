@@ -23,12 +23,12 @@ public interface SLogService {
 	/**
 	 * 计数
 	 */
-	long count(String modelId, String content, String userName, String roleName);
+	long count(String modelId, String content, String userName, String startTime, String endTime, Integer roleId);
 	
 	/**
 	 * 列表
 	 */
-	List<SLog> logPage(PageInfo pageInfo, String modelId, String content, String userName, String roleName);
+	List<SLog> logPage(PageInfo pageInfo, String modelId, String content, String userName, String startTime, String endTime, Integer roleId);
 	
 	/**
 	 * 详情
