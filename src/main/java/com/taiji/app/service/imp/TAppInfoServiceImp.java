@@ -13,7 +13,9 @@ import org.springframework.util.StringUtils;
 
 import com.taiji.admin.common.LogMsgInfo;
 import com.taiji.admin.common.PageInfo;
+import com.taiji.admin.mapper.SPermissionMapper;
 import com.taiji.admin.mapper.TAppInfoMapper;
+import com.taiji.admin.model.SPermission;
 import com.taiji.admin.model.SUser;
 import com.taiji.app.model.TAppInfo;
 import com.taiji.app.model.TAppInfoExample;
@@ -34,6 +36,9 @@ public class TAppInfoServiceImp implements TAppInfoService {
 	
 	@Autowired
 	private TAppInfoMapper appInfoMapper;
+	
+	@Autowired
+	private SPermissionMapper permissionMapper;
 
 	/**
 	 * 计数
@@ -88,7 +93,7 @@ public class TAppInfoServiceImp implements TAppInfoService {
 	@Override
 	@Transactional(transactionManager="adminTransactionManager")
 	public String updateAppInfo(Integer id, String name, String code, String url, String owner, String pid, SUser host) {
-		if (StringUtils.isEmpty(name) || (StringUtils.isEmpty(url) && StringUtils.isEmpty(pid)))
+		if (StringUtils.isEmpty(name) || StringUtils.isEmpty(code) || (StringUtils.isEmpty(url) && StringUtils.isEmpty(pid)))
 			return "参数错误；必要数据为空";
 		TAppInfo appInfo = new TAppInfo();
 		appInfo.setName(name);
@@ -104,6 +109,15 @@ public class TAppInfoServiceImp implements TAppInfoService {
 			Integer gid = appInfo.getId();
 			if (gid == null)
 				return "保存应用失败";
+
+			//添加专题权限
+			SPermission permission = new SPermission();
+			permission.setName(code);
+			permission.setDescrip(name);
+			permission.setType(Integer.valueOf(pid));
+			permission.setCreateBy(host==null?null:host.getId());
+			permission.setCreateDate(new Date());
+			permissionMapper.insertSelective(permission);
 		}
 		else {//编辑
 			TAppInfo tmp = appInfoMapper.selectByPrimaryKey(id);

@@ -15,6 +15,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.sidenav li').click(function(){
+		checkLogin0();
 		$(this).siblings('li').removeClass('now');
 		$(this).addClass('now');
 		$(".erji").hide();
@@ -30,15 +31,108 @@ $(function(){
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
-  $(".click").click(function(){
-  $(".tip").fadeIn(200);
-  });
-  
-  $(".tiptop a").click(function(){
-  $(".tip").fadeOut(200); 
-});
+	perInfo() ;
 //   $("#erjiTab1").css("display","none");
 });
+
+//检测登录
+function checkLogin0() {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/checkLogin",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if (resp.code==501 || resp.code==500) {
+				window.parent.location.href = "/view/index";
+			}
+		}
+	});
+}
+
+function perInfo() {
+	$.ajax({
+		async : false,
+		type : "post",
+		url : "/perInfo",
+		dataType : "json",
+		data : {},
+		success : function(resp) {
+			if(resp.code == 200){
+// 				alert(resp.data);
+				pers = resp.data;
+				if (pers.indexOf("xxkw")==-1) {
+// 					alert($("#xxkw a")[0]);
+					$("#xxkw a")[0].href = "javascript:void(0)";
+					$("#xxkw a").click(function(){
+						alert("您没有权限！");
+					});
+				}
+				if (pers.indexOf("dcdb")==-1) {
+// 					alert($("#xxkw a")[0]);
+					$("#dcdb a")[0].href = "javascript:void(0)";
+					$("#dcdb a").click(function(){
+						alert("您没有权限！");
+					});
+				}
+				if (pers.indexOf("szc")==-1) {
+// 					alert($("#xxkw a")[0]);
+					$("#szc a")[0].href = "javascript:void(0)";
+					$("#szc a").click(function(){
+						alert("您没有权限！");
+					});
+				}
+				if (pers.indexOf("cwjk")==-1) {
+// 					alert($("#xxkw a")[0]);
+					$("#cwjk a")[0].href = "javascript:void(0)";
+					$("#cwjk a").click(function(){
+						alert("您没有权限！");
+					});
+				}
+				if (pers.indexOf("aqww")==-1) {
+// 					alert($("#xxkw a")[0]);
+					$("#aqww a")[0].href = "javascript:void(0)";
+					$("#aqww a").click(function(){
+						alert("您没有权限！");
+					});
+				}
+				if (pers.indexOf("fp")==-1) {
+// 					alert($("#fp a")[0]);
+					$("#fp a")[0].href = "javascript:void(0)";
+					$("#fp a").click(function(){
+						alert("您没有权限！");
+					});
+				}
+				if (pers.indexOf("lsxzg")==-1) {
+// 					alert($("#lsxzg a")[0]);
+					$("#lsxzg a")[0].href = "javascript:void(0)";
+					$("#lsxzg a").click(function(){
+						alert("您没有权限！");
+					});
+				}
+				if (pers.indexOf("csyx")==-1) {
+// 					alert($("#csyx a")[0]);
+					$("#csyx a")[0].href = "javascript:void(0)";
+					$("#csyx a").click(function(){
+						alert("您没有权限！");
+					});
+				}
+				else {
+					$(".click").click(function(){
+						  $(".tip").fadeIn(200);
+					});
+						  
+					$(".tiptop a").click(function(){
+						  $(".tip").fadeOut(200); 
+					});
+				}
+			} else {
+// 				alert(resp.msg);
+			}
+		}
+	});
+}
 
 function erjiHide(o) {
     if(o == "1"){
@@ -48,9 +142,7 @@ function erjiHide(o) {
 	}
 
 }
-function aqww() {
-	return false;
-}
+
 </script>
 </head>
 <body style="overflow:none;">
@@ -92,7 +184,7 @@ function aqww() {
 						<span class="menu_zt_01"></span>
 					</a>
 				</li>
-				<li>
+				<li id="aqww">
 					<a href="./aqww/aqww_1zhzl.html" target="Frame">
 						<span class="menuID_05"></span>
 					</a>
@@ -116,7 +208,7 @@ function aqww() {
 						<span class="now_span"><img src="/templates/view/dcdb/images/ico_up.png"></span>
 					</div>
 				</li>
-				<div class="click">
+				<div id="csyx" class="click">
 					<a href="###">
 						<span class="menuID_08"></span>
 					</a>

@@ -378,7 +378,7 @@
 		var url = $(document).contents().find("#iframe3")[0].contentWindow.$("#url").val();
 		var owner = $(document).contents().find("#iframe3")[0].contentWindow.$("#owner").val();
 		var pid = $(document).contents().find("#iframe3")[0].contentWindow.$("input[name='per']:checked");
-		if (!checkInfo(name, url, pid))
+		if (!checkInfo(name, code, pid))
 			return;
 		$.ajax({
 			async : false,
@@ -413,7 +413,7 @@
 	}
 	
 	//校验字段
-	function checkInfo(name, url, pid) {
+	function checkInfo(name, code, pid) {
 		if (name == '') {
 			alert("请输入应用名称");
 			return false;
@@ -422,12 +422,12 @@
 			alert("应用名称字数过多，请重新输入");
 			return false;
 		}
-		if (url == '') {
-			alert("请输入应用地址");
+		if (code == '') {
+			alert("请输入编码");
 			return false;
 		}
-		else if(url.length > 1200) {
-			alert("应用地址字数过多，请重新输入");
+		else if(code.length > 32) {
+			alert("编码字数过多，请重新输入");
 			return false;
 		}
 		else if (pid.length == 0) {
@@ -477,7 +477,7 @@
 		var url = $(document).contents().find("#iframe2")[0].contentWindow.$("#url").val();
 		var owner = $(document).contents().find("#iframe2")[0].contentWindow.$("#owner").val();
 		var pid = $(document).contents().find("#iframe2")[0].contentWindow.$("input[name='per']:checked");
-		if (!checkInfo(name, url, pid))
+		if (!checkInfo(name, code, pid))
 			return;
 		//编辑应用
 		$.ajax({

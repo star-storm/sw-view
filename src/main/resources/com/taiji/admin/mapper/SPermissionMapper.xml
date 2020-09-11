@@ -403,6 +403,16 @@
     from 
         s_permission p
 	where p.del_flg = 0
+	and type is null
+	order by p.type, p.id
+  </select>
+  <select id="subjects" resultType="java.util.Map">
+    select 
+    	p.id, p.name, p.descrip, p.type
+    from 
+        s_permission p
+	where p.del_flg = 0
+	and type=5
 	order by p.type, p.id
   </select>
 </mapper>

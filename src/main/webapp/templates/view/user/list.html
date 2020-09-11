@@ -313,12 +313,16 @@
 				+ "	<td class='tc w300' title='" + unionRole(item) + "'>" + textEllipsis(unionRole(item), 12) + "</td>"
 				+ "	<td class='tc w180'>"
 				+ "		<a href='#' onclick='show(1, " + item.id + ");' class='mr15 unl btn_ck Black'>查看</a>"
-				+ "		<a href='#' onclick='show(2, " + item.id + ");' class='mr15 unl btn_ck Black'>编辑</a>"
-				+ "		<a href='#' onclick='delUser(" + item.id + ");' class='mr15 unl btn_ck Black'>删除</a>"
+				+ (isManager(item)?"":"		<a href='#' onclick='show(2, " + item.id + ");' class='mr15 unl btn_ck Black'>编辑</a>")
+				+ (isManager(item)?"":"		<a href='#' onclick='delUser(" + item.id + ");' class='mr15 unl btn_ck Black'>删除</a>")
 				+ "	</td>"
 				+ "</tr>";
 		}
 		return html;
+	}
+	
+	function isManager(item) {
+		return item.loginName=="sysAdmin" || item.loginName=="secAdmin" || item.loginName=="audAdmin";
 	}
 	
 	//拼接用户角色

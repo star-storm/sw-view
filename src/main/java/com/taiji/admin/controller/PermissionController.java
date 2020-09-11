@@ -108,6 +108,20 @@ public class PermissionController {
 	}
 	
 	/**
+	 * 查询全部专题权限
+	 */
+	@RequestMapping("/subjects")
+	@ResponseBody
+	public ResponseInfo subjects() throws IOException {
+		List<Map<String, Object>> result = permissionService.subjects();
+		ResponseInfo resp = new ResponseInfo();
+		resp.setCode(200);
+		resp.setData(result);
+//		logUtil.appendLog(request, Constant.SYSTEM_INDEX.toString(), "查询权限", "", Constant.RESULT_SUCCESS_CODE);
+		return resp;
+	}
+	
+	/**
 	 * 更新权限
 	 */
 	@RequestMapping("/update")

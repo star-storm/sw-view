@@ -240,6 +240,7 @@ $(function(){
 		var html = "";
 		for (var i = 0; i < list.length; i++) {
 			var item = list[i];
+			if ((item.name=="系统管理员") || (item.name=="安全管理员") || (item.name=="审计管理员"))continue;
 			html += "<li  class='fl w200 mt10 mb10'>"
 				+ "  <span class='fl w50 tr mr10 mt5'>"
 				+ "    <input type='radio' name='role' value='" + item.id + "'/>"

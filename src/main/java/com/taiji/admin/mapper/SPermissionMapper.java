@@ -100,4 +100,6 @@ public interface SPermissionMapper {
     List<SPermission> selectByRole(Integer rid);
 
 	List<Map<String, Object>> members();
+
+	List<Map<String, Object>> subjects();
 }

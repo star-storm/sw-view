@@ -325,6 +325,7 @@
 	function show(i, id) {
 	    $("#rId").val(id);
 		permissions(id, i);
+		subjects(id, i);
 
 		showdiv(i);
 	    if (i == 1)//查询
@@ -375,7 +376,44 @@
 		var s = "";
 		for (var i=0; i<items.length; i++) {
 			var item = items[i];
-			s += "<ul id='u32' class=' fl w mt6 mb6'>"
+			s += "<ul id='u_"+(i+1)+"' class=' fl w mt6 mb6'>"
+				+ " <span class='fl w30 tr mr10 mt5'><input type='checkbox' name='checkbox"+n+"' id='p_"+item.id+"' value='"+item.id+"'" + checkPermission(item.name, n) + "/></span>"
+				+ "	<span class='fl w300 gray5'>" + item.descrip + "</span>"
+				+ "</ul>";
+			if (item.id==5)
+				s += "<div id='listUl2'></div>";
+		}
+		return s;
+	}
+	/**
+	 * 专题权限数据
+	 */
+	function subjects(id, n) {
+		 perInfo(id);
+		 $.ajax({
+			async : false,
+			type : "post",
+			url : "/api/permission/subjects",
+			dataType : "json",
+			data : {},
+			success : function(resp) {
+				if(resp.code == 200){
+					if (resp.data != null) {
+						$("#iframe" + n).contents().find("#listUl2").html("");
+						$("#iframe" + n).contents().find("#listUl2").append(formSubjects(resp.data, n));
+					}
+				} else {
+					alert(resp.msg);
+				}
+			}
+		});
+	}
+	//权限数据
+	function formSubjects(items, n) {
+		var s = "";
+		for (var i=0; i<items.length; i++) {
+			var item = items[i];
+			s += "<ul id='sub_u_"+(i+1)+"' class=' fl w mt6 mb6 ml20'>"
 				+ " <span class='fl w30 tr mr10 mt5'><input type='checkbox' name='checkbox"+n+"' id='p_"+item.id+"' value='"+item.id+"'" + checkPermission(item.name, n) + "/></span>"
 				+ "	<span class='fl w300 gray5'>" + item.descrip + "</span>"
 				+ "</ul>";

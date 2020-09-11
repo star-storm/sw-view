@@ -93,6 +93,14 @@ public class SPermissionServiceImp implements SPermissionService {
 	public List<Map<String, Object>> members() {
 		return permissionMapper.members();
 	}
+	
+	/**
+	 * 查询全部专题权限
+	 */
+	@Override
+	public List<Map<String, Object>> subjects() {
+		return permissionMapper.subjects();
+	}
 
 	/**
 	 * 更新权限权限

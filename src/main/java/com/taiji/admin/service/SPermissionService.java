@@ -48,6 +48,11 @@ public interface SPermissionService {
 	 * 只查询权限Id和名称
 	 */
 	List<Map<String, Object>> members();
+	
+	/**
+	 * 查询全部专题权限
+	 */
+	List<Map<String, Object>> subjects();
 
 	/**
 	 * 更新权限

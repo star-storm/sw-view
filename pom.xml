@@ -493,22 +493,22 @@
 					</dependency>
 				</dependencies>
 				<!-- 自动生成 -->
-                <executions>
+                <!-- <executions>
                     <execution>
                         <id>Generate MyBatis Artifacts</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <!-- 指定文件位置好像不起作用，始终默认读取src/main/resources/generatorConfig.xml文件 -->
+                            指定文件位置好像不起作用，始终默认读取src/main/resources/generatorConfig.xml文件
                             <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
-                            <!-- 允许移动生成的文件 -->
+                            允许移动生成的文件
                             <verbose>true</verbose>
-                            <!-- 允许覆盖生成的文件 -->
+                            允许覆盖生成的文件
                             <overwrite>true</overwrite>
                         </configuration>
                     </execution>
-                </executions> 
+                </executions>  -->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

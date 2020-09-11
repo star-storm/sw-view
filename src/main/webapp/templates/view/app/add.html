@@ -24,11 +24,11 @@
 					<span class="fl w500 "><input type="text" id="name" class="InputText w600"/></span>
 				</li>
 				<li  class="fl w mt10 mb10">
-					<span class="fl w100 tr mr10 mt5">编码：</span>
+					<span class="fl w100 tr mr10 mt5"><font class="red bold mr5">*</font>编码：</span>
 					<span class="fl w500 "><input type="text" id="code" class="InputText w600"/></span>
 				</li>
 				<li  class="fl w mt10 mb10">
-					<span class="fl w100 tr mr10 mt5"><font class="red bold mr5">*</font>地址：</span>
+					<span class="fl w100 tr mr10 mt5">地址：</span>
 					<span class="fl w500 "><input type="text" id="url" class="InputText w600"/></span>
 				</li>
 				<li  class="fl w mt10 mb10">
@@ -82,7 +82,8 @@ function formPermissions(items) {
 	var s = "";
 	for (var i=0; i<items.length; i++) {
 		var item = items[i];
-		if (item.name=="org" || item.name=="user" || item.name=="role" || item.name=="permission")
+// 		if (item.name=="org" || item.name=="user" || item.name=="role" || item.name=="permission")
+		if (item.name!="app")
 			continue;
 		s += "<ul id='u32' class=' fl w mt6 mb6'>"
 			+ " <span class='fl w30 tr mr10 mt5'><input type='radio' name='per' id='p_"+item.id+"' value='"+item.id+"'/></span>"
